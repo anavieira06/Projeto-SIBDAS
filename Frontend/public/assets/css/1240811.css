@@ -1,0 +1,182 @@
+/* Seletor Universal - Remove margens e preenchimentos padrão */
+*{
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
+    box-sizing: border-box; /* Inclui a borda e o preenchimento no cálculo do tamanho */
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif; /* Define a fonte padrão */
+}
+
+/* Estilo da barra de navegação principal (navbar)*/
+.bng-navbar {
+    background-color: #ffeafd; /* Cor de fundo escuro */
+    display: flex; /* Coloca os elementos em linha */
+    align-items: center; /* Centraliza os itens verticais */
+    justify-content: space-between; /* Espaço entre os blocos */
+    padding: 10px 20px; /* Espaçamento interno da barra */
+    position: sticky; /* Fixa a barra no topo ao fazer scroll */
+    top: 0; /* A barra fica colada ao topo */
+    width: 100%; /* Faz a navbar ocupar toda a largura da página */
+}
+
+
+/* Estilo para os <div> internos da barra de navegação */ 
+.bng-navbar div {
+    display: flex; /* Coloca os elementos lado a lado */
+    align-items: center; /* Alinha-os verticalmente ao centro */
+}
+
+/* Estilo do logótipo na barra de navegação */ 
+.bng-navbar img {
+    height: 80px; /* Define a altura do logótipo */
+    margin-right: 10px; /* Espaço entre o logótipo e o texto */ 
+}
+
+/* Estilos para os links centrais da navegação */ 
+.container-navegacao {
+    text-align: center; /* Centraliza os links */
+    padding: 20px; /* Adiciona espaçamento interno */ 
+}
+
+.container-navegacao a {
+    font-size: 1.3em; /* Aumenta o tamanho da fonte dos links */
+    margin: 0px 50px; /* Espaçamento horizontal entre os links */
+    text-decoration: none; /* Remove o sublinhado */
+    color: #a83882; /* Define a cor dos links */
+    white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
+}
+
+.container-navegacao a:hover {
+    color: #ffffff; /* Muda a cor ao passar o mouse */ 
+}
+
+/* Estilos para o botão de iniciar sessão */
+.nav-cliente a{
+    color: #680447;/* Cor do texto */
+    text-decoration: none;/* Remove sublinhado */ 
+    font-size: 1.5em;/* Tamanho da fonte */
+    padding: 10px;/* Espaçamento interno */ 
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: background 0.3s;/* Efeito suave na transição */
+    white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
+}
+
+/* Efeito ao passar o mouse no botão da Área Cliente */ 
+.nav-cliente a:hover {
+    background-color: #a838834c; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilos para o Rodapé */ 
+.footer-container {
+    display: flex; /* Ativa o layout flexível */
+    background-color: #ffeafd; /* Cor de fundo escura */
+    color: rgb(161, 17, 106); /* Cor do texto */
+    padding: 30px 20px; /* Espaçamento interno do rodapé */
+    flex-wrap: wrap; /* Permite que os itens se ajustem em ecrãs pequenos */ 
+    /*position: fixed; /* Fixa o rodapé no fundo da página */
+    /*bottom: 0; /* Alinha o rodapé à parte inferior */
+    /*left: 0; /* Alinha o rodapé à esquerda */
+    width: 100%; /* Faz o rodapé ocupar toda a largura da página */
+}
+
+.footer-section {
+    flex: 1; /* Faz com que as secções tenham larguras iguais */
+    min-width: 100px; /* Define uma largura mínima para cada secção */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o conteúdo de cada bloco */
+}
+
+.footer-section strong {
+    font-size: 1.2rem; /* Tamanho da fonte para os títulos */
+    display: block; /* Ocupa toda a largura disponível */
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
+    color: #680447; /* Cor clara para destaque */
+}
+
+/* Texto Genérico */ 
+.container-texto-generico {
+    display: flex; /* Ativa o layout flexível */
+    justify-content: center;/* Centraliza os elementos horizontalmente */
+    flex-wrap: wrap;/* Permite quebra de linha em ecrãs menores */
+    gap: 20px; /* Espaço entre os elementos */
+    padding: 100px 40px; /* Espaçamento interno (superior/inferior e laterais) */
+    text-align: center; /* Centraliza o texto dentro dos artigos */
+    min-height: 70vh; /* Garante altura mínima de uma janela (ecrã) */
+}
+
+/* Seção "Sobre nós" */
+#sobre-nos {
+    position: relative; /* Posições dos elementos relativas à secção */
+    text-align: center; /* Centra horizontalmente o conteúdo */
+    padding: 170px 20px 100px; /* Espaçamento interno */
+    background-color: #fff; /* Cor de fundo branca */
+    overflow: hidden; /* Evita que o fundo ultrapasse a secção */
+}
+
+/* Imagem de fundo translúcida */
+#sobre-nos::before {
+    content: ""; /* Cria uma camada extra para a imagem */
+    position: absolute; /* Coloca a imagem por trás do conteúdo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url("../img/Fundo.png"); /* Caminho da imagem */
+    background-size: cover; /* Faz a imagem ocupar toda a secção */
+    background-position: center; /* Centra a imagem */
+    background-repeat: no-repeat; /* Impede repetição da imagem */
+
+    opacity: 0.25; /* Torna a imagem clara/translúcida */
+    z-index: 0; /* Fica atrás do texto */
+}
+
+/* Fade branco no fim da secção */
+#sobre-nos::after {
+    content: ""; /* Cria a camada do esvanecimento */
+    position: absolute; /* Posiciona o fade sobre o fundo */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        white
+    );
+
+    z-index: 1; /* Fica por cima da imagem */
+}
+
+.sobre-nos-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px; /* Largura máxima de 800px para limitar o conteúdo */
+    margin: 0 auto; /* Centra horizontalmente o conteúdo */
+    text-align: center;
+}
+
+.sobre-nos-content h1 {
+    font-size: 3em; /* Tamanho grande para o título principal */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
+    text-align: center; /* Texto centrado */
+    color:#680447 /* Cor do texto */
+}
+
+.sobre-nos-content p {
+    font-size: 1.2em; /* Aumenta o tamanho da letra do parágrafo */
+    margin-bottom: 70px; /* Espaço abaixo do parágrafo */
+    color:#680447 /* Cor do texto */
+}
+
+.button {
+    display: inline-block; /* Permite definir largura/altura e manter como botão em linha */
+    background-color: #945880; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno (vertical x horizontal) */
+    text-decoration: none; /* Remove o sublinhado do link */
+    border-radius: 10px; /* Bordas arredondadas no botão */
+}
+
+

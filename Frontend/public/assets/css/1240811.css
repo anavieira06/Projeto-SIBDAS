@@ -46,23 +46,44 @@
 }
 
 .container-navegacao a:hover {
-    color: #ffffff; /* Muda a cor ao passar o mouse */ 
+    color: #fff; /* Muda a cor ao passar o mouse */ 
 }
 
-/* Estilos para o botão de iniciar sessão */
-.nav-cliente a{
-    color: #680447;/* Cor do texto */
-    text-decoration: none;/* Remove sublinhado */ 
-    font-size: 1.5em;/* Tamanho da fonte */
-    padding: 10px;/* Espaçamento interno */ 
-    border-radius: 5px; /* Bordas arredondadas */
-    transition: background 0.3s;/* Efeito suave na transição */
-    white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
+/* Botão de iniciar sessão */
+.nav-cliente a {
+    color: #680447; /* Cor do texto */
+    text-decoration: none; /* Remove sublinhado */ 
+    font-size: 1.1em; /* Tamanho da letra */ 
+    font-weight: 600; /* Grossura da letra */
+    border-radius: 999px; /* Raio das bordas do botão */
+    padding: 10px 20px; /* Espaçamento interno */ 
+    background-color: #ffeafd; /* Cor do botão */
+
+    border: 2px solid #945880; /* Borda esterna do botão */
+
+    transition: /* Cria uma transição mais suave e controlada */
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+
+    white-space: nowrap; /* Faz com que não haja quebra para linha de baixo */
+
+    display: inline-flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
 }
 
-/* Efeito ao passar o mouse no botão da Área Cliente */ 
+/* Efeito ao passar o mouse no botão de iniciar sessão */ 
 .nav-cliente a:hover {
-    background-color: #a838834c; /* Cor de fundo ao passar o mouse */
+    background: #945880; /* Cor do fundo */
+    color: #fff; /* Cor da fonte */
+
+    box-shadow: 0 10px 25px rgba(168, 56, 130, 0.3); /* Cria uma sombra em volta do botão */
+}
+
+/* Efeito de clicar no botão */
+.nav-cliente a:active {
+    transform: scale(0.97);
 }
 
 /* Estilos para o Rodapé */ 
@@ -72,9 +93,6 @@
     color: rgb(161, 17, 106); /* Cor do texto */
     padding: 30px 20px; /* Espaçamento interno do rodapé */
     flex-wrap: wrap; /* Permite que os itens se ajustem em ecrãs pequenos */ 
-    /*position: fixed; /* Fixa o rodapé no fundo da página */
-    /*bottom: 0; /* Alinha o rodapé à parte inferior */
-    /*left: 0; /* Alinha o rodapé à esquerda */
     width: 100%; /* Faz o rodapé ocupar toda a largura da página */
 }
 
@@ -139,7 +157,7 @@
     width: 100%;
     height: 200px;
 
-    background: linear-gradient(
+    background: linear-gradient( /* Cria um grandiente vertical da imagem até branco */
         to bottom,
         rgba(255,255,255,0),
         white
@@ -150,14 +168,14 @@
 
 .sobre-nos-content {
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Faz com que esteja em primeiro plano (em cima de tudo) */
     max-width: 800px; /* Largura máxima de 800px para limitar o conteúdo */
     margin: 0 auto; /* Centra horizontalmente o conteúdo */
     text-align: center;
 }
 
 .sobre-nos-content h1 {
-    font-size: 3em; /* Tamanho grande para o título principal */
+    font-size: 3em; /* Tamanho para o título principal */
     margin-bottom: 20px; /* Espaçamento abaixo do título */
     white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
     text-align: center; /* Texto centrado */
@@ -165,7 +183,7 @@
 }
 
 .sobre-nos-content p {
-    font-size: 1.2em; /* Aumenta o tamanho da letra do parágrafo */
+    font-size: 1.2em; /* Tamanho da letra */
     margin-bottom: 70px; /* Espaço abaixo do parágrafo */
     color:#680447 /* Cor do texto */
 }

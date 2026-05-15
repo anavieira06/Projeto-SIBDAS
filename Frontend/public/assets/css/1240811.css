@@ -16,6 +16,7 @@
     position: sticky; /* Fixa a barra no topo ao fazer scroll */
     top: 0; /* A barra fica colada ao topo */
     width: 100%; /* Faz a navbar ocupar toda a largura da página */
+    z-index: 10; /* Garante que a navbar está em cima de tudo */
 }
 
 
@@ -34,12 +35,12 @@
 /* Estilos para os links centrais da navegação */ 
 .container-navegacao {
     text-align: center; /* Centraliza os links */
-    padding: 20px; /* Adiciona espaçamento interno */ 
+    padding: 10px; /* Adiciona espaçamento interno */ 
 }
 
 .container-navegacao a {
     font-size: 1.3em; /* Aumenta o tamanho da fonte dos links */
-    margin: 0px 50px; /* Espaçamento horizontal entre os links */
+    margin: 0px 40px; /* Espaçamento horizontal entre os links */
     text-decoration: none; /* Remove o sublinhado */
     color: #a83882; /* Define a cor dos links */
     white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
@@ -118,7 +119,7 @@
     gap: 20px; /* Espaço entre os elementos */
     padding: 100px 40px; /* Espaçamento interno (superior/inferior e laterais) */
     text-align: center; /* Centraliza o texto dentro dos artigos */
-    min-height: 70vh; /* Garante altura mínima de uma janela (ecrã) */
+    min-height: 100vh; /* Garante altura mínima de uma janela (ecrã) */
 }
 
 /* Seção "Sobre nós" */
@@ -195,6 +196,41 @@
     padding: 10px 20px; /* Espaçamento interno (vertical x horizontal) */
     text-decoration: none; /* Remove o sublinhado do link */
     border-radius: 10px; /* Bordas arredondadas no botão */
+}
+
+/* Secção "Problema e Solução" */
+#problema-solucao {
+    display: flex;
+    flex-wrap: wrap; /* Permite a quebra dos elementos caso não haja espaço para as duas caixas */
+    justify-content: center; /* Texto centrado */
+    align-items: stretch; /* Todos os elementos apresentam a mesma altura */
+    gap: 35px; /* Espaçamento entre as duas caixas */
+    padding: 200px 40px;  /* Espaçamento interno */
+    background-color: #fff;  /* Cor de fundo */
+}
+
+
+/* Caixas de Problema/Solução */
+.problema-solucao-content {
+    width: 500px; /* Largura da caixa */
+    padding: 40px 30px; /* Espaço interno entre a caixa e o texto */
+    background-color: #fff5fc; /* Cor do fundo */
+    border-radius: 25px; /* Raio das bordas da caixa */
+    text-align: center; /* Texto centrado */
+    box-shadow: 0 10px 30px rgba(168, 56, 130, 0.3); /* Sombra em volta da caixa */
+}
+
+.problema-solucao-content h2 {
+    color: #680447; /* Cor do texto */
+    font-size: 2em; /* Tamanho do texto */
+    margin-bottom: 20px; /* Espaçamento para baixo */
+}
+
+.problema-solucao-content p {
+    color: #5c3750; /* Cor do texto */
+    font-size: 1.05em; /* Tamanho do texto */
+    line-height: 1.7; /* Espaçamento entre linhas */
+    margin-bottom: 16px; /* Espaçamento para baixo */
 }
 
 

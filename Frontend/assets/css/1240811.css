@@ -233,4 +233,43 @@
     margin-bottom: 16px; /* Espaçamento para baixo */
 }
 
+/* Secção "Vantagens" */
+#vantagens {
+    padding: 110px 40px; /* Espaçamento interno */
+    background-color: #fff; /* Cor de fundo da secção */
+}
 
+#vantagens h2 {
+    text-align: center; /* Texto centrado */
+    font-size: 2.5em; /* Tamanho texto */
+    color: #680447; /* Cor texto */
+    margin-bottom: 20px; /* Espaçamento para baixo do título */
+}
+
+.vantagens-content {
+    max-width: 900px; /* Define a largura máxima da secção */
+    margin: 0 auto; /* Centra horizontalmente a secção */
+    padding: 0; /* Remove espaçamento interno */
+}
+
+.vantagens-content li {
+    position: relative;
+    list-style: none; /* Permite remover os pontinhos */
+    padding: 20px 20px 20px 55px; /* Espaçamento interno */
+    margin-bottom: 18px; /* Espaçamento para baixo */
+    background-color: #fff5fc; /* Cor de fundo */
+    border-radius: 12px; /* Raio da borda da caixa de texto */
+    line-height: 1.7; /* Espaçamento entre linhas */
+    font-size: 1.05em; /* Tamanho da letra */
+}
+
+/* Check list */
+.vantagens-content li::before {
+    content: "✔"; /* Coloca "✔" antes de cada ponto */
+    position: absolute; /* Posiciona o icon livremente dentro do item */
+    left: 20px;
+    top: 20px;
+    color: #a83882; /* Cor do símbolo */
+    font-weight: bold; /* Negrito */
+    font-size: 1.2em; /* Tamanho do símbolo */
+}

@@ -273,3 +273,54 @@
     font-weight: bold; /* Negrito */
     font-size: 1.2em; /* Tamanho do símbolo */
 }
+
+/* Secção "Funcionalidades" */
+#funcionalidades{
+    display: flex; /* Organiza os pacotes lado a lado */
+    flex-wrap: wrap; /* Permite quebra de linha em ecrãs pequenos */
+    padding: 150px 10px; /* Espaçamento interno */
+}
+
+#funcionalidades h2{
+    text-align: left; /* Texto encostado à esquerda */
+    font-size: 2.5em; /* Tamanho texto */
+    color: #680447; /* Cor texto */
+    margin-bottom: 5px; /* Espaçamento para baixo do título */
+    text-decoration: underline; /* Sublinha o texto */
+}
+
+#funcionalidades > p{
+    width: 100%; /* Ocupar 100% da largura */
+    text-align: left; /* Texto alinhado à esquerda */
+    font-size: 18px; /* Tamanho da letra */
+    margin-top: 0; /* Sem espaçamento para cima */
+    margin-bottom: 30px; /* Espaçamento para baixo */
+}
+
+.funcionalidades-container{
+    display: flex; /* Alinha os elementos em linha */
+    flex-wrap: wrap; /* Permite que os elementos passem para a linha seguinte em ecrãs menores */ 
+    justify-content: center; /* Centraliza os elementos na horizontal */
+}
+
+.funcionalidades-content {
+    width: 300px; /* Largura de cada caixa */
+    margin: 20px; /* Espaçamento entre cada caixa */
+    padding: 20px; /* Espaçamento interno em cada caixa */
+    background-color: #fff5fc; /* Cor de fundo */
+    border-radius: 5px; /* Raio da borda de cada caixa para efeito mais arredondado*/
+    text-align: center; /* texto centrado */
+    border: 2px solid #945880; /* Borda esterna da caixa */
+}
+
+.funcionalidades-content i{
+    font-size: 50px;
+}
+
+
+
+
+
+    
+    
+   

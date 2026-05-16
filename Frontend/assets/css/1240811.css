@@ -196,6 +196,7 @@
     padding: 10px 20px; /* Espaçamento interno (vertical x horizontal) */
     text-decoration: none; /* Remove o sublinhado do link */
     border-radius: 10px; /* Bordas arredondadas no botão */
+    cursor: pointer; /* Cursor tipo "mão" ao passar por cima */
 }
 
 /* Secção "Problema e Solução" */
@@ -310,14 +311,62 @@
     background-color: #fff5fc; /* Cor de fundo */
     border-radius: 5px; /* Raio da borda de cada caixa para efeito mais arredondado*/
     text-align: center; /* texto centrado */
-    border: 2px solid #945880; /* Borda esterna da caixa */
+    border: 2px solid #945880; /* Borda externa da caixa */
 }
 
 .funcionalidades-content i{
     font-size: 50px;
 }
 
+/* Secção "Contacto" */
+#contacto {
+    padding: 150px 10px; /* Espaçamento interno */
+}
 
+#contacto form {
+    display: flex; /* Usa layout flexível */
+    flex-direction: column; /* Organiza os elementos na vertical */
+    max-width: 500px; /* Largura máxima do formulário */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    margin-bottom: 50px; /* Espaçamento para baixo do formulário */
+}
+
+#contacto h2 {
+    text-align: left; /* Texto encostado à esquerda */
+    font-size: 2.5em; /* Tamanho texto */
+    color: #680447; /* Cor texto */
+    margin-bottom: 5px; /* Espaçamento para baixo do título */
+    text-decoration: underline; /* Sublinha o texto */
+}
+
+#contacto p {
+    width: 100%; /* Ocupar 100% da largura */
+    text-align: left; /* Texto alinhado à esquerda */
+    font-size: 18px; /* Tamanho da letra */
+    margin-top: 0; /* Sem espaçamento para cima */
+    margin-bottom: 30px; /* Espaçamento para baixo */
+}
+
+#contacto label {
+    margin-top: 10px; /*Espaço acima de cada rótulo */
+}
+
+#contacto input, #contacto textarea {
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 15px; /* Espaço abaixo de cada campo */
+    border: 1px solid #e6b3d7; /* Borda dos campos de texto */
+    border-radius: 5px; /* Bordas arredondadas */
+    width: 100%; /* Permite que os campos de texto ocupem toda a largura */
+}
+
+#contacto button {
+    background-color: #680447; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor tipo "mão" ao passar por cima */
+}
 
 
 

@@ -378,6 +378,28 @@ body{
 }
 
 
+/* PRIVATE */
+
+/* Estilo para a navbar */
+.logo {
+    max-height: 80px; /* Altura do logo */
+    width: auto; /* Ajusta a largura da imagem automaticamente */
+}
+
+.custom-navbar {
+    background-color: #ffeafd; /* Cor do fundo */
+    height: 110px; /* Altura do navbar */
+}
+
+.custom-btn {
+    background-color: #fff; /* Cor do fundo */
+    color:#680447; /* Cor do texto */
+    border: 2px solid #680447; /* Borda do botão */
+    border-radius: 10px; /* Raio da borda do botão */
+    padding: 10px 20px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor tipo "mão" ao passar por cima */
+}
+
 
     
     

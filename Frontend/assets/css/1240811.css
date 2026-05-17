@@ -6,6 +6,14 @@
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif; /* Define a fonte padrão */
 }
 
+html {
+    scroll-behavior: smooth; /* Implementa uma passagem suave para a secção através do navbar */
+}
+
+body{
+    overflow-x: hidden; /* Esconde a barra de scroll horizontal da página */
+}
+
 /* Estilo da barra de navegação principal (navbar)*/
 .bng-navbar {
     background-color: #ffeafd; /* Cor de fundo escuro */
@@ -16,7 +24,7 @@
     position: sticky; /* Fixa a barra no topo ao fazer scroll */
     top: 0; /* A barra fica colada ao topo */
     width: 100%; /* Faz a navbar ocupar toda a largura da página */
-    z-index: 10; /* Garante que a navbar está em cima de tudo */
+    z-index: 1000; /* Garante que a navbar está em cima de tudo */
 }
 
 
@@ -169,8 +177,8 @@
 
 .sobre-nos-content {
     position: relative;
-    z-index: 1; /* Faz com que esteja em primeiro plano (em cima de tudo) */
-    max-width: 800px; /* Largura máxima de 800px para limitar o conteúdo */
+    z-index: 2; /* Faz com que esteja em primeiro plano (em cima de tudo) */
+    max-width: 100%; /* Largura máxima de 800px para limitar o conteúdo */
     margin: 0 auto; /* Centra horizontalmente o conteúdo */
     text-align: center;
 }
@@ -178,15 +186,16 @@
 .sobre-nos-content h1 {
     font-size: 3em; /* Tamanho para o título principal */
     margin-bottom: 20px; /* Espaçamento abaixo do título */
-    white-space: nowrap; /* Impede que o texto quebre para a linha de baixo */
+    display: flex; 
+    flex-wrap: wrap; /* Permite quebra de linha em ecrãs pequenos */
     text-align: center; /* Texto centrado */
-    color:#680447 /* Cor do texto */
+    color:#680447; /* Cor do texto */
 }
 
 .sobre-nos-content p {
     font-size: 1.2em; /* Tamanho da letra */
     margin-bottom: 70px; /* Espaço abaixo do parágrafo */
-    color:#680447 /* Cor do texto */
+    color:#680447; /* Cor do texto */
 }
 
 .button {

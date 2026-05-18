@@ -48,7 +48,7 @@ body{
     text-align: center; /* Centraliza os links */
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Permite a quebra em ecrãs menores */
     padding: 10px; /* Adiciona espaçamento interno */ 
 }
 
@@ -335,7 +335,7 @@ body{
 }
 
 .funcionalidades-content i{
-    font-size: 50px;
+    font-size: 50px; /* Tamanho de letra */
 }
 
 /* Secção "Contacto" */
@@ -388,8 +388,10 @@ body{
     cursor: pointer; /* Cursor tipo "mão" ao passar por cima */
 }
 
-
+/* ======================================== */
 /* PRIVATE */
+/* ======================================== */
+
 
 /* Estilo para a navbar */
 .logo {
@@ -398,19 +400,78 @@ body{
 }
 
 .custom-navbar {
-    background-color: #ffeafd; /* Cor do fundo */
+    background-color: #fff; /* Cor do fundo */
     height: 110px; /* Altura do navbar */
+    border-bottom: 1px solid #f1cde4;
 }
 
 /* Botão de utilizador */
 .custom-btn {
-    background-color: #fff; /* Cor do fundo */
-    color:#680447; /* Cor do texto */
-    border: 2px solid #680447; /* Borda do botão */
+    background-color: #fff4fb; /* Cor do fundo */
+    color:#945880; /* Cor do texto */
+    border: 2px solid #945880; /* Borda do botão */
     border-radius: 10px; /* Raio da borda do botão */
     padding: 10px 20px; /* Espaçamento interno */
     cursor: pointer; /* Cursor tipo "mão" ao passar por cima */
 }
+
+/* Estilo para sidebar */
+.custom-sidebar {
+    background-color: #fff4fb;
+    padding: 25px 18px;
+    border-right: 1px solid #f1cde4;
+}
+
+.sidebar-title {
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espaço entre links */
+}
+
+.sidebar-link {
+    text-decoration: none;
+    color: #680447;
+    padding: 10px 15px;
+    font-weight: 500;
+    font-size: 1.2rem;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    transition: 0.3s;
+}
+
+.sidebar-link:hover { /* Quando o "mouse" passa em cima */
+    color: #e6b3d7;
+    transform: translateX(5px); /* Desloca-se ligeiramente para o lado */
+}
+
+.main-section {
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.main-section h2 {
+    color: #680447;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.main-section p {
+    color: #555;
+    font-size: 1.2rem;
+    line-height: normal;
+    margin-bottom: 5px;
+}
+
 
 /* ======================================== */
 /* RESPONSIVIDADE */

@@ -392,7 +392,7 @@ body{
 /* PRIVATE */
 /* ======================================== */
 
-
+/* Página inicial */
 /* Estilo para a navbar */
 .logo {
     max-height: 80px; /* Altura do logo */
@@ -418,32 +418,32 @@ body{
 /* Estilo para sidebar */
 .custom-sidebar {
     background-color: #fff4fb;
-    padding: 25px 18px;
+    padding: 25px 18px; /* Espaçamento interno */
     border-right: 1px solid #f1cde4;
 }
 
+/* Título Menu */
 .sidebar-title {
-    margin-bottom: 15px;
-    font-size: 2rem;
+    margin-bottom: 15px; /* Espaçamento para baixo */
+    font-size: 2rem; /* Tamanho da letra */
 }
 
 .sidebar-menu {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Transforma num container flexivel */
+    flex-direction: column; /* Links em coluna */
     gap: 5px; /* Espaço entre links */
 }
 
+/* Links do menu */
 .sidebar-link {
-    text-decoration: none;
+    text-decoration: none; /* Sem ser sublinhado, etc */
     color: #680447;
     padding: 10px 15px;
-    font-weight: 500;
+    font-weight: 500; /* Espessura das letras */
     font-size: 1.2rem;
-
     display: flex;
-    align-items: center;
-    gap: 10px;
-
+    align-items: center; /* Elementos centrados em linha */
+    gap: 10px; /* Espaço entre o icon e o texto */
     transition: 0.3s;
 }
 
@@ -453,24 +453,74 @@ body{
 }
 
 .main-section {
-    padding: 30px;
+    padding: 30px; /* Tamanho da caixa */
     border-radius: 18px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra em volta da caixa */
 }
 
-.main-section h2 {
+.main-section h2 { /* Definições para título */
     color: #680447;
     font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-weight: bold; /* Negrito */
+    margin-bottom: 20px; /* Espaço para baixo */
 }
 
-.main-section p {
+.main-section p { /* Definições para parágrafos */
     color: #555;
     font-size: 1.2rem;
-    line-height: normal;
-    margin-bottom: 5px;
+    line-height: normal; /* Espaço entre linhas */
+    margin-bottom: 5px; /* Espaço entre cada parágrafo */
 }
+
+/* Botão de menu nas páginas secundárias */
+.custom-button {
+    background-color: #945880; /* Cor de fundo */
+    color: white;
+    border: none; 
+    border-radius: 14px; /* Define o arredondamento das bordas */
+    padding: 10px 18px; /* Espaçamento interno */
+    font-size: 1rem; /* Tamanho do texto */
+    font-weight: 600; /* Espessura do texto */
+    display: flex;
+    align-items: center; /* Elementos centrados */
+    transition: all 0.3s ease; /* Permite que as transições sejam mais suaves */
+}
+
+.custom-button:hover { /* Quando se passa o "mouse" em cima do botão */
+    box-shadow: 0 6px 15px rgba(104, 4, 71, 0.35);
+}
+
+.custom-button:active { /* Quando se clica no botão */
+    transform: scale(0.97);
+}
+
+#sidebarMenu {
+    width: 35%; /* O menu lateral ocupa 35% */
+    max-width: 320px; /* Largura máxima */
+}
+
+.offcanvas-header { /* Cabeçalho */
+    border-bottom: 1px solid #f1cde4;
+    padding: 20px;
+}
+
+/* Título Menu */
+.offcanvas-title {
+    color: #680447;
+    font-size: 1.8rem; /* Tamanho da letra */
+    font-weight: bold; /* Texto a negrito */
+}
+
+/* Corpo do menu */
+.offcanvas-body {
+    display: flex;
+    flex-direction: column; /* Links organizados em coluna */
+    gap: 10px; /* Define o espaço entre os links */
+    padding: 20px; /* Espaçamento interno */
+}
+
+
+
 
 
 /* ======================================== */

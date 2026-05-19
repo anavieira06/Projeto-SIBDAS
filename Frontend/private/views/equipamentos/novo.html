@@ -8,9 +8,6 @@
         <!-- favicon -->
         <link rel="shortcut icon" href="../../../assets/img/Icon.png">
 
-        <!-- custom CSS -->
-        <link rel="stylesheet" href="../../../assets/css/1240811.css">
-
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +18,9 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../../../assets/bootstrap/bootstrap.min.css">
+
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="../../../assets/css/1240811.css">
 
     </head>
 
@@ -70,7 +70,7 @@
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="codigo_inventario" class="form-label">Código interno</label>
-                                        <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: 04.002.04" required>
+                                        <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: EQ04.002.04" required>
                                     </div>
                                 </div>
 
@@ -99,15 +99,15 @@
                                 <div class="row mb-3"> 
                                     <div class="col-md-4">
                                         <label for="marca" class="form-label">Marca</label> 
-                                        <input type="text" class="form-control" id="marca" name="marca" placeholder="Ex: Zoll">
+                                        <input type="text" class="form-control" id="marca" name="marca" placeholder="Ex: Zoll" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="modelo" class="form-label">Modelo</label> 
-                                        <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ex: Evita V500">
+                                        <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ex: Evita V500" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="numero-serie" class="form-label">Nº de série</label> 
-                                        <input type="text" class="form-control" id="numero-serie" name="numero-serie" placeholder="Ex: EV500-2021-9934">
+                                        <input type="text" class="form-control" id="numero-serie" name="numero-serie" placeholder="Ex: EV500-2021-9934" required>
                                     </div>
                                 </div>
 
@@ -115,7 +115,7 @@
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="fabricante" class="form-label">Fabricante</label>
-                                        <input type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Ex: Philips" required>
+                                        <input type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Ex: Philips Healthcare" required>
                                     </div>
                                 </div>
 
@@ -134,7 +134,7 @@
                                         <input type="number" class="form-control" id="ano_fabrico" name="ano_fabrico" min="1980" max="2026" placeholder="Ex: 2024" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="custo_aquisicao" class="form-label">Custo de aquisição</label>
+                                        <label for="custo_aquisicao" class="form-label">Custo de aquisição (€)</label>
                                         <input type="text" class="form-control" id="custo_aquisicao" name="custo_aquisicao" placeholder="Ex: 2500" step="0.01" required>
                                     </div>                               
                                 </div>
@@ -187,7 +187,7 @@
                                     <a href="lista.html" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar 
                                     </a>
-                                    <button type="submit" class="btn btn" style="background-color: #680447; color: #fff;">
+                                    <button type="submit" class="btn btn-guardar">
                                         <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
                                     </button>
                                 </div>

@@ -8,9 +8,6 @@
         <!-- favicon -->
         <link rel="shortcut icon" href="../../../assets/img/Icon.png">
 
-        <!-- custom CSS -->
-        <link rel="stylesheet" href="../../../assets/css/1240811.css">
-
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +18,9 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../../../assets/bootstrap/bootstrap.min.css">
+
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="../../../assets/css/1240811.css">
 
     </head>
 
@@ -56,6 +56,145 @@
                 </a>
             </div>
         </div>
+
+        <!-- Conteúdo Principal -->
+            <main class="container-fluid p-4" style="background-color: #fff4fb;">
+                <div class="d-flex justify-content-center mt-4">
+                    <div class="card w-100 shadow rounded" style="max-width: 1200px;">
+                        <div class="card-body">
+                            <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-pen-to-square me-2"></i> Atualização de Dados EQUIPAMENTOS</strong></h2>
+                            <hr>
+                            <form action="#" method="post" novalidate>
+                                <!-- Campo código de inventário --> 
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="codigo_inventario" class="form-label">Código interno</label>
+                                        <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" value="EQ04.002.04" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campos Categoria/Grupo e Designação -->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="categoria_grupo" class="form-label">Categoria / Grupo</label>
+                                        <select class="form-control" id="tipo_entrada" name="tipo_entrada" required> 
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="suporte_vida">Suporte de vida</option>
+                                            <option value="terapia">Terapia</option>
+                                            <option value="diagnostico">Diagnóstico</option>
+                                            <option value="laboratorio">Laboratório</option>
+                                            <option value="esterilizaçao">Esterilização</option>
+                                            <option value="reabilitaçao">Reabilitação</option>
+                                            <option value="monitorizaçao" selected>Monitorização</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="designacao_equipamento" class="form-label">Designação</label>
+                                        <input type="text" class="form-control" id="designacao_equipamento" name="designacao_equipamento" value="Sensor de temperatura do Monitor multiparamétrico " required>
+                                    </div>
+                                </div>
+
+                                <!-- Campos Marca, Modelo e Nº série --> 
+                                <div class="row mb-3"> 
+                                    <div class="col-md-4">
+                                        <label for="marca" class="form-label">Marca</label> 
+                                        <input type="text" class="form-control" id="marca" name="marca" value="Philips" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="modelo" class="form-label">Modelo</label> 
+                                        <input type="text" class="form-control" id="modelo" name="modelo" value="IntelliVue MP5" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="numero-serie" class="form-label">Nº de série</label> 
+                                        <input type="text" class="form-control" id="numero-serie" name="numero-serie" value="MP5-2022-45873" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Fabricante -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="fabricante" class="form-label">Fabricante</label>
+                                        <input type="text" class="form-control" id="fabricante" name="fabricante" value="Philips Healthcare" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Data de aquisição -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="data_aquisicao" class="form-label">Data de aquisição</label>
+                                        <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" value="2023-05-19" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campos Ano de fabrico e custo de aquisição -->
+                                <div class="row mb-3"> 
+                                    <div class="col-md-6">
+                                        <label for="ano_fabrico" class="form-label">Ano de fabrico</label>
+                                        <input type="number" class="form-control" id="ano_fabrico" name="ano_fabrico" min="1980" max="2026" value="2022" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="custo_aquisicao" class="form-label">Custo de aquisição (€)</label>
+                                        <input type="text" class="form-control" id="custo_aquisicao" name="custo_aquisicao" value="25000" step="0.01" required>
+                                    </div>                               
+                                </div>
+
+                                <!--Campos Tipo de entrada, Estado atual e Criticidade -->
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="tipo_entrada" class="form-label">Entrada por:</label>
+                                        <select class="form-control" id="tipo_entrada" name="tipo_entrada" required> 
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="doacao">Doação</option>
+                                            <option value="aluguer">Aluguer</option>
+                                            <option value="emprestimo">Empréstimo</option>
+                                            <option value="compra" selected>Compra</option>
+                                        </select>
+                                    </div>     
+                                    <div class="col-md-4">
+                                        <label for="estado" class="form-label">Estado atual</label>
+                                        <select class="form-control" id="estado" name="estado" required> 
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="inativo">Inativo</option>
+                                            <option value="calibração">Em calibração</option>
+                                            <option value="quarentena">Em quarentena</option>
+                                            <option value="abatido">Abatido</option>
+                                            <option value="ativo" selected>Ativo</option>
+                                        </select>
+                                    </div>   
+                                    <div class="col-md-4">
+                                        <label for="criticidade" class="form-label">Criticidade</label>
+                                        <select class="form-control" id="criticidade" name="criticidade" required> 
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="baixa">Baixa</option>
+                                            <option value="media">Média</option>
+                                            <option value="alta">Alta</option>
+                                            <option value="suporte_vida" selected>Suporte de vida</option>
+                                        </select>
+                                    </div>   
+                                </div>
+
+                                <!-- Campo Observações -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="observacoes" class="form-label">Observações</label>
+                                        <textarea class="form-control" id="observacoes" name="observacoes" rows="4" >Equipamento adquirido por compra em 2023. Encontra-se em pleno funcionamento e sujeito a manutenção preventiva anual.</textarea>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botões -->
+                                <div class="d-flex justify-content-end gap-2 mb-4">
+                                    <a href="lista.html" class="btn btn-outline-secondary">
+                                        <i class="fa-solid fa-xmark me-1"></i> Cancelar 
+                                    </a>
+                                    <button type="submit" class="btn btn-guardar">
+                                        <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
 
         <!-- Bootstrap JS -->
         <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>

@@ -538,6 +538,17 @@ body{
     font-weight: 600;
 }
 
+/* Botão para guardar alterações */
+.btn-guardar {
+    background-color: #680447;
+    color: #fff;
+    transition: 0.3s;
+}
+.btn-guardar:hover {
+    background-color: #a83882;
+    color: #fff;
+}
+
 /* ======================================== */
 /* RESPONSIVIDADE */
 /* ======================================== */

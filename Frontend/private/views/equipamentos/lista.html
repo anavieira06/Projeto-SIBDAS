@@ -60,22 +60,56 @@
         <!-- Conteúdo Principal -->
         <div class="container-fluid p-4">
             <div class="d-flex align-items-center mb-3 w-100">
-
                 <h2 class="mb-0" style="color: #680447;">
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Equipamentos</strong>
                 </h2>
-
                 <a href="novo.html" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
-                    <i class="fa-solid fa-plus me-1"></i>
-                    Novo equipamento
+                    <i class="fa-solid fa-plus me-1"></i> Novo equipamento
                 </a>
-
             </div>
 
-             
+            <hr>
 
-
+            <p class="text-muted">Consulte a tabela abaixo com os equipamentos registados.</p>
+            <div class="card shadow rounded-4 border-0 p-3">
+                <div class="table-responsive">
+                    <table class="table table-bordered able-striped align-middle text-center">
+                        <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
+                            <tr>
+                                <th>Código interno</th> 
+                                <th>Designação</th>
+                                <th>Categoria / Grupo</th> 
+                                <th>Marca</th> 
+                                <th>Modelo</th> 
+                                <th>Nº de série</th> 
+                                <th>Estado</th> 
+                                <th>Criticidade</th> 
+                                <th class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <tr>
+                                <td>[Código]</td> 
+                                <td>[Designação]</td> 
+                                <td>[Categoria e Grupo]</td> 
+                                <td>[Marca]</td> 
+                                <td>[Modelo]</td> 
+                                <td>[Nº de série]</td> 
+                                <td>[Estado]</td> 
+                                <td>[Criticidade]</td>
+                                <td class="text-center">
+                                    <a href="detalhes.html"  class=" btn-sm me-3 btn-acao"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                    
+                                    <a href="editar.html" class=" btn-sm me-3 btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                    
+                                    <a href="apagar.html" class=" btn-sm btn-acao"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         <!-- Bootstrap JS -->
         <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
     </body>

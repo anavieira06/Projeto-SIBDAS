@@ -532,6 +532,12 @@ body{
     transform: scale(0.96);
 }
 
+/* Botões das ações do listar equipamento */
+.btn-acao {
+    color: #680447;
+    font-weight: 600;
+}
+
 /* ======================================== */
 /* RESPONSIVIDADE */
 /* ======================================== */

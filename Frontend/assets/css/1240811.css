@@ -519,8 +519,18 @@ body{
     padding: 20px; /* Espaçamento interno */
 }
 
+/* Botão de novo equipamento */
+.btn-novo {
+    transition: all 0.3s ease;
+}
 
+.btn-novo:hover { /* Quando se passa "mouse" no botão */
+    box-shadow: 0 8px 18px rgba(104, 4, 71, 0.35);
+}
 
+.btn-novo:active { /* Quando se clica no botão */
+    transform: scale(0.96);
+}
 
 /* ======================================== */
 /* RESPONSIVIDADE */

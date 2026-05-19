@@ -78,7 +78,16 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="categoria_grupo" class="form-label">Categoria / Grupo</label>
-                                        <input type="text" class="form-control" id="categoria_grupo" name="categoria_grupo" placeholder="Ex: Monitorização" required>
+                                        <select class="form-control" id="tipo_entrada" name="tipo_entrada" required> 
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="monitorizaçao">Monitorização</option>
+                                            <option value="suporte_vida">Suporte de vida</option>
+                                            <option value="terapia">Terapia</option>
+                                            <option value="diagnostico">Diagnóstico</option>
+                                            <option value="laboratorio">Laboratório</option>
+                                            <option value="esterilizaçao">Esterilização</option>
+                                            <option value="reabilitaçao">Reabilitação</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="designacao_equipamento" class="form-label">Designação</label>
@@ -102,7 +111,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Campo Fabricante e Data de aquisição -->
+                                <!-- Campo Fabricante -->
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="fabricante" class="form-label">Fabricante</label>
@@ -122,7 +131,7 @@
                                 <div class="row mb-3"> 
                                     <div class="col-md-6">
                                         <label for="ano_fabrico" class="form-label">Ano de fabrico</label>
-                                        <input type="text" class="form-control" id="ano_fabrico" name="ano_fabrico" placeholder="Ex: 2024" required>
+                                        <input type="number" class="form-control" id="ano_fabrico" name="ano_fabrico" min="1980" max="2026" placeholder="Ex: 2024" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="custo_aquisicao" class="form-label">Custo de aquisição</label>

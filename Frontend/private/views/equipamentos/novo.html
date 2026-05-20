@@ -64,7 +64,7 @@
                         <div class="card-body">
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-plus me-2" style="color: #680447;"></i> Inserir novo equipamento</strong></h2>
                             <hr>
-                            <form action="#" method="post" novalidate>
+                            <form id="formEquipamento" action="#" method="post" novalidate>
                                 <!-- Campo código de inventário --> 
                                 <div class="row mb-3">
                                     <div class="col-12">
@@ -77,7 +77,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="categoria_grupo" class="form-label">Categoria / Grupo</label>
-                                        <select class="form-control" id="tipo_entrada" name="tipo_entrada" required> 
+                                        <select class="form-control" id="categoria_grupo" name="categoria_grupo" required> 
                                             <option selected disabled>Escolha uma opção</option>
                                             <option value="monitorizaçao">Monitorização</option>
                                             <option value="suporte_vida">Suporte de vida</option>
@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="numero-serie" class="form-label">Nº de série</label> 
-                                        <input type="text" class="form-control" id="numero-serie" name="numero-serie" placeholder="Ex: EV500-2021-9934" required>
+                                        <input type="text" class="form-control" id="numero_serie" name="numero_serie" placeholder="Ex: EV500-2021-9934" required>
                                     </div>
                                 </div>
 
@@ -199,5 +199,8 @@
 
         <!-- Bootstrap JS -->
         <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JS -->
+        <script src="../../../assets/js/1240811.js"></script>
     </body>
 </html>

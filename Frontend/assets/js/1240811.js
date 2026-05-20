@@ -29,8 +29,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             localStorage.setItem("equipamentos", JSON.stringify(equipamentos));
 
-            window.location.href = "lista.html";
+            const mensagem = document.getElementById("mensagem_sucesso");
+            if (mensagem) {
+                mensagem.textContent = "Equipamento adicionado com sucesso.";
+                mensagem.classList.remove("d-none");
+            }
+
+            setTimeout(function () {
+                window.location.href = "lista.html";
+            }, 3000);
         });
+        
     }
 
     const tabela = document.getElementById("tabelaEquipamentos"); /* Tabela */
@@ -81,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
         });
     }
+
 });
 
 

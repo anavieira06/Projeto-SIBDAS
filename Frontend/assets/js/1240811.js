@@ -17,5 +17,13 @@ document.querySelectorAll(".btn-apagar").forEach(function(botao) {
 document.getElementById("confirmarEliminar") .addEventListener("click", function() {
     if (linhaSelecionada) {
         linhaSelecionada.remove();/* Remove a linha da tabela */
+        /* Mostra mensagem de sucesso */
+        const mensagem =
+            document.getElementById("mensagemSucesso");
+            mensagem.classList.remove("d-none");
+        /* Esconde após 3 segundos */
+        setTimeout(function () {
+            mensagem.classList.add("d-none");
+        }, 3000);
     }
 });

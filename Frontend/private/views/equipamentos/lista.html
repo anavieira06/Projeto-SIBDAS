@@ -103,13 +103,45 @@
                                     
                                     <a href="editar.html" class=" btn-sm me-3 btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                     
-                                    <a href="apagar.html" class=" btn-sm btn-acao"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
+                                    <a href="#" class=" btn-sm btn-acao btn-apagar" data-codigo="[Código]" data-designacao="[Designação]" data-marca="[Marca]" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>  
+        <div class="modal fade" id="modalEliminar" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
+                <div class="modal-content rounded-4">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color:#680447;">
+                            Confirmar eliminação
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Tem a certeza que pretende eliminar este equipamento?</p>
+
+                        <p><strong>Código:</strong> <span id="modalCodigo"></span></p>
+                        <p><strong>Designação:</strong> <span id="modalDesignacao"></span></p>
+                        <p><strong>Marca:</strong> <span id="modalMarca"></span></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="button" class="btn btn-danger" id="confirmarEliminar">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Bootstrap JS -->
         <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
     </body>

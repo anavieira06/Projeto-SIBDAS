@@ -379,6 +379,12 @@ body{
     width: 100%; /* Permite que os campos de texto ocupem toda a largura */
 }
 
+#contacto input:focus, #contacto textarea:focus {
+    outline: none;
+    border-color: #945880;
+    box-shadow: 0 0 5px rgba(148, 88, 128, 0.5);
+}
+
 #contacto button {
     background-color: #680447; /* Cor de fundo do botão */
     color: #fff; /* Cor do texto do botão */
@@ -386,6 +392,10 @@ body{
     border: none; /* Remove a borda padrão */
     border-radius: 5px; /* Bordas arredondadas */
     cursor: pointer; /* Cursor tipo "mão" ao passar por cima */
+}
+
+#contacto button:hover {
+    background-color: #a83882;
 }
 
 /* ======================================== */
@@ -536,6 +546,10 @@ body{
 .btn-acao {
     color: #680447;
     font-weight: 600;
+}
+
+.btn-acao:hover {
+    color: #ca3698;
 }
 
 /* Botão para guardar alterações */

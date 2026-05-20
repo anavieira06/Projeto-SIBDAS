@@ -97,34 +97,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Simulação de eliminação de equipamentos
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () { /* Garante que o html existe antes do js alterar a tabela */
     let linhaSelecionada = null;
-    document.querySelectorAll(".btn-apagar").forEach(function(botao) {
-        botao.addEventListener("click", function() {
-            /* Guarda a linha da tabela */
-            linhaSelecionada = this.closest("tr");
-            /* Coloca os dados no modal */
-            document.getElementById("modalCodigo").textContent =
-                this.dataset.codigo;
-            document.getElementById("modalDesignacao").textContent =
-                this.dataset.designacao;
-            document.getElementById("modalMarca").textContent =
-            this.dataset.marca;
-            });
+    let codigoSelecionado = null;
+
+    let eliminados = JSON.parse(localStorage.getItem("equipamentosEliminados")) || []; /* Guarda localmente os equipamentos eliminados */
+
+    eliminados.forEach(function(codigo) {
+        const linha = document.querySelector(`.btn-apagar[data-codigo="${codigo}"]`)?.closest("tr");
+        if (linha) {
+            linha.remove();
+        }
     });
 
-    document.getElementById("confirmarEliminar") .addEventListener("click", function() {
+    document.querySelectorAll(".btn-apagar").forEach(function(botao) {
+        botao.addEventListener("click", function() {
+            linhaSelecionada = this.closest("tr");
+            codigoSelecionado = this.dataset.codigo;
+
+            document.getElementById("modalCodigo").textContent = this.dataset.codigo;
+            document.getElementById("modalDesignacao").textContent = this.dataset.designacao;
+            document.getElementById("modalMarca").textContent = this.dataset.marca;
+        });
+    });
+
+    document.getElementById("btnConfirmarEliminar").addEventListener("click", function () {
         if (linhaSelecionada) {
-            linhaSelecionada.remove();/* Remove a linha da tabela */
-            /* Mostra mensagem de sucesso */
-            const mensagem =
-                document.getElementById("mensagemSucesso");
-                mensagem.classList.remove("d-none");
-            /* Esconde após 3 segundos */
-            setTimeout(function () {
-                mensagem.classList.add("d-none");
-            }, 3000);
+            linhaSelecionada.remove(); /* Remove visualmente o equipamento da tabela */
         }
+
+        eliminados.push(codigoSelecionado); /* Faz com que não volte a aparecer depois de atualizar */
+        localStorage.setItem("equipamentosEliminados", JSON.stringify(eliminados));
     });
 });
 

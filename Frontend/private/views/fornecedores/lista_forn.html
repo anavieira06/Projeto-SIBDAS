@@ -91,14 +91,20 @@
                                 <th class="text-center">Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tabelaFornecedores">
-                            <tr id="linhaSemFornecedores">
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
+                        <tbody>
+                            <tr>
+                                <td>[Nome empresa]</td> 
+                                <td>[NIF]</td> 
+                                <td>[Contacto]</td> 
+                                <td>[Email]</td> 
+                                <td>[Tipo fornecedor]</td> 
+                                <td class="text-center align-middle">
+                                    <div class="d-flex justify-content-center align-items-center gap-3">
+                                        <a href="detalhes_forn.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="editar_forn.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                        <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

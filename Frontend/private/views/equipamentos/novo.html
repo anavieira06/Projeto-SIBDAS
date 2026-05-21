@@ -69,7 +69,7 @@
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="codigo_inventario" class="form-label">Código interno <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: EQ04.002.04" required>
+                                        <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: EQ0001" required>
                                     </div>
                                 </div>
 
@@ -189,6 +189,11 @@
                                     <button type="submit" class="btn btn-guardar">
                                         <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
                                     </button>
+                                </div>
+
+                                <!-- Área de erros -->
+                                <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
+                                    • Erro
                                 </div>
                 
                             </form>

@@ -28,16 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             equipamentos.push(equipamento);
 
             localStorage.setItem("equipamentos", JSON.stringify(equipamentos));
-
-            const mensagem = document.getElementById("mensagem_sucesso");
-            if (mensagem) {
-                mensagem.textContent = "Equipamento adicionado com sucesso.";
-                mensagem.classList.remove("d-none");
-            }
-
-            setTimeout(function () {
-                window.location.href = "lista.html";
-            }, 3000);
+            window.location.href = "lista.html";
         });
         
     }
@@ -46,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (tabela) {
         const equipamentos = JSON.parse(localStorage.getItem("equipamentos")) || [];
-
         equipamentos.forEach(function (equipamento) {
             tabela.innerHTML += `
             <tr>
@@ -89,12 +79,58 @@ document.addEventListener("DOMContentLoaded", function () {
             </tr>
             `;
         });
+        mostrarLinhaVazia();
+
+        const linhasEquipamentos = tabela.querySelectorAll("tr:not(#linhaSemEquipamentos)");
+
+        if (linhasEquipamentos.length > 0) {
+            const linhaVazia = document.getElementById("linhaSemEquipamentos");
+            if (linhaVazia) {
+                linhaVazia.remove();
+            }
+        } else {
+            tabela.innerHTML = `
+                <tr id="linhaSemEquipamentos">
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            `;
+        }
     }
 
 });
 
 
+function mostrarLinhaVazia() {
+    const tabela = document.getElementById("tabelaEquipamentos");
 
+    if (!tabela) return;
+
+    const linhasReais = tabela.querySelectorAll("tr:not(#linhaSemEquipamentos)");
+
+    if (linhasReais.length === 0) {
+        tabela.innerHTML = `
+            <tr id="linhaSemEquipamentos">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        `;
+    }
+}
 
 // Simulação de eliminação de equipamentos
 document.addEventListener("DOMContentLoaded", function () { /* Garante que o html existe antes do js alterar a tabela */
@@ -109,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () { /* Garante que o htm
             linha.remove();
         }
     });
+    mostrarLinhaVazia();
 
     document.querySelectorAll(".btn-apagar").forEach(function(botao) {
         botao.addEventListener("click", function() {
@@ -124,12 +161,14 @@ document.addEventListener("DOMContentLoaded", function () { /* Garante que o htm
     document.getElementById("btnConfirmarEliminar").addEventListener("click", function () {
         if (linhaSelecionada) {
             linhaSelecionada.remove(); /* Remove visualmente o equipamento da tabela */
+            mostrarLinhaVazia();
         }
 
         eliminados.push(codigoSelecionado); /* Faz com que não volte a aparecer depois de atualizar */
         localStorage.setItem("equipamentosEliminados", JSON.stringify(eliminados));
     });
 });
+
 
 
 

@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
             const equipamento = {
                 codigo: document.getElementById("codigo_inventario").value,
                 categoria: document.getElementById("categoria_grupo").value,

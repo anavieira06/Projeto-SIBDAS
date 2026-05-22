@@ -80,31 +80,29 @@
             <div class="alert alert-success text-center d-none" id="mensagemSucesso" role="alert">
                 • Operação realizada com sucesso.
             </div>
-            <p class="text-muted">Consulte a tabela abaixo com os fornecedores registados.</p>
+            <p class="text-muted">Consulte a tabela abaixo com as localizações registadas.</p>
             <div class="card shadow rounded-4 border-0 p-3">
                 <div class="table-responsive">
                     <table class="table table-bordered able-striped align-middle text-center">
                         <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
                             <tr>
-                                <th>Empresa</th> 
-                                <th>NIF</th>
-                                <th>Contacto telefónico</th> 
-                                <th>Email</th> 
-                                <th>Tipo de fornecedor</th> 
+                                <th>Edifício</th> 
+                                <th>Piso</th>
+                                <th>Serviço / Departamento</th> 
+                                <th>Sala / Gabinete</th> 
                                 <th class="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>[Nome empresa]</td> 
-                                <td>[NIF]</td> 
-                                <td>[Contacto]</td> 
-                                <td>[Email]</td> 
-                                <td>[Tipo fornecedor]</td> 
+                                <td>[Edifício]</td> 
+                                <td>[Piso]</td> 
+                                <td>[Serviço / Departamento]</td> 
+                                <td>[Sala / Gabinete]</td> 
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="detalhes_forn.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="editar_forn.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                        <a href="detalhes_loc.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="editar_loc.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                         <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
                                     </div>
                                 </td>
@@ -126,11 +124,12 @@
                     </div>
 
                     <div class="modal-body">
-                        <p>Tem a certeza que pretende eliminar este fornecedor?</p>
+                        <p>Tem a certeza que pretende eliminar esta localização?</p>
 
-                        <p><strong>Empresa:</strong> <span id="modalCodigo"></span></p>
-                        <p><strong>Contacto telefónico:</strong> <span id="modalDesignacao"></span></p>
-                        <p><strong>Tipo de fornecedor:</strong> <span id="modalMarca"></span></p>
+                        <p><strong>Edifício:</strong> <span id="modalEdificio"></span></p>
+                        <p><strong>Piso:</strong> <span id="modalPiso"></span></p>
+                        <p><strong>Serviço / Departamento:</strong> <span id="modalServico"></span></p>
+                        <p><strong>Sala / Gabinete:</strong> <span id="modalSala"></span></p>
                     </div>
 
                     <div class="modal-footer">

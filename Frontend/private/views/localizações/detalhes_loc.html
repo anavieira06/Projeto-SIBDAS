@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MEDInvenTEC</title>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="../../../assets/img/Icon.png">
+
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="../../../assets/css/1240811.css">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
+    
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../../assets/fontawesome/all.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../../assets/bootstrap/bootstrap.min.css">
+
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <header class="container-fluid custom-navbar">
+            <div class="row align-items-center h-100">
+                <div class="col d-flex align-items-center" >
+                    <!-- Logo -->
+                    <a href="../../index.html">
+                        <img src="../../../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo"> <!-- Clicar no logo vai pro início -->
+                    </a>
+                </div>
+
+                <!-- Botão para voltar ao menu-->
+                <div class="col-auto"> 
+                    <button class="custom-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                        <i class="fa-solid fa-bars me-2"></i> Menu
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <a href="../equipamentos/lista.html" class="sidebar-link">
+                    <i class="fas fa-laptop"></i> Equipamentos
+                </a>
+                <a href="../fornecedores/lista_forn.html" class="sidebar-link">
+                    <i class="fas fa-building"></i> Fornecedores
+                </a>
+                <a href="../localizações/lista_loc.html" class="sidebar-link">
+                    <i class="fas fa-location-dot"></i> Localizações
+                </a>
+            </div>
+        </div>
+
+        <div class="container-fluid p-4 min-vh-100" style="background-color: #fff4fb;">
+            <!-- Título -->
+            <div class="mb-4">
+                <h2 style="color:#680447;">
+                    <i class="fa-solid fa-circle-info me-2"></i>
+                    <strong>Detalhes da Localização</strong>
+                </h2>
+            </div>
+            
+            <!-- Localização -->
+            <div class="card shadow-sm rounded-4 border-0 mb-4">
+                <div class="card-body">
+
+                    <h5 class="mb-4" style="color:#680447;">
+                        <i class="fa-solid fa-location-dot me-2"></i>
+                        Localização
+                    </h5>
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <small class="text-muted">Edifício</small>
+                            <p class="fw-semibold mb-0"></p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <small class="text-muted">Piso</small>
+                            <p class="fw-semibold mb-0"></p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <small class="text-muted">Serviço / Departamento</small>
+                            <p class="fw-semibold mb-0"></p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <small class="text-muted">Sala / Gabinete</small>
+                            <p class="fw-semibold mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botoão -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a href="lista_loc.html" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-arrow-left me-1"></i> Voltar
+                </a>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MEDInvenTEC</title>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="../../../assets/img/Icon.png">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
+    
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../../assets/fontawesome/all.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../../assets/bootstrap/bootstrap.min.css">
+
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="../../../assets/css/1240811.css">
+
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <header class="container-fluid custom-navbar">
+            <div class="row align-items-center h-100">
+                <div class="col d-flex align-items-center" >
+                    <!-- Logo -->
+                    <a href="../../index.html">
+                        <img src="../../../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo"> <!-- Clicar no logo vai pro início -->
+                    </a>
+                </div>
+
+                <!-- Botão para voltar ao menu-->
+                <div class="col-auto"> 
+                    <button class="custom-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                        <i class="fa-solid fa-bars me-2"></i> Menu
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <a href="../equipamentos/lista.html" class="sidebar-link">
+                    <i class="fas fa-laptop"></i> Equipamentos
+                </a>
+                <a href="../fornecedores/lista_forn.html" class="sidebar-link">
+                    <i class="fas fa-building"></i> Fornecedores
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+            <main class="container-fluid p-4" style="background-color: #fff4fb;">
+                <div class="d-flex justify-content-center mt-4">
+                    <div class="card w-100 shadow rounded" style="max-width: 1200px;">
+                        <div class="card-body">
+                            <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-pen-to-square me-2"></i> Atualização de Dados EQUIPAMENTOS</strong></h2>
+                            <hr>
+                            <form action="#" method="post">
+                                <!-- Campo nome da empresa --> 
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="nome_empresa" class="form-label">Nome da empresa<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nome_empresa" name="nome_empresa" value="HealthPrime Medical Systems" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campo NIF --> 
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="nif" class="form-label">NIF<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nif" name="nif" value="509876321" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campos Número telefónico, Email e Website-->
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="numero_telefonico" class="form-label">Número telefónico <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="numero_telefonico" name="numero_telefonico" value="+351 212 456 890" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="email" name="email" value="suporte@healthprime-medical.pt" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="website" class="form-label">Website <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="website" name="website" value="www.healthprime-medical.pt" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Morada --> 
+                                <div class="row mb-3"> 
+                                    <div class="col-12">
+                                        <label for="morada" class="form-label">Morada <span class="text-danger">*</span></label> 
+                                        <input type="text" class="form-control" id="morada" name="morada" value="Rua das Flores, nº 28" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campos Pessoa de contacto e Telefone da pessoa de contacto -->
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="pessoa_contacto" class="form-label">Pessoa de contacto <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="pessoa_contacto" name="pessoa_contacto" value="Dr. Ricardo Almeida" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="tel_pessoa_contacto" class="form-label">Telefone da pessoa de contacto <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="tel_pessoa_contacto" name="tel_pessoa_contacto" value="+351 917 845 320" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Tipo de fornecedor -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="tipo_fornecedor" class="form-label">Tipo de fornecedor <span class="text-danger">*</span></label>
+                                        <select class="form-control" id="tipo_fornecedor" name="tipo_fornecedor" required> 
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Distribuidor / fornecedor comercial">Distribuidor / fornecedor comercial</option>
+                                            <option value="Assistência técnica">Assistência técnica</option>
+                                            <option value="Fornecedor de consumíveis">Fornecedor de consumíveis</option>
+                                            <option value="Fabricante" selected>Fabricante</option>
+                                        </select>
+                                    </div>      
+                                </div>
+
+                                <!-- Campo Observações -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="observacoes" class="form-label">Observações</label>
+                                        <textarea class="form-control" id="observacoes" name="observacoes" rows="4" value="Informações adicionais sobre o fornecedor..."></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Botões -->
+                                <div class="d-flex justify-content-end gap-2 mb-4">
+                                    <a href="lista_forn.html" class="btn btn-outline-secondary">
+                                        <i class="fa-solid fa-xmark me-1"></i> Cancelar 
+                                    </a>
+                                    <button type="submit" class="btn btn-guardar">
+                                        <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
+                                    </button>
+                                </div>
+
+                                <!-- Área de erros -->
+                                <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
+                                    • Erro
+                                </div>
+                
+                            </form>
+                    </div>
+                </div>
+            </main>
+
+        <!-- Bootstrap JS -->
+        <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

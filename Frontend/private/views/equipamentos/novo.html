@@ -179,6 +179,78 @@
                                     </div>   
                                 </div>
 
+                                <!--Campo Garantia-->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="data_inicio" class="form-label">Data de início de Garantia <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="data_fim" class="form-label">Data de fim de Garantia <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="data_fim" name="data_fim" required>
+                                    </div>
+                                </div>
+
+                                <!--Campo Contrato-->
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="contrato_manutencao" class="form-label">
+                                            Contrato de manutenção <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="form-control"
+                                                id="contrato_manutencao"
+                                                name="contrato_manutencao" required>
+
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Sim">Sim</option>
+                                            <option value="Não">Não</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="tipo_contrato" class="form-label">
+                                            Tipo de contrato <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control"
+                                                id="tipo_contrato"
+                                                name="tipo_contrato" required>
+
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Preventiva">Preventiva</option>
+                                            <option value="Corretiva">Corretiva</option>
+                                            <option value="Completa">Completa</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="periodicidade" class="form-label">
+                                            Periodicidade <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control"
+                                                id="periodicidade"
+                                                name="periodicidade" required>
+
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Mensal">Mensal</option>
+                                            <option value="Trimestral">Trimestral</option>
+                                            <option value="Anual">Anual</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="entidade_responsavel" class="form-label">
+                                            Entidade responsável <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text"
+                                            class="form-control"
+                                            id="entidade_responsavel"
+                                            name="entidade_responsavel"
+                                            placeholder="Ex: BioTech Portugal" required>
+                                    </div>
+                                </div>
+
                                 <!-- Campo Observações -->
                                 <div class="row mb-3">
                                     <div class="col-12">

@@ -71,6 +71,11 @@
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-plus me-2" style="color: #680447;"></i> Inserir novo fornecedor</strong></h2>
                             <hr>
                             <form id="formFornecedor" action="#" method="post">
+                                <!-- Secção: Identificação -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-barcode me-2"></i>
+                                    Identificação
+                                </h5>
                                 <!-- Campo nome da empresa --> 
                                 <div class="row mb-3">
                                     <div class="col-12">
@@ -86,6 +91,34 @@
                                         <input type="text" class="form-control" id="nif" name="nif" placeholder="Ex: 509876321" required>
                                     </div>
                                 </div>
+
+                                <!-- Campo Morada --> 
+                                <div class="row mb-3"> 
+                                    <div class="col-12">
+                                        <label for="morada" class="form-label">Morada <span class="text-danger">*</span></label> 
+                                        <input type="text" class="form-control" id="morada" name="morada" placeholder="Ex: Rua das Flores, nº 28" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Tipo de fornecedor -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="tipo_fornecedor" class="form-label">Tipo de fornecedor <span class="text-danger">*</span></label>
+                                        <select class="form-control" id="tipo_fornecedor" name="tipo_fornecedor" required> 
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Fabricante">Fabricante</option>
+                                            <option value="Distribuidor / fornecedor comercial">Distribuidor / fornecedor comercial</option>
+                                            <option value="Assistência técnica">Assistência técnica</option>
+                                            <option value="Fornecedor de consumíveis">Fornecedor de consumíveis</option>
+                                        </select>
+                                    </div>      
+                                </div>
+
+                                <!-- Secção: Contactos -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-phone me-2"></i>
+                                    Contactos
+                                </h5>
 
                                 <!-- Campos Número telefónico, Email e Website-->
                                 <div class="row mb-3">
@@ -103,14 +136,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Campo Morada --> 
-                                <div class="row mb-3"> 
-                                    <div class="col-12">
-                                        <label for="morada" class="form-label">Morada <span class="text-danger">*</span></label> 
-                                        <input type="text" class="form-control" id="morada" name="morada" placeholder="Ex: Rua das Flores, nº 28" required>
-                                    </div>
-                                </div>
-
                                 <!-- Campos Pessoa de contacto e Telefone da pessoa de contacto -->
                                 <div class="row mb-3">
                                     <div class="col-6">
@@ -123,19 +148,11 @@
                                     </div>
                                 </div>
 
-                                <!-- Campo Tipo de fornecedor -->
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label for="tipo_fornecedor" class="form-label">Tipo de fornecedor <span class="text-danger">*</span></label>
-                                        <select class="form-control" id="tipo_fornecedor" name="tipo_fornecedor" required> 
-                                            <option selected disabled>Escolha uma opção</option>
-                                            <option value="Fabricante">Fabricante</option>
-                                            <option value="Distribuidor / fornecedor comercial">Distribuidor / fornecedor comercial</option>
-                                            <option value="Assistência técnica">Assistência técnica</option>
-                                            <option value="Fornecedor de consumíveis">Fornecedor de consumíveis</option>
-                                        </select>
-                                    </div>      
-                                </div>
+                                <!-- Secção: Observações -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-note-sticky me-2"></i>
+                                    Observações
+                                </h5>
 
                                 <!-- Campo Observações -->
                                 <div class="row mb-3">

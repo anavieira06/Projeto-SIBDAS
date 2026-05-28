@@ -71,6 +71,11 @@
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-pen-to-square me-2"></i> Atualização de Dados EQUIPAMENTOS</strong></h2>
                             <hr>
                             <form action="#" method="post">
+                                <!-- Secção: Identificação -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-barcode me-2"></i>
+                                    Identificação
+                                </h5>
                                 <!-- Campo código de inventário --> 
                                 <div class="row mb-3">
                                     <div class="col-12">
@@ -123,6 +128,12 @@
                                         <input type="text" class="form-control" id="fabricante" name="fabricante" value="Philips Healthcare" required>
                                     </div>
                                 </div>
+
+                                <!-- Secção: Aquisição e estado -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-cart-shopping me-2"></i>
+                                    Aquisição e estado
+                                </h5>
 
                                 <!-- Campo Data de aquisição -->
                                 <div class="row mb-3">
@@ -178,6 +189,91 @@
                                         </select>
                                     </div>   
                                 </div>
+
+                                <!-- Secção: Garantias e contratos -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-file-signature me-2"></i>
+                                    Garantias e contratos
+                                </h5>
+
+                                <!--Campo Garantia-->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="data_inicio" class="form-label">Data de início de Garantia <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="data_inicio" name="data_inicio" value="2023-05-20" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="data_fim" class="form-label">Data de fim de Garantia <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="data_fim" name="data_fim" value="2027-05-20" required>
+                                    </div>
+                                </div>
+
+                                <!--Campo Contrato-->
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="contrato_manutencao" class="form-label">
+                                            Contrato de manutenção <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="form-control"
+                                                id="contrato_manutencao"
+                                                name="contrato_manutencao" required>
+
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Sim" selected>Sim</option>
+                                            <option value="Não">Não</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="tipo_contrato" class="form-label">
+                                            Tipo de contrato <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control"
+                                                id="tipo_contrato"
+                                                name="tipo_contrato" required>
+
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Preventivo">Preventivo</option>
+                                            <option value="Corretivo">Corretivo</option>
+                                            <option value="Completo" selected>Completo</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="periodicidade" class="form-label">
+                                            Periodicidade <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="form-control"
+                                                id="periodicidade"
+                                                name="periodicidade" required>
+
+                                            <option selected disabled>Escolha uma opção</option>
+                                            <option value="Mensal">Mensal</option>
+                                            <option value="Trimestral">Trimestral</option>
+                                            <option value="Anual">Anual</option>
+                                            <option value="Semestral" selected>Semestral</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label for="entidade_responsavel" class="form-label">
+                                            Entidade responsável <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text"
+                                            class="form-control"
+                                            id="entidade_responsavel"
+                                            name="entidade_responsavel"
+                                            value="BioTech Portugal" required>
+                                    </div>
+                                </div>
+
+                                <!-- Secção: Observações -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-note-sticky me-2"></i>
+                                    Observações
+                                </h5>
 
                                 <!-- Campo Observações -->
                                 <div class="row mb-3">

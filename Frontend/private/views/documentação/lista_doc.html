@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MEDInvenTEC</title>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="../../../assets/img/Icon.png">
+
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="../../../assets/css/1240811.css">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
+    
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../../assets/fontawesome/all.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../../assets/bootstrap/bootstrap.min.css">
+
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <header class="container-fluid custom-navbar">
+            <div class="row align-items-center h-100">
+                <div class="col d-flex align-items-center" >
+                    <!-- Logo -->
+                    <a href="../../index.html">
+                        <img src="../../../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo"> <!-- Clicar no logo vai pro início -->
+                    </a>
+                </div>
+
+                <!-- Botão para voltar ao menu-->
+                <div class="col-auto"> 
+                    <button class="custom-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                        <i class="fa-solid fa-bars me-2"></i> Menu
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <a href="../equipamentos/lista.html" class="sidebar-link">
+                    <i class="fas fa-laptop"></i> Equipamentos
+                </a>
+                <a href="../fornecedores/lista_forn.html" class="sidebar-link">
+                    <i class="fas fa-building"></i> Fornecedores
+                </a>
+                <a href="../localizações/lista_loc.html" class="sidebar-link">
+                    <i class="fas fa-location-dot"></i> Localizações
+                </a>
+                <a href="../documentação/lista_doc.html" class="sidebar-link">
+                    <i class="fas fa-folder-open"></i> Documentação
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="container-fluid p-4">
+            <div class="d-flex align-items-center mb-3 w-100">
+                <h2 class="mb-0" style="color: #680447;">
+                    <i class="fa-solid fa-list-check me-2"></i>
+                    <strong>Listagem de Documentos</strong>
+                </h2>
+                <a href="novo_doc.html" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                    <i class="fa-solid fa-plus me-1"></i> Novo Documento
+                </a>
+            </div>
+
+            <hr>
+            <!-- Área de sucesso -->
+            <div class="alert alert-success text-center d-none" id="mensagemSucesso" role="alert">
+                • Operação realizada com sucesso.
+            </div>
+            <p class="text-muted">Consulte a tabela abaixo com a documentação registada.</p>
+            <div class="card shadow rounded-4 border-0 p-3">
+                <div class="table-responsive">
+                    <table class="table table-bordered able-striped align-middle text-center">
+                        <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
+                            <tr>
+                                <th>Tipo de documento</th> 
+                                <th>Nome</th>
+                                <th>Data</th> 
+                                <th>Equipamento associado</th> 
+                                <th class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[Tipo de documento]</td> 
+                                <td>[Nome]</td> 
+                                <td>[Data]</td> 
+                                <td>[Equipamento associado]</td> 
+                                <td class="text-center align-middle">
+                                    <div class="d-flex justify-content-center align-items-center gap-3">
+                                        <a href="detalhes_doc.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="editar_doc.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                        <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>  
+        <div class="modal fade" id="modalEliminar" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
+                <div class="modal-content rounded-4">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="color:#680447;">
+                            Confirmar eliminação
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Tem a certeza que pretende eliminar este documento?</p>
+
+                        <p><strong>Tipo:</strong> <span id="modalTipo"></span></p>
+                        <p><strong>Nome:</strong> <span id="modalNome"></span></p>
+                        <p><strong>Equipamento associado:</strong> <span id="modalEquipamento"></span></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-bs-dismiss="modal">
+                            Eliminar
+                        </button>
+                    </div>
+
+                    <!-- Área de erros -->
+                    <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
+                        • Erro
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap JS -->
+        <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JS-->
+        <script src="../../../assets/js/1240811.js"></script>
+    </body>
+</html>

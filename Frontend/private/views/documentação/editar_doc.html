@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MEDInvenTEC</title>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="../../../assets/img/Icon.png">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
+    
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../../assets/fontawesome/all.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../../assets/bootstrap/bootstrap.min.css">
+
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="../../../assets/css/1240811.css">
+
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <header class="container-fluid custom-navbar">
+            <div class="row align-items-center h-100">
+                <div class="col d-flex align-items-center" >
+                    <!-- Logo -->
+                    <a href="../../index.html">
+                        <img src="../../../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo"> <!-- Clicar no logo vai pro início -->
+                    </a>
+                </div>
+
+                <!-- Botão para voltar ao menu-->
+                <div class="col-auto"> 
+                    <button class="custom-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                        <i class="fa-solid fa-bars me-2"></i> Menu
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <a href="../equipamentos/lista.html" class="sidebar-link">
+                    <i class="fas fa-laptop"></i> Equipamentos
+                </a>
+                <a href="../fornecedores/lista_forn.html" class="sidebar-link">
+                    <i class="fas fa-building"></i> Fornecedores
+                </a>
+                <a href="../localizações/lista_loc.html" class="sidebar-link">
+                    <i class="fas fa-location-dot"></i> Localizações
+                </a>
+                <a href="../documentação/lista_doc.html" class="sidebar-link">
+                    <i class="fas fa-folder-open"></i> Documentação
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+            <main class="container-fluid p-4" style="background-color: #fff4fb;">
+                <div class="d-flex justify-content-center mt-4">
+                    <div class="card w-100 shadow rounded" style="max-width: 1200px;">
+                        <div class="card-body">
+                            <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-pen-to-square me-2"></i> Atualização de Dados EQUIPAMENTOS</strong></h2>
+                            <hr>
+                            <form action="#" method="post">
+                                <!-- Secção: Identificação -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-barcode me-2"></i>
+                                    Identificação
+                                </h5>
+                                <!-- Campo tipo e nome de documento --> 
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="tipo_doc" class="form-label">Tipo de documento <span class="text-danger">*</span></label>
+                                        <select class="form-control" id="tipo_doc" name="tipo_doc" required>
+                                            <option value="" selected disabled>Escolha uma opção</option>
+                                            <option value="Manual de utilização">Manual de utilização</option>
+                                            <option value="Certificado de calibração">Certificado de calibração</option>
+                                            <option value="Contrato de manutenção">Contrato de manutenção</option>
+                                            <option value="Garantia">Garantia</option>
+                                            <option value="Relatório de manutenção" selected>Relatório de manutenção</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="nome_doc" class="form-label">Nome <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nome_doc" name="nome_doc" value="Manual de Utilização - Ventilador Evita V500" required>
+                                    </div>
+                                </div>
+
+                                <!-- Secção: Datas -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-calendar-days me-2"></i>
+                                    Datas
+                                </h5>
+
+                                <!-- Campo Data de documento -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="data_doc" name="data_doc" value="2023-05-19" required>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Data de validade -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="data_validade" class="form-label">Data de validade</label>
+                                        <input type="date" class="form-control" id="data_validade" name="data_validade">
+                                    </div>
+                                </div>
+
+                                <!-- Secção: Associações e ficheiro -->
+                                <h5 class="mt-4 mb-3" style="color:#680447;">
+                                    <i class="fa-solid fa-link me-2"></i>
+                                    Associações e ficheiro
+                                </h5>
+
+                                <!--Campo Equipamento e Fornecedor associado -->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="equipamento_id" class="form-label">
+                                            Equipamento associado <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="form-control" id="equipamento_id" name="equipamento_id" required>
+                                            <option selected disabled>Escolha um equipamento</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fornecedor_id" class="form-label">
+                                            Fornecedor associado
+                                        </label>
+                                        <select class="form-control" id="fornecedor_id" name="fornecedor_id">
+                                            <option selected disabled>Escolha um fornecedor</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Ficheiro -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <label for="ficheiro" class="form-label">
+                                            Selecionar ficheiro <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file"
+                                            class="form-control"
+                                            id="ficheiro"
+                                            name="ficheiro"
+                                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <!-- Botões -->
+                                <div class="d-flex justify-content-end gap-2 mb-4">
+                                    <a href="lista_doc.html" class="btn btn-outline-secondary">
+                                        <i class="fa-solid fa-xmark me-1"></i> Cancelar 
+                                    </a>
+                                    <button type="submit" class="btn btn-guardar">
+                                        <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
+                                    </button>
+                                </div>
+
+                                <!-- Área de erros -->
+                                <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
+                                    • Erro
+                                </div>
+                
+                            </form>
+                    </div>
+                </div>
+            </main>
+
+        <!-- Bootstrap JS -->
+        <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

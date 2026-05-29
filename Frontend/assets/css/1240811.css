@@ -765,3 +765,29 @@ body{
         font-size: 0.95rem;
     }
 }
+
+
+/* Criticidade dos equipamentos */
+.criticidade-badge {
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.criticidade-baixa {
+    background-color: #28a745;
+}
+
+.criticidade-media {
+    background-color: #ffc107;
+    color: black;
+}
+
+.criticidade-alta {
+    background-color: #fd7e14;
+}
+
+.criticidade-suporte-vida {
+    background-color: #dc3545;
+}

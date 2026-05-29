@@ -83,6 +83,60 @@
             <div class="alert alert-success text-center d-none" id="mensagemSucesso" role="alert">
                 • Operação realizada com sucesso.
             </div>
+            <!-- Pesquisa e filtros -->
+            <div class="card shadow-sm rounded-4 border-0 mb-4" style="background-color: #fff4fb;">
+                <div class="card-body">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-4">
+                            <label class="form-label">Pesquisar</label>
+                            <input type="text" class="form-control" placeholder="Código, designação, marca, modelo...">
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="form-label">Estado</label>
+                            <select class="form-control">
+                                <option selected>Todos</option>
+                                <option>Ativo</option>
+                                <option>Inativo</option>
+                                <option>Em calibração</option>
+                                <option>Em quarentena</option>
+                                <option>Abatido</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="form-label">Categoria</label>
+                            <select class="form-control">
+                                <option selected>Todas</option>
+                                <option>Monitorização</option>
+                                <option>Diagnóstico</option>
+                                <option>Suporte de vida</option>
+                                <option>Terapia</option>
+                                <option>Diagnóstico</option>
+                                <option>Laboratório</option>
+                                <option>Esterilização</option>
+                                <option>Reabilitação</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="form-label">Criticidade</label>
+                            <select class="form-control">
+                                <option selected>Todas</option>
+                                <option>Baixa</option>
+                                <option>Média</option>
+                                <option>Alta</option>
+                                <option>Suporte de vida</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
             <p class="text-muted">Consulte a tabela abaixo com os equipamentos registados.</p>
             <div class="card shadow rounded-4 border-0 p-3">
                 <div class="table-responsive">

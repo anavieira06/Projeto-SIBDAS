@@ -84,19 +84,19 @@
                 • Operação realizada com sucesso.
             </div>
 
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header" style="background-color: #fff4fb; color: #680447;">
-                    <h5 class="mb-0"> <i class="bi bi-funnel"></i>Pesquisa e Filtros</h5>
+            <div class="card border-0 shadow mb-4 rounded-4">
+                <div class="card-header" style="background-color: #945880; color: #fff;">
+                    <h5 class="mb-0 fw-bold"> <i class="bi bi-funnel"></i>Pesquisa e Filtros</h5>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" style="background-color: #fff4fb;">
                     <!-- Pesquisa -->
                     <div class="row mb-3">
                         <div class="col-12">
                             <label class="form-label fs-5 fw-semibold" style="color: #680447;" >Pesquisar</label>
-                            <div class="input-group">
-                                <span class="input-group-text">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-white">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #680447;"></i>
                                 </span>
                                 <input type="text"
                                     class="form-control"
@@ -106,58 +106,72 @@
                     </div>
 
                     <!-- Filtros -->
-                    <div class="row g-3 mb-4">
-                            <div class="col-md-3">
-                                <label class="form-label fw-semibold">Estado</label>
-                                <select class="form-select">
-                                    <option selected>Todos</option>
-                                    <option>Ativo</option>
-                                    <option>Inativo</option>
-                                    <option>Em calibração</option>
-                                    <option>Em quarentena</option>
-                                    <option>Abatido</option>
-                                </select>
+                    <div class="p-3 rounded-4 bg-white shadow-sm">
+                        <h6 class="fw-bold mb-3" style="color:#680447;">
+                            <i class="fa-solid fa-sliders me-2"></i>Filtros avançados
+                        </h6>
+                        <div class="row g-3 mb-4">
+                                <div class="col-md-3">
+                                    <label class="form-label fw-semibold">Estado</label>
+                                    <select class="form-select">
+                                        <option selected>Todos</option>
+                                        <option>Ativo</option>
+                                        <option>Inativo</option>
+                                        <option>Em calibração</option>
+                                        <option>Em quarentena</option>
+                                        <option>Abatido</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="form-label fw-semibold">Categoria</label>
+                                    <select class="form-select">
+                                        <option selected>Todas</option>
+                                        <option>Monitorização</option>
+                                        <option>Diagnóstico</option>
+                                        <option>Suporte de vida</option>
+                                        <option>Terapia</option>
+                                        <option>Diagnóstico</option>
+                                        <option>Laboratório</option>
+                                        <option>Esterilização</option>
+                                        <option>Reabilitação</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="form-label fw-semibold">Criticidade</label>
+                                    <select class="form-select">
+                                        <option selected>Todas</option>
+                                        <option>Baixa</option>
+                                        <option>Média</option>
+                                        <option>Alta</option>
+                                        <option>Suporte de vida</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="form-label fw-semibold">Serviço</label>
+                                    <select class="form-select">
+                                        <option selected>Todos</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="form-label fw-semibold">Fornecedor</label>
+                                    <select class="form-select">
+                                        <option selected>Todos</option>
+                                    </select>
+                                </div>
                             </div>
+                            <div class="d-flex justify-content-end gap-2 mt-4">
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-rotate-left me-1"></i> Limpar
+                                </button>
 
-                            <div class="col-md-3">
-                                <label class="form-label fw-semibold">Categoria</label>
-                                <select class="form-select">
-                                    <option selected>Todas</option>
-                                    <option>Monitorização</option>
-                                    <option>Diagnóstico</option>
-                                    <option>Suporte de vida</option>
-                                    <option>Terapia</option>
-                                    <option>Diagnóstico</option>
-                                    <option>Laboratório</option>
-                                    <option>Esterilização</option>
-                                    <option>Reabilitação</option>
-
-                                </select>
-                            </div>
-
-                            <div class="col-md-2">
-                                <label class="form-label fw-semibold">Criticidade</label>
-                                <select class="form-select">
-                                    <option selected>Todas</option>
-                                    <option>Baixa</option>
-                                    <option>Média</option>
-                                    <option>Alta</option>
-                                    <option>Suporte de vida</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2">
-                                <label class="form-label fw-semibold">Serviço</label>
-                                <select class="form-select">
-                                    <option selected>Todos</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2">
-                                <label class="form-label fw-semibold">Fornecedor</label>
-                                <select class="form-select">
-                                    <option selected>Todos</option>
-                                </select>
+                                <button type="button" class="btn text-white" style="background-color:#680447;">
+                                    <i class="fa-solid fa-magnifying-glass me-1"></i> Aplicar filtros
+                                </button>
                             </div>
                         </div>
                     </div>

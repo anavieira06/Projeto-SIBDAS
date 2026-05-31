@@ -791,3 +791,20 @@ body{
 .criticidade-suporte-vida {
     background-color: #dc3545;
 }
+
+/* Separadores dos detalhes do equipamento */
+.nav-tabs .nav-link {
+    color: #680447;
+}
+
+.nav-tabs .nav-link i {
+    color: #680447;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #945880 !important;
+}
+
+.nav-tabs .nav-link:hover i {
+    color: #945880 !important;
+}

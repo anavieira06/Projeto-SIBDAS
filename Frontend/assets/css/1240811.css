@@ -832,7 +832,7 @@ body{
         align-items: center;
         justify-content: center;
         background-color: #f7d8ee;
-        color: #945880;
+        color: #ca3698;
         font-size: 1.3rem;
     }
 
@@ -864,9 +864,14 @@ body{
 
     /* Alertas */
     .alert-item {
-        border-left: 4px solid #945880;
+        border-left: 4px solid #a83882;
         background-color: #fff4fb;
         border-radius: 10px;
         padding: 12px;
         margin-bottom: 10px;
     }
+
+    /* Gráficos */
+    .dashboard-chart {
+    max-height: 200px;
+}

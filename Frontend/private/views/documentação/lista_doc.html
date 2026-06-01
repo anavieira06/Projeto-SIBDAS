@@ -86,6 +86,73 @@
             <div class="alert alert-success text-center d-none" id="mensagemSucesso" role="alert">
                 • Operação realizada com sucesso.
             </div>
+
+            <div class="card border-0 shadow mb-4 rounded-4">
+
+                <div class="card-body" style="background-color: #fff4fb;">
+                    <!-- Pesquisa -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-white">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #680447;"></i>
+                                </span>
+                                <input type="text"
+                                    class="form-control"
+                                    placeholder="Nome, data ...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="p-3 rounded-4 bg-white shadow-sm">
+                        <h6 class="fw-bold mb-3" style="color:#680447;">
+                            <i class="fa-solid fa-sliders me-2"></i>Filtros avançados
+                        </h6>
+                        <div class="row g-3 mb-4">
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Tipo de documento</label>
+                                    <select class="form-select">
+                                        <option selected>Todas</option>
+                                        <option>Manual de utilizador</option>
+                                        <option>Manual de serviço</option>
+                                        <option>Certificado de calibração</option>
+                                        <option>Contrato de manutenção</option>
+                                        <option>Fatura / Guia de aquisição</option>
+                                        <option>Declaração de conformidade</option>
+                                        <option>Relatório técnico</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Equipamento associado</label>
+                                    <select class="form-select">
+                                        <option selected>Todos</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Fornecedor associado</label>
+                                    <select class="form-select">
+                                        <option selected>Todos</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="d-flex justify-content-end gap-2 mt-4">
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-rotate-left me-1"></i> Limpar
+                                </button>
+
+                                <button type="button" class="btn text-white" style="background-color:#680447;">
+                                    <i class="fa-solid fa-magnifying-glass me-1"></i> Aplicar filtros
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <p class="text-muted">Consulte a tabela abaixo com a documentação registada.</p>
             <div class="card shadow rounded-4 border-0 p-3">
                 <div class="table-responsive">

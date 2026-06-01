@@ -18,7 +18,7 @@ document.querySelectorAll(".criticidade").forEach(function(celula) {
 /* Dashboard */
 // Gráfico por estado
     new Chart(document.getElementById('estadoChart'), {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: ['Ativos', 'Manutenção', 'Inativos'],
             datasets: [{
@@ -36,7 +36,7 @@ document.querySelectorAll(".criticidade").forEach(function(celula) {
             datasets: [{
                 label: 'Equipamentos',
                 data: [120, 95, 72, 48, 60],
-                backgroundColor: '#d63384'
+                backgroundColor: '#bb226f'
             }]
         },
         options: {
@@ -52,10 +52,10 @@ document.querySelectorAll(".criticidade").forEach(function(celula) {
     new Chart(document.getElementById('categoriaChart'), {
         type: 'pie',
         data: {
-            labels: ['Monitorização', 'Diagnóstico', 'Suporte de Vida', 'Laboratório', 'Terapia'],
+            labels: ['Monitorização', 'Diagnóstico', 'Suporte de Vida', 'Laboratório', 'Terapia', 'Esterilização', 'Reabilitação'],
             datasets: [{
-                data: [35, 25, 18, 12, 10],
-                backgroundColor: ['#680447', '#9b0a68', '#d63384', '#f083c3', '#f7c6e0']
+                data: [25, 23, 17, 12, 10, 10, 8],
+                backgroundColor: ['#680447', '#9b0a68', '#c3186d', '#d24497', '#f083c3', '#f7c6e0', '#fff4fb']
             }]
         }
     });

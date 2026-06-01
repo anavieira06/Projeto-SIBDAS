@@ -808,3 +808,65 @@ body{
 .nav-tabs .nav-link:hover i {
     color: #945880 !important;
 }
+
+/* Dashboard */ 
+
+
+    .stat-card {
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        transition: 0.2s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-3px);
+    }
+
+    /* Icons */
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f7d8ee;
+        color: #945880;
+        font-size: 1.3rem;
+    }
+
+    /* Número de equipamentos */
+    .stat-number {
+        color: #5c3750;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    /* Descrição do numero de equipamentos */
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    /* Cards */
+    .chart-card {
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    /* Títulos */ 
+    .chart-title {
+        color: #5c3750;
+        font-weight: 700;
+    }
+
+    /* Alertas */
+    .alert-item {
+        border-left: 4px solid #945880;
+        background-color: #fff4fb;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 10px;
+    }

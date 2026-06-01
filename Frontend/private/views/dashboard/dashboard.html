@@ -117,7 +117,7 @@
                             </div>
                             <div>
                                 <div class="stat-number" id="equipamentosManutencao">89</div>
-                                <div class="stat-label">Em Manutenção</div>
+                                <div class="stat-label">Equipamentos em Manutenção</div>
                             </div>
                         </div>
                     </div>
@@ -137,6 +137,72 @@
                     </div>
                 </div>
 
+                <!-- Gráficos -->
+                <div class="row g-4 mb-4">
+
+                    <div class="col-md-6">
+                        <div class="card chart-card">
+                            <div class="card-body">
+                                <h5 class="chart-title">
+                                    Equipamentos por Estado
+                                </h5>
+                                <canvas id="estadoChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card chart-card">
+                            <div class="card-body">
+                                <h5 class="chart-title">
+                                    Equipamentos por Serviço
+                                </h5>
+                                <canvas id="servicoChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Categorias e Alertas -->
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <div class="card chart-card">
+                            <div class="card-body">
+                                <h5 class="chart-title">
+                                    Distribuição por Categoria
+                                </h5>
+                                <canvas id="categoriaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card chart-card">
+                            <div class="card-body">
+
+                                <h5 class="chart-title">
+                                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                                    Alertas
+                                </h5>
+
+                                <div class="alert-item">
+                                    <strong>12 equipamentos</strong> com garantia a expirar nos próximos 30 dias
+                                </div>
+
+                                <div class="alert-item">
+                                    <strong>5 equipamentos</strong> sem documentação associada
+                                </div>
+
+                                <div class="alert-item">
+                                    <strong>18 equipamentos</strong> de criticidade elevada
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 

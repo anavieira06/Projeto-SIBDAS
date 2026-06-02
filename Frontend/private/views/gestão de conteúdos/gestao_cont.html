@@ -87,9 +87,8 @@
                     <div class="table-responsive">
                         <table class="table align-middle">
                             <colgroup> <!-- Definir o tamanho das colunas da tabela -->
-                                <col style="width: 20%;">
-                                <col style="width: 35%;">
-                                <col style="width: 15%;">
+                                <col style="width: 25%;">
+                                <col style="width: 45%;">
                                 <col style="width: 15%;">
                                 <col style="width: 15%;">
                             </colgroup>
@@ -97,7 +96,6 @@
                                 <tr>
                                     <th>Secção</th>
                                     <th>Conteúdo editável</th>
-                                    <th>Estado</th>
                                     <th>Última alteração</th>
                                     <th>Ações</th>
                                 </tr>
@@ -107,10 +105,9 @@
                                 <tr>
                                     <td><strong>Sobre nós</strong></td>
                                     <td>Título, subtítulo e botão principal</td>
-                                    <td><span class="badge bg-success">Ativo</span></td>
                                     <td>01/06/2026</td>
                                     <td>
-                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalEditarConteudo">
+                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalSobreNos">
                                             <i class="fa-solid fa-pen-to-square m-1"></i> Editar
                                         </button>
                                     </td>
@@ -119,10 +116,10 @@
                                 <tr>
                                     <td><strong>Problema e Solução</strong></td>
                                     <td>Apresentação do problema e proposta de solução</td>
-                                    <td><span class="badge bg-success">Ativo</span></td>
+                                    
                                     <td>01/06/2026</td>
                                     <td>
-                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalEditarConteudo">
+                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalProblemaSolucao">
                                             <i class="fa-solid fa-pen-to-square m-1"></i> Editar
                                         </button>
                                     </td>
@@ -131,10 +128,10 @@
                                 <tr>
                                     <td><strong>Vantagens</strong></td>
                                     <td>Lista de vantagens da plataforma</td>
-                                    <td><span class="badge bg-success">Ativo</span></td>
+                                    
                                     <td>01/06/2026</td>
                                     <td>
-                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalEditarConteudo">
+                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalVantagens">
                                             <i class="fa-solid fa-pen-to-square m-1"></i> Editar
                                         </button>
                                     </td>
@@ -143,10 +140,10 @@
                                 <tr>
                                     <td><strong>Funcionalidades</strong></td>
                                     <td>Funcionalidades em cards, com ícone, título e descrição</td>
-                                    <td><span class="badge bg-success">Ativo</span></td>
+                                    
                                     <td>01/06/2026</td>
                                     <td>
-                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalEditarConteudo">
+                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalFuncionalidades">
                                             <i class="fa-solid fa-pen-to-square m-1"></i> Editar
                                         </button>
                                     </td>
@@ -155,10 +152,10 @@
                                 <tr>
                                     <td><strong>Contacto</strong></td>
                                     <td>Texto introdutório do formulário</td>
-                                    <td><span class="badge bg-success">Ativo</span></td>
+                                    
                                     <td>01/06/2026</td>
                                     <td>
-                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalEditarConteudo">
+                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalContacto">
                                             <i class="fa-solid fa-pen-to-square m-1"></i> Editar
                                         </button>
                                     </td>
@@ -167,10 +164,10 @@
                                 <tr>
                                     <td><strong>Rodapé</strong></td>
                                     <td>Localização, horário e contactos</td>
-                                    <td><span class="badge bg-success">Ativo</span></td>
+                                    
                                     <td>01/06/2026</td>
                                     <td>
-                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalEditarConteudo">
+                                        <button class="btn btn-sm btn-editar" style="background-color: #945880; color: #fff;" data-bs-toggle="modal" data-bs-target="#modalRodape">
                                             <i class="fa-solid fa-pen-to-square m-1"></i> Editar
                                         </button>
                                     </td>
@@ -183,6 +180,58 @@
             </div>
         </div>
         
+        <!-- Modal Editar Conteúdo "Sobre nós"-->
+        <div class="modal fade" id="modalSobreNos" tabindex="-1" aria-labelledby="modalEditarConteudoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarConteudoLabel">
+                            <i class="fa-solid fa-pen-to-square me-2"></i>
+                            Editar Conteúdo Público
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+
+                            <div class="mb-3">
+                                <label class="form-label">Secção</label>
+                                <input type="text" class="form-control" value="Sobre nós">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Título</label>
+                                <input type="text" class="form-control" value="Gestão Inteligente de Equipamentos Médicos">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Conteúdo</label>
+                                <textarea class="form-control" rows="5">Organize, controle e otimize o seu inventário hospitalar.</textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Texto do botão</label>
+                                <input type="text" class="form-control" value="Fale connosco!">
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn" style="background-color: #945880; color: #fff;">
+                            <i class="fa-solid fa-floppy-disk me-1"></i>
+                            Guardar alterações
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Bootstrap JS -->
         <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
         

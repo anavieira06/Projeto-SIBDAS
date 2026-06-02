@@ -74,7 +74,7 @@
                 <div class="d-flex justify-content-center mt-4">
                     <div class="card w-100 shadow rounded" style="max-width: 1200px;">
                         <div class="card-body">
-                            <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-pen-to-square me-2"></i> Atualização de Dados EQUIPAMENTOS</strong></h2>
+                            <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-pen-to-square me-2"></i> Atualização de Dados DOCUMENTOS</strong></h2>
                             <hr>
                             <form action="#" method="post">
                                 <!-- Secção: Identificação -->
@@ -86,7 +86,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="tipo_doc" class="form-label">Tipo de documento <span class="text-danger">*</span></label>
-                                        <select class="form-control" id="tipo_doc" name="tipo_doc" required>
+                                        <select class="form-control" id="tipo_doc" name="tipo_doc" >
                                             <option value="" selected disabled>Escolha uma opção</option>
                                             <option value="Manual de utilização">Manual de utilizador</option>
                                             <option value="Manual de serviço">Manual de serviço</option>
@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="nome_doc" class="form-label">Nome <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="nome_doc" name="nome_doc" value="Manual de Utilização - Ventilador Evita V500" required>
+                                        <input type="text" class="form-control" id="nome_doc" name="nome_doc" value="Manual de Utilização - Ventilador Evita V500" >
                                     </div>
                                 </div>
 
@@ -113,7 +113,7 @@
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" id="data_doc" name="data_doc" value="2023-05-19" required>
+                                        <input type="date" class="form-control" id="data_doc" name="data_doc" value="2023-05-19" >
                                     </div>
                                 </div>
 
@@ -137,7 +137,7 @@
                                         <label for="equipamento_id" class="form-label">
                                             Equipamento associado <span class="text-danger">*</span>
                                         </label>
-                                        <select class="form-control" id="equipamento_id" name="equipamento_id" required>
+                                        <select class="form-control" id="equipamento_id" name="equipamento_id" >
                                             <option selected disabled>Escolha um equipamento</option>
                                         </select>
                                     </div>
@@ -162,7 +162,7 @@
                                             id="ficheiro"
                                             name="ficheiro"
                                             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 

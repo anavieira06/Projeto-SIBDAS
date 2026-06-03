@@ -605,7 +605,7 @@
 
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalContactoLabel">
-                            <i class="fa-solid fa-address-book me-2"></i>
+                            <i class="fa-solid fa-pen-to-square me-2"></i>
                             Editar "Contacto"
                         </h5>
 
@@ -661,6 +661,103 @@
                         </form>
                     </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn" style="background-color: #945880; color: #fff;">
+                            <i class="fa-solid fa-floppy-disk me-1"></i>
+                            Guardar alterações
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Editar Conteúdo "Rodapé" -->
+        <div class="modal fade" id="modalRodape" tabindex="-1" aria-labelledby="modalRodapeLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalRodapeLabel">
+                            <i class="fa-solid fa-pen-to-square me-2"></i>
+                            Editar "Rodapé"
+                        </h5>
+
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Fechar">
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <!-- Localização -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <strong>Localização</strong>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Título</label>
+                                        <input type="text" class="form-control" value="LOCALIZAÇÃO">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Morada</label>
+                                        <textarea class="form-control" rows="3">Rua da Inovação, 42
+4690-945, Viseu
+Portugal</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Horário -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <strong>Horário</strong>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Título</label>
+                                        <input type="text" class="form-control" value="HORÁRIO">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Horário</label>
+                                        <textarea class="form-control" rows="4">2ª a 6ª Feira: 8h - 18h
+Sábado e Feriados: 9h - 13h
+Domingo: Encerrado
+Atendimento online: 24/7</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contactos -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong>Contactos</strong>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Título</label>
+                                        <input type="text" class="form-control" value="CONTACTOS">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="suporte@MEDInvenTEC.pt">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Telefone</label>
+                                        <input type="text" class="form-control" value="+351 210 759 811">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             Cancelar

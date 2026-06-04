@@ -95,8 +95,8 @@
                                     </li>
 
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active"
-                                        id="info-tab"
+                                        <a class="nav-link disabled pe-none"
+                                        id="fornecedor-tab"
                                         data-bs-toggle="tab"
                                         href="#infoFornecedores"
                                         role="tab">
@@ -105,18 +105,18 @@
                                     </li>
 
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active"
-                                        id="info-tab"
+                                        <a class="nav-link disabled pe-none"
+                                        id="localizacao-tab"
                                         data-bs-toggle="tab"
-                                        href="#infoLocalização"
+                                        href="#infoLocalizacao"
                                         role="tab">
                                             3. Localização
                                         </a>
                                     </li>
 
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active"
-                                        id="info-tab"
+                                        <a class="nav-link disabled pe-none"
+                                        id="documentacao-tab"
                                         data-bs-toggle="tab"
                                         href="#infoDocumentos"
                                         role="tab">
@@ -268,15 +268,177 @@
                                                 <textarea class="form-control" id="observacoes" name="observacoes" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
                                             </div>
                                         </div> 
+                                        <div class="text-end">
+                                            <button type="button"
+                                                    class="btn btn-guardar mb-4"
+                                                    onclick="
+                                                        document.getElementById('fornecedor-tab').classList.remove('disabled','pe-none');
+                                                        bootstrap.Tab.getOrCreateInstance(document.querySelector('#fornecedor-tab')).show();
+                                                    ">
+                                                Seguinte
+                                                <i class="fa-solid fa-arrow-right ms-1"></i>
+                                            </button>
+                                        </div>
                                     </div> 
-                                    <div class="text-end">
-                                        <button type="button"
-                                                class="btn btn-guardar mb-4"
-                                                id="btnSeguinte"
-                                                onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#garantias-tab')).show()">
-                                            Seguinte
-                                            <i class="fa-solid fa-arrow-right ms-1"></i>
-                                        </button>
+
+                                    <div class="tab-pane fade" id="infoFornecedores" role="tabpanel">
+                                        <!-- Secção: Fornecedores-->
+                                        <h5 class="mt-4 mb-3" style="color:#680447;">
+                                            <i class="fa-solid fa-building me-2"></i>
+                                            Fornecedores
+                                        </h5>
+
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary"
+                                                    onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#info-tab')).show();">
+                                                Anterior
+                                            </button>
+
+                                            <button type="button"
+                                                    class="btn btn-guardar"
+                                                    onclick="
+                                                        document.getElementById('localizacao-tab').classList.remove('disabled','pe-none');
+                                                        bootstrap.Tab.getOrCreateInstance(document.querySelector('#localizacao-tab')).show();
+                                                    ">
+                                                Seguinte
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="infoLocalizacao" role="tabpanel">
+                                        <!-- Secção: Localizações -->
+                                        <h5 class="mt-4 mb-3" style="color:#680447;">
+                                            <i class="fa-solid fa-location-dot me-2"></i>
+                                            Localização
+                                        </h5>
+
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary"
+                                                    onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#fornecedor-tab')).show();">
+                                                Anterior
+                                            </button>
+
+                                            <button type="button"
+                                                    class="btn btn-guardar"
+                                                    onclick="
+                                                        document.getElementById('documentacao-tab').classList.remove('disabled','pe-none');
+                                                        bootstrap.Tab.getOrCreateInstance(document.querySelector('#documentacao-tab')).show();
+                                                    ">
+                                                Seguinte
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="infoDocumentos" role="tabpanel">
+                                        <!-- Secção: Documentação -->
+
+                                        <!-- Secção: Identificação -->
+                                        <h5 class="mt-4 mb-3" style="color:#680447;">
+                                            <i class="fa-solid fa-barcode me-2"></i>
+                                            Identificação
+                                        </h5>
+                                        <!-- Campo tipo e nome de documento --> 
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="tipo_doc" class="form-label">Tipo de documento <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="tipo_doc" name="tipo_doc" required>
+                                                    <option value="" selected disabled>Escolha uma opção</option>
+                                                    <option value="Manual de utilização">Manual de utilizador</option>
+                                                    <option value="Manual de serviço">Manual de serviço</option>
+                                                    <option value="Certificado de calibração">Certificado de calibração</option>
+                                                    <option value="Contrato de manutenção">Contrato de manutenção</option>
+                                                    <option value="Fatura / Guia de aquisição">Fatura / Guia de aquisição</option>
+                                                    <option value="Declaração de conformidade">Declaração de conformidade</option>
+                                                    <option value="Relatório técnico">Relatório técnico</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="nome_doc" class="form-label">Nome <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="nome_doc" name="nome_doc" placeholder="Ex: Manual de Utilização - Ventilador Evita V500" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Secção: Datas -->
+                                        <h5 class="mt-4 mb-3" style="color:#680447;">
+                                            <i class="fa-solid fa-calendar-days me-2"></i>
+                                            Datas
+                                        </h5>
+
+                                        <!-- Campo Data de documento -->
+                                        <div class="row mb-3">
+                                            <div class="col-12">
+                                                <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="data_doc" name="data_doc" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Campo Data de validade -->
+                                        <div class="row mb-3">
+                                            <div class="col-12">
+                                                <label for="data_validade" class="form-label">Data de validade</label>
+                                                <input type="date" class="form-control" id="data_validade" name="data_validade" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Secção: Associações e ficheiro -->
+                                        <h5 class="mt-4 mb-3" style="color:#680447;">
+                                            <i class="fa-solid fa-link me-2"></i>
+                                            Associações e ficheiro
+                                        </h5>
+
+                                        <!--Campo Equipamento e Fornecedor associado -->
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="equipamento_id" class="form-label">
+                                                    Equipamento associado <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="form-control" id="equipamento_id" name="equipamento_id" required>
+                                                    <option selected disabled>Escolha um equipamento</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="fornecedor_id" class="form-label">
+                                                    Fornecedor associado
+                                                </label>
+                                                <select class="form-control" id="fornecedor_id" name="fornecedor_id" required>
+                                                    <option selected disabled>Escolha um fornecedor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Campo Ficheiro -->
+                                        <div class="row mb-3">
+                                            <div class="col-12">
+                                                <label for="ficheiro" class="form-label">
+                                                    Selecionar ficheiro <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="file"
+                                                    class="form-control"
+                                                    id="ficheiro"
+                                                    name="ficheiro"
+                                                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                                     required>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button"
+                                                    class="btn btn-outline-secondary"
+                                                    onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#localizacao-tab')).show();">
+                                                Anterior
+                                            </button>
+
+                                            <button type="button"
+                                                    class="btn btn-guardar"
+                                                    onclick="
+                                                        document.getElementById('garantias-tab').classList.remove('disabled','pe-none');
+                                                        bootstrap.Tab.getOrCreateInstance(document.querySelector('#garantias-tab')).show();
+                                                    ">
+                                                Seguinte
+                                            </button>
+                                        </div>
                                     </div>
 
                                     <div class="tab-pane fade" id="garantiasContratos" role="tabpanel">
@@ -290,11 +452,11 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <label for="data_inicio" class="form-label">Data de início de Garantia <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="data_inicio" name="data_inicio" >
+                                                    <input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="data_fim" class="form-label">Data de fim de Garantia <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="data_fim" name="data_fim" >
+                                                    <input type="date" class="form-control" id="data_fim" name="data_fim" required>
                                                 </div>
                                             </div>
 
@@ -306,7 +468,7 @@
                                                     </label>
                                                     <select class="form-control"
                                                             id="contrato_manutencao"
-                                                            name="contrato_manutencao" >
+                                                            name="contrato_manutencao" required>
 
                                                         <option value="" selected disabled>Escolha uma opção</option>
                                                         <option value="Sim">Sim</option>
@@ -321,7 +483,7 @@
 
                                                     <select class="form-control"
                                                             id="tipo_contrato"
-                                                            name="tipo_contrato" >
+                                                            name="tipo_contrato" required>
 
                                                         <option value="" selected disabled>Escolha uma opção</option>
                                                         <option value="Preventivo">Preventivo</option>
@@ -337,7 +499,7 @@
 
                                                     <select class="form-control"
                                                             id="periodicidade"
-                                                            name="periodicidade" >
+                                                            name="periodicidade" required>
 
                                                         <option value="" selected disabled>Escolha uma opção</option>
                                                         <option value="Mensal">Mensal</option>
@@ -355,7 +517,7 @@
                                                         class="form-control"
                                                         id="entidade_responsavel"
                                                         name="entidade_responsavel"
-                                                        placeholder="Ex: BioTech Portugal" >
+                                                        placeholder="Ex: BioTech Portugal" required>
                                                 </div>
                                             </div>
 
@@ -382,6 +544,15 @@
                                                     Anterior
                                                 </button>
 
+                                                <button type="button"
+                                                        class="btn btn-guardar"
+                                                        onclick="
+                                                            document.getElementById('localizacao-tab').classList.remove('disabled','pe-none');
+                                                            bootstrap.Tab.getOrCreateInstance(document.querySelector('#localizacao-tab')).show();
+                                                        ">
+                                                    Seguinte
+                                                </button>
+
                                                 <div>
                                                     <a href="lista.html" class="btn btn-outline-secondary mb-4">
                                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar
@@ -392,7 +563,6 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div>
                                         <!-- Área de erros -->
                                         <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
                                             • Erro

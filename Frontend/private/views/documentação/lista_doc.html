@@ -137,6 +137,7 @@
                                         <option selected>Todos</option>
                                     </select>
                                 </div>
+
                                 <div class="col-md-4">
                                     <label class="form-label fw-semibold">Fornecedor associado</label>
                                     <select class="form-select">
@@ -177,12 +178,11 @@
                                 <td>[Tipo de documento]</td> 
                                 <td>[Nome]</td> 
                                 <td>[Data]</td> 
-                                <td>[Equipamento associado]</td> 
+                                <td>[Código]</td> 
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
                                         <a href="detalhes_doc.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="editar_doc.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
-                                        <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
+                                        <a href="../equipamentos/editar.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -191,42 +191,6 @@
                 </div>
             </div>
         </div>  
-        <div class="modal fade" id="modalEliminar" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
-                <div class="modal-content rounded-4">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" style="color:#680447;">
-                            Confirmar eliminação
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <p>Tem a certeza que pretende eliminar este documento?</p>
-
-                        <p><strong>Tipo:</strong> <span id="modalTipo"></span></p>
-                        <p><strong>Nome:</strong> <span id="modalNome"></span></p>
-                        <p><strong>Equipamento associado:</strong> <span id="modalEquipamento"></span></p>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-
-                        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-bs-dismiss="modal">
-                            Eliminar
-                        </button>
-                    </div>
-
-                    <!-- Área de erros -->
-                    <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                        • Erro
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Bootstrap JS -->
         <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
 

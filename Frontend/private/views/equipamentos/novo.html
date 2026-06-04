@@ -85,25 +85,23 @@
                             <form id="formEquipamento" action="#" method="post">
                                 <ul class="nav nav-tabs mb-4" id="equipamentoTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active"
-                                                id="info-tab"
-                                                data-bs-toggle="tab"
-                                                data-bs-target="#infoEquipamento"
-                                                type="button"
-                                                role="tab">
+                                        <a class="nav-link active"
+                                        id="info-tab"
+                                        data-bs-toggle="tab"
+                                        href="#infoEquipamento"
+                                        role="tab">
                                             1. Equipamento
-                                        </button>
+                                        </a>
                                     </li>
 
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link disabled"
-                                                id="garantias-tab"
-                                                data-bs-toggle="tab"
-                                                data-bs-target="#garantiasContratos"
-                                                type="button"
-                                                role="tab">
+                                        <a class="nav-link disabled pe-none"
+                                        id="garantias-tab"
+                                        data-bs-toggle="tab"
+                                        href="#garantiasContratos"
+                                        role="tab">
                                             2. Garantias e Contratos
-                                        </button>
+                                        </a>
                                     </li>
                                 </ul>
 
@@ -118,7 +116,7 @@
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="codigo_inventario" class="form-label">Código interno <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: EQ0001" >
+                                                <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: EQ0001" required>
                                             </div>
                                         </div>
 
@@ -126,7 +124,7 @@
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="categoria_grupo" class="form-label">Categoria / Grupo <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="categoria_grupo" name="categoria_grupo" > 
+                                                <select class="form-control" id="categoria_grupo" name="categoria_grupo" required> 
                                                     <option value="" selected disabled>Escolha uma opção</option>
                                                     <option value="Monitorização">Monitorização</option>
                                                     <option value="Suporte de vida">Suporte de vida</option>
@@ -139,7 +137,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="designacao_equipamento" class="form-label">Designação <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="designacao_equipamento" name="designacao_equipamento" placeholder="Ex: Monitor cardíaco" >
+                                                <input type="text" class="form-control" id="designacao_equipamento" name="designacao_equipamento" placeholder="Ex: Monitor cardíaco" required>
                                             </div>
                                         </div>
 
@@ -147,15 +145,15 @@
                                         <div class="row mb-3"> 
                                             <div class="col-md-4">
                                                 <label for="marca" class="form-label">Marca <span class="text-danger">*</span></label> 
-                                                <input type="text" class="form-control" id="marca" name="marca" placeholder="Ex: Zoll" >
+                                                <input type="text" class="form-control" id="marca" name="marca" placeholder="Ex: Zoll" required>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="modelo" class="form-label">Modelo <span class="text-danger">*</span></label> 
-                                                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ex: Evita V500" >
+                                                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ex: Evita V500" required>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="numero-serie" class="form-label">Nº de série <span class="text-danger">*</span></label> 
-                                                <input type="text" class="form-control" id="numero_serie" name="numero_serie" placeholder="Ex: EV500-2021-9934" >
+                                                <label for="numero_serie" class="form-label">Nº de série <span class="text-danger">*</span></label> 
+                                                <input type="text" class="form-control" id="numero_serie" name="numero_serie" placeholder="Ex: EV500-2021-9934" required>
                                             </div>
                                         </div>
 
@@ -163,7 +161,7 @@
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="fabricante" class="form-label">Fabricante <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Ex: Philips Healthcare" >
+                                                <input type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Ex: Philips Healthcare" required>
                                             </div>
                                         </div>
 
@@ -177,7 +175,7 @@
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="data_aquisicao" class="form-label">Data de aquisição <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" >
+                                                <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" required>
                                             </div>
                                         </div>
 
@@ -185,11 +183,11 @@
                                         <div class="row mb-3"> 
                                             <div class="col-md-6">
                                                 <label for="ano_fabrico" class="form-label">Ano de fabrico <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="ano_fabrico" name="ano_fabrico" min="1980" max="2026" placeholder="Ex: 2024" >
+                                                <input type="number" class="form-control" id="ano_fabrico" name="ano_fabrico" min="1980" max="2026" placeholder="Ex: 2024" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="custo_aquisicao" class="form-label">Custo de aquisição (€) <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="custo_aquisicao" name="custo_aquisicao" placeholder="Ex: 2500" step="0.01" >
+                                                <input type="number" class="form-control" id="custo_aquisicao" name="custo_aquisicao" placeholder="Ex: 2500" step="0.01" required>
                                             </div>                               
                                         </div>
 
@@ -197,7 +195,7 @@
                                         <div class="row mb-3">
                                             <div class="col-md-4">
                                                 <label for="tipo_entrada" class="form-label">Entrada por: <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="tipo_entrada" name="tipo_entrada" > 
+                                                <select class="form-control" id="tipo_entrada" name="tipo_entrada" required> 
                                                     <option value="" selected disabled>Escolha uma opção</option>
                                                     <option value="Compra">Compra</option>
                                                     <option value="Doação">Doação</option>
@@ -207,7 +205,7 @@
                                             </div>     
                                             <div class="col-md-4">
                                                 <label for="estado" class="form-label">Estado atual <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="estado" name="estado" > 
+                                                <select class="form-control" id="estado" name="estado" required> 
                                                     <option value="" selected disabled>Escolha uma opção</option>
                                                     <option value="Ativo">Ativo</option>
                                                     <option value="Inativo">Inativo</option>
@@ -218,7 +216,7 @@
                                             </div>   
                                             <div class="col-md-4">
                                                 <label for="criticidade" class="form-label">Criticidade <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="criticidade" name="criticidade" > 
+                                                <select class="form-control" id="criticidade" name="criticidade" required> 
                                                     <option value="" selected disabled>Escolha uma opção</option>
                                                     <option value="Baixa">Baixa</option>
                                                     <option value="Média">Média</option>
@@ -226,109 +224,7 @@
                                                     <option value="Suporte de vida">Suporte de vida</option>
                                                 </select>
                                             </div> 
-                                            <!-- Secção: Observações -->
-                                            <h5 class="mt-4 mb-3" style="color:#680447;">
-                                                <i class="fa-solid fa-note-sticky me-2"></i>
-                                                Observações
-                                            </h5>
-
-                                            <!-- Campo Observações -->
-                                            <div class="row mb-3">
-                                                <div class="col-12">
-                                                    <label for="observacoes" class="form-label">Observações</label>
-                                                    <textarea class="form-control" id="observacoes" name="observacoes" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
-                                                </div>
-                                            </div>  
                                         </div>
-
-                                    <div class="d-flex justify-content-end mt-4">
-                                        <button type="button" class="btn btn-guardar" id="btnSeguinte">
-                                            Seguinte
-                                            <i class="fa-solid fa-arrow-right ms-1"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="garantiasContratos" role="tabpanel">
-                                        <!-- Secção: Garantias e contratos -->
-                                        <h5 class="mt-4 mb-3" style="color:#680447;">
-                                            <i class="fa-solid fa-file-signature me-2"></i>
-                                            Garantias e contratos
-                                        </h5>
-
-                                        <!--Campo Garantia-->
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <label for="data_inicio" class="form-label">Data de início de Garantia <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="data_inicio" name="data_inicio" >
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="data_fim" class="form-label">Data de fim de Garantia <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="data_fim" name="data_fim" >
-                                            </div>
-                                        </div>
-
-                                        <!--Campo Contrato-->
-                                        <div class="row mb-3">
-                                            <div class="col-md-3">
-                                                <label for="contrato_manutencao" class="form-label">
-                                                    Contrato de manutenção <span class="text-danger">*</span>
-                                                </label>
-                                                <select class="form-control"
-                                                        id="contrato_manutencao"
-                                                        name="contrato_manutencao" >
-
-                                                    <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="Sim">Sim</option>
-                                                    <option value="Não">Não</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="tipo_contrato" class="form-label">
-                                                    Tipo de contrato <span class="text-danger">*</span>
-                                                </label>
-
-                                                <select class="form-control"
-                                                        id="tipo_contrato"
-                                                        name="tipo_contrato" >
-
-                                                    <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="Preventivo">Preventivo</option>
-                                                    <option value="Corretivo">Corretivo</option>
-                                                    <option value="Completo">Completo</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="periodicidade" class="form-label">
-                                                    Periodicidade <span class="text-danger">*</span>
-                                                </label>
-
-                                                <select class="form-control"
-                                                        id="periodicidade"
-                                                        name="periodicidade" >
-
-                                                    <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="Mensal">Mensal</option>
-                                                    <option value="Trimestral">Trimestral</option>
-                                                    <option value="Semestral">Semestral</option>
-                                                    <option value="Anual">Anual</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="entidade_responsavel" class="form-label">
-                                                    Entidade responsável <span class="text-danger">*</span>
-                                                </label>
-                                                <input type="text"
-                                                    class="form-control"
-                                                    id="entidade_responsavel"
-                                                    name="entidade_responsavel"
-                                                    placeholder="Ex: BioTech Portugal" >
-                                            </div>
-                                        </div>
-
                                         <!-- Secção: Observações -->
                                         <h5 class="mt-4 mb-3" style="color:#680447;">
                                             <i class="fa-solid fa-note-sticky me-2"></i>
@@ -338,31 +234,139 @@
                                         <!-- Campo Observações -->
                                         <div class="row mb-3">
                                             <div class="col-12">
-                                                <label for="observacoes-garant" class="form-label">Observações</label>
-                                                <textarea class="form-control" id="observacoes-garant" name="observacoes-garant" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
+                                                <label for="observacoes" class="form-label">Observações</label>
+                                                <textarea class="form-control" id="observacoes" name="observacoes" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
                                             </div>
-                                        </div>
-
-                                        <div class="d-flex justify-content-between gap-2 mb-4">
-                                            <button type="button" class="btn btn-outline-secondary" id="btnAnterior">
-                                                <i class="fa-solid fa-arrow-left me-1"></i>
-                                                Anterior
-                                            </button>
-
-                                            <div>
-                                                <a href="lista.html" class="btn btn-outline-secondary">
-                                                    <i class="fa-solid fa-xmark me-1"></i> Cancelar
-                                                </a>
-
-                                                <button type="submit" class="btn btn-guardar">
-                                                    <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
-                                                </button>
-                                            </div>
-                                        </div>
+                                        </div> 
+                                    </div> 
+                                    <div class="text-end">
+                                        <button type="button"
+                                                class="btn btn-guardar mb-4"
+                                                id="btnSeguinte"
+                                                onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#garantias-tab')).show()">
+                                            Seguinte
+                                            <i class="fa-solid fa-arrow-right ms-1"></i>
+                                        </button>
                                     </div>
-                                    <!-- Área de erros -->
-                                    <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                        • Erro
+
+                                    <div class="tab-pane fade" id="garantiasContratos" role="tabpanel">
+                                            <!-- Secção: Garantias e contratos -->
+                                            <h5 class="mt-4 mb-3" style="color:#680447;">
+                                                <i class="fa-solid fa-file-signature me-2"></i>
+                                                Garantias e contratos
+                                            </h5>
+
+                                            <!--Campo Garantia-->
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="data_inicio" class="form-label">Data de início de Garantia <span class="text-danger">*</span></label>
+                                                    <input type="date" class="form-control" id="data_inicio" name="data_inicio" >
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="data_fim" class="form-label">Data de fim de Garantia <span class="text-danger">*</span></label>
+                                                    <input type="date" class="form-control" id="data_fim" name="data_fim" >
+                                                </div>
+                                            </div>
+
+                                            <!--Campo Contrato-->
+                                            <div class="row mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="contrato_manutencao" class="form-label">
+                                                        Contrato de manutenção <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select class="form-control"
+                                                            id="contrato_manutencao"
+                                                            name="contrato_manutencao" >
+
+                                                        <option value="" selected disabled>Escolha uma opção</option>
+                                                        <option value="Sim">Sim</option>
+                                                        <option value="Não">Não</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label for="tipo_contrato" class="form-label">
+                                                        Tipo de contrato <span class="text-danger">*</span>
+                                                    </label>
+
+                                                    <select class="form-control"
+                                                            id="tipo_contrato"
+                                                            name="tipo_contrato" >
+
+                                                        <option value="" selected disabled>Escolha uma opção</option>
+                                                        <option value="Preventivo">Preventivo</option>
+                                                        <option value="Corretivo">Corretivo</option>
+                                                        <option value="Completo">Completo</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label for="periodicidade" class="form-label">
+                                                        Periodicidade <span class="text-danger">*</span>
+                                                    </label>
+
+                                                    <select class="form-control"
+                                                            id="periodicidade"
+                                                            name="periodicidade" >
+
+                                                        <option value="" selected disabled>Escolha uma opção</option>
+                                                        <option value="Mensal">Mensal</option>
+                                                        <option value="Trimestral">Trimestral</option>
+                                                        <option value="Semestral">Semestral</option>
+                                                        <option value="Anual">Anual</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label for="entidade_responsavel" class="form-label">
+                                                        Entidade responsável <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text"
+                                                        class="form-control"
+                                                        id="entidade_responsavel"
+                                                        name="entidade_responsavel"
+                                                        placeholder="Ex: BioTech Portugal" >
+                                                </div>
+                                            </div>
+
+                                            <!-- Secção: Observações -->
+                                            <h5 class="mt-4 mb-3" style="color:#680447;">
+                                                <i class="fa-solid fa-note-sticky me-2"></i>
+                                                Observações
+                                            </h5>
+
+                                            <!-- Campo Observações -->
+                                            <div class="row mb-3">
+                                                <div class="col-12">
+                                                    <label for="observacoes-garant" class="form-label">Observações</label>
+                                                    <textarea class="form-control" id="observacoes-garant" name="observacoes-garant" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center gap-2 mb-4">
+                                                <button type="button"
+                                                        class="btn btn-outline-secondary mb-4"
+                                                        id="btnAnterior"
+                                                        onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#info-tab')).show()">
+                                                    <i class="fa-solid fa-arrow-left me-1"></i>
+                                                    Anterior
+                                                </button>
+
+                                                <div>
+                                                    <a href="lista.html" class="btn btn-outline-secondary mb-4">
+                                                        <i class="fa-solid fa-xmark me-1"></i> Cancelar
+                                                    </a>
+
+                                                    <button type="submit" class="btn btn-guardar mb-4">
+                                                        <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Área de erros -->
+                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
+                                            • Erro
+                                        </div>
                                     </div>
                                 </div>
                             </form>

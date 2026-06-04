@@ -59,3 +59,45 @@ document.querySelectorAll(".criticidade").forEach(function(celula) {
             }]
         }
     });
+
+/* Separadores para adicionar equipamento */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const config = {
+        painelId: "infoEquipamento",
+        btnNextId: "btnSeguinte",
+        tabNextId: "garantias-tab"
+    };
+
+    function tabEstaValida(painelId) {
+        const painel = document.getElementById(painelId);
+        const camposObrigatorios = painel.querySelectorAll("[required]");
+
+        return Array.from(camposObrigatorios).every(function (campo) {
+            return campo.value.trim() !== "";
+        });
+    }
+
+    function atualizarBotao() {
+        const valido = tabEstaValida(config.painelId);
+
+        const btnNext = document.getElementById(config.btnNextId);
+        const tabNext = document.getElementById(config.tabNextId);
+
+        btnNext.disabled = !valido;
+
+        if (valido) {
+            tabNext.classList.remove("disabled", "pe-none");
+        } else {
+            tabNext.classList.add("disabled", "pe-none");
+        }
+    }
+
+    const painel = document.getElementById(config.painelId);
+
+    painel.addEventListener("input", atualizarBotao);
+    painel.addEventListener("change", atualizarBotao);
+
+    atualizarBotao();
+
+});

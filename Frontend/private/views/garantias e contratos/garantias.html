@@ -80,11 +80,8 @@
             <div class="d-flex align-items-center mb-3 w-100">
                 <h2 class="mb-0" style="color: #680447;">
                     <i class="fa-solid fa-list-check me-2"></i>
-                    <strong>Listagem de Documentos</strong>
+                    <strong>Listagem de Garantias e Contratos</strong>
                 </h2>
-                <a href="novo_doc.html" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
-                    <i class="fa-solid fa-plus me-1"></i> Novo Documento
-                </a>
             </div>
 
             <hr>
@@ -105,7 +102,7 @@
                                 </span>
                                 <input type="text"
                                     class="form-control"
-                                    placeholder="Nome, data ...">
+                                    placeholder="Datas, entidade responsável ...">
                             </div>
                         </div>
                     </div>
@@ -116,29 +113,36 @@
                             <i class="fa-solid fa-sliders me-2"></i>Filtros avançados
                         </h6>
                         <div class="row g-3 mb-4">
-
                                 <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Tipo de documento</label>
+                                    <label class="form-label fw-semibold">Contrato de manutenção</label>
                                     <select class="form-select">
-                                        <option selected>Todos</option>
-                                        <option>Manual de utilizador</option>
-                                        <option>Manual de serviço</option>
-                                        <option>Certificado de calibração</option>
-                                        <option>Contrato de manutenção</option>
-                                        <option>Fatura / Guia de aquisição</option>
-                                        <option>Declaração de conformidade</option>
-                                        <option>Relatório técnico</option>
+                                        <option >Sim</option>
+                                        <option >Não</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Equipamento associado</label>
+                                    <label class="form-label fw-semibold">Tipo de contrato</label>
                                     <select class="form-select">
                                         <option selected>Todos</option>
+                                        <option >Preventivo</option>
+                                        <option >Corretivo</option>
+                                        <option >Completo</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Periodicidade</label>
+                                    <select class="form-select">
+                                        <option selected>Todos</option>
+                                        <option>Mensal</option>
+                                        <option>Trimestral</option>
+                                        <option>Semestral</option>
+                                        <option>Anual</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Fornecedor associado</label>
+                                    <label class="form-label fw-semibold">Entidade responsável</label>
                                     <select class="form-select">
                                         <option selected>Todos</option>
                                     </select>
@@ -159,30 +163,31 @@
                 </div>
             </div>
             
-            <p class="text-muted">Consulte a tabela abaixo com a documentação registada.</p>
+            <p class="text-muted">Consulte a tabela abaixo com as garantias e contratos registados.</p>
             <div class="card shadow rounded-4 border-0 p-3">
                 <div class="table-responsive">
                     <table class="table table-bordered able-striped align-middle text-center">
                         <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
                             <tr>
-                                <th>Tipo de documento</th> 
-                                <th>Nome</th>
-                                <th>Data</th> 
-                                <th>Equipamento associado</th> 
+                                <th>Equipamento</th> 
+                                <th>Garantia até</th>
+                                <th>Contrato de manutenção</th> 
+                                <th>Tipo de contrato</th> 
+                                <th>Entidade responsável</th> 
                                 <th class="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>[Tipo de documento]</td> 
-                                <td>[Nome]</td> 
-                                <td>[Data]</td> 
-                                <td>[Equipamento associado]</td> 
+                                <td>[Código]</td> 
+                                <td>[Data de fim de garantia]</td> 
+                                <td>[Sim/Não]</td> 
+                                <td>[Tipo de contrato]</td> 
+                                <td>[Entidade responsável]</td> 
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="detalhes_doc.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="editar_doc.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
-                                        <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
+                                        <a href="detalhes_garant.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="../equipamentos/editar.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -191,42 +196,7 @@
                 </div>
             </div>
         </div>  
-        <div class="modal fade" id="modalEliminar" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
-                <div class="modal-content rounded-4">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" style="color:#680447;">
-                            Confirmar eliminação
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <p>Tem a certeza que pretende eliminar este documento?</p>
-
-                        <p><strong>Tipo:</strong> <span id="modalTipo"></span></p>
-                        <p><strong>Nome:</strong> <span id="modalNome"></span></p>
-                        <p><strong>Equipamento associado:</strong> <span id="modalEquipamento"></span></p>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-
-                        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-bs-dismiss="modal">
-                            Eliminar
-                        </button>
-                    </div>
-
-                    <!-- Área de erros -->
-                    <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                        • Erro
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- Bootstrap JS -->
         <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
 

@@ -123,7 +123,7 @@ function preencherLocalizacao() {
     painel.classList.remove('d-none');
 }
 
-/* Fornecedores nos documentos */
+/* Fornecedores nos equipamentos */
 // Base de dados local dos fornecedores
 const fornecedores = {
     1: {
@@ -293,7 +293,115 @@ function eliminarBlocoFornecedor(numero) {
     }
 }
 
+/* Documentos dos equipamentos */
+let contadorDocumentos = 1;
 
+function adicionarBlocoDocumento() {
+    contadorDocumentos++;
+
+    const area = document.getElementById("areaDocumentos");
+
+    const bloco = document.createElement("div");
+    bloco.className = "border rounded p-3 mb-4";
+    bloco.id = `blocoDocumento${contadorDocumentos}`;
+
+    bloco.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="mb-0" style="color:#680447;">
+                Documento ${contadorDocumentos}
+            </h6>
+
+            <button type="button"
+                    class="btn btn-outline-danger btn-sm"
+                    onclick="eliminarBlocoDocumento(${contadorDocumentos})">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+
+        <h6 class="mt-3 mb-3" style="color:#680447;">
+            <i class="fa-solid fa-barcode me-2"></i>
+            Identificação
+        </h6>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Tipo de documento <span class="text-danger">*</span></label>
+                <select class="form-control" name="tipo_doc[]" required>
+                    <option value="" selected disabled>Escolha uma opção</option>
+                    <option value="Manual de utilização">Manual de utilizador</option>
+                    <option value="Manual de serviço">Manual de serviço</option>
+                    <option value="Certificado de calibração">Certificado de calibração</option>
+                    <option value="Contrato de manutenção">Contrato de manutenção</option>
+                    <option value="Fatura / Guia de aquisição">Fatura / Guia de aquisição</option>
+                    <option value="Declaração de conformidade">Declaração de conformidade</option>
+                    <option value="Relatório técnico">Relatório técnico</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Nome <span class="text-danger">*</span></label>
+                <input type="text"
+                       class="form-control"
+                       name="nome_doc[]"
+                       placeholder="Ex: Manual de Utilização - Ventilador Evita V500"
+                       required>
+            </div>
+        </div>
+
+        <h6 class="mt-4 mb-3" style="color:#680447;">
+            <i class="fa-solid fa-calendar-days me-2"></i>
+            Datas
+        </h6>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Data <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" name="data_doc[]" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Data de validade</label>
+                <input type="date" class="form-control" name="data_validade[]">
+            </div>
+        </div>
+
+        <h6 class="mt-4 mb-3" style="color:#680447;">
+            <i class="fa-solid fa-link me-2"></i>
+            Associações e ficheiro
+        </h6>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Fornecedor associado</label>
+                <select class="form-control" name="fornecedor_doc_id[]">
+                    <option value="" selected disabled>Escolha um fornecedor</option>
+                    <option value="1">Philips Healthcare Portugal</option>
+                    <option value="2">Dräger Portugal</option>
+                    <option value="3">B. Braun Portugal</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Selecionar ficheiro <span class="text-danger">*</span></label>
+                <input type="file"
+                       class="form-control"
+                       name="ficheiro[]"
+                       accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                       required>
+            </div>
+        </div>
+    `;
+
+    area.appendChild(bloco);
+}
+
+function eliminarBlocoDocumento(numero) {
+    const bloco = document.getElementById(`blocoDocumento${numero}`);
+
+    if (bloco) {
+        bloco.remove();
+    }
+}
 
 /* Dashboard */
 // Gráfico por estado

@@ -283,12 +283,98 @@
                                     </div> 
 
                                     <div class="tab-pane fade" id="infoFornecedores" role="tabpanel">
-                                        <!-- Secção: Fornecedores-->
+                                        <!-- Secção: Fornecedores -->
                                         <h5 class="mt-4 mb-3" style="color:#680447;">
                                             <i class="fa-solid fa-building me-2"></i>
                                             Fornecedores
                                         </h5>
 
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <label for="selectFornecedor" class="form-label">
+                                                    Selecionar fornecedor
+                                                </label>
+
+                                                <select class="form-control"
+                                                        id="selectFornecedor"
+                                                        name="fornecedor_id"
+                                                        onchange="preencherFornecedor()"
+                                                        required>
+                                                    <option value="" selected disabled>Escolha um fornecedor</option>
+                                                    <option value="1">Philips Healthcare Portugal</option>
+                                                    <option value="2">Dräger Portugal</option>
+                                                    <option value="3">B. Braun Portugal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div id="infoFornecedor" class="d-none">
+                                            <hr>
+
+                                            <h6 class="text-muted mb-4">
+                                                <i class="fa-solid fa-circle-info me-2"></i>
+                                                Informação do fornecedor
+                                            </h6>
+
+                                            <div class="row">
+
+                                                <!-- Coluna 1 -->
+                                                <div class="col-md-4">
+                                                    <div class="mb-4">
+                                                        <strong>Nome da empresa</strong>
+                                                        <p id="f-nome">-</p>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <strong>NIF</strong>
+                                                        <p id="f-nif">-</p>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <strong>Tipo de fornecedor</strong>
+                                                        <p id="f-tipo">-</p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Coluna 2 -->
+                                                <div class="col-md-4">
+                                                    <div class="mb-4">
+                                                        <strong>Morada</strong>
+                                                        <p id="f-morada">-</p>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <strong>Número telefónico</strong>
+                                                        <p id="f-telefone">-</p>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <strong>Email</strong>
+                                                        <p id="f-email">-</p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Coluna 3 -->
+                                                <div class="col-md-4">
+                                                    <div class="mb-4">
+                                                        <strong>Website</strong>
+                                                        <p id="f-website">-</p>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <strong>Pessoa de contacto</strong>
+                                                        <p id="f-contacto">-</p>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <strong>Telefone da pessoa de contacto</strong>
+                                                        <p id="f-tel-contacto">-</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
                                         <div class="d-flex justify-content-between">
                                             <button type="button"
                                                     class="btn btn-outline-secondary"
@@ -297,8 +383,8 @@
                                             </button>
 
                                             <button type="button"
-                                                    class="btn btn-guardar"
                                                     id="btnSeguinteFornecedor"
+                                                    class="btn btn-guardar"
                                                     onclick="
                                                         document.getElementById('localizacao-tab').classList.remove('disabled','pe-none');
                                                         bootstrap.Tab.getOrCreateInstance(document.querySelector('#localizacao-tab')).show();
@@ -306,6 +392,7 @@
                                                 Seguinte
                                             </button>
                                         </div>
+
                                     </div>
 
                                     <div class="tab-pane fade" id="infoLocalizacao" role="tabpanel">

@@ -161,29 +161,138 @@ const fornecedores = {
     }
 };
 
-function preencherFornecedor() {
-    const id = document.getElementById("selectFornecedor").value;
-    const painel = document.getElementById("infoFornecedor");
+// Como já existe Fornecedor 1 no HTML
+let contadorFornecedores = 1;
 
-    if (!id) {
-        painel.classList.add("d-none");
-        return;
-    }
-
+function preencherFornecedorBloco(select, numero) {
+    const id = select.value;
     const f = fornecedores[id];
 
-    document.getElementById("f-nome").textContent = f.nome;
-    document.getElementById("f-nif").textContent = f.nif;
-    document.getElementById("f-morada").textContent = f.morada;
-    document.getElementById("f-tipo").textContent = f.tipo;
-    document.getElementById("f-telefone").textContent = f.telefone;
-    document.getElementById("f-email").textContent = f.email;
-    document.getElementById("f-website").textContent = f.website;
-    document.getElementById("f-contacto").textContent = f.contacto;
-    document.getElementById("f-tel-contacto").textContent = f.telContacto;
+    document.getElementById(`f-nome-${numero}`).textContent = f.nome;
+    document.getElementById(`f-nif-${numero}`).textContent = f.nif;
+    document.getElementById(`f-tipo-${numero}`).textContent = f.tipo;
+    document.getElementById(`f-morada-${numero}`).textContent = f.morada;
+    document.getElementById(`f-telefone-${numero}`).textContent = f.telefone;
+    document.getElementById(`f-email-${numero}`).textContent = f.email;
+    document.getElementById(`f-website-${numero}`).textContent = f.website;
+    document.getElementById(`f-contacto-${numero}`).textContent = f.contacto;
+    document.getElementById(`f-tel-contacto-${numero}`).textContent = f.telContacto;
 
-    painel.classList.remove("d-none");
+    document.getElementById(`infoFornecedor${numero}`).classList.remove("d-none");
 }
+
+function adicionarBlocoFornecedor() {
+    contadorFornecedores++;
+
+    const area = document.getElementById("areaFornecedores");
+
+    const bloco = document.createElement("div");
+    bloco.className = "border rounded p-3 mb-4";
+    bloco.id = `blocoFornecedor${contadorFornecedores}`;
+
+    bloco.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="mb-0" style="color:#680447;">
+                Fornecedor ${contadorFornecedores}
+            </h6>
+
+            <button type="button"
+                    class="btn btn-outline-danger btn-sm"
+                    onclick="eliminarBlocoFornecedor(${contadorFornecedores})">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label class="form-label">Selecionar fornecedor</label>
+
+                <select class="form-control"
+                        name="fornecedor_id[]"
+                        onchange="preencherFornecedorBloco(this, ${contadorFornecedores})"
+                        required>
+                    <option value="" selected disabled>Escolha um fornecedor</option>
+                    <option value="1">Philips Healthcare Portugal</option>
+                    <option value="2">Dräger Portugal</option>
+                    <option value="3">B. Braun Portugal</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="infoFornecedor${contadorFornecedores}" class="d-none">
+            <hr>
+
+            <h6 class="text-muted mb-4">
+                <i class="fa-solid fa-circle-info me-2"></i>
+                Informação do fornecedor
+            </h6>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-4">
+                        <strong>Nome da empresa</strong>
+                        <p id="f-nome-${contadorFornecedores}">-</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>NIF</strong>
+                        <p id="f-nif-${contadorFornecedores}">-</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>Tipo de fornecedor</strong>
+                        <p id="f-tipo-${contadorFornecedores}">-</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="mb-4">
+                        <strong>Morada</strong>
+                        <p id="f-morada-${contadorFornecedores}">-</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>Número telefónico</strong>
+                        <p id="f-telefone-${contadorFornecedores}">-</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>Email</strong>
+                        <p id="f-email-${contadorFornecedores}">-</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="mb-4">
+                        <strong>Website</strong>
+                        <p id="f-website-${contadorFornecedores}">-</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>Pessoa de contacto</strong>
+                        <p id="f-contacto-${contadorFornecedores}">-</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>Telefone da pessoa de contacto</strong>
+                        <p id="f-tel-contacto-${contadorFornecedores}">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    area.appendChild(bloco);
+}
+
+function eliminarBlocoFornecedor(numero) {
+    const bloco = document.getElementById(`blocoFornecedor${numero}`);
+
+    if (bloco) {
+        bloco.remove();
+    }
+}
+
 
 
 /* Dashboard */

@@ -122,6 +122,13 @@ function preencherLocalizacao() {
 
     painel.classList.remove('d-none');
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const selectLocalizacao = document.getElementById("selectLocalizacao");
+
+    if (selectLocalizacao && selectLocalizacao.value) {
+        preencherLocalizacao();
+    }
+});
 
 /* Fornecedores nos equipamentos */
 // Base de dados local dos fornecedores
@@ -180,6 +187,14 @@ function preencherFornecedorBloco(select, numero) {
 
     document.getElementById(`infoFornecedor${numero}`).classList.remove("d-none");
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const selectFornecedor1 = document.querySelector("#blocoFornecedor1 select");
+
+    if (selectFornecedor1 && selectFornecedor1.value) {
+        preencherFornecedorBloco(selectFornecedor1, 1);
+    }
+});
 
 function adicionarBlocoFornecedor() {
     contadorFornecedores++;

@@ -15,6 +15,114 @@ document.querySelectorAll(".criticidade").forEach(function(celula) {
     }
 });
 
+/* Validação dos separadores */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const etapas = [
+        {
+            painelId: "infoEquipamento",
+            btnNextId: "btnSeguinteEquipamento",
+            tabNextId: "fornecedor-tab"
+        },
+        {
+            painelId: "infoFornecedores",
+            btnNextId: "btnSeguinteFornecedor",
+            tabNextId: "localizacao-tab"
+        },
+        {
+            painelId: "infoLocalizacao",
+            btnNextId: "btnSeguinteLocalizacao",
+            tabNextId: "documentacao-tab"
+        },
+        {
+            painelId: "infoDocumentos",
+            btnNextId: "btnSeguinteDocumentos",
+            tabNextId: "garantias-tab"
+        }
+    ];
+
+    function tabEstaValida(painelId) {
+        const painel = document.getElementById(painelId);
+        const camposObrigatorios = painel.querySelectorAll("[required]");
+
+        return Array.from(camposObrigatorios).every(function (campo) {
+            return campo.value.trim() !== "";
+        });
+    }
+
+    function atualizarEtapa(etapa) {
+        const valido = tabEstaValida(etapa.painelId);
+
+        const btnNext = document.getElementById(etapa.btnNextId);
+        const tabNext = document.getElementById(etapa.tabNextId);
+
+        btnNext.disabled = !valido;
+
+        if (valido) {
+            tabNext.classList.remove("disabled", "pe-none");
+        } else {
+            tabNext.classList.add("disabled", "pe-none");
+        }
+    }
+
+    etapas.forEach(function (etapa) {
+        const painel = document.getElementById(etapa.painelId);
+
+        painel.addEventListener("input", function () {
+            atualizarEtapa(etapa);
+        });
+
+        painel.addEventListener("change", function () {
+            atualizarEtapa(etapa);
+        });
+
+        atualizarEtapa(etapa);
+    });
+
+});
+
+/* Localizações nos documentos */
+// Base de dados local das localizações
+const localizacoes = {
+    1: {
+        edificio: "Hospital Central",
+        piso: "Piso 2",
+        sala: "BO-204",
+        servico: "Bloco Operatório"
+    },
+    2: {
+        edificio: "Hospital Central",
+        piso: "Piso 0",
+        sala: "URG-12",
+        servico: "Urgência"
+    },
+    3: {
+        edificio: "Hospital Central",
+        piso: "Piso 3",
+        sala: "UCI-301",
+        servico: "Unidade de Cuidados Intensivos"
+    }
+};
+
+function preencherLocalizacao() {
+    const id = document.getElementById('selectLocalizacao').value;
+    const painel = document.getElementById('infoLocalizacaoPainel');
+
+    if (!id) {
+        painel.classList.add('d-none');
+        return;
+    }
+
+    const l = localizacoes[id];
+
+    document.getElementById('l-edificio').textContent = l.edificio;
+    document.getElementById('l-piso').textContent = l.piso;
+    document.getElementById('l-sala').textContent = l.sala;
+    document.getElementById('l-servico').textContent = l.servico;
+
+    painel.classList.remove('d-none');
+}
+
 /* Dashboard */
 // Gráfico por estado
     new Chart(document.getElementById('estadoChart'), {
@@ -60,44 +168,5 @@ document.querySelectorAll(".criticidade").forEach(function(celula) {
         }
     });
 
-/* Separadores para adicionar equipamento */
-document.addEventListener("DOMContentLoaded", function () {
 
-    const config = {
-        painelId: "infoEquipamento",
-        btnNextId: "btnSeguinte",
-        tabNextId: "garantias-tab"
-    };
 
-    function tabEstaValida(painelId) {
-        const painel = document.getElementById(painelId);
-        const camposObrigatorios = painel.querySelectorAll("[required]");
-
-        return Array.from(camposObrigatorios).every(function (campo) {
-            return campo.value.trim() !== "";
-        });
-    }
-
-    function atualizarBotao() {
-        const valido = tabEstaValida(config.painelId);
-
-        const btnNext = document.getElementById(config.btnNextId);
-        const tabNext = document.getElementById(config.tabNextId);
-
-        btnNext.disabled = !valido;
-
-        if (valido) {
-            tabNext.classList.remove("disabled", "pe-none");
-        } else {
-            tabNext.classList.add("disabled", "pe-none");
-        }
-    }
-
-    const painel = document.getElementById(config.painelId);
-
-    painel.addEventListener("input", atualizarBotao);
-    painel.addEventListener("change", atualizarBotao);
-
-    atualizarBotao();
-
-});

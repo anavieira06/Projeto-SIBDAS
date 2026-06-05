@@ -271,6 +271,7 @@
                                         <div class="text-end">
                                             <button type="button"
                                                     class="btn btn-guardar mb-4"
+                                                    id="btnSeguinteEquipamento"
                                                     onclick="
                                                         document.getElementById('fornecedor-tab').classList.remove('disabled','pe-none');
                                                         bootstrap.Tab.getOrCreateInstance(document.querySelector('#fornecedor-tab')).show();
@@ -297,6 +298,7 @@
 
                                             <button type="button"
                                                     class="btn btn-guardar"
+                                                    id="btnSeguinteFornecedor"
                                                     onclick="
                                                         document.getElementById('localizacao-tab').classList.remove('disabled','pe-none');
                                                         bootstrap.Tab.getOrCreateInstance(document.querySelector('#localizacao-tab')).show();
@@ -313,6 +315,56 @@
                                             Localização
                                         </h5>
 
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <label for="selectLocalizacao" class="form-label">
+                                                    Selecionar localização
+                                                </label>
+
+                                                <select class="form-control"
+                                                        id="selectLocalizacao"
+                                                        name="localizacao_id"
+                                                        onchange="preencherLocalizacao()"
+                                                        required>
+                                                    <option value="" selected disabled>Escolha uma localização</option>
+                                                    <option value="1">Bloco Operatório</option>
+                                                    <option value="2">Urgência</option>
+                                                    <option value="3">Unidade de Cuidados Intensivos</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div id="infoLocalizacaoPainel" class="d-none">
+                                            <hr>
+
+                                            <h6 class="text-muted mb-3" style="color:#680447;">
+                                                <i class="fa-solid fa-circle-info me-2"></i>
+                                                Informação da localização
+                                            </h6>
+
+                                            <div class="row mb-3">
+                                                <div class="col-md-3">
+                                                    <strong>Edifício</strong>
+                                                    <p id="l-edificio">-</p>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <strong>Piso</strong>
+                                                    <p id="l-piso">-</p>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <strong>Sala</strong>
+                                                    <p id="l-sala">-</p>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <strong>Serviço</strong>
+                                                    <p id="l-servico">-</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="d-flex justify-content-between">
                                             <button type="button"
                                                     class="btn btn-outline-secondary"
@@ -322,6 +374,7 @@
 
                                             <button type="button"
                                                     class="btn btn-guardar"
+                                                    id="btnSeguinteLocalizacao"
                                                     onclick="
                                                         document.getElementById('documentacao-tab').classList.remove('disabled','pe-none');
                                                         bootstrap.Tab.getOrCreateInstance(document.querySelector('#documentacao-tab')).show();
@@ -432,6 +485,7 @@
 
                                             <button type="button"
                                                     class="btn btn-guardar"
+                                                    id="btnSeguinteDocumentos"
                                                     onclick="
                                                         document.getElementById('garantias-tab').classList.remove('disabled','pe-none');
                                                         bootstrap.Tab.getOrCreateInstance(document.querySelector('#garantias-tab')).show();
@@ -539,18 +593,9 @@
                                                 <button type="button"
                                                         class="btn btn-outline-secondary mb-4"
                                                         id="btnAnterior"
-                                                        onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#info-tab')).show()">
+                                                        onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#documentacao-tab')).show()">
                                                     <i class="fa-solid fa-arrow-left me-1"></i>
                                                     Anterior
-                                                </button>
-
-                                                <button type="button"
-                                                        class="btn btn-guardar"
-                                                        onclick="
-                                                            document.getElementById('localizacao-tab').classList.remove('disabled','pe-none');
-                                                            bootstrap.Tab.getOrCreateInstance(document.querySelector('#localizacao-tab')).show();
-                                                        ">
-                                                    Seguinte
                                                 </button>
 
                                                 <div>

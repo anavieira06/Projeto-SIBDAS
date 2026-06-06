@@ -555,8 +555,8 @@
 
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
-                                                        <label class="form-label">Tipo de documento <span class="text-danger">*</span></label>
-                                                        <select class="form-control" name="tipo_doc[]" required>
+                                                        <label for="tipo_doc" class="form-label">Tipo de documento <span class="text-danger">*</span></label>
+                                                        <select class="form-control" name="tipo_doc" id="tipo_doc" required>
                                                             <option value="" selected disabled>Escolha uma opção</option>
                                                             <option value="Manual de utilização" selected>Manual de utilizador</option>
                                                             <option value="Manual de serviço">Manual de serviço</option>
@@ -569,10 +569,11 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label class="form-label">Nome <span class="text-danger">*</span></label>
+                                                        <label for="nome_doc" class="form-label">Nome <span class="text-danger">*</span></label>
                                                         <input type="text"
                                                             class="form-control"
-                                                            name="nome_doc[]"
+                                                            name="nome_doc"
+                                                            id="nome_doc"
                                                             value="Manual de Utilização - Ventilador Evita V500"
                                                             required>
                                                     </div>
@@ -585,13 +586,13 @@
 
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
-                                                        <label class="form-label">Data <span class="text-danger">*</span></label>
-                                                        <input type="date" class="form-control" name="data_doc[]" value="2025-01-04" required>
+                                                        <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
+                                                        <input type="date" class="form-control" name="data_doc" id="data_doc" value="2025-01-04" required>
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label class="form-label">Data de validade</label>
-                                                        <input type="date" class="form-control" name="data_validade[]" value="2027-01-04">
+                                                        <label for="data_validade" class="form-label">Data de validade</label>
+                                                        <input type="date" class="form-control" name="data_validade" id="data_validade" value="2027-01-04">
                                                     </div>
                                                 </div>
 
@@ -602,8 +603,8 @@
 
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
-                                                        <label class="form-label">Fornecedor associado</label>
-                                                        <select class="form-control" name="fornecedor_doc_id[]">
+                                                        <label for="fornecedor_id" class="form-label">Fornecedor associado</label>
+                                                        <select class="form-control" name="fornecedor_id" id="fornecedor_id">
                                                             <option value="" disabled>Escolha um fornecedor</option>
                                                             <option value="1" selected>Philips Healthcare Portugal</option>
                                                             <option value="2">Dräger Portugal</option>
@@ -617,12 +618,13 @@
                                                             <i class="fa-solid fa-file-pdf text-danger me-2"></i>
                                                             Manual_Utilizacao_MP5.pdf
                                                         </div>
-                                                        <label class="form-label mt-3">
+                                                        <label for="ficheiro" class="form-label mt-3">
                                                             Substituir ficheiro
                                                         </label>
                                                         <input type="file"
                                                             class="form-control"
-                                                            name="ficheiro[]"
+                                                            name="ficheiro"
+                                                            id="ficheiro"
                                                             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
                                                     </div>
                                                 </div>
@@ -750,8 +752,8 @@
                                             <!-- Campo Observações -->
                                             <div class="row mb-3">
                                                 <div class="col-12">
-                                                    <label for="observacoes-garant" class="form-label">Observações</label>
-                                                    <textarea class="form-control" id="observacoes-garant" name="observacoes-garant" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
+                                                    <label for="observacoes_garant" class="form-label">Observações</label>
+                                                    <textarea class="form-control" id="observacoes_garant" name="observacoes_garant" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
                                                 </div>
                                             </div>
 

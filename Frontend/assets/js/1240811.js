@@ -341,7 +341,7 @@ function adicionarBlocoDocumento() {
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Tipo de documento <span class="text-danger">*</span></label>
-                <select class="form-control" name="tipo_doc[]" required>
+                <select class="form-control" name="tipo_doc" id="tipo_doc" required>
                     <option value="" selected disabled>Escolha uma opção</option>
                     <option value="Manual de utilização">Manual de utilizador</option>
                     <option value="Manual de serviço">Manual de serviço</option>
@@ -354,10 +354,11 @@ function adicionarBlocoDocumento() {
             </div>
 
             <div class="col-md-6">
-                <label class="form-label">Nome <span class="text-danger">*</span></label>
+                <label for="nome_doc" class="form-label">Nome <span class="text-danger">*</span></label>
                 <input type="text"
                        class="form-control"
-                       name="nome_doc[]"
+                       id="nome_doc"
+                       name="nome_doc"
                        placeholder="Ex: Manual de Utilização - Ventilador Evita V500"
                        required>
             </div>
@@ -370,13 +371,13 @@ function adicionarBlocoDocumento() {
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <label class="form-label">Data <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" name="data_doc[]" required>
+                <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
+                <input type="date" class="form-control"  name="data_doc" id="data_doc" required>
             </div>
 
             <div class="col-md-6">
-                <label class="form-label">Data de validade</label>
-                <input type="date" class="form-control" name="data_validade[]">
+                <label for="data_validade" class="form-label">Data de validade</label>
+                <input type="date" class="form-control" name="data_validade" id="data_validade">
             </div>
         </div>
 
@@ -387,8 +388,8 @@ function adicionarBlocoDocumento() {
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <label class="form-label">Fornecedor associado</label>
-                <select class="form-control" name="fornecedor_doc_id[]">
+                <label for="fornecedor_id" class="form-label">Fornecedor associado</label>
+                <select class="form-control" name="fornecedor_id" id="fornecedor_id">
                     <option value="" selected disabled>Escolha um fornecedor</option>
                     <option value="1">Philips Healthcare Portugal</option>
                     <option value="2">Dräger Portugal</option>
@@ -397,10 +398,11 @@ function adicionarBlocoDocumento() {
             </div>
 
             <div class="col-md-6">
-                <label class="form-label">Selecionar ficheiro <span class="text-danger">*</span></label>
+                <label for="ficheiro" class="form-label">Selecionar ficheiro <span class="text-danger">*</span></label>
                 <input type="file"
                        class="form-control"
-                       name="ficheiro[]"
+                       name="ficheiro"
+                       id="ficheiro"
                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                        required>
             </div>

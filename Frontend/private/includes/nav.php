@@ -1,0 +1,58 @@
+<?php
+$pagina = $pagina ?? 'normal'; /* Se $pagina já tiver valor continua, se for null é 'normal' */
+?>
+
+<!-- Navbar -->
+<header class="container-fluid custom-navbar">
+    <div class="row align-items-center h-100">
+        <div class="col d-flex align-items-center">
+
+            <?php if ($pagina == 'index') : ?>
+                <a href="../private/index.php">
+                    <img src="../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                </a>
+
+            <?php else : ?>
+                <a href="../../index.php">
+                    <img src="../../../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                </a>
+            <?php endif; ?>
+
+        </div>
+
+        <?php if ($pagina == 'index') : ?>
+            <div class="col text-end">
+                <div class="dropdown">
+                    <button class="dropdown-toggle custom-btn" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-regular fa-user me-2"></i> Utilizador
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-key me-2"></i>Alterar password
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="../public/login.php">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>Sair
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        <?php else : ?>
+            <div class="col-auto">
+                <button class="custom-button" type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#sidebarMenu"
+                    aria-controls="sidebarMenu">
+                    <i class="fa-solid fa-bars me-2"></i> Menu
+                </button>
+            </div>
+        <?php endif; ?>
+
+    </div>
+</header>

@@ -1,35 +1,9 @@
 <?php include 'includes/header.php'; ?>
-        <!-- Navbar -->
-        <header class="container-fluid custom-navbar">
-            <div class="row align-items-center h-100">
-                <div class="col d-flex align-items-center" >
-                    <!-- Logo -->
-                    <a href="../private/index.php">
-                        <img src="../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo"> <!-- Clicar no logo vai pro início -->
-                    </a>
-                </div>
 
-                <div class="col text-end"> 
-                    <div class="dropdown">
-                        <button class=" dropdown-toggle custom-btn" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="fa-regular fa-user me-2"></i> Utilizador
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="fa-solid fa-key me-2"></i>Alterar password</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="../public/login.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a>
-                            </li>
-                        </ul> 
-                    </div>
-                </div>
-            </div>
-        </header>
+<?php 
+$pagina = 'index';
+include 'includes/nav.php';
+?>
 
         <div class="container-fluid">
             <div class="row">

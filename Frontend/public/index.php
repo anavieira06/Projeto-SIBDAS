@@ -39,7 +39,7 @@
 
             <!-- Área Cliente -->
             <div class="nav-cliente">
-                <a href="../login/login.html" target="_blank">Iniciar sessão</a>
+                <a href="login.php" target="_blank">Iniciar sessão</a>
             </div>
         </nav>
 

@@ -37,19 +37,19 @@
                 <aside class="col-4 col-md-3 col-lg-2 p-3 min-vh-100 custom-sidebar">
                     <h4 class="sidebar-title" style="color:#945880; font-weight:bold">Menu</h4>
                     <nav class="sidebar-menu">
-                        <a href="views/equipamentos/lista.html" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-laptop"></i> &ensp; Equipamentos</a>
+                        <a href="/Projeto SIBDAS/Frontend/private/views/equipamentos/lista.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-laptop"></i> &ensp; Equipamentos</a>
                         <hr>
-                        <a href="views/fornecedores/lista_forn.html" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-building"></i> &ensp; Fornecedores</a>
+                        <a href="/Projeto SIBDAS/Frontend/private/views/fornecedores/lista_forn.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-building"></i> &ensp; Fornecedores</a>
                         <hr>
-                        <a href="views/localizações/lista_loc.html" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-location-dot"></i> &ensp; Localizações</a>
+                        <a href="/Projeto SIBDAS/Frontend/private/views/localizações/lista_loc.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-location-dot"></i> &ensp; Localizações</a>
                         <hr>
-                        <a href="views/documentacao/lista_doc.html" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-folder-open"></i> &ensp; Documentação</a>
+                        <a href="/Projeto SIBDAS/Frontend/private/views/documentação/lista_doc.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-folder-open"></i> &ensp; Documentação</a>
                         <hr>
-                        <a href="views/garantias e contratos/" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-file-signature"></i> &ensp; Garantias e Contratos</a>
+                        <a href="/Projeto SIBDAS/Frontend/private/views/garantias e contratos/garantias.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-file-signature"></i> &ensp; Garantias e Contratos</a>
                         <hr>
-                        <a href="views/dashboard/dashboard.html" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-chart-column"></i> &ensp; Dashboard</a>
+                        <a href="/Projeto SIBDAS/Frontend/private/views/dashboard/dashboard.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-chart-column"></i> &ensp; Dashboard</a>
                         <hr>
-                        <a href="views/gestão de conteúdos/gestao_cont.html" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-globe"></i> &ensp; Gestão de conteúdos públicos</a>
+                        <a href="/Projeto SIBDAS/Frontend/private/views/gestão de conteúdos/gestao_cont.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-globe"></i> &ensp; Gestão de conteúdos públicos</a>
                     </nav>
                         
                 </aside>

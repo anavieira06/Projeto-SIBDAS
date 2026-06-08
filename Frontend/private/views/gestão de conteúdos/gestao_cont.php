@@ -807,8 +807,6 @@ Atendimento online: 24/7</textarea>
             </div>
         </div>
 
-        <!-- Bootstrap JS -->
-        <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
-        
-    </body>
-</html>
+
+
+<?php include 'includes/footer.php'; ?>

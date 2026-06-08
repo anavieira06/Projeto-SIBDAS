@@ -762,10 +762,7 @@
                 </div>
             </main>
 
-        <!-- Bootstrap JS -->
-        <script src="../../../assets/bootstrap/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="../../../assets/js/1240811.js"></script>
 
-        <!-- Custom JS -->
-        <script src="../../../assets/js/1240811.js"></script>
-    </body>
-</html>
+<?php include 'includes/footer.php'; ?>

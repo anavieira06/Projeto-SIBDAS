@@ -1,23 +1,8 @@
 <?php include 'includes/header.php'; ?>
-        <!-- Navbar -->
-        <header class="container-fluid custom-navbar">
-            <div class="row align-items-center h-100">
-                <div class="col d-flex align-items-center" >
-                    <!-- Logo -->
-                    <a href="../../index.html">
-                        <img src="../../../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo"> <!-- Clicar no logo vai pro início -->
-                    </a>
-                </div>
-
-                <!-- Botão para voltar ao menu-->
-                <div class="col-auto"> 
-                    <button class="custom-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-                        <i class="fa-solid fa-bars me-2"></i> Menu
-                    </button>
-                </div>
-            </div>
-        </header>
-
+<?php
+$pagina = 'normal';
+include '../../includes/nav.php';
+?>
         <!-- Sidebar -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
             <div class="offcanvas-header">

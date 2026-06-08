@@ -1,30 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MEDInvenTEC</title>
-
-        <!-- favicon -->
-        <link rel="shortcut icon" href="../../../assets/img/Icon.png">
-
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
-    
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../../assets/fontawesome/all.min.css">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../../../assets/bootstrap/bootstrap.min.css">
-
-        <!-- custom CSS -->
-        <link rel="stylesheet" href="../../../assets/css/1240811.css">
-
-    </head>
-
-    <body>
+<?php include 'includes/header.php'; ?>
         <!-- Navbar -->
         <header class="container-fluid custom-navbar">
             <div class="row align-items-center h-100">

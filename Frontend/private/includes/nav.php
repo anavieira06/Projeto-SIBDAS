@@ -8,13 +8,13 @@ $pagina = $pagina ?? 'normal'; /* Se $pagina já tiver valor continua, se for nu
         <div class="col d-flex align-items-center">
 
             <?php if ($pagina == 'index') : ?>
-                <a href="../private/index.php">
-                    <img src="../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/Projeto SIBDAS/Frontend/private/index.php">
+                    <img src="/Projeto SIBDAS/Frontend/private/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
 
             <?php else : ?>
-                <a href="../../index.php">
-                    <img src="../../../assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/Projeto SIBDAS/Frontend/private/index.php">
+                    <img src="/Projeto SIBDAS/Frontend/private/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
             <?php endif; ?>
 
@@ -35,7 +35,7 @@ $pagina = $pagina ?? 'normal'; /* Se $pagina já tiver valor continua, se for nu
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="../public/login.php">
+                            <a class="dropdown-item" href="/Projeto SIBDAS/Frontend/public/login.php">
                                 <i class="fa-solid fa-right-from-bracket me-2"></i>Sair
                             </a>
                         </li>

@@ -1,5 +1,5 @@
 <!-- Bootstrap JS -->
-        <script src="../assets/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="/Projeto SIBDAS/Frontend/private/assets/bootstrap/bootstrap.bundle.min.js"></script>
 
     </body>
 </html>

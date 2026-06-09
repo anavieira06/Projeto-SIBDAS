@@ -16,17 +16,17 @@ include '../private/includes/header.php';
                         <div class="row">
                             <div class="col">
                                 <!-- Formulário -->
-                                <form action="/ProjetoSIBDAS/Frontend/private/index.php" method="post">
+                                <form action="../private/index.php" method="post">
                                     <div class="mb-3">
                                         <!-- Utilizador -->
                                         <label for="email" class="form-label">Utilizador</label>
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="Insira o seu email">
+                                        <input type="email" name="text_username" id="" class="form-control" placeholder="Insira o seu email">
                                     </div>
 
                                     <div class="mb-3">
                                         <!-- Password -->
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="Insira a sua password">
+                                        <input type="password" name="text_password" id="" class="form-control" placeholder="Insira a sua password">
                                     </div>
 
                                     <div class="mb-3 text-center">

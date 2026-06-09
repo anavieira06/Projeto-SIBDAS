@@ -3,38 +3,11 @@
 <?php
 $pagina = 'normal';
 include '../../includes/nav.php';
+include '../../includes/sidebar.php';
 ?>
 
-        <!-- Sidebar -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title">Menu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-            </div>
-            <div class="offcanvas-body">
-                <a href="../equipamentos/lista.html" class="sidebar-link">
-                    <i class="fas fa-laptop"></i> Equipamentos
-                </a>
-                <a href="../fornecedores/lista_forn.html" class="sidebar-link">
-                    <i class="fas fa-building"></i> Fornecedores
-                </a>
-                <a href="../localizações/lista_loc.html" class="sidebar-link">
-                    <i class="fas fa-location-dot"></i> Localizações
-                </a>
-                <a href="../documentação/lista_doc.html" class="sidebar-link">
-                    <i class="fas fa-folder-open"></i> Documentação
-                </a>
-                <a href="../garantias e contratos/garantias.html" class="sidebar-link">
-                    <i class="fas fa-file-signature"></i> Garantias e Contratos
-                </a>
-                <a href="../dashboard/dashboard.html" class="sidebar-link">
-                    <i class="fas fa-chart-column"></i> Dashboard
-                </a>
-                <a href="../gestão de conteúdos/gestao_cont.html" class="sidebar-link">
-                    <i class="fas fa-globe"></i> Gestão de conteúdos públicos
-                </a>
-            </div>
-        </div>
+       
+
 
         <!-- Conteúdo Principal -->
         <div class="container-fluid p-4">

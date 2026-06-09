@@ -8,13 +8,13 @@ $pagina = $pagina ?? 'normal'; /* Se $pagina já tiver valor continua, se for nu
         <div class="col d-flex align-items-center">
 
             <?php if ($pagina == 'index') : ?>
-                <a href="/Projeto SIBDAS/Frontend/private/index.php">
-                    <img src="/Projeto SIBDAS/Frontend/private/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/ProjetoSIBDAS/Frontend/private/index.php">
+                    <img src="/ProjetoSIBDAS/Frontend/private/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
 
             <?php else : ?>
-                <a href="/Projeto SIBDAS/Frontend/private/index.php">
-                    <img src="/Projeto SIBDAS/Frontend/private/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/ProjetoSIBDAS/Frontend/private/index.php">
+                    <img src="/ProjetoSIBDAS/Frontend/private/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
             <?php endif; ?>
 

@@ -1,4 +1,4 @@
-<?php include 'includes/header.php'; ?>
+<?php include '../../includes/header.php'; ?>
 <?php
 $pagina = 'normal';
 include '../../includes/nav.php';
@@ -124,4 +124,4 @@ include '../../includes/sidebar.php';
             </div>
         </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../../includes/footer.php'; ?>

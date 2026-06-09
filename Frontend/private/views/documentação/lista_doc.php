@@ -1,4 +1,4 @@
-<?php include 'includes/header.php'; ?>
+<?php include '../../includes/header.php'; ?>
 
 <?php
 $pagina = 'normal';
@@ -125,6 +125,6 @@ include '../../includes/sidebar.php';
 
 
 <!-- Custom JS -->
-<script src="/Projeto SIBDAS/Frontend/private/assets/js/1240811.js"></script>
+<script src="/ProjetoSIBDAS/Frontend/private/assets/js/1240811.js"></script>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../../includes/footer.php'; ?>

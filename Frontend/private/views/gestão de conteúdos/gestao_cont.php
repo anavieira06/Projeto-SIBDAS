@@ -1,4 +1,4 @@
-<?php include 'includes/header.php'; ?>
+<?php include '../../includes/header.php'; ?>
 <?php
 $pagina = 'normal';
 include '../../includes/nav.php';
@@ -767,4 +767,4 @@ Atendimento online: 24/7</textarea>
 
 
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../../includes/footer.php'; ?>

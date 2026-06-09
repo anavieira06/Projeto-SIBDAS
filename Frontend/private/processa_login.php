@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/funcoes.php';
 session_start();
 
 // Impede o acesso direto ao script (apenas permite pedidos POST)
@@ -70,28 +71,8 @@ if (!$result['status']) {
 
 // Guarda o nome de utilizador na sessão para identificar o utilizador autenticado
 $_SESSION['utilizador'] = $username;
-// Agora código da área privada
+
+// Redirecionar para a página principal privada
+header('Location: home.php');
+exit;
 ?>
-
-<?php include 'includes/header.php'; ?>
-
-<?php 
-$pagina = 'index';
-include 'includes/nav.php';
-?>
-
-        <div class="container-fluid">
-            <div class="row">
-                <?php include 'includes/sidebar.php'; ?>
-                <!-- Conteúdo Principal -->
-                <main class="col-8 col-md-9 col-lg-10 p-4">
-                    <section class="main-section">
-                        <h2>Bem-vindo a MEDInvenTEC</h2>
-                        <p>Gere equipamentos médicos e muito mais, de forma simples e eficiente. </p>
-                        <p>Utilize o menu lateral para aceder às funcionalidades do sistema.</p>
-                    </section>
-                </main>
-            </div>
-        </div>
-
-<?php include 'includes/footer.php'; ?>

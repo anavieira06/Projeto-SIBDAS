@@ -49,6 +49,28 @@ if (!empty($validation_errors)) {
     header('Location: ../public/login.php'); 
     return;
 }
+
+//###########
+// Simula o resultado do login antes da ligação à base de dados
+// Neste caso, assume-se que o login é válido (status = 1)
+$result['status'] = 1; // 1 = login válido, 0 = inválido
+
+// Verifica se o status retornado indica login inválido
+if (!$result['status']) {
+    // Se o login for inválido, guarda uma mensagem de erro na sessão
+    $_SESSION['server_error'] = 'Login inválido';
+    // Redireciona o utilizador novamente para o formulário de login
+    header('Location: ../public/login.php'); // ou 'login_form.php'
+    // Encerra o script para não continuar o processamento
+    return;
+}
+// Se o status for 1 (válido), o código continuará 
+//############
+
+
+// Guarda o nome de utilizador na sessão para identificar o utilizador autenticado
+$_SESSION['utilizador'] = $username;
+// Agora código da área privada
 ?>
 
 <?php include 'includes/header.php'; ?>

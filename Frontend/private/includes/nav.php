@@ -1,5 +1,19 @@
 <?php
 $pagina = $pagina ?? 'normal'; /* Se $pagina já tiver valor continua, se for null é 'normal' */
+
+// Verifica se a sessão ainda não foi iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Inicia a sessão
+}
+// Verifica se o utilizador está autenticado
+if (!isset($_SESSION['utilizador'])) {
+    // Se não estiver autenticado, redireciona para o formulário de login
+    header('Location: ../public/login.php');
+    exit; // Encerra o script
+}
+// A partir daqui, o utilizador está autenticado
+// Podemos usar livremente os dados da sessão
+$nome = $_SESSION['utilizador'];
 ?>
 
 <!-- Navbar -->
@@ -25,7 +39,7 @@ $pagina = $pagina ?? 'normal'; /* Se $pagina já tiver valor continua, se for nu
                 <div class="dropdown">
                     <button class="dropdown-toggle custom-btn" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-regular fa-user me-2"></i> Utilizador
+                        <i class="fa-regular fa-user me-2"></i> <?= htmlspecialchars($nome) ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>

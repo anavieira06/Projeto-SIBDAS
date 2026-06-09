@@ -875,4 +875,9 @@ body{
     .dashboard-chart {
     max-height: 300px;
 }
+
+/* Página de login */
+.bg-login {
+    background-color: #fff4fb !important;
+}
  

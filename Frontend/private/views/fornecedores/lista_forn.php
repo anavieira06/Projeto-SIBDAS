@@ -153,6 +153,6 @@ include '../../includes/sidebar.php';
         </div>
         
 <!-- Custom JS -->
-<script src="/ProjetoSIBDAS/Frontend/private/assets/js/1240811.js"></script>
+<script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>
 
 <?php include '../../includes/footer.php'; ?>

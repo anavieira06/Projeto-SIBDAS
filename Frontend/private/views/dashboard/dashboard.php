@@ -153,6 +153,6 @@ include '../../includes/sidebar.php';
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Custom JS -->
-<script src="/ProjetoSIBDAS/Frontend/private/assets/js/1240811.js"></script>
+<script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>
 
 <?php include '../../includes/footer.php'; ?>

@@ -10,7 +10,7 @@ require_once __DIR__ . '/../../config/config.php';
         <title><?php echo APP_NAME; ?></title>
 
         <!-- favicon-->
-        <link rel="shortcut icon" href="/ProjetoSIBDAS/Frontend/private/assets/img/Icon.png" type="image/png">
+        <link rel="shortcut icon" href="/ProjetoSIBDAS/Frontend/assets/img/Icon.png" type="image/png">
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,13 +18,14 @@ require_once __DIR__ . '/../../config/config.php';
         <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
 
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/private/assets/fontawesome/all.min.css">
-
-        <!-- Estilos da página -->
-        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/private/assets/css/1240811.css">
+        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/assets/fontawesome/all.min.css">
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/private/assets/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/assets/bootstrap/bootstrap.min.css">
+
+        <!-- Estilos da página -->
+        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/assets/css/1240811.css">
+
     </head>
 
-    <body>
+    <body class="<?= $bodyClass ?? '' ?>">

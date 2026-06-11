@@ -14,7 +14,7 @@ include '../../includes/sidebar.php';
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Localizações</strong>
                 </h2>
-                <a href="novo_loc.html" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/ProjetoSIBDAS/Frontend/private/views/localizações/novo_loc.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Nova localização
                 </a>
             </div>

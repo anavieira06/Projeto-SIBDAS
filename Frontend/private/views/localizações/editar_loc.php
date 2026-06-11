@@ -43,7 +43,7 @@ include '../../includes/sidebar.php';
                                 <div class="row mb-3"> 
                                     <div class="col-12">
                                         <label for="sala_gabinete" class="form-label">Sala / Gabinete <span class="text-danger">*</span></label> 
-                                        <input type="text" class="form-control" id="sala_gabinete" name="sala_gabinete" value="214" >
+                                        <input type="text" class="form-control" id="sala_gabinete" name="sala_gabinete" value="LAB01" >
                                     </div>
                                 </div>                           
 

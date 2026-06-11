@@ -631,12 +631,12 @@ include '../../includes/sidebar.php';
 
                                                 <div class="col-md-3">
                                                     <label for="tipo_contrato" class="form-label">
-                                                        Tipo de contrato <span class="text-danger">*</span>
+                                                        Tipo de contrato 
                                                     </label>
 
                                                     <select class="form-control"
                                                             id="tipo_contrato"
-                                                            name="tipo_contrato" required>
+                                                            name="tipo_contrato">
 
                                                         <option value="" selected disabled>Escolha uma opção</option>
                                                         <option value="Preventivo">Preventivo</option>
@@ -647,12 +647,12 @@ include '../../includes/sidebar.php';
 
                                                 <div class="col-md-3">
                                                     <label for="periodicidade" class="form-label">
-                                                        Periodicidade <span class="text-danger">*</span>
+                                                        Periodicidade 
                                                     </label>
 
                                                     <select class="form-control"
                                                             id="periodicidade"
-                                                            name="periodicidade" required>
+                                                            name="periodicidade">
 
                                                         <option value="" selected disabled>Escolha uma opção</option>
                                                         <option value="Mensal">Mensal</option>

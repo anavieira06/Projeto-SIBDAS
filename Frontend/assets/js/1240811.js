@@ -86,19 +86,19 @@ document.addEventListener("DOMContentLoaded", function () {
 const localizacoes = {
     1: {
         edificio: "Hospital Central",
-        piso: "Piso 2",
+        piso: "2",
         sala: "BO-204",
         servico: "Bloco Operatório"
     },
     2: {
         edificio: "Hospital Central",
-        piso: "Piso 0",
+        piso: "0",
         sala: "URG-12",
         servico: "Urgência"
     },
     3: {
         edificio: "Hospital Central",
-        piso: "Piso 3",
+        piso: "3",
         sala: "UCI-301",
         servico: "Unidade de Cuidados Intensivos"
     }

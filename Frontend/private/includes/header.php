@@ -26,6 +26,13 @@ require_once __DIR__ . '/../../config/config.php';
         <!-- Estilos da página -->
         <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/assets/css/1240811.css">
 
+        <!-- jQuery -->
+        <script src="/ProjetoSIBDAS/Frontend/assets/jQuery/jquery-3.6.0.min.js"></script>
+        
+        <!-- DataTables CSS + JS -->
+        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/assets/datatables/datatables.min.css">
+        <script src="/ProjetoSIBDAS/Frontend/assets/datatables/datatables.min.js"></script>
+
     </head>
 
     <body class="<?= $bodyClass ?? '' ?>">

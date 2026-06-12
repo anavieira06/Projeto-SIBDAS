@@ -883,3 +883,56 @@ body{
     background-color: #fff4fb !important;
 }
  
+/* Tabela dos equipamentos */
+#tabelaEquipamentos {
+    min-width: 1500px;
+    width: 100%;
+}
+
+#tabelaEquipamentos th,
+#tabelaEquipamentos td {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#tabelaEquipamentos tbody tr {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+#tabelaEquipamentos td,
+#tabelaEquipamentos th {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    padding-bottom: 18px;
+}
+
+/* Paginação da listagem de equipamentos */
+.pagination .page-link {
+    color: #680447 !important;
+    background-color: #fff !important;
+    border: 1px solid #e6c6da !important;
+    border-radius: 8px !important;
+    margin: 0 3px !important;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8e8f3 !important;
+    color: #680447 !important;
+    border-color: #680447 !important;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #680447 !important;
+    border-color: #680447 !important;
+    color: #fff !important;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #c9a9bb !important;
+    background-color: #fff4fb !important;
+    border-color: #e6c6da !important;
+}

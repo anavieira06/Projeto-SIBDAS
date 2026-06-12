@@ -14,51 +14,89 @@ $pagina = 'normal';
 include __DIR__ . '/../../includes/nav.php';
 include __DIR__ . '/../../includes/sidebar.php';
 
+// Paginação
+$registosPorPagina = 5;
+
+$paginaAtual = isset($_GET['pagina'])
+    ? (int) $_GET['pagina']
+    : 1;
+
+if ($paginaAtual < 1) {
+    $paginaAtual = 1;
+}
+
+$offset = ($paginaAtual - 1) * $registosPorPagina;
+
 try {
+
     $ligacao = new PDO(
         "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
         MYSQL_USERNAME,
         MYSQL_PASSWORD
     );
+
     $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $resultados = $ligacao->query("
-    SELECT
-        e.*,
-        cg.categoria_grupo AS categoria,
-        es.estado,
-        c.criticidade,
-        l.servico_depart AS localizacao,
-        GROUP_CONCAT(f.nome_empresa SEPARATOR ', ') AS fornecedores
+    $sql = "
+        SELECT
+            e.*,
+            cg.categoria_grupo AS categoria,
+            es.estado,
+            c.criticidade,
+            l.servico_depart AS localizacao,
+            GROUP_CONCAT(f.nome_empresa SEPARATOR '<br>') AS fornecedores
 
-    FROM equipamentos e
+        FROM equipamentos e
 
-    LEFT JOIN categoria_grupo cg
-        ON e.categoria_grupo_id = cg.id
+        LEFT JOIN categoria_grupo cg
+            ON e.categoria_grupo_id = cg.id
 
-    LEFT JOIN estado es
-        ON e.estado_id = es.id
+        LEFT JOIN estado es
+            ON e.estado_id = es.id
 
-    LEFT JOIN criticidade c
-        ON e.criticidade_id = c.id
+        LEFT JOIN criticidade c
+            ON e.criticidade_id = c.id
 
-    LEFT JOIN localizacoes l
-        ON e.localizacao_id = l.id
+        LEFT JOIN localizacoes l
+            ON e.localizacao_id = l.id
 
-    LEFT JOIN equipamento_fornecedor ef
-        ON e.id = ef.equipamento_id
+        LEFT JOIN equipamento_fornecedor ef
+            ON e.id = ef.equipamento_id
 
-    LEFT JOIN fornecedores f
-        ON ef.fornecedor_id = f.id
+        LEFT JOIN fornecedores f
+            ON ef.fornecedor_id = f.id
 
-    GROUP BY e.id
-")->fetchAll(PDO::FETCH_OBJ);
-    $erro ='';
+        GROUP BY e.id
+
+        LIMIT :limite OFFSET :offset
+    ";
+
+    $stmt = $ligacao->prepare($sql);
+
+    $stmt->bindValue(':limite', $registosPorPagina, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    // Contar total de equipamentos
+    $totalRegistos = $ligacao
+        ->query("SELECT COUNT(*) AS total FROM equipamentos")
+        ->fetch(PDO::FETCH_OBJ)
+        ->total;
+
+    $totalPaginas = ceil($totalRegistos / $registosPorPagina);
+
+    $erro = '';
 
 } catch (PDOException $err) {
+
     $erro = "Aconteceu um erro na ligação.";
     $resultados = [];
+    $totalPaginas = 0;
 }
+
 // Fecha a ligação
 $ligacao = null;
 ?>
@@ -181,68 +219,76 @@ $ligacao = null;
                     <p class="text-muted">Consulte a tabela abaixo com os equipamentos registados.</p>
 
                 <div class="card shadow rounded-4 border-0 p-3">
+                    <div class="alert border-0 shadow-sm py-2 px-3 mb-3"
+                        style="background-color:#f8e8f3; color:#680447; width:fit-content;">
+
+                        <i class="fa-solid fa-laptop me-2"></i>
+
+                        <strong><?= $totalRegistos ?></strong>
+                        equipamentos registados
+
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered align-middle text-center">
+                        <table id="tabelaEquipamentos" class="table table-bordered table-hover align-middle text-center w-100">
                                 <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
                                     <tr>
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Código interno
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th>
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Designação
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th>
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Categoria / Grupo
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th>
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Marca
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th> 
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Modelo
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th> 
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Nº de série
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th>
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Fornecedor
-                                                <i class="fa-solid fa-sort ms-1"></i>
                                             </a>
                                         </th>
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Serviço / Departamento
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th>
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Estado
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th> 
                                         <th>
                                             <a href="#" class="text-decoration-none" style="color: #fff;">
                                                 Criticidade
-                                                <i class="fa-solid fa-sort ms-1"></i>
+                                                
                                             </a>
                                         </th>
                                         <th class="text-center">Ações</th>
@@ -287,18 +333,55 @@ $ligacao = null;
                                 </tbody>
                         </table>
                     </div>
-                    <div class="alert border-0 shadow-sm py-2 px-3 mb-3"
-                        style="background-color:#f8e8f3; color:#680447; width:fit-content;">
-
-                        <i class="fa-solid fa-laptop me-2"></i>
-
-                        <strong><?= count($resultados) ?></strong>
-                        equipamentos registados
-
-                    </div>
                 <?php endif; ?>
             <?php endif; ?>
         </div>  
+        <?php
+        $inicio = max(1, $paginaAtual - 2);
+        $fim = min($totalPaginas, $paginaAtual + 2);
+        ?>
+
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+
+                <?php if ($paginaAtual > 1) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?pagina=1#tabelaEquipamentos">
+                            Primeira
+                        </a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" href="?pagina=<?= $paginaAtual - 1 ?>#tabelaEquipamentos">
+                            Anterior
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php for ($i = $inicio; $i <= $fim; $i++) : ?>
+                    <li class="page-item <?= ($i == $paginaAtual) ? 'active' : '' ?>">
+                        <a class="page-link" href="?pagina=<?= $i ?>#tabelaEquipamentos">
+                            <?= $i ?>
+                        </a>
+                    </li>
+                <?php endfor; ?>
+
+                <?php if ($paginaAtual < $totalPaginas) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?pagina=<?= $paginaAtual + 1 ?>#tabelaEquipamentos">
+                            Seguinte
+                        </a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" href="?pagina=<?= $totalPaginas ?>#tabelaEquipamentos">
+                            Última
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+            </ul>
+        </nav>
         <div class="modal fade" id="modalEliminar" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
                 <div class="modal-content rounded-4">
@@ -340,5 +423,19 @@ $ligacao = null;
 
 <!-- Custom JS -->
 <script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>
+
+<!-- Datatables -->
+<script>
+    // tradução para português
+    $(document).ready(function() {
+        $('#tabelaEquipamentos').DataTable({
+            ordering: true,
+            searching: false,
+            paging: false,
+            info: false,
+            lengthChange: false
+        });
+    });
+</script>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

@@ -769,27 +769,29 @@ body{
 
 /* Criticidade dos equipamentos */
 .criticidade-badge {
+    display: inline-block;
+    text-align: center;
     padding: 6px 10px;
     border-radius: 12px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.85rem;
     color: white;
 }
 
 .criticidade-baixa {
-    background-color: #28a745;
+    background-color: #81da96;
 }
 
 .criticidade-media {
-    background-color: #ffc107;
-    color: black;
+    background-color: #f1ca53;
 }
 
 .criticidade-alta {
-    background-color: #fd7e14;
+    background-color: #ffa55b;
 }
 
-.criticidade-suporte-vida {
-    background-color: #dc3545;
+.criticidade-suporte-de-vida {
+    background-color: #d34d5a;
 }
 
 /* Separadores dos detalhes do equipamento */

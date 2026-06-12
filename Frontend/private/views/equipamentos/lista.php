@@ -11,8 +11,56 @@ include '../../includes/header.php';
 
 <?php
 $pagina = 'normal';
-include '../../includes/nav.php';
-include '../../includes/sidebar.php';
+include __DIR__ . '/../../includes/nav.php';
+include __DIR__ . '/../../includes/sidebar.php';
+
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $resultados = $ligacao->query("
+    SELECT
+        e.*,
+        cg.categoria_grupo AS categoria,
+        es.estado,
+        c.criticidade,
+        l.servico_depart AS localizacao,
+        GROUP_CONCAT(f.nome_empresa SEPARATOR ', ') AS fornecedores
+
+    FROM equipamentos e
+
+    LEFT JOIN categoria_grupo cg
+        ON e.categoria_grupo_id = cg.id
+
+    LEFT JOIN estado es
+        ON e.estado_id = es.id
+
+    LEFT JOIN criticidade c
+        ON e.criticidade_id = c.id
+
+    LEFT JOIN localizacoes l
+        ON e.localizacao_id = l.id
+
+    LEFT JOIN equipamento_fornecedor ef
+        ON e.id = ef.equipamento_id
+
+    LEFT JOIN fornecedores f
+        ON ef.fornecedor_id = f.id
+
+    GROUP BY e.id
+")->fetchAll(PDO::FETCH_OBJ);
+    $erro ='';
+
+} catch (PDOException $err) {
+    $erro = "Aconteceu um erro na ligação.";
+    $resultados = [];
+}
+// Fecha a ligação
+$ligacao = null;
 ?>
         
 
@@ -123,99 +171,125 @@ include '../../includes/sidebar.php';
                 </div>
             </div>
             
-            <p class="text-muted">Consulte a tabela abaixo com os equipamentos registados.</p>
-            <div class="card shadow rounded-4 border-0 p-3">
-                <div class="table-responsive">
-                    <table class="table table-bordered align-middle text-center">
-                        <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
-                            <tr>
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Código interno
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Designação
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Categoria / Grupo
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Marca
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th> 
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Modelo
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th> 
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Nº de série
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Fornecedor
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Serviço / Departamento
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Estado
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th> 
-                                <th>
-                                    <a href="#" class="text-decoration-none" style="color: #fff;">
-                                        Criticidade
-                                        <i class="fa-solid fa-sort ms-1"></i>
-                                    </a>
-                                </th>
-                                <th class="text-center">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>[Código interno]</td> 
-                                <td>[Designação]</td> 
-                                <td>[Categoria / Grupo]</td> 
-                                <td>[Marca]</td> 
-                                <td>[Modelo]</td> 
-                                <td>[Nº de série]</td> 
-                                <td>[NIF fornecedor]</td>  
-                                <td>[Serviço/Departamento]</td> 
-                                <td>[Estado]</td> 
-                                <td>[Criticidade]</td> 
-                                <td class="text-center align-middle">
-                                    <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/detalhes.php"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
-                                        <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <?php if (!empty($erro)) : ?>
+                <p class="text-center text-danger"><?= $erro ?></p>
+
+            <?php else : ?>
+                <?php if (count($resultados) == 0) : ?>
+                    <p class="text-muted">Não existem equipamentos registados.</p>
+                <?php else : ?>
+                    <p class="text-muted">Consulte a tabela abaixo com os equipamentos registados.</p>
+
+                <div class="card shadow rounded-4 border-0 p-3">
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle text-center">
+                                <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
+                                    <tr>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Código interno
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Designação
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Categoria / Grupo
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Marca
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th> 
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Modelo
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th> 
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Nº de série
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Fornecedor
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Serviço / Departamento
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Estado
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th> 
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Criticidade
+                                                <i class="fa-solid fa-sort ms-1"></i>
+                                            </a>
+                                        </th>
+                                        <th class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($resultados as $equipamento) : ?>
+
+                                        <tr>
+                                            <td><?= $equipamento->codigo_inventario ?></td>
+                                            <td><?= $equipamento->designacao_equipamento ?></td>
+                                            <td><?= $equipamento->categoria ?></td>
+                                            <td><?= $equipamento->marca ?></td>
+                                            <td><?= $equipamento->modelo ?></td>
+                                            <td><?= $equipamento->numero_serie ?></td>
+                                            <td><?= $equipamento->fornecedores ?></td>
+                                            <td><?= $equipamento->localizacao ?></td>
+                                            <td><?= $equipamento->estado ?></td>
+
+                                            <?php
+                                            $criticidadeClasse = strtolower($equipamento->criticidade);
+                                            $criticidadeClasse = str_replace(' ', '-', $criticidadeClasse);
+                                            $criticidadeClasse = str_replace('é', 'e', $criticidadeClasse);
+                                            ?>
+
+                                            <td>
+                                                <span class="criticidade-badge criticidade-<?= $criticidadeClasse ?>">
+                                                    <?= $equipamento->criticidade ?>
+                                                </span>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                                    <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/detalhes.php?id=<?= $equipamento->id ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                                    <span class="mx-2 text-muted">|</span>
+                                                    <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php?id=<?= $equipamento->id ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                                    <span class="mx-2 text-muted">|</span>
+                                                    <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>  
         <div class="modal fade" id="modalEliminar" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
@@ -259,4 +333,4 @@ include '../../includes/sidebar.php';
 <!-- Custom JS -->
 <script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>
 
-<?php include '../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>

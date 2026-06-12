@@ -181,19 +181,20 @@ include '../../includes/sidebar.php';
                                                     <option value="" selected disabled>Escolha uma opção</option>
                                                     <option value="Ativo">Ativo</option>
                                                     <option value="Inativo">Inativo</option>
-                                                    <option value="Calibração">Em calibração</option>
-                                                    <option value="Quarentena">Em quarentena</option>
+                                                    <option value="Manutenção">Em Manutenção</option>
+                                                    <option value="Calibração">Em Calibração</option>
+                                                    <option value="Quarentena">Em Quarentena</option>
                                                     <option value="Abatido">Abatido</option>
                                                 </select>
                                             </div>   
                                             <div class="col-md-4">
                                                 <label for="criticidade" class="form-label">Criticidade <span class="text-danger">*</span></label>
-                                                <select class="form-control" id="criticidade" name="criticidade" required> 
+                                                <select class="form-control" id="criticidade" name="criticidade_id" required> 
                                                     <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="Baixa">Baixa</option>
-                                                    <option value="Média">Média</option>
-                                                    <option value="Alta">Alta</option>
-                                                    <option value="Suporte de vida">Suporte de vida</option>
+                                                    <option value="1">Baixa</option>
+                                                    <option value="2">Média</option>
+                                                    <option value="3">Alta</option>
+                                                    <option value="4">Suporte de Vida</option>
                                                 </select>
                                             </div> 
                                         </div>

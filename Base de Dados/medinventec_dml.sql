@@ -29,7 +29,7 @@ INSERT INTO criticidade (criticidade) VALUES
 ('Baixa'),
 ('Média'),
 ('Alta'),
-('Suporte de Vida');
+('Suporte de vida');
 
 INSERT INTO tipo_fornecedor (tipo_fornecedor) VALUES
 ('Fabricante'),
@@ -314,7 +314,7 @@ INSERT INTO equipamentos
  categoria_grupo_id, estado_id, criticidade_id, tipo_entrada_id,
  localizacao_id, garantia_contrato_id)
 VALUES
-('EQ0001','Monitor multiparamétrico','Philips','IntelliVue MX450','PH-MX450-001','Philips Healthcare Portugal','2023-01-15',2022,8500.00,'Equipamento em utilização regular na UCI.',1,1,3,1,3,1),
+('EQ0001','Monitor multiparamétrico','Philips','IntelliVue MX450','PH-MX450-001','Philips Healthcare Portugal','2023-01-15',2022,8500.00,'Equipamento em utilização regular na UCI.',1,1,1,1,3,1),
 
 ('EQ0002','Ventilador pulmonar','Dräger','Evita V500','DR-EV500-002','Dräger','2023-02-10',2022,18500.00,'Equipamento crítico para suporte ventilatório.',2,1,4,1,3,2),
 

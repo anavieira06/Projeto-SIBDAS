@@ -27,6 +27,14 @@ if ($paginaAtual < 1) {
 
 $offset = ($paginaAtual - 1) * $registosPorPagina;
 
+// Pesquisa e filtros
+$pesquisa          = isset($_GET['pesquisa']) ? trim($_GET['pesquisa']) : '';
+$filtroEstado      = isset($_GET['estado']) ? (int) $_GET['estado'] : 0;
+$filtroCategoria   = isset($_GET['categoria']) ? (int) $_GET['categoria'] : 0;
+$filtroCriticidade = isset($_GET['criticidade']) ? (int) $_GET['criticidade'] : 0;
+$filtroLocalizacao = isset($_GET['localizacao']) ? (int) $_GET['localizacao'] : 0;
+$filtroFornecedor  = isset($_GET['fornecedor']) ? (int) $_GET['fornecedor'] : 0;
+
 try {
 
     $ligacao = new PDO(
@@ -36,6 +44,49 @@ try {
     );
 
     $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Construção dinâmica das condições WHERE
+    $condicoes = [];
+    $parametros = [];
+
+    if ($pesquisa !== '') {
+        $condicoes[] = "(e.codigo_inventario LIKE :pesquisa
+            OR e.designacao_equipamento LIKE :pesquisa
+            OR e.marca LIKE :pesquisa
+            OR e.modelo LIKE :pesquisa
+            OR e.numero_serie LIKE :pesquisa)";
+        $parametros[':pesquisa'] = '%' . $pesquisa . '%';
+    }
+
+    if ($filtroEstado > 0) {
+        $condicoes[] = "e.estado_id = :estado";
+        $parametros[':estado'] = $filtroEstado;
+    }
+
+    if ($filtroCategoria > 0) {
+        $condicoes[] = "e.categoria_grupo_id = :categoria";
+        $parametros[':categoria'] = $filtroCategoria;
+    }
+
+    if ($filtroCriticidade > 0) {
+        $condicoes[] = "e.criticidade_id = :criticidade";
+        $parametros[':criticidade'] = $filtroCriticidade;
+    }
+
+    if ($filtroLocalizacao > 0) {
+        $condicoes[] = "e.localizacao_id = :localizacao";
+        $parametros[':localizacao'] = $filtroLocalizacao;
+    }
+
+    if ($filtroFornecedor > 0) {
+        $condicoes[] = "ef.fornecedor_id = :fornecedor";
+        $parametros[':fornecedor'] = $filtroFornecedor;
+    }
+
+    $whereSql = '';
+    if (!empty($condicoes)) {
+        $whereSql = ' WHERE ' . implode(' AND ', $condicoes);
+    }
 
     $sql = "
         SELECT
@@ -66,12 +117,22 @@ try {
         LEFT JOIN fornecedores f
             ON ef.fornecedor_id = f.id
 
+        " . $whereSql . "
+
         GROUP BY e.id
 
         LIMIT :limite OFFSET :offset
     ";
 
     $stmt = $ligacao->prepare($sql);
+
+    foreach ($parametros as $chave => $valor) {
+        if ($chave === ':pesquisa') {
+            $stmt->bindValue($chave, $valor, PDO::PARAM_STR);
+        } else {
+            $stmt->bindValue($chave, $valor, PDO::PARAM_INT);
+        }
+    }
 
     $stmt->bindValue(':limite', $registosPorPagina, PDO::PARAM_INT);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
@@ -80,13 +141,37 @@ try {
 
     $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-    // Contar total de equipamentos
-    $totalRegistos = $ligacao
-        ->query("SELECT COUNT(*) AS total FROM equipamentos")
-        ->fetch(PDO::FETCH_OBJ)
-        ->total;
+    // Contar total de equipamentos (respeitando os filtros)
+    $sqlTotal = "
+        SELECT COUNT(DISTINCT e.id) AS total
+        FROM equipamentos e
+        LEFT JOIN equipamento_fornecedor ef
+            ON e.id = ef.equipamento_id
+        " . $whereSql . "
+    ";
+
+    $stmtTotal = $ligacao->prepare($sqlTotal);
+
+    foreach ($parametros as $chave => $valor) {
+        if ($chave === ':pesquisa') {
+            $stmtTotal->bindValue($chave, $valor, PDO::PARAM_STR);
+        } else {
+            $stmtTotal->bindValue($chave, $valor, PDO::PARAM_INT);
+        }
+    }
+
+    $stmtTotal->execute();
+
+    $totalRegistos = $stmtTotal->fetch(PDO::FETCH_OBJ)->total;
 
     $totalPaginas = ceil($totalRegistos / $registosPorPagina);
+
+    // Listas para os selects de filtros
+    $listaEstados     = $ligacao->query("SELECT id, estado FROM estado ORDER BY estado")->fetchAll(PDO::FETCH_OBJ);
+    $listaCategorias  = $ligacao->query("SELECT id, categoria_grupo FROM categoria_grupo ORDER BY categoria_grupo")->fetchAll(PDO::FETCH_OBJ);
+    $listaCriticidade = $ligacao->query("SELECT id, criticidade FROM criticidade ORDER BY id")->fetchAll(PDO::FETCH_OBJ);
+    $listaLocalizacoes = $ligacao->query("SELECT id, servico_depart FROM localizacoes ORDER BY servico_depart")->fetchAll(PDO::FETCH_OBJ);
+    $listaFornecedores = $ligacao->query("SELECT id, nome_empresa FROM fornecedores ORDER BY nome_empresa")->fetchAll(PDO::FETCH_OBJ);
 
     $erro = '';
 
@@ -95,7 +180,14 @@ try {
     $erro = "Aconteceu um erro na ligação.";
     $resultados = [];
     $totalPaginas = 0;
+    $totalRegistos = 0;
+    $listaEstados = [];
+    $listaCategorias = [];
+    $listaCriticidade = [];
+    $listaLocalizacoes = [];
+    $listaFornecedores = [];
 }
+
 
 // Fecha a ligação
 $ligacao = null;
@@ -124,6 +216,7 @@ $ligacao = null;
 
                 <div class="card-body" style="background-color: #fff4fb;">
                     <!-- Pesquisa -->
+                    <form method="GET" action="" id="formFiltros">
                     <div class="row mb-3">
                         <div class="col-12">
                             <div class="input-group input-group-lg">
@@ -131,7 +224,10 @@ $ligacao = null;
                                     <i class="fa-solid fa-magnifying-glass" style="color: #680447;"></i>
                                 </span>
                                 <input type="text"
+                                    name="pesquisa"
+                                    id="campoPesquisa"
                                     class="form-control"
+                                    value="<?= htmlspecialchars($pesquisa) ?>"
                                     placeholder="Código, designação, marca, modelo ...">
                             </div>
                         </div>
@@ -145,67 +241,76 @@ $ligacao = null;
                         <div class="row g-3 mb-4">
                                 <div class="col-md-3">
                                     <label class="form-label fw-semibold">Estado</label>
-                                    <select class="form-select">
-                                        <option selected>Todos</option>
-                                        <option>Ativo</option>
-                                        <option>Inativo</option>
-                                        <option>Em calibração</option>
-                                        <option>Em quarentena</option>
-                                        <option>Abatido</option>
+                                    <select class="form-select" name="estado">
+                                        <option value="0">Todos</option>
+                                        <?php foreach ($listaEstados as $opcao) : ?>
+                                            <option value="<?= $opcao->id ?>" <?= ($filtroEstado == $opcao->id) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($opcao->estado) ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label class="form-label fw-semibold">Categoria</label>
-                                    <select class="form-select">
-                                        <option selected>Todas</option>
-                                        <option>Monitorização</option>
-                                        <option>Diagnóstico</option>
-                                        <option>Suporte de vida</option>
-                                        <option>Terapia</option>
-                                        <option>Laboratório</option>
-                                        <option>Esterilização</option>
-                                        <option>Reabilitação</option>
-
+                                    <select class="form-select" name="categoria">
+                                        <option value="0">Todas</option>
+                                        <?php foreach ($listaCategorias as $opcao) : ?>
+                                            <option value="<?= $opcao->id ?>" <?= ($filtroCategoria == $opcao->id) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($opcao->categoria_grupo) ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-2">
                                     <label class="form-label fw-semibold">Criticidade</label>
-                                    <select class="form-select">
-                                        <option selected>Todas</option>
-                                        <option>Baixa</option>
-                                        <option>Média</option>
-                                        <option>Alta</option>
-                                        <option>Suporte de vida</option>
+                                    <select class="form-select" name="criticidade">
+                                        <option value="0">Todas</option>
+                                        <?php foreach ($listaCriticidade as $opcao) : ?>
+                                            <option value="<?= $opcao->id ?>" <?= ($filtroCriticidade == $opcao->id) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($opcao->criticidade) ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-2">
                                     <label class="form-label fw-semibold">Serviço / Departamento</label>
-                                    <select class="form-select">
-                                        <option selected>Todos</option>
+                                    <select class="form-select" name="localizacao">
+                                        <option value="0">Todos</option>
+                                        <?php foreach ($listaLocalizacoes as $opcao) : ?>
+                                            <option value="<?= $opcao->id ?>" <?= ($filtroLocalizacao == $opcao->id) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($opcao->servico_depart) ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-2">
                                     <label class="form-label fw-semibold">Fornecedor</label>
-                                    <select class="form-select">
-                                        <option selected>Todos</option>
+                                    <select class="form-select" name="fornecedor">
+                                        <option value="0">Todos</option>
+                                        <?php foreach ($listaFornecedores as $opcao) : ?>
+                                            <option value="<?= $opcao->id ?>" <?= ($filtroFornecedor == $opcao->id) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($opcao->nome_empresa) ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end gap-2 mt-4">
-                                <button type="reset" class="btn btn-outline-secondary">
+                                <a href="?" class="btn btn-outline-secondary">
                                     <i class="fa-solid fa-rotate-left me-1"></i> Limpar
-                                </button>
+                                </a>
 
-                                <button type="button" class="btn text-white" style="background-color:#680447;">
+                                <button type="submit" class="btn text-white" style="background-color:#680447;">
                                     <i class="fa-solid fa-magnifying-glass me-1"></i> Aplicar filtros
                                 </button>
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
             
@@ -224,7 +329,7 @@ $ligacao = null;
 
                         <i class="fa-solid fa-laptop me-2"></i>
 
-                        <strong><?= $totalRegistos ?></strong>
+                        <strong><?= count($resultados) ?></strong>
                         equipamentos registados
 
                     </div>

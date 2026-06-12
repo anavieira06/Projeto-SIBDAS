@@ -107,7 +107,7 @@ include '../../includes/sidebar.php';
 
                                 <!-- Botões -->
                                 <div class="d-flex justify-content-end gap-2 mb-4">
-                                    <a href="lista_forn.html" class="btn btn-outline-secondary">
+                                    <a href="/ProjetoSIBDAS/Frontend/private/views/fornecedores/lista_forn.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar 
                                     </a>
                                     <button type="submit" class="btn btn-guardar">

@@ -109,8 +109,8 @@ include '../../includes/sidebar.php';
                                 <td>[Sala / Gabinete]</td> 
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="detalhes_loc.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="editar_loc.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/localizações/detalhes_loc.php"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/localizações/editar_loc.php" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                         <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
                                     </div>
                                 </td>

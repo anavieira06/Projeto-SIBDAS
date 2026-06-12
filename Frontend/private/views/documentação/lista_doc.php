@@ -112,8 +112,8 @@ include '../../includes/sidebar.php';
                                 <td>[Código]</td> 
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="detalhes_doc.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="../equipamentos/editar.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/documentação/detalhes_doc.php"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                     </div>
                                 </td>
                             </tr>

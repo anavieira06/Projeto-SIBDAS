@@ -14,7 +14,7 @@ include '../../includes/sidebar.php';
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Fornecedores</strong>
                 </h2>
-                <a href="novo_forn.html" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/ProjetoSIBDAS/Frontend/private/views/fornecedores/novo_forn.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo fornecedor
                 </a>
             </div>
@@ -104,8 +104,8 @@ include '../../includes/sidebar.php';
                                 <td>[Tipo fornecedor]</td> 
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="detalhes_forn.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="editar_forn.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/fornecedores/detalhes_forn.php"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/fornecedores/editar_forn.php" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                         <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
                                     </div>
                                 </td>

@@ -49,7 +49,7 @@ include '../../includes/sidebar.php';
 
                                 <!-- Botões -->
                                 <div class="d-flex justify-content-end gap-2 mb-4">
-                                    <a href="lista_loc.html" class="btn btn-outline-secondary">
+                                    <a href="/ProjetoSIBDAS/Frontend/private/views/localizações/lista_loc.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar 
                                     </a>
                                     <button type="submit" class="btn btn-guardar">

@@ -95,7 +95,7 @@ include '../../includes/sidebar.php';
 
             <!-- Botoão -->
             <div class="d-flex justify-content-end gap-2 mt-4">
-                <a href="lista_doc.html" class="btn btn-outline-secondary">
+                <a href="/ProjetoSIBDAS/Frontend/private/views/garantias e contratos/garantias.php" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Voltar
                 </a>
             </div>

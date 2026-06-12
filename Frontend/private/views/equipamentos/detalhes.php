@@ -498,7 +498,7 @@ include '../../includes/sidebar.php';
 
             <!-- Botoão -->
             <div class="d-flex justify-content-end gap-2 mt-4 me-3 mb-3">
-                <a href="lista.html" class="btn btn-outline-secondary">
+                <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Voltar
                 </a>
             </div>

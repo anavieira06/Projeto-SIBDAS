@@ -14,7 +14,7 @@ include '../../includes/sidebar.php';
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Equipamentos</strong>
                 </h2>
-                <a href="novo.html" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/novo.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo equipamento
                 </a>
             </div>
@@ -197,8 +197,8 @@ include '../../includes/sidebar.php';
                                 <td>[Criticidade]</td> 
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="detalhes.html"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
-                                        <a href="editar.html" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/detalhes.php"  class="btn-sm btn-acao me-3"><i class="fa-solid fa-eye me-2"></i> Consultar</a>
+                                        <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php" class="btn-sm btn-acao me-3"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
                                         <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can me-2"></i> Eliminar</a>
                                     </div>
                                 </td>

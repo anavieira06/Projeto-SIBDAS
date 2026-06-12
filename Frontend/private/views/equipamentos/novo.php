@@ -699,7 +699,7 @@ include '../../includes/sidebar.php';
                                                 </button>
 
                                                 <div>
-                                                    <a href="lista.html" class="btn btn-outline-secondary mb-4">
+                                                    <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php" class="btn btn-outline-secondary mb-4">
                                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar
                                                     </a>
 

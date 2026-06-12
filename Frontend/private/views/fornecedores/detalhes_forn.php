@@ -127,7 +127,7 @@ include '../../includes/sidebar.php';
 
             <!-- Botoão -->
             <div class="d-flex justify-content-end gap-2 mt-4">
-                <a href="lista_forn.html" class="btn btn-outline-secondary">
+                <a href="/ProjetoSIBDAS/Frontend/private/views/fornecedores/lista_forn.php" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Voltar
                 </a>
             </div>

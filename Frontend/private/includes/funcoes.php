@@ -14,7 +14,7 @@ function check_session()
 }
 
 // Redireciona automaticamente se não houver sessão iniciada
-function redirect_if_not_logged($redirect_to = '/public/login.php')
+function redirect_if_not_logged($redirect_to = '/Frontend/public/login.php')
 {
     start_session();
     if (!check_session()) {
@@ -23,7 +23,7 @@ function redirect_if_not_logged($redirect_to = '/public/login.php')
     }
 }
 
-function logout_and_redirect($redirect_to = '/public/login.php')
+function logout_and_redirect($redirect_to = '/Frontend/public/login.php')
 {
     start_session();
     session_unset();

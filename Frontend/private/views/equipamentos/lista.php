@@ -285,8 +285,16 @@ $ligacao = null;
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
-                            </table>
-                        </div>
+                        </table>
+                    </div>
+                    <div class="alert border-0 shadow-sm py-2 px-3 mb-3"
+                        style="background-color:#f8e8f3; color:#680447; width:fit-content;">
+
+                        <i class="fa-solid fa-laptop me-2"></i>
+
+                        <strong><?= count($resultados) ?></strong>
+                        equipamentos registados
+
                     </div>
                 <?php endif; ?>
             <?php endif; ?>

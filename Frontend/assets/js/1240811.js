@@ -67,28 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* Localizações nos documentos */
-// Base de dados local das localizações
-const localizacoes = {
-    1: {
-        edificio: "Hospital Central",
-        piso: "2",
-        sala: "BO-204",
-        servico: "Bloco Operatório"
-    },
-    2: {
-        edificio: "Hospital Central",
-        piso: "0",
-        sala: "URG-12",
-        servico: "Urgência"
-    },
-    3: {
-        edificio: "Hospital Central",
-        piso: "3",
-        sala: "UCI-301",
-        servico: "Unidade de Cuidados Intensivos"
-    }
-};
-
 function preencherLocalizacao() {
     const id = document.getElementById('selectLocalizacao').value;
     const painel = document.getElementById('infoLocalizacaoPainel');
@@ -116,42 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* Fornecedores nos equipamentos */
-// Base de dados local dos fornecedores
-const fornecedores = {
-    1: {
-        nome: "Philips Healthcare Portugal",
-        nif: "500 123 456",
-        morada: "Av. da Liberdade, 110, Lisboa",
-        tipo: "Fabricante",
-        telefone: "+351 210 000 000",
-        email: "geral@philips.pt",
-        website: "www.philips.pt",
-        contacto: "João Ferreira",
-        telContacto: "+351 962 000 000"
-    },
-    2: {
-        nome: "Dräger Portugal",
-        nif: "500 234 567",
-        morada: "Rua do Ouro, 55, Porto",
-        tipo: "Fabricante",
-        telefone: "+351 220 000 000",
-        email: "geral@draeger.pt",
-        website: "www.draeger.com/pt",
-        contacto: "Ana Sousa",
-        telContacto: "+351 933 000 000"
-    },
-    3: {
-        nome: "B. Braun Portugal",
-        nif: "500 345 678",
-        morada: "Av. do Brasil, 23, Lisboa",
-        tipo: "Distribuidor",
-        telefone: "+351 210 111 000",
-        email: "geral@bbraun.pt",
-        website: "www.bbraun.pt",
-        contacto: "Carlos Mendes",
-        telContacto: "+351 912 000 000"
-    }
-};
 
 // Como já existe Fornecedor 1 no HTML
 let contadorFornecedores = 1;
@@ -212,9 +154,7 @@ function adicionarBlocoFornecedor() {
                         onchange="preencherFornecedorBloco(this, ${contadorFornecedores})"
                         required>
                     <option value="" selected disabled>Escolha um fornecedor</option>
-                    <option value="1">Philips Healthcare Portugal</option>
-                    <option value="2">Dräger Portugal</option>
-                    <option value="3">B. Braun Portugal</option>
+                    ${Object.entries(fornecedores).map(([id, f]) => `<option value="${id}">${f.nome}</option>`).join('')}
                 </select>
             </div>
         </div>

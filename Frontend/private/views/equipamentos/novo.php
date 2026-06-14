@@ -7,6 +7,39 @@
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
 
+// Valores por defeito (para quando a página carrega pela primeira vez)
+$erros           = [];
+$codigo          = '';
+$categoria       = '';
+$designacao      = '';
+$marca           = '';
+$modelo          = '';
+$numero_serie    = '';
+$fabricante      = '';
+$data_aquisicao  = '';
+$ano_fabrico     = '';
+$custo_aquisicao = '';
+$tipo_entrada    = '';
+$estado          = '';
+$criticidade     = '';
+$observacoes     = '';
+$fornecedor      = [];
+$localizacao     = '';
+$tipo_doc        = [];
+$nome_doc        = [];
+$data_doc        = [];
+$data_validade   = [];
+$fornecedor_doc  = [];
+$ficheiro        = [];
+$data_inicio     = '';
+$data_fim        = '';
+$contrato        = '';
+$tipo_contrato   = '';
+$periodicidade   = '';
+$entidade        = '';
+$obs_garantia    = '';
+$docs            = [];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 1. Recolher dados
@@ -39,6 +72,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $periodicidade   = $_POST["periodicidade"]          ?? "";
     $entidade        = $_POST["entidade_responsavel"]   ?? "";
     $obs_garantia    = $_POST["observacoes_garant"]     ?? "";
+
+    $docs = [];
+        if (!empty($tipo_doc)) {
+            foreach ($tipo_doc as $i => $t) {
+                $docs[] = [
+                    'tipo'          => $t,
+                    'nome'          => $nome_doc[$i]      ?? '',
+                    'data'          => $data_doc[$i]       ?? '',
+                    'data_validade' => $data_validade[$i]  ?? '',
+                    'fornecedor'    => $fornecedor_doc[$i] ?? '',
+                ];
+            }
+        }
 
     // 2. Imprimir os dados recebidos (para teste)
     echo "<p><strong>Dados recebidos:</strong>
@@ -244,21 +290,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 4. Se não houver erros, guardar na base de dados
 }
     
+// Buscar fornecedores da BD para o select
+// Buscar fornecedores e localizações da BD
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    $listaFornecedores = $ligacao->query("
+        SELECT f.id, f.nome_empresa, f.nif, f.morada, f.numero_telefonico,
+               f.email, f.website, f.pessoa_contacto, f.tel_pessoa_contacto,
+               tf.tipo_fornecedor
+        FROM fornecedores f
+        LEFT JOIN tipo_fornecedor tf ON f.tipo_fornecedor_id = tf.id
+        ORDER BY f.nome_empresa
+    ")->fetchAll(PDO::FETCH_OBJ);
 
-  
+    $listaLocalizacoes = $ligacao->query("
+        SELECT id, servico_depart, edificio, piso, sala_gabinete
+        FROM localizacoes
+        ORDER BY servico_depart
+    ")->fetchAll(PDO::FETCH_OBJ);
 
-    
-
-    
-    
-
-   
-
-  
-
-    
-
+} catch (PDOException $err) {
+    $listaFornecedores = [];
+    $listaLocalizacoes = [];
+}
 
 include '../../includes/header.php'; 
 ?>
@@ -342,7 +402,7 @@ include '../../includes/sidebar.php';
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="codigo_inventario" class="form-label">Código interno <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: EQ0001" required>
+                                                <input type="text" class="form-control" id="codigo_inventario" name="codigo_inventario" placeholder="Ex: EQ0001" value="<?= htmlspecialchars($codigo) ?>" required>
                                             </div>
                                         </div>
 
@@ -351,19 +411,19 @@ include '../../includes/sidebar.php';
                                             <div class="col-md-6">
                                                 <label for="categoria_grupo" class="form-label">Categoria / Grupo <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="categoria_grupo" name="categoria_grupo" required> 
-                                                    <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="Monitorização">Monitorização</option>
-                                                    <option value="Suporte de vida">Suporte de vida</option>
-                                                    <option value="Terapia">Terapia</option>
-                                                    <option value="Diagnóstico">Diagnóstico</option>
-                                                    <option value="Laboratório">Laboratório</option>
-                                                    <option value="Esterilização">Esterilização</option>
-                                                    <option value="Reabilitação">Reabilitação</option>
+                                                    <option value="" disabled <?= $categoria === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                    <option value="Monitorização"  <?= $categoria === 'Monitorização'  ? 'selected' : '' ?>>Monitorização</option>
+                                                    <option value="Suporte de vida" <?= $categoria === 'Suporte de vida' ? 'selected' : '' ?>>Suporte de vida</option>
+                                                    <option value="Terapia"        <?= $categoria === 'Terapia'        ? 'selected' : '' ?>>Terapia</option>
+                                                    <option value="Diagnóstico"    <?= $categoria === 'Diagnóstico'    ? 'selected' : '' ?>>Diagnóstico</option>
+                                                    <option value="Laboratório"    <?= $categoria === 'Laboratório'    ? 'selected' : '' ?>>Laboratório</option>
+                                                    <option value="Esterilização"  <?= $categoria === 'Esterilização'  ? 'selected' : '' ?>>Esterilização</option>
+                                                    <option value="Reabilitação"   <?= $categoria === 'Reabilitação'   ? 'selected' : '' ?>>Reabilitação</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="designacao_equipamento" class="form-label">Designação <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="designacao_equipamento" name="designacao_equipamento" placeholder="Ex: Monitor cardíaco" required>
+                                                <input type="text" class="form-control" id="designacao_equipamento" name="designacao_equipamento" placeholder="Ex: Monitor cardíaco" value="<?= htmlspecialchars($designacao) ?>" required>
                                             </div>
                                         </div>
 
@@ -371,15 +431,15 @@ include '../../includes/sidebar.php';
                                         <div class="row mb-3"> 
                                             <div class="col-md-4">
                                                 <label for="marca" class="form-label">Marca <span class="text-danger">*</span></label> 
-                                                <input type="text" class="form-control" id="marca" name="marca" placeholder="Ex: Zoll" required>
+                                                <input type="text" class="form-control" id="marca" name="marca" placeholder="Ex: Zoll" value="<?= htmlspecialchars($marca) ?>" required>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="modelo" class="form-label">Modelo <span class="text-danger">*</span></label> 
-                                                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ex: Evita V500" required>
+                                                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ex: Evita V500" value="<?= htmlspecialchars($modelo) ?>" required>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="numero_serie" class="form-label">Nº de série <span class="text-danger">*</span></label> 
-                                                <input type="text" class="form-control" id="numero_serie" name="numero_serie" placeholder="Ex: EV500-2021-9934" required>
+                                                <input type="text" class="form-control" id="numero_serie" name="numero_serie" placeholder="Ex: EV500-2021-9934" value="<?= htmlspecialchars($numero_serie) ?>" required>
                                             </div>
                                         </div>
 
@@ -387,7 +447,7 @@ include '../../includes/sidebar.php';
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="fabricante" class="form-label">Fabricante <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Ex: Philips Healthcare" required>
+                                                <input type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Ex: Philips Healthcare" value="<?= htmlspecialchars($fabricante) ?>" required>
                                             </div>
                                         </div>
 
@@ -401,7 +461,7 @@ include '../../includes/sidebar.php';
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="data_aquisicao" class="form-label">Data de aquisição <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" required>
+                                                <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" value="<?= htmlspecialchars($data_aquisicao) ?>" required>
                                             </div>
                                         </div>
 
@@ -409,11 +469,11 @@ include '../../includes/sidebar.php';
                                         <div class="row mb-3"> 
                                             <div class="col-md-6">
                                                 <label for="ano_fabrico" class="form-label">Ano de fabrico <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="ano_fabrico" name="ano_fabrico" min="1980" max="2026" placeholder="Ex: 2024" required>
+                                                <input type="number" class="form-control" id="ano_fabrico" name="ano_fabrico" min="1980" max="2026" placeholder="Ex: 2024" value="<?= htmlspecialchars($ano_fabrico) ?>" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="custo_aquisicao" class="form-label">Custo de aquisição (€) <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="custo_aquisicao" name="custo_aquisicao" placeholder="Ex: 2500" step="0.01" required>
+                                                <input type="number" class="form-control" id="custo_aquisicao" name="custo_aquisicao" placeholder="Ex: 2500" step="0.01" value="<?= htmlspecialchars($custo_aquisicao) ?>"required>
                                             </div>                               
                                         </div>
 
@@ -422,33 +482,33 @@ include '../../includes/sidebar.php';
                                             <div class="col-md-4">
                                                 <label for="tipo_entrada" class="form-label">Entrada por: <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="tipo_entrada" name="tipo_entrada" required> 
-                                                    <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="Compra">Compra</option>
-                                                    <option value="Doação">Doação</option>
-                                                    <option value="Aluguer">Aluguer</option>
-                                                    <option value="Empréstimo">Empréstimo</option>
+                                                    <option value="" disabled <?= $tipo_entrada === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                    <option value="Compra"     <?= $tipo_entrada === 'Compra'     ? 'selected' : '' ?>>Compra</option>
+                                                    <option value="Doação"     <?= $tipo_entrada === 'Doação'     ? 'selected' : '' ?>>Doação</option>
+                                                    <option value="Aluguer"    <?= $tipo_entrada === 'Aluguer'    ? 'selected' : '' ?>>Aluguer</option>
+                                                    <option value="Empréstimo" <?= $tipo_entrada === 'Empréstimo' ? 'selected' : '' ?>>Empréstimo</option>
                                                 </select>
                                             </div>     
                                             <div class="col-md-4">
                                                 <label for="estado" class="form-label">Estado atual <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="estado" name="estado" required> 
-                                                    <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="Ativo">Ativo</option>
-                                                    <option value="Inativo">Inativo</option>
-                                                    <option value="Manutenção">Em Manutenção</option>
-                                                    <option value="Calibração">Em Calibração</option>
-                                                    <option value="Quarentena">Em Quarentena</option>
-                                                    <option value="Abatido">Abatido</option>
+                                                    <option value="" disabled <?= $estado === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                    <option value="Ativo"      <?= $estado === 'Ativo'      ? 'selected' : '' ?>>Ativo</option>
+                                                    <option value="Inativo"    <?= $estado === 'Inativo'    ? 'selected' : '' ?>>Inativo</option>
+                                                    <option value="Manutenção" <?= $estado === 'Manutenção' ? 'selected' : '' ?>>Em Manutenção</option>
+                                                    <option value="Calibração" <?= $estado === 'Calibração' ? 'selected' : '' ?>>Em Calibração</option>
+                                                    <option value="Quarentena" <?= $estado === 'Quarentena' ? 'selected' : '' ?>>Em Quarentena</option>
+                                                    <option value="Abatido"    <?= $estado === 'Abatido'    ? 'selected' : '' ?>>Abatido</option>
                                                 </select>
                                             </div>   
                                             <div class="col-md-4">
                                                 <label for="criticidade" class="form-label">Criticidade <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="criticidade" name="criticidade_id" required> 
-                                                    <option value="" selected disabled>Escolha uma opção</option>
-                                                    <option value="1">Baixa</option>
-                                                    <option value="2">Média</option>
-                                                    <option value="3">Alta</option>
-                                                    <option value="4">Suporte de Vida</option>
+                                                    <option value="" disabled <?= $criticidade === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                    <option value="1" <?= $criticidade === '1' ? 'selected' : '' ?>>Baixa</option>
+                                                    <option value="2" <?= $criticidade === '2' ? 'selected' : '' ?>>Média</option>
+                                                    <option value="3" <?= $criticidade === '3' ? 'selected' : '' ?>>Alta</option>
+                                                    <option value="4" <?= $criticidade === '4' ? 'selected' : '' ?>>Suporte de Vida</option>
                                                 </select>
                                             </div> 
                                         </div>
@@ -462,7 +522,7 @@ include '../../includes/sidebar.php';
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="observacoes" class="form-label">Observações</label>
-                                                <textarea class="form-control" id="observacoes" name="observacoes" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
+                                                <textarea class="form-control" id="observacoes" name="observacoes" rows="4" placeholder="Informações adicionais sobre o equipamento..." ><?= htmlspecialchars($observacoes) ?></textarea>
                                             </div>
                                         </div> 
                                         <div class="text-end">
@@ -512,22 +572,12 @@ include '../../includes/sidebar.php';
                                                                 onchange="preencherFornecedorBloco(this,1)"
                                                                 required>
 
-                                                            <option value="" selected disabled>
-                                                                Escolha um fornecedor
-                                                            </option>
-
-                                                            <option value="1">
-                                                                Philips Healthcare Portugal
-                                                            </option>
-
-                                                            <option value="2">
-                                                                Dräger Portugal
-                                                            </option>
-
-                                                            <option value="3">
-                                                                B. Braun Portugal
-                                                            </option>
-
+                                                            <option value="" selected disabled>Escolha um fornecedor</option>
+                                                            <?php foreach ($listaFornecedores as $f): ?>
+                                                                <option value="<?= $f->id ?>">
+                                                                    <?= htmlspecialchars($f->nome_empresa) ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -666,9 +716,11 @@ include '../../includes/sidebar.php';
                                                         onchange="preencherLocalizacao()"
                                                         required>
                                                     <option value="" selected disabled>Escolha uma localização</option>
-                                                    <option value="1">Bloco Operatório</option>
-                                                    <option value="2">Urgência</option>
-                                                    <option value="3">Unidade de Cuidados Intensivos</option>
+                                                    <?php foreach ($listaLocalizacoes as $l): ?>
+                                                        <option value="<?= $l->id ?>">
+                                                            <?= htmlspecialchars($l->servico_depart) ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -760,14 +812,14 @@ include '../../includes/sidebar.php';
                                                     <div class="col-md-6">
                                                         <label for="tipo_doc" class="form-label">Tipo de documento <span class="text-danger">*</span></label>
                                                         <select class="form-control" name="tipo_doc" id="tipo_doc" required>
-                                                            <option value="" selected disabled>Escolha uma opção</option>
-                                                            <option value="Manual de utilização">Manual de utilizador</option>
-                                                            <option value="Manual de serviço">Manual de serviço</option>
-                                                            <option value="Certificado de calibração">Certificado de calibração</option>
-                                                            <option value="Contrato de manutenção">Contrato de manutenção</option>
-                                                            <option value="Fatura / Guia de aquisição">Fatura / Guia de aquisição</option>
-                                                            <option value="Declaração de conformidade">Declaração de conformidade</option>
-                                                            <option value="Relatório técnico">Relatório técnico</option>
+                                                            <option value="" disabled <?= ($docs[0]['tipo'] ?? '') === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                            <option value="Manual de utilização"       <?= ($docs[0]['tipo'] ?? '') === 'Manual de utilização'       ? 'selected' : '' ?>>Manual de utilizador</option>
+                                                            <option value="Manual de serviço"          <?= ($docs[0]['tipo'] ?? '') === 'Manual de serviço'          ? 'selected' : '' ?>>Manual de serviço</option>
+                                                            <option value="Certificado de calibração"  <?= ($docs[0]['tipo'] ?? '') === 'Certificado de calibração'  ? 'selected' : '' ?>>Certificado de calibração</option>
+                                                            <option value="Contrato de manutenção"     <?= ($docs[0]['tipo'] ?? '') === 'Contrato de manutenção'     ? 'selected' : '' ?>>Contrato de manutenção</option>
+                                                            <option value="Fatura / Guia de aquisição" <?= ($docs[0]['tipo'] ?? '') === 'Fatura / Guia de aquisição' ? 'selected' : '' ?>>Fatura / Guia de aquisição</option>
+                                                            <option value="Declaração de conformidade" <?= ($docs[0]['tipo'] ?? '') === 'Declaração de conformidade' ? 'selected' : '' ?>>Declaração de conformidade</option>
+                                                            <option value="Relatório técnico"          <?= ($docs[0]['tipo'] ?? '') === 'Relatório técnico'          ? 'selected' : '' ?>>Relatório técnico</option>
                                                         </select>
                                                     </div>
 
@@ -778,6 +830,7 @@ include '../../includes/sidebar.php';
                                                             id="nome_doc"
                                                             name="nome_doc"
                                                             placeholder="Ex: Manual de Utilização - Ventilador Evita V500"
+                                                            value="<?= htmlspecialchars($docs[0]['nome'] ?? '') ?>" 
                                                             required>
                                                     </div>
                                                 </div>
@@ -790,12 +843,12 @@ include '../../includes/sidebar.php';
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
                                                         <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
-                                                        <input type="date" class="form-control" name="data_doc" id="data_doc" required>
+                                                        <input type="date" class="form-control" name="data_doc" id="data_doc" value="<?= htmlspecialchars($docs[0]['data'] ?? '') ?>" required>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <label for="data_validade" class="form-label">Data de validade</label>
-                                                        <input type="date" class="form-control" name="data_validade" id="data_validade">
+                                                        <input type="date" class="form-control" name="data_validade" id="data_validade" value="<?= htmlspecialchars($docs[0]['data_validade'] ?? '') ?>">
                                                     </div>
                                                 </div>
 
@@ -807,11 +860,13 @@ include '../../includes/sidebar.php';
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
                                                         <label for="fornecedor_doc_id" class="form-label">Fornecedor associado</label>
-                                                        <select class="form-control" name="fornecedor_doc_id" id="fornecedor_doc_id">
-                                                            <option value="" selected disabled>Escolha um fornecedor</option>
-                                                            <option value="1">Philips Healthcare Portugal</option>
-                                                            <option value="2">Dräger Portugal</option>
-                                                            <option value="3">B. Braun Portugal</option>
+                                                        <select class="form-control" name="fornecedor_doc_id[]" id="fornecedor_id">
+                                                            <option value="" disabled <?= ($docs[0]['fornecedor'] ?? '') === '' ? 'selected' : '' ?>>Escolha um fornecedor</option>
+                                                            <?php foreach ($listaFornecedores as $f): ?>
+                                                                <option value="<?= $f->id ?>" <?= ($docs[0]['fornecedor'] ?? '') == $f->id ? 'selected' : '' ?>>
+                                                                    <?= htmlspecialchars($f->nome_empresa) ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
                                                         </select>
                                                     </div>
 
@@ -871,11 +926,11 @@ include '../../includes/sidebar.php';
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <label for="data_inicio" class="form-label">Data de início de Garantia <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
+                                                    <input type="date" class="form-control" id="data_inicio" name="data_inicio" value="<?= htmlspecialchars($data_inicio) ?>" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="data_fim" class="form-label">Data de fim de Garantia <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="data_fim" name="data_fim" required>
+                                                    <input type="date" class="form-control" id="data_fim" name="data_fim" value="<?= htmlspecialchars($data_fim) ?>" required>
                                                 </div>
                                             </div>
 
@@ -889,9 +944,9 @@ include '../../includes/sidebar.php';
                                                             id="contrato_manutencao"
                                                             name="contrato_manutencao" required>
 
-                                                        <option value="" selected disabled>Escolha uma opção</option>
-                                                        <option value="Sim">Sim</option>
-                                                        <option value="Não">Não</option>
+                                                        <option value="" disabled <?= $contrato === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                        <option value="Sim" <?= $contrato === 'Sim' ? 'selected' : '' ?>>Sim</option>
+                                                        <option value="Não" <?= $contrato === 'Não' ? 'selected' : '' ?>>Não</option>
                                                     </select>
                                                 </div>
 
@@ -904,10 +959,10 @@ include '../../includes/sidebar.php';
                                                             id="tipo_contrato"
                                                             name="tipo_contrato">
 
-                                                        <option value="" selected disabled>Escolha uma opção</option>
-                                                        <option value="Preventivo">Preventivo</option>
-                                                        <option value="Corretivo">Corretivo</option>
-                                                        <option value="Completo">Completo</option>
+                                                        <option value="" disabled <?= $tipo_contrato === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                        <option value="Preventivo" <?= $tipo_contrato === 'Preventivo' ? 'selected' : '' ?>>Preventivo</option>
+                                                        <option value="Corretivo"  <?= $tipo_contrato === 'Corretivo'  ? 'selected' : '' ?>>Corretivo</option>
+                                                        <option value="Completo"   <?= $tipo_contrato === 'Completo'   ? 'selected' : '' ?>>Completo</option>
                                                     </select>
                                                 </div>
 
@@ -920,11 +975,11 @@ include '../../includes/sidebar.php';
                                                             id="periodicidade"
                                                             name="periodicidade">
 
-                                                        <option value="" selected disabled>Escolha uma opção</option>
-                                                        <option value="Mensal">Mensal</option>
-                                                        <option value="Trimestral">Trimestral</option>
-                                                        <option value="Semestral">Semestral</option>
-                                                        <option value="Anual">Anual</option>
+                                                        <option value="" disabled <?= $periodicidade === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                                        <option value="Mensal"     <?= $periodicidade === 'Mensal'     ? 'selected' : '' ?>>Mensal</option>
+                                                        <option value="Trimestral" <?= $periodicidade === 'Trimestral' ? 'selected' : '' ?>>Trimestral</option>
+                                                        <option value="Semestral"  <?= $periodicidade === 'Semestral'  ? 'selected' : '' ?>>Semestral</option>
+                                                        <option value="Anual"      <?= $periodicidade === 'Anual'      ? 'selected' : '' ?>>Anual</option>
                                                     </select>
                                                 </div>
 
@@ -936,7 +991,7 @@ include '../../includes/sidebar.php';
                                                         class="form-control"
                                                         id="entidade_responsavel"
                                                         name="entidade_responsavel"
-                                                        placeholder="Ex: BioTech Portugal" required>
+                                                        placeholder="Ex: BioTech Portugal" value="<?= htmlspecialchars($entidade) ?>" required>
                                                 </div>
                                             </div>
 
@@ -950,7 +1005,7 @@ include '../../includes/sidebar.php';
                                             <div class="row mb-3">
                                                 <div class="col-12">
                                                     <label for="observacoes_garant" class="form-label">Observações</label>
-                                                    <textarea class="form-control" id="observacoes_garant" name="observacoes_garant" rows="4" placeholder="Informações adicionais sobre o equipamento..."></textarea>
+                                                    <textarea class="form-control" id="observacoes_garant" name="observacoes_garant" rows="4" placeholder="Informações adicionais sobre a Garantia/Contrato..." ><?= htmlspecialchars($obs_garantia) ?></textarea>
                                                 </div>
                                             </div>
 
@@ -984,6 +1039,34 @@ include '../../includes/sidebar.php';
                     </div>
                 </div>
             </main>
+<script>
+const fornecedores = {
+    <?php foreach ($listaFornecedores as $f): ?>
+    <?= $f->id ?>: {
+        nome: "<?= addslashes($f->nome_empresa) ?>",
+        nif: "<?= addslashes($f->nif) ?>",
+        morada: "<?= addslashes($f->morada) ?>",
+        tipo: "<?= addslashes($f->tipo_fornecedor) ?>",
+        telefone: "<?= addslashes($f->numero_telefonico) ?>",
+        email: "<?= addslashes($f->email) ?>",
+        website: "<?= addslashes($f->website) ?>",
+        contacto: "<?= addslashes($f->pessoa_contacto) ?>",
+        telContacto: "<?= addslashes($f->tel_pessoa_contacto) ?>"
+    },
+    <?php endforeach; ?>
+};
+
+const localizacoes = {
+    <?php foreach ($listaLocalizacoes as $l): ?>
+    <?= $l->id ?>: {
+        edificio: "<?= addslashes($l->edificio) ?>",
+        piso: "<?= addslashes($l->piso) ?>",
+        sala: "<?= addslashes($l->sala_gabinete) ?>",
+        servico: "<?= addslashes($l->servico_depart) ?>"
+    },
+    <?php endforeach; ?>
+};
+</script>
 
 <!-- Custom JS -->
 <script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>

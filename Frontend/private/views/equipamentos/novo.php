@@ -199,6 +199,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $partes = explode('-', $data_aquisicao);
         if (!checkdate((int)$partes[1], (int)$partes[2], (int)$partes[0])) {
             $erros[] = "A data de aquisição é inválida.";
+        } elseif ($data_aquisicao > date('Y-m-d')) {
+            $erros[] = "A data de aquisição não pode ser superior à data atual.";
         }
     }
 
@@ -242,30 +244,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Documentação
-    if (empty($tipo_doc)) {
-        $erros[] = "O tipo de documento é obrigatório.";
-    }
-    if (empty($nome_doc)) {
-        $erros[] = "O nome do documento é obrigatório.";
-    }
-    if (empty($data_doc)) {
-        $erros[] = "A data do documento é obrigatória.";
-    } else {
-        $partes = explode('-', $data_doc);
-        if (!checkdate((int)$partes[1], (int)$partes[2], (int)$partes[0])) {
-            $erros[] = "A data do documento é inválida.";
+
+    // Garantir que são sempre arrays
+    $tipo_doc       = (array)$tipo_doc;
+    $nome_doc       = (array)$nome_doc;
+    $data_doc       = (array)$data_doc;
+    $data_validade  = (array)$data_validade;
+    $fornecedor_doc = (array)$fornecedor_doc;
+
+    $temDocumento = false;
+    foreach ($tipo_doc as $i => $t) {
+        $t = trim($t);
+        $n = trim($nome_doc[$i] ?? '');
+        $d = trim($data_doc[$i] ?? '');
+        $fich = $ficheiro['name'][$i] ?? '';
+
+        if (!empty($t) || !empty($n) || !empty($d) || !empty($fich)) {
+            $temDocumento = true;
+
+            if (empty($t)) {
+                $erros[] = "O tipo do documento " . ($i + 1) . " é obrigatório.";
+            }
+            if (empty($n)) {
+                $erros[] = "O nome do documento " . ($i + 1) . " é obrigatório.";
+            }
+            if (empty($d)) {
+                $erros[] = "A data do documento " . ($i + 1) . " é obrigatória.";
+            } else {
+                $partes = explode('-', $d);
+                if (!checkdate((int)$partes[1], (int)$partes[2], (int)$partes[0])) {
+                    $erros[] = "A data do documento " . ($i + 1) . " é inválida.";
+                } elseif ($d > date('Y-m-d')) {
+                    $erros[] = "A data do documento " . ($i + 1) . " não pode ser superior à data atual.";
+                }
+            }
+            if (empty($fich)) {
+                $erros[] = "O ficheiro do documento " . ($i + 1) . " é obrigatório.";
+            }
         }
     }
-    if (empty($fornecedor_doc)) {
-        $erros[] = "O fornecedor associado ao documento é obrigatório.";
-    }
-    if (empty($ficheiro['name'])) {
-        $erros[] = "O ficheiro do documento é obrigatório.";
+
+    if (!$temDocumento) {
+        $erros[] = "É necessário adicionar pelo menos um documento.";
     }
 
     // Datas de garantia
     if (empty($data_inicio)) {
         $erros[] = "A data de início de garantia é obrigatória.";
+    } else {
+        $partes = explode('-', $data_inicio);
+        if (!checkdate((int)$partes[1], (int)$partes[2], (int)$partes[0])) {
+            $erros[] = "A data de início de garantia é inválida.";
+        } elseif ($data_inicio > date('Y-m-d')) {
+            $erros[] = "A data de início de garantia não pode ser superior à data atual.";
+        }
     }
     if (empty($data_fim)) {
         $erros[] = "A data de fim de garantia é obrigatória.";
@@ -813,7 +845,7 @@ include '../../includes/sidebar.php';
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
                                                         <label for="tipo_doc" class="form-label">Tipo de documento <span class="text-danger">*</span></label>
-                                                        <select class="form-control" name="tipo_doc" id="tipo_doc" required>
+                                                        <select class="form-control" name="tipo_doc[]" id="tipo_doc" required>
                                                             <option value="" disabled <?= ($docs[0]['tipo'] ?? '') === '' ? 'selected' : '' ?>>Escolha uma opção</option>
                                                             <option value="Manual de utilização"       <?= ($docs[0]['tipo'] ?? '') === 'Manual de utilização'       ? 'selected' : '' ?>>Manual de utilizador</option>
                                                             <option value="Manual de serviço"          <?= ($docs[0]['tipo'] ?? '') === 'Manual de serviço'          ? 'selected' : '' ?>>Manual de serviço</option>
@@ -830,7 +862,7 @@ include '../../includes/sidebar.php';
                                                         <input type="text"
                                                             class="form-control"
                                                             id="nome_doc"
-                                                            name="nome_doc"
+                                                            name="nome_doc[]"
                                                             placeholder="Ex: Manual de Utilização - Ventilador Evita V500"
                                                             value="<?= htmlspecialchars($docs[0]['nome'] ?? '') ?>" 
                                                             required>
@@ -845,12 +877,12 @@ include '../../includes/sidebar.php';
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
                                                         <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" name="data_doc" id="data_doc" value="<?= htmlspecialchars($docs[0]['data'] ?? '') ?>" required>
+                                                        <input type="text" class="form-control" name="data_doc[]" id="data_doc" value="<?= htmlspecialchars($docs[0]['data'] ?? '') ?>" required>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <label for="data_validade" class="form-label">Data de validade</label>
-                                                        <input type="text" class="form-control" name="data_validade" id="data_validade" value="<?= htmlspecialchars($docs[0]['data_validade'] ?? '') ?>">
+                                                        <input type="text" class="form-control" name="data_validade[]" id="data_validade" value="<?= htmlspecialchars($docs[0]['data_validade'] ?? '') ?>">
                                                     </div>
                                                 </div>
 
@@ -876,7 +908,7 @@ include '../../includes/sidebar.php';
                                                         <label for="ficheiro" class="form-label">Selecionar ficheiro <span class="text-danger">*</span></label>
                                                         <input type="file"
                                                             class="form-control"
-                                                            name="ficheiro"
+                                                            name="ficheiro[]"
                                                             id="ficheiro"
                                                             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                                                             required>

@@ -208,9 +208,12 @@ $ligacao = null;
 
             <hr>
             <!-- Área de sucesso -->
-            <div class="alert alert-success text-center d-none" id="mensagemSucesso" role="alert">
-                • Operação realizada com sucesso.
-            </div>
+            <?php if (isset($_GET['sucesso'])): ?>
+                <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Equipamento inserido com sucesso!
+                </div>
+            <?php endif; ?>
 
             <div class="card border-0 shadow mb-4 rounded-4">
 

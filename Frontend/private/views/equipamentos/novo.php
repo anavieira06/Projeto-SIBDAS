@@ -86,48 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-    /*
-    // 2. Imprimir os dados recebidos (para teste)
-    echo "<p><strong>Dados recebidos:</strong>
-        Código: $codigo |
-        Categoria: $categoria |
-        Designação: $designacao |
-        Marca: $marca |
-        Modelo: $modelo |
-        Nº Série: $numero_serie |
-        Fabricante: $fabricante |
-        Data Aquisição: $data_aquisicao |
-        Ano Fabrico: $ano_fabrico |
-        Custo: $custo_aquisicao |
-        Tipo Entrada: $tipo_entrada |
-        Estado: $estado |
-        Criticidade: $criticidade |
-        Observações: $observacoes |
-        Fornecedor(es): " . implode(', ', (array)$fornecedor) . " |
-        Localização: $localizacao |
-        Data Início Garantia: $data_inicio |
-        Data Fim Garantia: $data_fim |
-        Contrato: $contrato |
-        Tipo Contrato: $tipo_contrato |
-        Periodicidade: $periodicidade |
-        Entidade: $entidade |
-        Obs Garantia: $obs_garantia
-    </p>";
-    echo "<p><strong>Documentos:</strong></p>";
-    foreach ($tipo_doc as $i => $t) {
-        echo "<p>
-            Documento " . ($i + 1) . ": 
-            Tipo: $t | 
-            Nome: " . $nome_doc[$i] . " | 
-            Data: " . $data_doc[$i] . " | 
-            Data Validade: " . ($data_validade[$i] ?? 'sem validade') . " | 
-            Fornecedor doc: " . ($fornecedor_doc[$i] ?? 'nenhum') . " | 
-            Ficheiro: " . ($ficheiros['name'][$i] ?? 'nenhum') . "
-        </p>";
-    }
-    */
-
-    // 3. Validar os dados
+    // 2. Validar os dados
     $erros = [];
 
     $codigo          = trim($codigo);
@@ -317,10 +276,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    // 4. Se não houver erros
+    // 3. Se não houver erros
     if (empty($erros)) {
 
-        // 5. Normalizar dados
+        // 4. Normalizar dados
         $designacao = ucwords(strtolower($designacao));
         $marca      = ucwords(strtolower($marca));
         $modelo     = ucwords(strtolower($modelo));
@@ -331,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nome_doc[$i] = ucfirst(strtolower($n));
         }
 
-        // 6. Guardar na base de dados
+        // 5. Guardar na base de dados
         try {
             $ligacao = new PDO(
                 "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",

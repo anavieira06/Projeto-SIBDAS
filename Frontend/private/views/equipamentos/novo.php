@@ -316,15 +316,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erros[] = "A entidade responsável é obrigatória.";
     }
 
-    /*
-    // Mostrar erros (para teste)
-    echo "<pre>";
-    print_r($erros);
-    echo "</pre>";
-
-    */
 
     // 4. Se não houver erros, guardar na base de dados
+    if (empty($erros)) {
+
+        // 5. Normalizar dados
+        $designacao = ucwords(strtolower($designacao));
+        $marca      = ucwords(strtolower($marca));
+        $modelo     = ucwords(strtolower($modelo));
+        $fabricante = ucwords(strtolower($fabricante));
+        $entidade   = ucwords(strtolower($entidade));
+
+        // 6. Guardar na base de dados
+    }
+
 }
     
 // Buscar fornecedores da BD para o select

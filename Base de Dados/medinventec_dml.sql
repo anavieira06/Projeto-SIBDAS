@@ -316,49 +316,49 @@ INSERT INTO equipamentos
 VALUES
 ('EQ0001','Monitor multiparamétrico','Philips','IntelliVue MX450','PH-MX450-001','Philips Healthcare Portugal','2023-01-15',2022,8500.00,'Equipamento em utilização regular na UCI.',1,1,1,1,3,1),
 
-('EQ0002','Ventilador pulmonar','Dräger','Evita V500','DR-EV500-002','Dräger','2023-02-10',2022,18500.00,'Equipamento crítico para suporte ventilatório.',2,1,4,1,3,2),
+('EQ0002','Ventilador pulmonar','Dräger','Evita V500','DR-EV500-002','Dräger','2023-02-10',2022,18500.00,'Equipamento crítico para suporte ventilatório.',2,2,4,1,3,2),
 
-('EQ0003','Bomba infusora','B. Braun','Infusomat Space','BB-IS-003','B. Braun','2023-03-12',2021,3200.00,NULL,3,1,2,1,11,3),
+('EQ0003','Bomba infusora','B. Braun','Infusomat Space','BB-IS-003','B. Braun','2023-03-12',2021,3200.00,NULL,3,2,2,1,11,3),
 
 ('EQ0004','Ecógrafo portátil','Siemens','Acuson Freestyle','SI-AF-004','Siemens Healthineers','2023-04-05',2022,24500.00,'Usado em exames rápidos junto ao doente.',4,1,3,1,10,4),
 
 ('EQ0005','Aparelho de raio-X digital','GE HealthCare','Definium 656','GE-D656-005','GE HealthCare','2023-05-20',2021,78000.00,NULL,4,1,3,1,4,5),
 
-('EQ0006','Desfibrilhador','Medtronic','Lifepak 20e','MD-LP20-006','Medtronic','2023-06-08',2022,6900.00,'Equipamento disponível na urgência.',2,1,4,1,1,6),
+('EQ0006','Desfibrilhador','Medtronic','Lifepak 20e','MD-LP20-006','Medtronic','2023-06-08',2022,6900.00,'Equipamento disponível na urgência.',2,3,4,1,1,6),
 
-('EQ0007','Monitor de sinais vitais','Mindray','VS 900','MI-VS900-007','Mindray','2023-07-14',2022,2400.00,NULL,1,1,2,1,10,7),
+('EQ0007','Monitor de sinais vitais','Mindray','VS 900','MI-VS900-007','Mindray','2023-07-14',2022,2400.00,NULL,1,3,2,1,10,7),
 
 ('EQ0008','Máquina de hemodiálise','Fresenius','5008S CorDiax','FR-5008S-008','Fresenius Medical Care','2023-08-01',2021,22000.00,'Equipamento usado em tratamentos regulares.',3,1,3,1,11,8),
 
-('EQ0009','Endoscópio flexível','Olympus','EVIS EXERA III','OL-EVIS-009','Olympus','2023-09-18',2022,31500.00,NULL,4,1,3,1,10,9),
+('EQ0009','Endoscópio flexível','Olympus','EVIS EXERA III','OL-EVIS-009','Olympus','2023-09-18',2022,31500.00,NULL,4,2,3,1,10,9),
 
-('EQ0010','Tomógrafo computorizado','Canon','Aquilion Prime','CA-AP-010','Canon Medical Systems','2023-10-22',2020,145000.00,'Equipamento de imagiologia de grande porte.',4,1,3,1,4,10),
+('EQ0010','Tomógrafo computorizado','Canon','Aquilion Prime','CA-AP-010','Canon Medical Systems','2023-10-22',2020,145000.00,'Equipamento de imagiologia de grande porte.',4,4,3,1,4,10),
 
 ('EQ0011','Autoclave hospitalar','Distrimed','Stericlav 80','DI-ST80-011','Distrimed Equipamentos Médicos','2023-11-09',2021,12800.00,NULL,6,1,2,1,8,11),
 
-('EQ0012','Mesa cirúrgica elétrica','TecnoSaúde','TS-Cirurgic 3000','TS-C3000-012','TecnoSaúde Equipamentos Hospitalares','2023-12-03',2022,16400.00,'Mesa principal do bloco operatório.',3,1,3,1,2,12),
+('EQ0012','Mesa cirúrgica elétrica','TecnoSaúde','TS-Cirurgic 3000','TS-C3000-012','TecnoSaúde Equipamentos Hospitalares','2023-12-03',2022,16400.00,'Mesa principal do bloco operatório.',3,4,3,1,2,12),
 
 ('EQ0013','Oxímetro de pulso','Philips','PulseOx 2500','PH-PO2500-013','Philips Healthcare Portugal','2024-01-11',2023,950.00,NULL,1,1,2,1,1,13),
 
-('EQ0014','Incubadora neonatal','Dräger','Isolette 8000','DR-ISO8000-014','Dräger','2024-02-07',2023,17500.00,'Equipamento afeto ao serviço de pediatria.',2,1,4,1,12,14),
+('EQ0014','Incubadora neonatal','Dräger','Isolette 8000','DR-ISO8000-014','Dräger','2024-02-07',2023,17500.00,'Equipamento afeto ao serviço de pediatria.',2,3,4,1,12,14),
 
 ('EQ0015','Bomba de seringa','B. Braun','Perfusor Space','BB-PS-015','B. Braun','2024-03-19',2023,2800.00,NULL,3,1,2,1,3,15),
 
-('EQ0016','Ressonância magnética','Siemens','MAGNETOM Sola','SI-MS-016','Siemens Healthineers','2024-04-02',2021,230000.00,'Equipamento de elevada complexidade técnica.',4,1,3,1,4,16),
+('EQ0016','Ressonância magnética','Siemens','MAGNETOM Sola','SI-MS-016','Siemens Healthineers','2024-04-02',2021,230000.00,'Equipamento de elevada complexidade técnica.',4,5,3,1,4,16),
 
 ('EQ0017','Eletrocardiógrafo','GE HealthCare','MAC 2000','GE-MAC2000-017','GE HealthCare','2024-05-13',2023,4100.00,NULL,4,1,2,1,5,17),
 
-('EQ0018','Neuroestimulador','Medtronic','NIM Vital','MD-NIM-018','Medtronic','2024-06-27',2022,13600.00,NULL,3,1,3,1,2,18),
+('EQ0018','Neuroestimulador','Medtronic','NIM Vital','MD-NIM-018','Medtronic','2024-06-27',2022,13600.00,NULL,3,4,3,1,2,18),
 
 ('EQ0019','Ventilador de transporte','Mindray','SV300','MI-SV300-019','Mindray','2024-07-08',2023,9800.00,'Usado em transporte intra-hospitalar.',2,1,4,1,1,19),
 
-('EQ0020','Sistema de diálise portátil','Fresenius','AquaUNO','FR-AQUNO-020','Fresenius Medical Care','2024-08-16',2022,18750.00,NULL,3,1,3,1,11,20),
+('EQ0020','Sistema de diálise portátil','Fresenius','AquaUNO','FR-AQUNO-020','Fresenius Medical Care','2024-08-16',2022,18750.00,NULL,3,5,3,1,11,20),
 
 ('EQ0021','Videolaringoscópio','Olympus','Airway Scope','OL-AS-021','Olympus','2024-09-05',2023,5600.00,'Equipamento usado em procedimentos de via aérea difícil.',4,1,3,1,2,21),
 
 ('EQ0022','Arco cirúrgico móvel','Canon','CXDI-Elite','CA-CXDI-022','Canon Medical Systems','2024-10-21',2021,89000.00,NULL,4,1,3,1,2,22),
 
-('EQ0023','Centrífuga laboratorial','Distrimed','LabSpin 400','DI-LS400-023','Distrimed Equipamentos Médicos','2024-11-14',2023,3700.00,NULL,5,1,2,1,7,23),
+('EQ0023','Centrífuga laboratorial','Distrimed','LabSpin 400','DI-LS400-023','Distrimed Equipamentos Médicos','2024-11-14',2023,3700.00,NULL,5,5,2,1,7,23),
 
 ('EQ0024','Cama hospitalar articulada','TecnoSaúde','ComfortCare 500','TS-CC500-024','TecnoSaúde Equipamentos Hospitalares','2024-12-06',2023,2900.00,NULL,3,1,2,1,11,24),
 

@@ -6,6 +6,260 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // 1. Recolher dados
+    $codigo          = $_POST["codigo_inventario"]      ?? "";
+    $categoria       = $_POST["categoria_grupo"]        ?? "";
+    $designacao      = $_POST["designacao_equipamento"] ?? "";
+    $marca           = $_POST["marca"]                  ?? "";
+    $modelo          = $_POST["modelo"]                 ?? "";
+    $numero_serie    = $_POST["numero_serie"]           ?? "";
+    $fabricante      = $_POST["fabricante"]             ?? "";
+    $data_aquisicao  = $_POST["data_aquisicao"]         ?? "";
+    $ano_fabrico     = $_POST["ano_fabrico"]            ?? "";
+    $custo_aquisicao = $_POST["custo_aquisicao"]        ?? "";
+    $tipo_entrada    = $_POST["tipo_entrada"]           ?? "";
+    $estado          = $_POST["estado"]                 ?? "";
+    $criticidade     = $_POST["criticidade_id"]         ?? "";
+    $observacoes     = $_POST["observacoes"]            ?? "";
+    $fornecedor      = $_POST["fornecedor_id"]          ?? [];
+    $localizacao     = $_POST["localizacao_id"]         ?? "";
+    $tipo_doc        = $_POST["tipo_doc"]               ?? [];
+    $nome_doc        = $_POST["nome_doc"]               ?? [];
+    $data_doc        = $_POST["data_doc"]               ?? [];
+    $data_validade   = $_POST["data_validade"]          ?? [];
+    $fornecedor_doc  = $_POST["fornecedor_doc_id"]      ?? [];
+    $ficheiro        = $_FILES["ficheiro"]              ?? [];
+    $data_inicio     = $_POST["data_inicio"]            ?? "";
+    $data_fim        = $_POST["data_fim"]               ?? "";
+    $contrato        = $_POST["contrato_manutencao"]    ?? "";
+    $tipo_contrato   = $_POST["tipo_contrato"]          ?? "";
+    $periodicidade   = $_POST["periodicidade"]          ?? "";
+    $entidade        = $_POST["entidade_responsavel"]   ?? "";
+    $obs_garantia    = $_POST["observacoes_garant"]     ?? "";
+
+    // 2. Imprimir os dados recebidos (para teste)
+    echo "<p><strong>Dados recebidos:</strong>
+        Código: $codigo |
+        Categoria: $categoria |
+        Designação: $designacao |
+        Marca: $marca |
+        Modelo: $modelo |
+        Nº Série: $numero_serie |
+        Fabricante: $fabricante |
+        Data Aquisição: $data_aquisicao |
+        Ano Fabrico: $ano_fabrico |
+        Custo: $custo_aquisicao |
+        Tipo Entrada: $tipo_entrada |
+        Estado: $estado |
+        Criticidade: $criticidade |
+        Observações: $observacoes |
+        Fornecedor(es): " . implode(', ', (array)$fornecedor) . " |
+        Localização: $localizacao |
+        Data Início Garantia: $data_inicio |
+        Data Fim Garantia: $data_fim |
+        Contrato: $contrato |
+        Tipo Contrato: $tipo_contrato |
+        Periodicidade: $periodicidade |
+        Entidade: $entidade |
+        Obs Garantia: $obs_garantia
+    </p>";
+    echo "<p><strong>Documentos:</strong></p>";
+    foreach ($tipo_doc as $i => $t) {
+        echo "<p>
+            Documento " . ($i + 1) . ": 
+            Tipo: $t | 
+            Nome: " . $nome_doc[$i] . " | 
+            Data: " . $data_doc[$i] . " | 
+            Data Validade: " . ($data_validade[$i] ?? 'sem validade') . " | 
+            Fornecedor doc: " . ($fornecedor_doc[$i] ?? 'nenhum') . " | 
+            Ficheiro: " . ($ficheiros['name'][$i] ?? 'nenhum') . "
+        </p>";
+    }
+
+    // 3. Validar os dados
+    $erros = [];
+
+    $codigo          = trim($codigo);
+    $categoria       = trim($categoria);
+    $designacao      = trim($designacao);
+    $marca           = trim($marca);
+    $modelo          = trim($modelo);
+    $numero_serie    = trim($numero_serie);
+    $fabricante      = trim($fabricante);
+    $data_aquisicao  = trim($data_aquisicao);
+    $ano_fabrico     = trim($ano_fabrico);
+    $custo_aquisicao = trim($custo_aquisicao);
+    $tipo_entrada    = trim($tipo_entrada);
+    $estado          = trim($estado);
+    $criticidade     = trim($criticidade);
+    $localizacao     = trim($localizacao);
+    $fornecedor_doc  = trim($fornecedor_doc);
+    $tipo_doc        = trim($tipo_doc);
+    $nome_doc        = trim($nome_doc);
+    $data_doc        = trim($data_doc);
+    $data_inicio     = trim($data_inicio);
+    $data_fim        = trim($data_fim);
+    $contrato        = trim($contrato);
+    $entidade        = trim($entidade);
+
+    // Código de inventário — formato EQ seguido de números (ex: EQ0001)
+    if (empty($codigo)) {
+        $erros[] = "O código de inventário é obrigatório.";
+    } elseif (!preg_match('/^EQ\d+$/', $codigo)) {
+        $erros[] = "O código de inventário deve começar por 'EQ' seguido de números (ex: EQ0001).";
+    }
+
+    // Categoria
+    if (empty($categoria)) {
+        $erros[] = "A categoria / grupo é obrigatória.";
+    }
+
+    // Designação
+    if (empty($designacao)) {
+        $erros[] = "A designação do equipamento é obrigatória.";
+    }
+
+    // Marca
+    if (empty($marca)) {
+        $erros[] = "A marca é obrigatória.";
+    }
+
+    // Modelo
+    if (empty($modelo)) {
+        $erros[] = "O modelo é obrigatório.";
+    }
+
+    // Nº de série — só letras, números e hífens
+    if (empty($numero_serie)) {
+        $erros[] = "O número de série é obrigatório.";
+    } elseif (!preg_match('/^[A-Za-z0-9\-]+$/', $numero_serie)) {
+        $erros[] = "O número de série apenas pode conter letras, números e hífens.";
+    }
+
+    // Fabricante
+    if (empty($fabricante)) {
+        $erros[] = "O fabricante é obrigatório.";
+    }
+
+    // Data de aquisição
+    if (empty($data_aquisicao)) {
+        $erros[] = "A data de aquisição é obrigatória.";
+    } else {
+        $partes = explode('-', $data_aquisicao);
+        if (!checkdate((int)$partes[1], (int)$partes[2], (int)$partes[0])) {
+            $erros[] = "A data de aquisição é inválida.";
+        }
+    }
+
+    // Ano de fabrico
+    if (empty($ano_fabrico)) {
+        $erros[] = "O ano de fabrico é obrigatório.";
+    } elseif (!is_numeric($ano_fabrico) || $ano_fabrico < 1980 || $ano_fabrico > 2026) {
+        $erros[] = "O ano de fabrico deve ser um valor entre 1980 e 2026.";
+    }
+
+    // Custo de aquisição
+    if (empty($custo_aquisicao)) {
+        $erros[] = "O custo de aquisição é obrigatório.";
+    } elseif (!is_numeric($custo_aquisicao) || $custo_aquisicao < 0) {
+        $erros[] = "O custo de aquisição deve ser um valor numérico positivo.";
+    }
+
+    // Tipo de entrada
+    if (empty($tipo_entrada)) {
+        $erros[] = "O tipo de entrada é obrigatório.";
+    }
+
+    // Estado
+    if (empty($estado)) {
+        $erros[] = "O estado atual é obrigatório.";
+    }
+
+    // Criticidade
+    if (empty($criticidade)) {
+        $erros[] = "A criticidade é obrigatória.";
+    }
+
+    // Fornecedor(es) do equipamento
+    if (empty($fornecedor)) {
+        $erros[] = "É necessário associar pelo menos um fornecedor.";
+    }
+
+    // Localização
+    if (empty($localizacao)) {
+        $erros[] = "A localização é obrigatória.";
+    }
+
+    // Documentação
+    if (empty($tipo_doc)) {
+        $erros[] = "O tipo de documento é obrigatório.";
+    }
+    if (empty($nome_doc)) {
+        $erros[] = "O nome do documento é obrigatório.";
+    }
+    if (empty($data_doc)) {
+        $erros[] = "A data do documento é obrigatória.";
+    } else {
+        $partes = explode('-', $data_doc);
+        if (!checkdate((int)$partes[1], (int)$partes[2], (int)$partes[0])) {
+            $erros[] = "A data do documento é inválida.";
+        }
+    }
+    if (empty($fornecedor_doc)) {
+        $erros[] = "O fornecedor associado ao documento é obrigatório.";
+    }
+    if (empty($ficheiro['name'])) {
+        $erros[] = "O ficheiro do documento é obrigatório.";
+    }
+
+    // Datas de garantia
+    if (empty($data_inicio)) {
+        $erros[] = "A data de início de garantia é obrigatória.";
+    }
+    if (empty($data_fim)) {
+        $erros[] = "A data de fim de garantia é obrigatória.";
+    }
+    if (!empty($data_inicio) && !empty($data_fim) && $data_fim < $data_inicio) {
+        $erros[] = "A data de fim de garantia não pode ser anterior à data de início.";
+    }
+
+    // Contrato de manutenção
+    if (empty($contrato)) {
+        $erros[] = "Indique se existe contrato de manutenção.";
+    }
+
+    // Entidade responsável
+    if (empty($entidade)) {
+        $erros[] = "A entidade responsável é obrigatória.";
+    }
+
+    // Mostrar erros (para teste)
+    echo "<pre>";
+    print_r($erros);
+    echo "</pre>";
+
+    // 4. Se não houver erros, guardar na base de dados
+}
+    
+
+
+  
+
+    
+
+    
+    
+
+   
+
+  
+
+    
+
+
 include '../../includes/header.php'; 
 ?>
 
@@ -24,7 +278,7 @@ include '../../includes/sidebar.php';
                         <div class="card-body">
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-plus me-2" style="color: #680447;"></i> Inserir novo equipamento</strong></h2>
                             <hr>
-                            <form id="formEquipamento" action="#" method="post">
+                            <form id="formEquipamento" action="#" method="post" enctype="multipart/form-data">
                                 <ul class="nav nav-tabs mb-4" id="equipamentoTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active"
@@ -552,8 +806,8 @@ include '../../includes/sidebar.php';
 
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
-                                                        <label for="fornecedor_id" class="form-label">Fornecedor associado</label>
-                                                        <select class="form-control" name="fornecedor_id" id="fornecedor_id">
+                                                        <label for="fornecedor_doc_id" class="form-label">Fornecedor associado</label>
+                                                        <select class="form-control" name="fornecedor_doc_id" id="fornecedor_doc_id">
                                                             <option value="" selected disabled>Escolha um fornecedor</option>
                                                             <option value="1">Philips Healthcare Portugal</option>
                                                             <option value="2">Dräger Portugal</option>

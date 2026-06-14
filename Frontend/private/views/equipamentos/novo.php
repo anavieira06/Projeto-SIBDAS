@@ -86,6 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
+    /*
     // 2. Imprimir os dados recebidos (para teste)
     echo "<p><strong>Dados recebidos:</strong>
         Código: $codigo |
@@ -124,6 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Ficheiro: " . ($ficheiros['name'][$i] ?? 'nenhum') . "
         </p>";
     }
+    */
 
     // 3. Validar os dados
     $erros = [];
@@ -461,7 +463,7 @@ include '../../includes/sidebar.php';
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <label for="data_aquisicao" class="form-label">Data de aquisição <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" value="<?= htmlspecialchars($data_aquisicao) ?>" required>
+                                                <input type="text" class="form-control" id="data_aquisicao" name="data_aquisicao" value="<?= htmlspecialchars($data_aquisicao) ?>" required>
                                             </div>
                                         </div>
 
@@ -843,12 +845,12 @@ include '../../includes/sidebar.php';
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
                                                         <label for="data_doc" class="form-label">Data <span class="text-danger">*</span></label>
-                                                        <input type="date" class="form-control" name="data_doc" id="data_doc" value="<?= htmlspecialchars($docs[0]['data'] ?? '') ?>" required>
+                                                        <input type="text" class="form-control" name="data_doc" id="data_doc" value="<?= htmlspecialchars($docs[0]['data'] ?? '') ?>" required>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <label for="data_validade" class="form-label">Data de validade</label>
-                                                        <input type="date" class="form-control" name="data_validade" id="data_validade" value="<?= htmlspecialchars($docs[0]['data_validade'] ?? '') ?>">
+                                                        <input type="text" class="form-control" name="data_validade" id="data_validade" value="<?= htmlspecialchars($docs[0]['data_validade'] ?? '') ?>">
                                                     </div>
                                                 </div>
 
@@ -926,11 +928,11 @@ include '../../includes/sidebar.php';
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <label for="data_inicio" class="form-label">Data de início de Garantia <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="data_inicio" name="data_inicio" value="<?= htmlspecialchars($data_inicio) ?>" required>
+                                                    <input type="text" class="form-control" id="data_inicio" name="data_inicio" value="<?= htmlspecialchars($data_inicio) ?>" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="data_fim" class="form-label">Data de fim de Garantia <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="data_fim" name="data_fim" value="<?= htmlspecialchars($data_fim) ?>" required>
+                                                    <input type="text" class="form-control" id="data_fim" name="data_fim" value="<?= htmlspecialchars($data_fim) ?>" required>
                                                 </div>
                                             </div>
 
@@ -1066,6 +1068,14 @@ const localizacoes = {
     },
     <?php endforeach; ?>
 };
+</script>
+
+<script>
+flatpickr("#data_aquisicao", { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_inicio",    { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_fim",       { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_doc",       { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_validade",  { dateFormat: "Y-m-d", locale: "pt" });
 </script>
 
 <!-- Custom JS -->

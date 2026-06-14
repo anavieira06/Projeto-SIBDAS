@@ -33,6 +33,12 @@ require_once __DIR__ . '/../../config/config.php';
         <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/assets/datatables/datatables.min.css">
         <script src="/ProjetoSIBDAS/Frontend/assets/datatables/datatables.min.js"></script>
 
+        <!-- CSS do Flatpickr -->
+        <link rel="stylesheet" href="/ProjetoSIBDAS/Frontend/assets/flatpickr/flatpickr.min.css">
+
+        <!-- JS do Flatpickr -->
+        <script src="/ProjetoSIBDAS/Frontend/assets/flatpickr/flatpickr.js"></script>
+
     </head>
 
     <body class="<?= $bodyClass ?? '' ?>">

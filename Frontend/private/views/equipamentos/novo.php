@@ -317,7 +317,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    // 4. Se não houver erros, guardar na base de dados
+    // 4. Se não houver erros
     if (empty($erros)) {
 
         // 5. Normalizar dados
@@ -327,7 +327,145 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fabricante = ucwords(strtolower($fabricante));
         $entidade   = ucwords(strtolower($entidade));
 
+        foreach ($nome_doc as $i => $n) {
+            $nome_doc[$i] = ucfirst(strtolower($n));
+        }
+
         // 6. Guardar na base de dados
+        try {
+            $ligacao = new PDO(
+                "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+                MYSQL_USERNAME,
+                MYSQL_PASSWORD
+            );
+            $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Obter IDs das tabelas relacionadas
+            $stmtEstado = $ligacao->prepare("SELECT id FROM estado WHERE estado = :estado LIMIT 1");
+            $stmtEstado->execute([':estado' => $estado]);
+            $estadoId = $stmtEstado->fetchColumn();
+
+            $stmtCategoria = $ligacao->prepare("SELECT id FROM categoria_grupo WHERE categoria_grupo = :cat LIMIT 1");
+            $stmtCategoria->execute([':cat' => $categoria]);
+            $categoriaId = $stmtCategoria->fetchColumn();
+
+            $stmtTipoEntrada = $ligacao->prepare("SELECT id FROM tipo_entrada WHERE tipo_entrada = :tipo LIMIT 1");
+            $stmtTipoEntrada->execute([':tipo' => $tipo_entrada]);
+            $tipoEntradaId = $stmtTipoEntrada->fetchColumn();
+
+            // 1. Inserir garantia/contrato primeiro (porque equipamentos tem garantia_contrato_id)
+            $sqlGarantia = "INSERT INTO garantias_contratos (
+                data_inicio, data_fim, contrato_manutencao,
+                entidade_responsavel, observacoes_garant
+            ) VALUES (
+                :data_inicio, :data_fim, :contrato,
+                :entidade, :obs
+            )";
+
+            $stmtG = $ligacao->prepare($sqlGarantia);
+            $stmtG->execute([
+                ':data_inicio' => $data_inicio,
+                ':data_fim'    => $data_fim,
+                ':contrato'    => $contrato === 'Sim' ? 1 : 0,
+                ':entidade'    => $entidade,
+                ':obs'         => $obs_garantia ?: null,
+            ]);
+
+            $garantiaId = $ligacao->lastInsertId();
+
+            // 2. Inserir equipamento
+            $sqlEquip = "INSERT INTO equipamentos (
+                codigo_inventario, designacao_equipamento, marca, modelo, numero_serie,
+                fabricante, data_aquisicao, ano_fabrico, custo_aquisicao, observacoes,
+                categoria_grupo_id, estado_id, criticidade_id, tipo_entrada_id,
+                localizacao_id, garantia_contrato_id
+            ) VALUES (
+                :codigo, :designacao, :marca, :modelo, :numero_serie,
+                :fabricante, :data_aquisicao, :ano_fabrico, :custo_aquisicao, :observacoes,
+                :categoria_id, :estado_id, :criticidade_id, :tipo_entrada_id,
+                :localizacao_id, :garantia_id
+            )";
+
+            $stmtE = $ligacao->prepare($sqlEquip);
+            $stmtE->execute([
+                ':codigo'          => $codigo,
+                ':designacao'      => $designacao,
+                ':marca'           => $marca,
+                ':modelo'          => $modelo,
+                ':numero_serie'    => $numero_serie,
+                ':fabricante'      => $fabricante,
+                ':data_aquisicao'  => $data_aquisicao,
+                ':ano_fabrico'     => $ano_fabrico,
+                ':custo_aquisicao' => $custo_aquisicao,
+                ':observacoes'     => $observacoes ?: null,
+                ':categoria_id'    => $categoriaId,
+                ':estado_id'       => $estadoId,
+                ':criticidade_id'  => $criticidade,
+                ':tipo_entrada_id' => $tipoEntradaId,
+                ':localizacao_id'  => $localizacao,
+                ':garantia_id'     => $garantiaId,
+            ]);
+
+            $equipamentoId = $ligacao->lastInsertId();
+
+            // 3. Inserir fornecedores do equipamento
+            $sqlForn = "INSERT INTO equipamento_fornecedor (equipamento_id, fornecedor_id)
+                        VALUES (:equipamento_id, :fornecedor_id)";
+            $stmtF = $ligacao->prepare($sqlForn);
+
+            foreach ((array)$fornecedor as $fId) {
+                $stmtF->execute([
+                    ':equipamento_id' => $equipamentoId,
+                    ':fornecedor_id'  => $fId,
+                ]);
+            }
+
+            // 4. Inserir documentos
+            $sqlDoc = "INSERT INTO documentos (
+                equipamento_id, fornecedor_id, tipo_doc_id,
+                nome_doc, data_doc, data_validade, ficheiro
+            ) VALUES (
+                :equipamento_id, :fornecedor_id, :tipo_doc_id,
+                :nome_doc, :data_doc, :data_validade, :ficheiro
+            )";
+            $stmtD = $ligacao->prepare($sqlDoc);
+
+            foreach ($tipo_doc as $i => $t) {
+
+                // Obter id do tipo de documento
+                $stmtTipoDoc = $ligacao->prepare("SELECT id FROM tipo_doc WHERE tipo_doc = :tipo LIMIT 1");
+                $stmtTipoDoc->execute([':tipo' => $t]);
+                $tipoDocId = $stmtTipoDoc->fetchColumn();
+
+                // Guardar ficheiro
+                $nomeFicheiro = null;
+                if (!empty($ficheiro['name'][$i])) {
+                    $extensao    = pathinfo($ficheiro['name'][$i], PATHINFO_EXTENSION);
+                    $nomeFicheiro = uniqid('doc_') . '.' . $extensao;
+                    $destino     = __DIR__ . '/../../../uploads/' . $nomeFicheiro;
+                    move_uploaded_file($ficheiro['tmp_name'][$i], $destino);
+                }
+
+                $stmtD->execute([
+                    ':equipamento_id' => $equipamentoId,
+                    ':fornecedor_id'  => $fornecedor_doc[$i] ?: null,
+                    ':tipo_doc_id'    => $tipoDocId,
+                    ':nome_doc'       => $nome_doc[$i],
+                    ':data_doc'       => $data_doc[$i],
+                    ':data_validade'  => $data_validade[$i] ?: null,
+                    ':ficheiro'       => $nomeFicheiro,
+                ]);
+            }
+
+            $ligacao = null;
+
+            // Redirecionar para a listagem
+            header('Location: /ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php?sucesso=1');
+            exit;
+
+        } catch (PDOException $err) {
+            $erro_sistema = "Erro ao guardar os dados: " . $err->getMessage();
+        }
     }
 
 }

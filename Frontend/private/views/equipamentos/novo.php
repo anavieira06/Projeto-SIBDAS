@@ -316,10 +316,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erros[] = "A entidade responsável é obrigatória.";
     }
 
+    /*
     // Mostrar erros (para teste)
     echo "<pre>";
     print_r($erros);
     echo "</pre>";
+
+    */
 
     // 4. Se não houver erros, guardar na base de dados
 }
@@ -571,10 +574,6 @@ include '../../includes/sidebar.php';
                                                 <i class="fa-solid fa-arrow-right ms-1"></i>
                                             </button>
                                         </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
                                     </div> 
 
                                     <div class="tab-pane fade" id="infoFornecedores" role="tabpanel">
@@ -724,10 +723,6 @@ include '../../includes/sidebar.php';
                                             </button>
 
                                         </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
 
                                     </div>
 
@@ -807,10 +802,7 @@ include '../../includes/sidebar.php';
                                                 Seguinte
                                             </button>
                                         </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
+                                       
                                     </div>
 
                                     <div class="tab-pane fade" id="infoDocumentos" role="tabpanel">
@@ -943,10 +935,7 @@ include '../../includes/sidebar.php';
                                                 Seguinte
                                             </button>
                                         </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="tab-pane fade" id="garantiasContratos" role="tabpanel">
@@ -1062,10 +1051,17 @@ include '../../includes/sidebar.php';
                                                     </button>
                                                 </div>
                                             </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
+                                        <!-- Área de erros -->
+                                        <?php if (!empty($erros)): ?>
+                                        <div class="alert alert-danger mt-3" role="alert">
+                                            <strong>Foram encontrados os seguintes erros:</strong>
+                                            <ul class="mb-0 mt-2">
+                                                <?php foreach ($erros as $erro): ?>
+                                                    <li><?= htmlspecialchars($erro) ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </form>

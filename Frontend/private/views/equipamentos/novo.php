@@ -39,6 +39,7 @@ $periodicidade   = '';
 $entidade        = '';
 $obs_garantia    = '';
 $docs            = [];
+$erro_sistema    = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -88,7 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 2. Validar os dados
     $erros = [];
-
     $codigo          = trim($codigo);
     $categoria       = trim($categoria);
     $designacao      = trim($designacao);
@@ -103,10 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado          = trim($estado);
     $criticidade     = trim($criticidade);
     $localizacao     = trim($localizacao);
-    $fornecedor_doc  = trim($fornecedor_doc);
-    $tipo_doc        = trim($tipo_doc);
-    $nome_doc        = trim($nome_doc);
-    $data_doc        = trim($data_doc);
     $data_inicio     = trim($data_inicio);
     $data_fim        = trim($data_fim);
     $contrato        = trim($contrato);
@@ -401,7 +397,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (!empty($ficheiro['name'][$i])) {
                     $extensao    = pathinfo($ficheiro['name'][$i], PATHINFO_EXTENSION);
                     $nomeFicheiro = uniqid('doc_') . '.' . $extensao;
-                    $destino     = __DIR__ . '/../../../uploads/' . $nomeFicheiro;
+                    $destino     = __DIR__ . '/../../uploads/' . $nomeFicheiro;
                     move_uploaded_file($ficheiro['tmp_name'][$i], $destino);
                 }
 
@@ -459,8 +455,14 @@ try {
     $listaLocalizacoes = [];
 }
 
-include '../../includes/header.php'; 
-?>
+include '../../includes/header.php'; ?>
+
+<?php if (!empty($erro_sistema)): ?>
+    <div class="alert alert-danger mt-3 mx-4" role="alert">
+        <strong>Erro:</strong> <?= htmlspecialchars($erro_sistema) ?>
+    </div>
+<?php endif; ?>
+
 
 <?php
 $pagina = 'normal';
@@ -468,10 +470,8 @@ include '../../includes/nav.php';
 include '../../includes/sidebar.php';
 ?>
 
-        
-
         <!-- Conteúdo Principal -->
-            <main class="container-fluid p-4" style="background-color: #fff4fb;">
+            <main class="container-fluid p-4" style="background-color: #fff4fb; min-height:100vh">
                 <div class="d-flex justify-content-center mt-4">
                     <div class="card w-100 shadow rounded" style="max-width: 1200px;">
                         <div class="card-body">
@@ -941,7 +941,7 @@ include '../../includes/sidebar.php';
                                                         <label for="tipo_doc" class="form-label">Tipo de documento <span class="text-danger">*</span></label>
                                                         <select class="form-control" name="tipo_doc[]" id="tipo_doc" required>
                                                             <option value="" disabled <?= ($docs[0]['tipo'] ?? '') === '' ? 'selected' : '' ?>>Escolha uma opção</option>
-                                                            <option value="Manual de utilização"       <?= ($docs[0]['tipo'] ?? '') === 'Manual de utilização'       ? 'selected' : '' ?>>Manual de utilizador</option>
+                                                            <option value="Manual de utilizador"       <?= ($docs[0]['tipo'] ?? '') === 'Manual de utilizador'       ? 'selected' : '' ?>>Manual de utilizador</option>
                                                             <option value="Manual de serviço"          <?= ($docs[0]['tipo'] ?? '') === 'Manual de serviço'          ? 'selected' : '' ?>>Manual de serviço</option>
                                                             <option value="Certificado de calibração"  <?= ($docs[0]['tipo'] ?? '') === 'Certificado de calibração'  ? 'selected' : '' ?>>Certificado de calibração</option>
                                                             <option value="Contrato de manutenção"     <?= ($docs[0]['tipo'] ?? '') === 'Contrato de manutenção'     ? 'selected' : '' ?>>Contrato de manutenção</option>

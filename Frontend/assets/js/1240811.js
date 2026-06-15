@@ -265,7 +265,7 @@ function adicionarBlocoDocumento() {
                 <label class="form-label">Tipo de documento <span class="text-danger">*</span></label>
                 <select class="form-control" name="tipo_doc[]" required>
                     <option value="" selected disabled>Escolha uma opção</option>
-                    <option value="Manual de utilização">Manual de utilizador</option>
+                    <option value="Manual de utilizador">Manual de utilizador</option>
                     <option value="Manual de serviço">Manual de serviço</option>
                     <option value="Certificado de calibração">Certificado de calibração</option>
                     <option value="Contrato de manutenção">Contrato de manutenção</option>

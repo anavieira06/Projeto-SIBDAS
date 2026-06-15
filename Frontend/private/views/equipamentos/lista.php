@@ -209,7 +209,7 @@ $ligacao = null;
             <hr>
             <!-- Área de sucesso -->
             <?php if (isset($_GET['sucesso'])): ?>
-                <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+                <div class="alert alert-success d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
                     <i class="fa-solid fa-circle-check"></i>
                     Equipamento inserido com sucesso!
                 </div>
@@ -431,7 +431,7 @@ $ligacao = null;
                                                 <div class="d-flex justify-content-center align-items-center gap-2">
                                                     <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/detalhes.php?id=<?= $equipamento->id ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
-                                                    <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php?id=<?= $equipamento->id ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                                    <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
                                                     <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can"></i></a>
                                                 </div>
@@ -517,11 +517,6 @@ $ligacao = null;
                         <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-bs-dismiss="modal">
                             Eliminar
                         </button>
-                    </div>
-
-                    <!-- Área de erros -->
-                    <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                        • Erro
                     </div>
                 </div>
             </div>

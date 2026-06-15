@@ -11,3 +11,11 @@ define('MYSQL_PORT', 10464);
 define('MYSQL_DATABASE', 'db1240811');
 define('MYSQL_USERNAME', '1240811');
 define('MYSQL_PASSWORD', 'vieira_811');
+
+
+// --------------------------------------------------------------------
+// Segurança – Encriptação com OpenSSL
+// --------------------------------------------------------------------
+define('OPENSSL_METHOD', 'AES-256-CBC');
+define('OPENSSL_KEY',    'H0SDRQzIGqclX2kbYBk9xspdn9U5f3Wa'); // 32 caracteres
+define('OPENSSL_IV',     'BzKAbjuREsHgnw56');                  // 16 caracteres

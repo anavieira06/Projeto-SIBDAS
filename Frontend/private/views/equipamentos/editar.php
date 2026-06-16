@@ -1,6 +1,4 @@
 <?php 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 // --------------------------------------------------------------------
 // SEGURANÇA: Proteção de acesso à página de edição
 // Este ficheiro deve ser acedido apenas por utilizadores autenticados.
@@ -8,6 +6,7 @@ error_reporting(E_ALL);
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
+require_once __DIR__ . '/../../includes/validacoes.php';
 
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
     header('Location: ' . BASE_URL . '/public/login.php');
@@ -22,10 +21,7 @@ if (!$idEquipamento || !is_numeric($idEquipamento)) {
     header('Location: /ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php');
     exit;
 }
-if (!$idEquipamento || !is_numeric($idEquipamento)) {
-    header('Location: /ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php');
-    exit;
-}
+
 
 // --------------------------------------------------------------------
 // PROCESSAR FORMULÁRIO (POST)
@@ -36,82 +32,67 @@ $erros = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 1. Recolher dados
-    $codigo          = trim($_POST["codigo_inventario"]      ?? "");
-    $categoria       = trim($_POST["categoria_grupo"]        ?? "");
-    $designacao      = trim($_POST["designacao_equipamento"] ?? "");
-    $marca           = trim($_POST["marca"]                  ?? "");
-    $modelo          = trim($_POST["modelo"]                 ?? "");
-    $numero_serie    = trim($_POST["numero_serie"]           ?? "");
-    $fabricante      = trim($_POST["fabricante"]             ?? "");
-    $data_aquisicao  = trim($_POST["data_aquisicao"]         ?? "");
-    $ano_fabrico     = trim($_POST["ano_fabrico"]            ?? "");
-    $custo_aquisicao = trim($_POST["custo_aquisicao"]        ?? "");
-    $tipo_entrada    = trim($_POST["tipo_entrada"]           ?? "");
-    $estado          = trim($_POST["estado"]                 ?? "");
-    $criticidade     = trim($_POST["criticidade_id"]         ?? "");
-    $observacoes     = trim($_POST["observacoes"]            ?? "");
-    $localizacao     = trim($_POST["localizacao_id"]         ?? "");
-    $data_inicio     = trim($_POST["data_inicio"]            ?? "");
-    $data_fim        = trim($_POST["data_fim"]               ?? "");
-    $contrato        = trim($_POST["contrato_manutencao"]    ?? "");
-    $tipo_contrato   = trim($_POST["tipo_contrato"]          ?? "");
-    $periodicidade   = trim($_POST["periodicidade"]          ?? "");
-    $entidade        = trim($_POST["entidade_responsavel"]   ?? "");
-    $obs_garantia    = trim($_POST["observacoes_garant"]     ?? "");
+    $codigo          = $_POST["codigo_inventario"]      ?? "";
+    $categoria       = $_POST["categoria_grupo"]        ?? "";
+    $designacao      = $_POST["designacao_equipamento"] ?? "";
+    $marca           = $_POST["marca"]                  ?? "";
+    $modelo          = $_POST["modelo"]                 ?? "";
+    $numero_serie    = $_POST["numero_serie"]           ?? "";
+    $fabricante      = $_POST["fabricante"]             ?? "";
+    $data_aquisicao  = $_POST["data_aquisicao"]         ?? "";
+    $ano_fabrico     = $_POST["ano_fabrico"]            ?? "";
+    $custo_aquisicao = $_POST["custo_aquisicao"]        ?? "";
+    $tipo_entrada    = $_POST["tipo_entrada"]           ?? "";
+    $estado          = $_POST["estado"]                 ?? "";
+    $criticidade     = $_POST["criticidade_id"]         ?? "";
+    $observacoes     = $_POST["observacoes"]            ?? "";
+    $fornecedor      = $_POST["fornecedor_id"]          ?? [];
+    $localizacao     = $_POST["localizacao_id"]         ?? "";
+    $tipo_doc        = $_POST["tipo_doc"]               ?? [];
+    $nome_doc        = $_POST["nome_doc"]               ?? [];
+    $data_doc        = $_POST["data_doc"]               ?? [];
+    $data_validade   = $_POST["data_validade"]          ?? [];
+    $fornecedor_doc  = $_POST["fornecedor_doc_id"]      ?? [];
+    $ficheiro        = $_FILES["ficheiro"]              ?? [];
+    $data_inicio     = $_POST["data_inicio"]            ?? "";
+    $data_fim        = $_POST["data_fim"]               ?? "";
+    $contrato        = $_POST["contrato_manutencao"]    ?? "";
+    $tipo_contrato   = $_POST["tipo_contrato"]          ?? "";
+    $periodicidade   = $_POST["periodicidade"]          ?? "";
+    $entidade        = $_POST["entidade_responsavel"]   ?? "";
+    $obs_garantia    = $_POST["observacoes_garant"]     ?? "";
 
-    // 2. Validar
-    if (empty($codigo)) {
-        $erros[] = "O código de inventário é obrigatório.";
-    } elseif (!preg_match('/^EQ\d+$/', $codigo)) {
-        $erros[] = "O código de inventário deve começar por 'EQ' seguido de números.";
-    }
+    $docs = [];
+        if (!empty($tipo_doc)) {
+            foreach ($tipo_doc as $i => $t) {
+                $docs[] = [
+                    'tipo'          => $t,
+                    'nome'          => $nome_doc[$i]      ?? '',
+                    'data'          => $data_doc[$i]       ?? '',
+                    'data_validade' => $data_validade[$i]  ?? '',
+                    'fornecedor'    => $fornecedor_doc[$i] ?? '',
+                ];
+            }
+        }
 
-    if (empty($numero_serie)) {
-        $erros[] = "O número de série é obrigatório.";
-    } elseif (!preg_match('/^[A-Za-z0-9\-]+$/', $numero_serie)) {
-        $erros[] = "O número de série apenas pode conter letras, números e hífens.";
-    }
-
-    if (empty($designacao)) $erros[] = "A designação é obrigatória.";
-    if (empty($marca))      $erros[] = "A marca é obrigatória.";
-    if (empty($modelo))     $erros[] = "O modelo é obrigatório.";
-    if (empty($fabricante)) $erros[] = "O fabricante é obrigatório.";
-
-    if (empty($data_aquisicao)) {
-        $erros[] = "A data de aquisição é obrigatória.";
-    } elseif ($data_aquisicao > date('Y-m-d')) {
-        $erros[] = "A data de aquisição não pode ser superior à data atual.";
-    }
-
-    if (empty($ano_fabrico) || !is_numeric($ano_fabrico) || $ano_fabrico < 1980 || $ano_fabrico > 2026) {
-        $erros[] = "O ano de fabrico deve ser um valor entre 1980 e 2026.";
-    }
-
-    if (empty($custo_aquisicao) || !is_numeric($custo_aquisicao) || $custo_aquisicao < 0) {
-        $erros[] = "O custo de aquisição deve ser um valor numérico positivo.";
-    }
-
-    if (empty($tipo_entrada)) {
-        $erros[] = "O tipo de entrada é obrigatório.";
-    }
-    if (empty($estado))      $erros[] = "O estado atual é obrigatório.";
-    if (empty($criticidade)) $erros[] = "A criticidade é obrigatória.";
-    if (empty($localizacao)) $erros[] = "A localização é obrigatória.";
-    if (empty($entidade))    $erros[] = "A entidade responsável é obrigatória.";
-
-    if (empty($data_inicio)) {
-        $erros[] = "A data de início de garantia é obrigatória.";
-    } elseif ($data_inicio > date('Y-m-d')) {
-        $erros[] = "A data de início de garantia não pode ser superior à data atual.";
-    }
-
-    if (empty($data_fim)) {
-        $erros[] = "A data de fim de garantia é obrigatória.";
-    }
-
-    if (!empty($data_inicio) && !empty($data_fim) && $data_fim < $data_inicio) {
-        $erros[] = "A data de fim de garantia não pode ser anterior à data de início.";
-    }
+    // 2. Validar os dados
+    $erros = validar_equipamento([
+        'codigo'          => $codigo,
+        'categoria'       => $categoria,
+        'designacao'      => $designacao,
+        'marca'           => $marca,
+        'modelo'          => $modelo,
+        'numero_serie'    => $numero_serie,
+        'fabricante'      => $fabricante,
+        'data_aquisicao'  => $data_aquisicao,
+        'ano_fabrico'     => $ano_fabrico,
+        'custo_aquisicao' => $custo_aquisicao,
+        'tipo_entrada'    => $tipo_entrada,
+        'estado'          => $estado,
+        'criticidade'     => $criticidade,
+        'fornecedor'      => $fornecedor,
+        'localizacao'     => $localizacao,
+    ]);
 
     // 3. Normalizar
     if (empty($erros)) {
@@ -342,7 +323,7 @@ include '../../includes/sidebar.php';
                                     <strong>Erro:</strong> <?= htmlspecialchars($erro) ?>
                                 </div>
                             <?php endif; ?>
-                            
+
                             <form id="formEquipamento" action="editar.php?id=<?= $idEquipamentoEncriptado ?>" method="post" enctype="multipart/form-data">
                                 <ul class="nav nav-tabs mb-4" id="equipamentoTabs" role="tablist">
                                     <li class="nav-item" role="presentation">

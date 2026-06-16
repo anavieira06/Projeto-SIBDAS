@@ -6,6 +6,7 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
+require_once __DIR__ . '/../../includes/validacoes.php';
 
 // Valores por defeito (para quando a página carrega pela primeira vez)
 $erros           = [];
@@ -88,115 +89,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
     // 2. Validar os dados
-    $erros = [];
-    $codigo          = trim($codigo);
-    $categoria       = trim($categoria);
-    $designacao      = trim($designacao);
-    $marca           = trim($marca);
-    $modelo          = trim($modelo);
-    $numero_serie    = trim($numero_serie);
-    $fabricante      = trim($fabricante);
-    $data_aquisicao  = trim($data_aquisicao);
-    $ano_fabrico     = trim($ano_fabrico);
-    $custo_aquisicao = trim($custo_aquisicao);
-    $tipo_entrada    = trim($tipo_entrada);
-    $estado          = trim($estado);
-    $criticidade     = trim($criticidade);
-    $localizacao     = trim($localizacao);
-    $data_inicio     = trim($data_inicio);
-    $data_fim        = trim($data_fim);
-    $contrato        = trim($contrato);
-    $entidade        = trim($entidade);
-
-    // Código de inventário — formato EQ seguido de números (ex: EQ0001)
-    if (empty($codigo)) {
-        $erros[] = "O código de inventário é obrigatório.";
-    } elseif (!preg_match('/^EQ\d+$/', $codigo)) {
-        $erros[] = "O código de inventário deve começar por 'EQ' seguido de números (ex: EQ0001).";
-    }
-
-    // Categoria
-    if (empty($categoria)) {
-        $erros[] = "A categoria / grupo é obrigatória.";
-    }
-
-    // Designação
-    if (empty($designacao)) {
-        $erros[] = "A designação do equipamento é obrigatória.";
-    }
-
-    // Marca
-    if (empty($marca)) {
-        $erros[] = "A marca é obrigatória.";
-    }
-
-    // Modelo
-    if (empty($modelo)) {
-        $erros[] = "O modelo é obrigatório.";
-    }
-
-    // Nº de série — só letras, números e hífens
-    if (empty($numero_serie)) {
-        $erros[] = "O número de série é obrigatório.";
-    } elseif (!preg_match('/^[A-Za-z0-9\-]+$/', $numero_serie)) {
-        $erros[] = "O número de série apenas pode conter letras, números e hífens.";
-    }
-
-    // Fabricante
-    if (empty($fabricante)) {
-        $erros[] = "O fabricante é obrigatório.";
-    }
-
-    // Data de aquisição
-    if (empty($data_aquisicao)) {
-        $erros[] = "A data de aquisição é obrigatória.";
-    } else {
-        $partes = explode('-', $data_aquisicao);
-        if (!checkdate((int)$partes[1], (int)$partes[2], (int)$partes[0])) {
-            $erros[] = "A data de aquisição é inválida.";
-        } elseif ($data_aquisicao > date('Y-m-d')) {
-            $erros[] = "A data de aquisição não pode ser superior à data atual.";
-        }
-    }
-
-    // Ano de fabrico
-    if (empty($ano_fabrico)) {
-        $erros[] = "O ano de fabrico é obrigatório.";
-    } elseif (!is_numeric($ano_fabrico) || $ano_fabrico < 1980 || $ano_fabrico > 2026) {
-        $erros[] = "O ano de fabrico deve ser um valor entre 1980 e 2026.";
-    }
-
-    // Custo de aquisição
-    if (empty($custo_aquisicao)) {
-        $erros[] = "O custo de aquisição é obrigatório.";
-    } elseif (!is_numeric($custo_aquisicao) || $custo_aquisicao < 0) {
-        $erros[] = "O custo de aquisição deve ser um valor numérico positivo.";
-    }
-
-    // Tipo de entrada
-    if (empty($tipo_entrada)) {
-        $erros[] = "O tipo de entrada é obrigatório.";
-    }
-
-    // Estado
-    if (empty($estado)) {
-        $erros[] = "O estado atual é obrigatório.";
-    }
-
-    // Criticidade
-    if (empty($criticidade)) {
-        $erros[] = "A criticidade é obrigatória.";
-    }
-
-    // Fornecedor(es) do equipamento
-    if (empty($fornecedor)) {
-        $erros[] = "É necessário associar pelo menos um fornecedor.";
-    }
-
-    // Localização
-    if (empty($localizacao)) {
-        $erros[] = "A localização é obrigatória.";
-    }
+    $erros = validar_equipamento([
+        'codigo'          => $codigo,
+        'categoria'       => $categoria,
+        'designacao'      => $designacao,
+        'marca'           => $marca,
+        'modelo'          => $modelo,
+        'numero_serie'    => $numero_serie,
+        'fabricante'      => $fabricante,
+        'data_aquisicao'  => $data_aquisicao,
+        'ano_fabrico'     => $ano_fabrico,
+        'custo_aquisicao' => $custo_aquisicao,
+        'tipo_entrada'    => $tipo_entrada,
+        'estado'          => $estado,
+        'criticidade'     => $criticidade,
+        'fornecedor'      => $fornecedor,
+        'localizacao'     => $localizacao,
+    ]);
 
     // Documentação
 

@@ -20,7 +20,238 @@ if (!$idEquipamento || !is_numeric($idEquipamento)) {
     header('Location: /ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php');
     exit;
 }
+if (!$idEquipamento || !is_numeric($idEquipamento)) {
+    header('Location: /ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php');
+    exit;
+}
 
+// --------------------------------------------------------------------
+// PROCESSAR FORMULÁRIO (POST)
+// --------------------------------------------------------------------
+$erro  = "";
+$erros = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // 1. Recolher dados
+    $codigo          = trim($_POST["codigo_inventario"]      ?? "");
+    $categoria       = trim($_POST["categoria_grupo"]        ?? "");
+    $designacao      = trim($_POST["designacao_equipamento"] ?? "");
+    $marca           = trim($_POST["marca"]                  ?? "");
+    $modelo          = trim($_POST["modelo"]                 ?? "");
+    $numero_serie    = trim($_POST["numero_serie"]           ?? "");
+    $fabricante      = trim($_POST["fabricante"]             ?? "");
+    $data_aquisicao  = trim($_POST["data_aquisicao"]         ?? "");
+    $ano_fabrico     = trim($_POST["ano_fabrico"]            ?? "");
+    $custo_aquisicao = trim($_POST["custo_aquisicao"]        ?? "");
+    $tipo_entrada    = trim($_POST["tipo_entrada"]           ?? "");
+    $estado          = trim($_POST["estado"]                 ?? "");
+    $criticidade     = trim($_POST["criticidade_id"]         ?? "");
+    $observacoes     = trim($_POST["observacoes"]            ?? "");
+    $localizacao     = trim($_POST["localizacao_id"]         ?? "");
+    $data_inicio     = trim($_POST["data_inicio"]            ?? "");
+    $data_fim        = trim($_POST["data_fim"]               ?? "");
+    $contrato        = trim($_POST["contrato_manutencao"]    ?? "");
+    $tipo_contrato   = trim($_POST["tipo_contrato"]          ?? "");
+    $periodicidade   = trim($_POST["periodicidade"]          ?? "");
+    $entidade        = trim($_POST["entidade_responsavel"]   ?? "");
+    $obs_garantia    = trim($_POST["observacoes_garant"]     ?? "");
+
+    // 2. Validar
+    if (empty($codigo)) {
+        $erros[] = "O código de inventário é obrigatório.";
+    } elseif (!preg_match('/^EQ\d+$/', $codigo)) {
+        $erros[] = "O código de inventário deve começar por 'EQ' seguido de números.";
+    }
+
+    if (empty($designacao)) $erros[] = "A designação é obrigatória.";
+    if (empty($marca))      $erros[] = "A marca é obrigatória.";
+    if (empty($modelo))     $erros[] = "O modelo é obrigatório.";
+    if (empty($fabricante)) $erros[] = "O fabricante é obrigatório.";
+
+    if (empty($data_aquisicao)) {
+        $erros[] = "A data de aquisição é obrigatória.";
+    } elseif ($data_aquisicao > date('Y-m-d')) {
+        $erros[] = "A data de aquisição não pode ser superior à data atual.";
+    }
+
+    if (empty($ano_fabrico) || !is_numeric($ano_fabrico) || $ano_fabrico < 1980 || $ano_fabrico > 2026) {
+        $erros[] = "O ano de fabrico deve ser um valor entre 1980 e 2026.";
+    }
+
+    if (empty($custo_aquisicao) || !is_numeric($custo_aquisicao) || $custo_aquisicao < 0) {
+        $erros[] = "O custo de aquisição deve ser um valor numérico positivo.";
+    }
+
+    if (empty($estado))      $erros[] = "O estado atual é obrigatório.";
+    if (empty($criticidade)) $erros[] = "A criticidade é obrigatória.";
+    if (empty($localizacao)) $erros[] = "A localização é obrigatória.";
+    if (empty($entidade))    $erros[] = "A entidade responsável é obrigatória.";
+
+    if (empty($data_inicio)) {
+        $erros[] = "A data de início de garantia é obrigatória.";
+    } elseif ($data_inicio > date('Y-m-d')) {
+        $erros[] = "A data de início de garantia não pode ser superior à data atual.";
+    }
+
+    if (empty($data_fim)) {
+        $erros[] = "A data de fim de garantia é obrigatória.";
+    }
+
+    if (!empty($data_inicio) && !empty($data_fim) && $data_fim < $data_inicio) {
+        $erros[] = "A data de fim de garantia não pode ser anterior à data de início.";
+    }
+
+    // 3. Normalizar
+    if (empty($erros)) {
+        $designacao = ucwords(strtolower($designacao));
+        $marca      = ucwords(strtolower($marca));
+        $modelo     = ucwords(strtolower($modelo));
+        $fabricante = ucwords(strtolower($fabricante));
+        $entidade   = ucwords(strtolower($entidade));
+    }
+
+    // 4. Atualizar na BD
+    if (empty($erros)) {
+        try {
+            $ligacao = new PDO(
+                "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+                MYSQL_USERNAME,
+                MYSQL_PASSWORD
+            );
+            $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Obter IDs
+            $stmtEstado = $ligacao->prepare("SELECT id FROM estado WHERE estado = :estado LIMIT 1");
+            $stmtEstado->execute([':estado' => $estado]);
+            $estadoId = $stmtEstado->fetchColumn();
+
+            $stmtCategoria = $ligacao->prepare("SELECT id FROM categoria_grupo WHERE categoria_grupo = :cat LIMIT 1");
+            $stmtCategoria->execute([':cat' => $categoria]);
+            $categoriaId = $stmtCategoria->fetchColumn();
+
+            $stmtTipoEntrada = $ligacao->prepare("SELECT id FROM tipo_entrada WHERE tipo_entrada = :tipo LIMIT 1");
+            $stmtTipoEntrada->execute([':tipo' => $tipo_entrada]);
+            $tipoEntradaId = $stmtTipoEntrada->fetchColumn();
+
+            // UPDATE equipamento
+            $sqlEquip = "UPDATE equipamentos SET
+                codigo_inventario      = :codigo,
+                designacao_equipamento = :designacao,
+                marca                  = :marca,
+                modelo                 = :modelo,
+                numero_serie           = :numero_serie,
+                fabricante             = :fabricante,
+                data_aquisicao         = :data_aquisicao,
+                ano_fabrico            = :ano_fabrico,
+                custo_aquisicao        = :custo_aquisicao,
+                observacoes            = :observacoes,
+                categoria_grupo_id     = :categoria_id,
+                estado_id              = :estado_id,
+                criticidade_id         = :criticidade_id,
+                tipo_entrada_id        = :tipo_entrada_id,
+                localizacao_id         = :localizacao_id
+                WHERE id = :id";
+
+            $stmtE = $ligacao->prepare($sqlEquip);
+            $stmtE->execute([
+                ':codigo'          => $codigo,
+                ':designacao'      => $designacao,
+                ':marca'           => $marca,
+                ':modelo'          => $modelo,
+                ':numero_serie'    => $numero_serie,
+                ':fabricante'      => $fabricante,
+                ':data_aquisicao'  => $data_aquisicao,
+                ':ano_fabrico'     => $ano_fabrico,
+                ':custo_aquisicao' => $custo_aquisicao,
+                ':observacoes'     => $observacoes ?: null,
+                ':categoria_id'    => $categoriaId,
+                ':estado_id'       => $estadoId,
+                ':criticidade_id'  => $criticidade,
+                ':tipo_entrada_id' => $tipoEntradaId,
+                ':localizacao_id'  => $localizacao,
+                ':id'              => $idEquipamento,
+            ]);
+
+            // UPDATE garantia
+            $sqlGarantia = "UPDATE garantias_contratos SET
+                data_inicio          = :data_inicio,
+                data_fim             = :data_fim,
+                contrato_manutencao  = :contrato,
+                tipo_contrato        = :tipo_contrato,
+                periodicidade        = :periodicidade,
+                entidade_responsavel = :entidade,
+                observacoes_garant   = :obs
+                WHERE id = (SELECT garantia_contrato_id FROM equipamentos WHERE id = :eq_id)";
+
+            $stmtG = $ligacao->prepare($sqlGarantia);
+            $stmtG->execute([
+                ':data_inicio'   => $data_inicio,
+                ':data_fim'      => $data_fim,
+                ':contrato'      => $contrato === 'Sim' ? 1 : 0,
+                ':tipo_contrato' => $tipo_contrato ?: null,
+                ':periodicidade' => $periodicidade ?: null,
+                ':entidade'      => $entidade,
+                ':obs'           => $obs_garantia ?: null,
+                ':eq_id'         => $idEquipamento,
+            ]);
+
+            $ligacao = null;
+
+            header('Location: /ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php?atualizado=1');
+            exit;
+
+        } catch (PDOException $err) {
+            $erro = "Erro ao atualizar os dados: " . $err->getMessage();
+        }
+    }
+}
+
+// --------------------------------------------------------------------
+// BUSCAR DADOS DO EQUIPAMENTO NA BD (GET)
+// --------------------------------------------------------------------
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $ligacao->prepare("
+        SELECT e.*,
+               cg.categoria_grupo AS categoria,
+               es.estado,
+               c.criticidade,
+               l.servico_depart AS localizacao,
+               l.edificio, l.piso, l.sala_gabinete,
+               gc.data_inicio, gc.data_fim, gc.contrato_manutencao,
+               gc.entidade_responsavel, gc.observacoes_garant,
+               gc.tipo_contrato, gc.periodicidade
+        FROM equipamentos e
+        LEFT JOIN categoria_grupo cg ON e.categoria_grupo_id = cg.id
+        LEFT JOIN estado es ON e.estado_id = es.id
+        LEFT JOIN criticidade c ON e.criticidade_id = c.id
+        LEFT JOIN localizacoes l ON e.localizacao_id = l.id
+        LEFT JOIN garantias_contratos gc ON e.garantia_contrato_id = gc.id
+        WHERE e.id = :id
+    ");
+    $stmt->bindParam(':id', $idEquipamento, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $equipamento = $stmt->fetch(PDO::FETCH_OBJ);
+
+    if (!$equipamento) {
+        header('Location: /ProjetoSIBDAS/Frontend/private/views/equipamentos/lista.php');
+        exit;
+    }
+
+} catch (PDOException $err) {
+    $erro = "Erro na ligação à base de dados.";
+    $equipamento = null;
+}
+
+$ligacao = null;
 
 include '../../includes/header.php'; 
 ?>

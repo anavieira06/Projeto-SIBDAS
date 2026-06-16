@@ -140,66 +140,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tipoEntradaId = $stmtTipoEntrada->fetchColumn();
 
             // UPDATE equipamento
-            $sqlEquip = "UPDATE equipamentos SET
-                codigo_inventario      = :codigo,
-                designacao_equipamento = :designacao,
-                marca                  = :marca,
-                modelo                 = :modelo,
-                numero_serie           = :numero_serie,
-                fabricante             = :fabricante,
-                data_aquisicao         = :data_aquisicao,
-                ano_fabrico            = :ano_fabrico,
-                custo_aquisicao        = :custo_aquisicao,
-                observacoes            = :observacoes,
-                categoria_grupo_id     = :categoria_id,
-                estado_id              = :estado_id,
-                criticidade_id         = :criticidade_id,
-                tipo_entrada_id        = :tipo_entrada_id,
-                localizacao_id         = :localizacao_id
-                WHERE id = :id";
+            $stmtE = $ligacao->prepare("UPDATE equipamentos SET
+            codigo_inventario      = :codigo,
+            designacao_equipamento = :designacao,
+            marca                  = :marca,
+            modelo                 = :modelo,
+            numero_serie           = :numero_serie,
+            fabricante             = :fabricante,
+            data_aquisicao         = :data_aquisicao,
+            ano_fabrico            = :ano_fabrico,
+            custo_aquisicao        = :custo_aquisicao,
+            observacoes            = :observacoes,
+            categoria_grupo_id     = :categoria_id,
+            estado_id              = :estado_id,
+            criticidade_id         = :criticidade_id,
+            tipo_entrada_id        = :tipo_entrada_id,
+            localizacao_id         = :localizacao_id
+            WHERE id = :id");
 
-            $stmtE = $ligacao->prepare($sqlEquip);
-            $stmtE->execute([
-                ':codigo'          => $codigo,
-                ':designacao'      => $designacao,
-                ':marca'           => $marca,
-                ':modelo'          => $modelo,
-                ':numero_serie'    => $numero_serie,
-                ':fabricante'      => $fabricante,
-                ':data_aquisicao'  => $data_aquisicao,
-                ':ano_fabrico'     => $ano_fabrico,
-                ':custo_aquisicao' => $custo_aquisicao,
-                ':observacoes'     => $observacoes ?: null,
-                ':categoria_id'    => $categoriaId,
-                ':estado_id'       => $estadoId,
-                ':criticidade_id'  => $criticidade,
-                ':tipo_entrada_id' => $tipoEntradaId,
-                ':localizacao_id'  => $localizacao,
-                ':id'              => $idEquipamento,
-            ]);
+            $stmtE->bindParam(':codigo',          $codigo,          PDO::PARAM_STR);
+            $stmtE->bindParam(':designacao',      $designacao,      PDO::PARAM_STR);
+            $stmtE->bindParam(':marca',           $marca,           PDO::PARAM_STR);
+            $stmtE->bindParam(':modelo',          $modelo,          PDO::PARAM_STR);
+            $stmtE->bindParam(':numero_serie',    $numero_serie,    PDO::PARAM_STR);
+            $stmtE->bindParam(':fabricante',      $fabricante,      PDO::PARAM_STR);
+            $stmtE->bindParam(':data_aquisicao',  $data_aquisicao,  PDO::PARAM_STR);
+            $stmtE->bindParam(':ano_fabrico',     $ano_fabrico,     PDO::PARAM_INT);
+            $stmtE->bindParam(':custo_aquisicao', $custo_aquisicao, PDO::PARAM_STR);
+            $stmtE->bindParam(':observacoes',     $observacoes,     PDO::PARAM_STR);
+            $stmtE->bindParam(':categoria_id',    $categoriaId,     PDO::PARAM_INT);
+            $stmtE->bindParam(':estado_id',       $estadoId,        PDO::PARAM_INT);
+            $stmtE->bindParam(':criticidade_id',  $criticidade,     PDO::PARAM_INT);
+            $stmtE->bindParam(':tipo_entrada_id', $tipoEntradaId,   PDO::PARAM_INT);
+            $stmtE->bindParam(':localizacao_id',  $localizacao,     PDO::PARAM_INT);
+            $stmtE->bindParam(':id',              $idEquipamento,   PDO::PARAM_INT);
+            $stmtE->execute();
 
             // UPDATE garantia
-            $sqlGarantia = "UPDATE garantias_contratos SET
-                data_inicio          = :data_inicio,
-                data_fim             = :data_fim,
-                contrato_manutencao  = :contrato,
-                tipo_contrato        = :tipo_contrato,
-                periodicidade        = :periodicidade,
-                entidade_responsavel = :entidade,
-                observacoes_garant   = :obs
-                WHERE id = (SELECT garantia_contrato_id FROM equipamentos WHERE id = :eq_id)";
+            $stmtG = $ligacao->prepare("UPDATE garantias_contratos SET
+            data_inicio          = :data_inicio,
+            data_fim             = :data_fim,
+            contrato_manutencao  = :contrato,
+            entidade_responsavel = :entidade,
+            observacoes_garant   = :obs
+            WHERE id = (SELECT garantia_contrato_id FROM equipamentos WHERE id = :eq_id)");
 
-            $stmtG = $ligacao->prepare($sqlGarantia);
-            $stmtG->execute([
-                ':data_inicio'   => $data_inicio,
-                ':data_fim'      => $data_fim,
-                ':contrato'      => $contrato === 'Sim' ? 1 : 0,
-                ':tipo_contrato' => $tipo_contrato ?: null,
-                ':periodicidade' => $periodicidade ?: null,
-                ':entidade'      => $entidade,
-                ':obs'           => $obs_garantia ?: null,
-                ':eq_id'         => $idEquipamento,
-            ]);
+            $stmtG->bindParam(':data_inicio', $data_inicio, PDO::PARAM_STR);
+            $stmtG->bindParam(':data_fim',    $data_fim,    PDO::PARAM_STR);
+            $contratoValor = $contrato === 'Sim' ? 1 : 0;
+            $stmtG->bindParam(':contrato',    $contratoValor, PDO::PARAM_INT);
+            $stmtG->bindParam(':entidade',    $entidade,    PDO::PARAM_STR);
+            $stmtG->bindParam(':obs',         $obs_garantia, PDO::PARAM_STR);
+            $stmtG->bindParam(':eq_id',       $idEquipamento, PDO::PARAM_INT);
+            $stmtG->execute();
 
             $ligacao = null;
 

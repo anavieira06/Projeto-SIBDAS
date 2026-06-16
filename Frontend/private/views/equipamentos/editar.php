@@ -66,6 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erros[] = "O código de inventário deve começar por 'EQ' seguido de números.";
     }
 
+    if (empty($numero_serie)) {
+        $erros[] = "O número de série é obrigatório.";
+    } elseif (!preg_match('/^[A-Za-z0-9\-]+$/', $numero_serie)) {
+        $erros[] = "O número de série apenas pode conter letras, números e hífens.";
+    }
+
     if (empty($designacao)) $erros[] = "A designação é obrigatória.";
     if (empty($marca))      $erros[] = "A marca é obrigatória.";
     if (empty($modelo))     $erros[] = "O modelo é obrigatório.";
@@ -200,7 +206,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
 
         } catch (PDOException $err) {
-            $erro = "Erro ao atualizar os dados: " . $err->getMessage();
+            if ($err->getCode() == 23000) {
+                if (strpos($err->getMessage(), 'codigo_inventario') !== false) {
+                    $erro = "Já existe um equipamento com este código de inventário.";
+                } elseif (strpos($err->getMessage(), 'numero_serie') !== false) {
+                    $erro = "Já existe um equipamento com este número de série.";
+                } else {
+                    $erro = "Erro de duplicação: " . $err->getMessage();
+                }
+            } else {
+                $erro = "Erro ao guardar os dados: " . $err->getMessage();
+            }
         }
     }
 }
@@ -309,6 +325,24 @@ include '../../includes/sidebar.php';
                         <div class="card-body">
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-plus me-2" style="color: #680447;"></i> Atualização de Dados EQUIPAMENTO</strong></h2>
                             <hr>
+                            <!-- Área de erros -->
+                            <?php if (!empty($erros)): ?>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>Foram encontrados os seguintes erros:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <?php foreach ($erros as $e): ?>
+                                        <li><?= htmlspecialchars($e) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                            <?php endif; ?>
+
+                            <?php if (!empty($erro)): ?>
+                                <div class="alert alert-danger mt-3" role="alert">
+                                    <strong>Erro:</strong> <?= htmlspecialchars($erro) ?>
+                                </div>
+                            <?php endif; ?>
+                            
                             <form id="formEquipamento" action="editar.php?id=<?= $idEquipamentoEncriptado ?>" method="post" enctype="multipart/form-data">
                                 <ul class="nav nav-tabs mb-4" id="equipamentoTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
@@ -655,10 +689,6 @@ include '../../includes/sidebar.php';
                                             </button>
 
                                         </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
 
                                     </div>
 
@@ -738,10 +768,7 @@ include '../../includes/sidebar.php';
                                                 Seguinte
                                             </button>
                                         </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="tab-pane fade" id="infoDocumentos" role="tabpanel">
@@ -859,10 +886,7 @@ include '../../includes/sidebar.php';
                                                 Seguinte
                                             </button>
                                         </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="tab-pane fade" id="garantiasContratos" role="tabpanel">
@@ -965,10 +989,6 @@ include '../../includes/sidebar.php';
                                                     </button>
                                                 </div>
                                             </div>
-                                        <!-- Área de erros -->
-                                        <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                            • Erro
-                                        </div>
                                     </div>
                                 </div>
                             </form>

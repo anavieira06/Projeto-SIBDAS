@@ -477,6 +477,23 @@ include '../../includes/sidebar.php';
                         <div class="card-body">
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-plus me-2" style="color: #680447;"></i> Inserir novo equipamento</strong></h2>
                             <hr>
+                            <!-- Área de erros -->
+                            <?php if (!empty($erros)): ?>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>Foram encontrados os seguintes erros:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <?php foreach ($erros as $erro): ?>
+                                        <li><?= htmlspecialchars($erro) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                            <?php endif; ?>
+                            <?php if (!empty($erro_sistema)): ?>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>Erro:</strong> <?= htmlspecialchars($erro_sistema) ?>
+                            </div>
+                            <?php endif; ?>
+
                             <form id="formEquipamento" action="#" method="post" enctype="multipart/form-data">
                                 <ul class="nav nav-tabs mb-4" id="equipamentoTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
@@ -1153,17 +1170,6 @@ include '../../includes/sidebar.php';
                                                     </button>
                                                 </div>
                                             </div>
-                                        <!-- Área de erros -->
-                                        <?php if (!empty($erros)): ?>
-                                        <div class="alert alert-danger mt-3" role="alert">
-                                            <strong>Foram encontrados os seguintes erros:</strong>
-                                            <ul class="mb-0 mt-2">
-                                                <?php foreach ($erros as $erro): ?>
-                                                    <li><?= htmlspecialchars($erro) ?></li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </div>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </form>

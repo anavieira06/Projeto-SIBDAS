@@ -214,6 +214,12 @@ $ligacao = null;
                     Equipamento inserido com sucesso!
                 </div>
             <?php endif; ?>
+            <?php if (isset($_GET['atualizado'])): ?>
+                <div class="alert alert-success d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Equipamento atualizado com sucesso!
+                </div>
+            <?php endif; ?>
 
             <div class="card border-0 shadow mb-4 rounded-4">
 

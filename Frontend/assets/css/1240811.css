@@ -924,7 +924,9 @@ body{
 #tabelaFornecedores th,
 #tabelaFornecedores td,
 #tabelaLocalizacoes th,
-#tabelaLocalizacoes td {
+#tabelaLocalizacoes td,
+#tabelaDocumentos th,
+#tabelaDocumentos td {
     border: 1px solid #dee2e6 !important;
     white-space: nowrap;
     vertical-align: middle;

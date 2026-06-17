@@ -105,6 +105,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'criticidade'     => $criticidade,
         'fornecedor'      => $fornecedor,
         'localizacao'     => $localizacao,
+        'tipo_doc'        => $tipo_doc,
+        'nome_doc'        => $nome_doc,
+        'data_doc'        => $data_doc,
+        'fornecedor_doc'  => $fornecedor_doc,
+        'ficheiro'        => $ficheiro,
+        'data_inicio'     => $data_inicio,
+        'data_fim'        => $data_fim,
+        'contrato'        => $contrato,
+        'entidade'        => $entidade,
     ]);
 
     // Documentação

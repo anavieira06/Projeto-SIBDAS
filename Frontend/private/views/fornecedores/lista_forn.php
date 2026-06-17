@@ -130,7 +130,13 @@ try {
     $erro = '';
 
 } catch (PDOException $err) {
-    $erro = "Erro: " . $err->getMessage();
+    $erro = "Aconteceu um erro na ligação.";
+    $resultados = [];
+    $totalPaginas = 0;
+    $totalRegistos = 0;
+    $listaNomeEmpresas = [];
+    $listaTipoFornecedores = [];
+    
 }
 
 // Fecha a ligação
@@ -250,7 +256,7 @@ $ligacao = null;
                 </div>
 
                 <div class="table-responsive">
-                    <table id="tabelaFornecedores" class="table table-bordered align-middle text-center w-100">
+                    <table id="tabelaFornecedores" class="table table-bordered table-hover align-middle text-center w-100">
                         <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
                             <tr>
                                 <th>

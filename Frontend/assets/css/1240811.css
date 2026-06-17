@@ -883,37 +883,7 @@ body{
     background-color: #fff4fb !important;
 }
  
-/* Tabela de listagem dos equipametos */
-/* Forçar grelha completa na tabela de fornecedores */
-#tabelaEquipamentos th,
-#tabelaEquipamentos td {
-    border: none !important;
-    box-shadow:
-        inset 1px 0 0 #dee2e6,
-        inset 0 1px 0 #dee2e6 !important;
-}
 
-/* linha inferior da última linha */
-#tabelaEquipamentos tbody tr:last-child td {
-    box-shadow:
-        inset 1px 0 0 #dee2e6,
-        inset 0 1px 0 #dee2e6,
-        inset 0 -1px 0 #dee2e6 !important;
-}
-
-/* manter scroll horizontal */
-#tabelaEquipamentos {
-    min-width: 1200px;
-    width: 100%;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-}
-
-#tabelaEquipamentos th,
-#tabelaEquipamentos td {
-    white-space: nowrap;
-    vertical-align: middle;
-}
 
 
 .table-responsive {
@@ -948,34 +918,14 @@ body{
     border-color: #e6c6da !important;
 }
 
-/* Tabela de listagem dos fornecedores */
-/* Forçar grelha completa na tabela de fornecedores */
+
+#tabelaEquipamentos th,
+#tabelaEquipamentos td,
 #tabelaFornecedores th,
-#tabelaFornecedores td {
-    border: none !important;
-    box-shadow:
-        inset 1px 0 0 #dee2e6,
-        inset 0 1px 0 #dee2e6 !important;
-}
-
-/* linha inferior da última linha */
-#tabelaFornecedores tbody tr:last-child td {
-    box-shadow:
-        inset 1px 0 0 #dee2e6,
-        inset 0 1px 0 #dee2e6,
-        inset 0 -1px 0 #dee2e6 !important;
-}
-
-/* manter scroll horizontal */
-#tabelaFornecedores {
-    min-width: 1200px;
-    width: 100%;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-}
-
-#tabelaFornecedores th,
-#tabelaFornecedores td {
+#tabelaFornecedores td,
+#tabelaLocalizacoes th,
+#tabelaLocalizacoes td {
+    border: 1px solid #dee2e6 !important;
     white-space: nowrap;
     vertical-align: middle;
 }

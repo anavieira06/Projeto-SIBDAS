@@ -343,7 +343,7 @@ $ligacao = null;
 
                     </div>
                     <div class="table-responsive">
-                        <table id="tabelaEquipamentos" class="table table-bordered align-middle text-center w-100">
+                        <table id="tabelaEquipamentos" class="table table-bordered table-hover align-middle text-center w-100">
                                 <thead class="table align-middle text-center" style="color: #fff; background-color: #945880;">
                                     <tr>
                                         <th>

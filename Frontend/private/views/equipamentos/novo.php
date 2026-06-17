@@ -373,7 +373,7 @@ try {
     $listaLocalizacoes = [];
 }
 
-include '../../includes/header.php'; ?>
+include __DIR__ . '../../includes/header.php'; ?>
 
 <?php if (!empty($erro_sistema)): ?>
     <div class="alert alert-danger mt-3 mx-4" role="alert">
@@ -384,8 +384,8 @@ include '../../includes/header.php'; ?>
 
 <?php
 $pagina = 'normal';
-include '../../includes/nav.php';
-include '../../includes/sidebar.php';
+include __DIR__ . '../../includes/nav.php';
+include __DIR__ . '../../includes/sidebar.php';
 ?>
 
         <!-- Conteúdo Principal -->
@@ -1135,4 +1135,4 @@ flatpickr("#data_validade",  { dateFormat: "Y-m-d", locale: "pt" });
 <!-- Custom JS -->
 <script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>
 
-<?php include '../../includes/footer.php'; ?>
+<?php include __DIR__ . '../../includes/footer.php'; ?>

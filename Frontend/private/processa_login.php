@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/funcoes.php';
+require_once __DIR__ . 'includes/funcoes.php';
 session_start();
 
 // Impede o acesso direto ao script (apenas permite pedidos POST)

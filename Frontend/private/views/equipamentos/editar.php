@@ -299,12 +299,12 @@ try {
 $ligacao = null;
 
 
-include __DIR__ . '../../includes/header.php'; 
+include __DIR__ . '/../../includes/header.php'; 
 ?>
 <?php
 $pagina = 'normal';
-include __DIR__ . '../../includes/nav.php';
-include __DIR__ . '../../includes/sidebar.php';
+include __DIR__ . '/../../includes/nav.php';
+include __DIR__ . '/../../includes/sidebar.php';
 ?>
         
 
@@ -1019,4 +1019,4 @@ const localizacoes = {
 <!-- Custom JS -->
 <script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>
 
-<?php include __DIR__ . '../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>

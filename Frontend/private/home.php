@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . 'includes/funcoes.php';
+require_once __DIR__ . '/includes/funcoes.php';
 redirect_if_not_logged();
 start_session();
 
@@ -8,9 +8,9 @@ unset($_SESSION['success_message']);
 ?>
 
 <?php 
-include __DIR__ . 'includes/header.php';
+include __DIR__ . '/includes/header.php';
 $pagina = 'index';
-include __DIR__ . 'includes/nav.php';
+include __DIR__ . '/includes/nav.php';
 ?>
 
 <?php if (!empty($success_message)) : ?>
@@ -28,7 +28,7 @@ include __DIR__ . 'includes/nav.php';
 
 <div class="container-fluid">
     <div class="row">
-        <?php include __DIR__ . 'includes/sidebar.php'; ?>
+        <?php include __DIR__ . '/includes/sidebar.php'; ?>
         <!-- Conteúdo Principal -->
         <main class="col-8 col-md-9 col-lg-10 p-4">
             <section class="main-section">
@@ -40,4 +40,4 @@ include __DIR__ . 'includes/nav.php';
     </div>
 </div>
 
-<?php include __DIR__ . 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

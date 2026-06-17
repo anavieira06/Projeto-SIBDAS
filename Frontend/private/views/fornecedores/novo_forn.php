@@ -6,7 +6,6 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
-include __DIR__ . '../../includes/header.php'; 
 
 // Valores por defeito
 $erros             = [];
@@ -21,12 +20,71 @@ $pessoa_contacto   = '';
 $tel_pessoa_contacto = '';
 $observacoes       = '';
 $erro_sistema      = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ 
+    // 1. Recolher dados
+    $nome_empresa        = trim($_POST['nome_empresa']        ?? '');
+    $nif                 = trim($_POST['nif']                 ?? '');
+    $morada              = trim($_POST['morada']              ?? '');
+    $tipo_fornecedor     = trim($_POST['tipo_fornecedor']     ?? '');
+    $numero_telefonico   = trim($_POST['numero_telefonico']   ?? '');
+    $email               = trim($_POST['email']               ?? '');
+    $website             = trim($_POST['website']             ?? '');
+    $pessoa_contacto     = trim($_POST['pessoa_contacto']     ?? '');
+    $tel_pessoa_contacto = trim($_POST['tel_pessoa_contacto'] ?? '');
+    $observacoes         = trim($_POST['observacoes']         ?? '');
+
+    // 2. Validar
+
+    if (empty($nome_empresa)) {
+        $erros[] = "O nome da empresa é obrigatório.";
+    }
+ 
+    if (empty($nif)) {
+        $erros[] = "O NIF é obrigatório.";
+    } elseif (!preg_match('/^\d{9}$/', $nif)) {
+        $erros[] = "O NIF deve ter exatamente 9 dígitos.";
+    }
+ 
+    if (empty($morada)) {
+        $erros[] = "A morada é obrigatória.";
+    }
+ 
+    if (empty($tipo_fornecedor)) {
+        $erros[] = "O tipo de fornecedor é obrigatório.";
+    }
+ 
+    if (empty($numero_telefonico)) {
+        $erros[] = "O número telefónico é obrigatório.";
+    }
+ 
+    if (empty($email)) {
+        $erros[] = "O email é obrigatório.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erros[] = "O email introduzido não é válido.";
+    }
+ 
+    if (empty($website)) {
+        $erros[] = "O website é obrigatório.";
+    }
+ 
+    if (empty($pessoa_contacto)) {
+        $erros[] = "A pessoa de contacto é obrigatória.";
+    }
+ 
+    if (empty($tel_pessoa_contacto)) {
+        $erros[] = "O telefone da pessoa de contacto é obrigatório.";
+    }
+}
+
+include __DIR__ . '/../../includes/header.php'; 
 ?>
 
 <?php
 $pagina = 'normal';
-include __DIR__ . '../../includes/nav.php';
-include __DIR__ . '../../includes/sidebar.php';
+include __DIR__ . '/../../includes/nav.php';
+include __DIR__ . '/../../includes/sidebar.php';
 ?>
         
 
@@ -153,4 +211,4 @@ include __DIR__ . '../../includes/sidebar.php';
 <!-- Custom JS -->
 <script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>
 
-<?php include __DIR__ . '../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>

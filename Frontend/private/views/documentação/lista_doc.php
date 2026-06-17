@@ -6,13 +6,13 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
-include __DIR__ . '../../includes/header.php'; 
+include __DIR__ . '/../../includes/header.php'; 
 ?>
 
 <?php
 $pagina = 'normal';
-include __DIR__ . '../../includes/nav.php';
-include __DIR__ . '../../includes/sidebar.php';
+include __DIR__ . '/../../includes/nav.php';
+include __DIR__ . '/../../includes/sidebar.php';
 
 // Paginação
 $registosPorPagina = 5;
@@ -388,4 +388,4 @@ $ligacao = null;
     });
 </script>
 
-<?php include __DIR__ . '../../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>

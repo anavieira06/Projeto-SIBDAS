@@ -24,7 +24,7 @@ if (!empty($_SESSION['server_error'])) {
 
 <?php
 $bodyClass = 'bg-login';
-include __DIR__ . '../private/includes/header.php';
+include __DIR__ . '/../private/includes/header.php';
 ?>
 
         <div class="container-fluid mt-5">
@@ -94,4 +94,4 @@ include __DIR__ . '../private/includes/header.php';
                 </div>
             </div>
         </div>
-<?php include __DIR__ . '../private/includes/footer.php'; ?>
+<?php include __DIR__ . '/../private/includes/footer.php'; ?>

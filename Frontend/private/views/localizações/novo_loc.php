@@ -6,6 +6,82 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
+
+// Valores por defeito
+$erros          = [];
+$edificio       = '';
+$piso           = '';
+$servico_depart = '';
+$sala_gabinete  = '';
+$erro_sistema   = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ 
+    // 1. Recolher dados
+    $edificio       = $_POST["edificio"]       ?? "";
+    $piso           = $_POST["piso"]           ?? "";
+    $servico_depart = $_POST["servico_depart"] ?? "";
+    $sala_gabinete  = $_POST["sala_gabinete"]  ?? "";
+ 
+    // 2. Validar
+    if (empty($edificio)) {
+        $erros[] = "O edifício é obrigatório.";
+    }
+ 
+    if (empty($piso)) {
+        $erros[] = "O piso é obrigatório.";
+    }
+ 
+    if (empty($servico_depart)) {
+        $erros[] = "O serviço / departamento é obrigatório.";
+    }
+ 
+    if (empty($sala_gabinete)) {
+        $erros[] = "A sala / gabinete é obrigatória.";
+    }
+ 
+    // 3. Se não houver erros
+    if (empty($erros)) {
+ 
+        // 4. Normalizar dados
+        $edificio       = ucwords(strtolower($edificio));
+        $servico_depart = ucwords(strtolower($servico_depart));
+        $sala_gabinete  = strtoupper($sala_gabinete);
+ 
+        // 5. Guardar na base de dados
+        try {
+            $ligacao = new PDO(
+                "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+                MYSQL_USERNAME,
+                MYSQL_PASSWORD
+            );
+            $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ 
+            $sql = "INSERT INTO localizacoes (
+                    edificio, piso, servico_depart, sala_gabinete
+                ) VALUES (
+                    :edificio, :piso, :servico_depart, :sala_gabinete
+                )";
+ 
+            $stmt = $ligacao->prepare($sql);
+            $stmt->execute([
+                ':edificio'       => $edificio,
+                ':piso'           => $piso,
+                ':servico_depart' => $servico_depart,
+                ':sala_gabinete'  => $sala_gabinete,
+            ]);
+ 
+            $ligacao = null;
+ 
+            header('Location: /ProjetoSIBDAS/Frontend/private/views/localizações/lista_loc.php?sucesso=1');
+            exit;
+ 
+        } catch (PDOException $err) {
+            $erro_sistema = "Erro ao guardar os dados: " . $err->getMessage();
+        }
+    }
+}
+
 include __DIR__ . '/../../includes/header.php'; 
 ?>
 
@@ -24,12 +100,30 @@ include __DIR__ . '/../../includes/sidebar.php';
                         <div class="card-body">
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-plus me-2" style="color: #680447;"></i> Inserir nova localização</strong></h2>
                             <hr>
+
+                            <!-- Área de erros -->
+                            <?php if (!empty($erros)): ?>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>Foram encontrados os seguintes erros:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <?php foreach ($erros as $erro): ?>
+                                        <li><?= htmlspecialchars($erro) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                            <?php endif; ?>
+                            <?php if (!empty($erro_sistema)): ?>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>Erro:</strong> <?= htmlspecialchars($erro_sistema) ?>
+                            </div>
+                            <?php endif; ?>
+
                             <form id="formLocalizaçao" action="#" method="post">
                                 <!-- Campo Edifício --> 
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="edificio" class="form-label">Edifício<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="edificio" name="edificio" placeholder="Ex: Edifício Central Hospitalar" >
+                                        <input type="text" class="form-control" id="edificio" name="edificio" placeholder="Ex: Edifício Central Hospitalar" value="<?= htmlspecialchars($edificio) ?>" required>
                                     </div>
                                 </div>
 
@@ -37,7 +131,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="piso" class="form-label">Piso<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="piso" name="piso" placeholder="Ex: 2" >
+                                        <input type="text" class="form-control" id="piso" name="piso" placeholder="Ex: 2" value="<?= htmlspecialchars($piso) ?>" required>
                                     </div>
                                 </div>
 
@@ -45,7 +139,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="servico_depart" class="form-label">Seviço / Departamento <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="servico_depart" name="servico_depart" placeholder="Ex: Cardiologia" >
+                                        <input type="text" class="form-control" id="servico_depart" name="servico_depart" placeholder="Ex: Cardiologia" value="<?= htmlspecialchars($servico_depart) ?>" required>
                                     </div>
                                 </div>
 
@@ -53,7 +147,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3"> 
                                     <div class="col-12">
                                         <label for="sala_gabinete" class="form-label">Sala / Gabinete <span class="text-danger">*</span></label> 
-                                        <input type="text" class="form-control" id="sala_gabinete" name="sala_gabinete" placeholder="Ex: LAB01" >
+                                        <input type="text" class="form-control" id="sala_gabinete" name="sala_gabinete" placeholder="Ex: LAB01" value="<?= htmlspecialchars($sala_gabinete) ?>" required>
                                     </div>
                                 </div>
 
@@ -66,12 +160,6 @@ include __DIR__ . '/../../includes/sidebar.php';
                                         <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
                                     </button>
                                 </div>
-
-                                <!-- Área de erros -->
-                                <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                    • Erro
-                                </div>
-                
                             </form>
                         </div>
                     </div>

@@ -6,6 +6,7 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
+require_once __DIR__ . '/../../includes/validacoes.php';
 
 // Valores por defeito
 $erros             = [];
@@ -37,56 +38,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 2. Validar
 
-    if (empty($nome_empresa)) {
-        $erros[] = "O nome da empresa é obrigatório.";
-    }
- 
-    if (empty($nif)) {
-        $erros[] = "O NIF é obrigatório.";
-    } elseif (!preg_match('/^\d{9}$/', $nif)) {
-        $erros[] = "O NIF deve ter exatamente 9 dígitos.";
-    }
- 
-    if (empty($morada)) {
-        $erros[] = "A morada é obrigatória.";
-    }
- 
-    if (empty($tipo_fornecedor)) {
-        $erros[] = "O tipo de fornecedor é obrigatório.";
-    }
- 
-    if (empty($numero_telefonico)) {
-        $erros[] = "O número telefónico é obrigatório.";
-    }
- 
-    if (empty($email)) {
-        $erros[] = "O email é obrigatório.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erros[] = "O email introduzido não é válido (ex: nome@empresa.pt).";
-    } elseif (!preg_match('/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/', $email)) {
-        $erros[] = "O email deve ter o formato texto@dominio.extensão.";
-    }
- 
-    if (empty($website)) {
-        $erros[] = "O website é obrigatório.";
-    } elseif (!preg_match('/^(https?:\/\/|www\.)[^\s]{2,}$/i', $website)) {
-        $erros[] = "O website deve começar por 'www.' ou 'https://' (ex: www.empresa.pt ou https://empresa.pt).";
-    }
- 
-    if (empty($pessoa_contacto)) {
-        $erros[] = "A pessoa de contacto é obrigatória.";
-    }
- 
-    if (empty($tel_pessoa_contacto)) {
-        $erros[] = "O telefone da pessoa de contacto é obrigatório.";
-    }
+    $erros = validar_fornecedor([
+        'nome_empresa'        => $nome_empresa,
+        'nif'                 => $nif,
+        'morada'              => $morada,
+        'tipo_fornecedor'     => $tipo_fornecedor,
+        'numero_telefonico'   => $numero_telefonico,
+        'email'               => $email,
+        'website'             => $website,
+        'pessoa_contacto'     => $pessoa_contacto,
+        'tel_pessoa_contacto' => $tel_pessoa_contacto,
+    ]);
 
     // 3. Se não houver erros
     if (empty($erros)) {
  
         // 4. Normalizar dados
         $nome_empresa      = ucwords(strtolower($nome_empresa));
-        $morada            = ucfirst(strtolower($morada));
+        $morada            = ucwords(strtolower($morada));
         $pessoa_contacto   = ucwords(strtolower($pessoa_contacto));
         $email             = strtolower($email);
         $website           = strtolower($website);

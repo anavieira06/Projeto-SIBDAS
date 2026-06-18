@@ -135,3 +135,31 @@ function validar_fornecedor(array $dados): array {
 
     return $erros;
 }
+
+function validar_localizacao(array $dados): array {
+    $erros = [];
+
+    $edificio               = $dados['edificio']         ?? '';
+    $piso                   = $dados['piso']             ?? '';
+    $servico_depart         = $dados['servico_depart']   ?? '';
+    $sala_gabinete          = $dados['sala_gabinete']    ?? '';
+    
+
+    if (empty($edificio)) {
+        $erros[] = "O edifício é obrigatório.";
+    }
+    
+    if ($piso === "") {
+        $erros[] = "O piso é obrigatório.";
+    }
+    
+    if (empty($servico_depart)) {
+        $erros[] = "O serviço / departamento é obrigatório.";
+    }
+    
+    if (empty($sala_gabinete)) {
+        $erros[] = "A sala / gabinete é obrigatória.";
+    }
+
+    return $erros;
+}

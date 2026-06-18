@@ -6,6 +6,7 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
+require_once __DIR__ . '/../../includes/validacoes.php';
 
 // Valores por defeito
 $erros          = [];
@@ -24,27 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sala_gabinete  = $_POST["sala_gabinete"]  ?? "";
  
     // 2. Validar
-    if (empty($edificio)) {
-        $erros[] = "O edifício é obrigatório.";
-    }
- 
-    if (empty($piso)) {
-        $erros[] = "O piso é obrigatório.";
-    }
- 
-    if (empty($servico_depart)) {
-        $erros[] = "O serviço / departamento é obrigatório.";
-    }
- 
-    if (empty($sala_gabinete)) {
-        $erros[] = "A sala / gabinete é obrigatória.";
-    }
+    $erros = validar_localizacao([
+        'edificio'          => $edificio,
+        'piso'              => $piso,
+        'servico_depart'    => $servico_depart,
+        'sala_gabinete'     => $sala_gabinete,
+    ]);
  
     // 3. Se não houver erros
     if (empty($erros)) {
  
         // 4. Normalizar dados
         $edificio       = ucwords(strtolower($edificio));
+        $piso           = ucwords(strtolower($piso));
         $servico_depart = ucwords(strtolower($servico_depart));
         $sala_gabinete  = strtoupper($sala_gabinete);
  

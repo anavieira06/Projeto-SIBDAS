@@ -24,16 +24,16 @@ $erro_sistema      = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
     // 1. Recolher dados
-    $nome_empresa        = trim($_POST['nome_empresa']        ?? '');
-    $nif                 = trim($_POST['nif']                 ?? '');
-    $morada              = trim($_POST['morada']              ?? '');
-    $tipo_fornecedor     = trim($_POST['tipo_fornecedor']     ?? '');
-    $numero_telefonico   = trim($_POST['numero_telefonico']   ?? '');
-    $email               = trim($_POST['email']               ?? '');
-    $website             = trim($_POST['website']             ?? '');
-    $pessoa_contacto     = trim($_POST['pessoa_contacto']     ?? '');
-    $tel_pessoa_contacto = trim($_POST['tel_pessoa_contacto'] ?? '');
-    $observacoes         = trim($_POST['observacoes']         ?? '');
+    $nome_empresa        = $_POST["nome_empresa"]        ?? "";
+    $nif                 = $_POST["nif"]                 ?? "";
+    $morada              = $_POST["morada"]              ?? "";
+    $tipo_fornecedor     = $_POST["tipo_fornecedor"]     ?? "";
+    $numero_telefonico   = $_POST["numero_telefonico"]   ?? "";
+    $email               = $_POST["email"]               ?? "";
+    $website             = $_POST["website"]             ?? "";
+    $pessoa_contacto     = $_POST["pessoa_contacto"]     ?? "";
+    $tel_pessoa_contacto = $_POST["tel_pessoa_contacto"] ?? "";
+    $observacoes         = $_POST["observacoes"]         ?? "";
 
     // 2. Validar
 
@@ -62,11 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email)) {
         $erros[] = "O email é obrigatório.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erros[] = "O email introduzido não é válido.";
+        $erros[] = "O email introduzido não é válido (ex: nome@empresa.pt).";
+    } elseif (!preg_match('/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/', $email)) {
+        $erros[] = "O email deve ter o formato texto@dominio.extensão.";
     }
  
     if (empty($website)) {
         $erros[] = "O website é obrigatório.";
+    } elseif (!preg_match('/^(https?:\/\/|www\.)[^\s]{2,}$/i', $website)) {
+        $erros[] = "O website deve começar por 'www.' ou 'https://' (ex: www.empresa.pt ou https://empresa.pt).";
     }
  
     if (empty($pessoa_contacto)) {
@@ -76,6 +80,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($tel_pessoa_contacto)) {
         $erros[] = "O telefone da pessoa de contacto é obrigatório.";
     }
+
+    // 3. Se não houver erros
+    if (empty($erros)) {
+ 
+        // 4. Normalizar dados
+        $nome_empresa      = ucwords(strtolower($nome_empresa));
+        $morada            = ucfirst(strtolower($morada));
+        $pessoa_contacto   = ucwords(strtolower($pessoa_contacto));
+        $email             = strtolower($email);
+        $website           = strtolower($website);
+
+        // 5. Guardar na base de dados
+        try {
+            $ligacao = new PDO(
+                "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+                MYSQL_USERNAME,
+                MYSQL_PASSWORD
+            );
+            $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ 
+            // Obter ID da tabela do tipo de fornecedor
+            $stmtTipo = $ligacao->prepare("SELECT id FROM tipo_fornecedor WHERE tipo_fornecedor = :tipo LIMIT 1");
+            $stmtTipo->execute([':tipo' => $tipo_fornecedor]);
+            $tipoFornecedorId = $stmtTipo->fetchColumn();
+ 
+            $sql = "INSERT INTO fornecedores (
+                    nome_empresa, nif, morada, numero_telefonico,
+                    email, website, pessoa_contacto, tel_pessoa_contacto,
+                    observacoes, tipo_fornecedor_id
+                ) VALUES (
+                    :nome_empresa, :nif, :morada, :numero_telefonico,
+                    :email, :website, :pessoa_contacto, :tel_pessoa_contacto,
+                    :observacoes, :tipo_fornecedor_id
+                )";
+
+            $stmt = $ligacao->prepare($sql);
+            $stmt->execute([
+                ':nome_empresa'        => $nome_empresa,
+                ':nif'                 => $nif,
+                ':morada'              => $morada,
+                ':numero_telefonico'   => $numero_telefonico,
+                ':email'               => $email,
+                ':website'             => $website,
+                ':pessoa_contacto'     => $pessoa_contacto,
+                ':tel_pessoa_contacto' => $tel_pessoa_contacto,
+                ':observacoes'         => $observacoes ?: null,
+                ':tipo_fornecedor_id'     => $tipoFornecedorId,
+            ]);
+
+            $ligacao = null;
+ 
+            header('Location: /ProjetoSIBDAS/Frontend/private/views/fornecedores/lista_forn.php?sucesso=1');
+            exit;
+        
+        } catch (PDOException $err) {
+            if ($err->getCode() == 23000) {
+                $erros[] = "Já existe um fornecedor registado com este NIF.";
+            } else {
+                $erro_sistema = "Erro ao guardar os dados: " . $err->getMessage();
+            }
+        }
+    }
+}
+
+// Buscar tipos de fornecedor da BD para o select
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ 
+    $listaTiposFornecedor = $ligacao->query("SELECT id, tipo_fornecedor FROM tipo_fornecedor ORDER BY tipo_fornecedor")->fetchAll(PDO::FETCH_OBJ);
+ 
+    $ligacao = null;
+ 
+} catch (PDOException $err) {
+    $listaTiposFornecedor = [];
 }
 
 include __DIR__ . '/../../includes/header.php'; 
@@ -95,6 +178,24 @@ include __DIR__ . '/../../includes/sidebar.php';
                         <div class="card-body">
                             <h2 class="mb-4" style="color: #680447;"><strong><i class="fa-solid fa-plus me-2" style="color: #680447;"></i> Inserir novo fornecedor</strong></h2>
                             <hr>
+
+                            <!-- Área de erros -->
+                            <?php if (!empty($erros)): ?>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>Foram encontrados os seguintes erros:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <?php foreach ($erros as $erro): ?>
+                                        <li><?= htmlspecialchars($erro) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                            <?php endif; ?>
+                            <?php if (!empty($erro_sistema)): ?>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>Erro:</strong> <?= htmlspecialchars($erro_sistema) ?>
+                            </div>
+                            <?php endif; ?>
+
                             <form id="formFornecedor" action="#" method="post">
                                 <!-- Secção: Identificação -->
                                 <h5 class="mt-4 mb-3" style="color:#680447;">
@@ -105,7 +206,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="nome_empresa" class="form-label">Nome da empresa<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="nome_empresa" name="nome_empresa" placeholder="Ex: HealthPrime Medical Systems" >
+                                        <input type="text" class="form-control" id="nome_empresa" name="nome_empresa" placeholder="Ex: HealthPrime Medical Systems"  value="<?= htmlspecialchars($nome_empresa) ?>" required>
                                     </div>
                                 </div>
 
@@ -113,7 +214,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="nif" class="form-label">NIF<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="nif" name="nif" placeholder="Ex: 509876321" >
+                                        <input type="text" class="form-control" id="nif" name="nif" placeholder="Ex: 509876321" value="<?= htmlspecialchars($nif) ?>" required>
                                     </div>
                                 </div>
 
@@ -121,7 +222,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3"> 
                                     <div class="col-12">
                                         <label for="morada" class="form-label">Morada <span class="text-danger">*</span></label> 
-                                        <input type="text" class="form-control" id="morada" name="morada" placeholder="Ex: Rua das Flores, nº 28" >
+                                        <input type="text" class="form-control" id="morada" name="morada" placeholder="Ex: Rua das Flores, nº 28" value="<?= htmlspecialchars($morada) ?>"required>
                                     </div>
                                 </div>
 
@@ -129,12 +230,13 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3">
                                     <div class="col-12">
                                         <label for="tipo_fornecedor" class="form-label">Tipo de fornecedor <span class="text-danger">*</span></label>
-                                        <select class="form-control" id="tipo_fornecedor" name="tipo_fornecedor" > 
-                                            <option value="" selected disabled>Escolha uma opção</option>
-                                            <option value="Fabricante">Fabricante</option>
-                                            <option value="Distribuidor / fornecedor comercial">Distribuidor / fornecedor comercial</option>
-                                            <option value="Assistência técnica">Assistência técnica</option>
-                                            <option value="Fornecedor de consumíveis">Fornecedor de consumíveis</option>
+                                        <select class="form-control" id="tipo_fornecedor" name="tipo_fornecedor" required> 
+                                            <option value="" disabled <?= $tipo_fornecedor === '' ? 'selected' : '' ?>>Escolha uma opção</option>
+                                            <?php foreach ($listaTiposFornecedor as $opcao): ?>
+                                                <option value="<?= htmlspecialchars($opcao->tipo_fornecedor) ?>" <?= ($tipo_fornecedor === $opcao->tipo_fornecedor) ? 'selected' : '' ?>>
+                                                    <?= htmlspecialchars($opcao->tipo_fornecedor) ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>      
                                 </div>
@@ -149,15 +251,15 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="numero_telefonico" class="form-label">Número telefónico <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="numero_telefonico" name="numero_telefonico" placeholder="Ex: +351 212 456 890" >
+                                        <input type="text" class="form-control" id="numero_telefonico" name="numero_telefonico" placeholder="Ex: +351 212 456 890" value="<?= htmlspecialchars($numero_telefonico) ?>" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Ex: suporte@healthprime-medical.pt" >
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="Ex: suporte@healthprime-medical.pt" value="<?= htmlspecialchars($email) ?>" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="website" class="form-label">Website <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="website" name="website" placeholder="Ex: www.healthprime-medical.pt" >
+                                        <input type="text" class="form-control" id="website" name="website" placeholder="Ex: www.healthprime-medical.pt" value="<?= htmlspecialchars($website) ?>" required>
                                     </div>
                                 </div>
 
@@ -165,11 +267,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label for="pessoa_contacto" class="form-label">Pessoa de contacto <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="pessoa_contacto" name="pessoa_contacto" placeholder="Ex: Dr. Ricardo Almeida" >
+                                        <input type="text" class="form-control" id="pessoa_contacto" name="pessoa_contacto" placeholder="Ex: Dr. Ricardo Almeida" value="<?= htmlspecialchars($pessoa_contacto) ?>" required>
                                     </div>
                                     <div class="col-6">
                                         <label for="tel_pessoa_contacto" class="form-label">Telefone da pessoa de contacto <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="tel_pessoa_contacto" name="tel_pessoa_contacto" placeholder="Ex: +351 917 845 320" >
+                                        <input type="text" class="form-control" id="tel_pessoa_contacto" name="tel_pessoa_contacto" placeholder="Ex: +351 917 845 320" value="<?= htmlspecialchars($tel_pessoa_contacto) ?>" required>
                                     </div>
                                 </div>
 
@@ -196,12 +298,6 @@ include __DIR__ . '/../../includes/sidebar.php';
                                         <i class="fa-regular fa-floppy-disk me-1"></i> Guardar
                                     </button>
                                 </div>
-
-                                <!-- Área de erros -->
-                                <div class="alert alert-danger text-center d-none" id="mensagemErro" role="alert"> 
-                                    • Erro
-                                </div>
-                
                             </form>
                         </div>
                     </div>

@@ -6,6 +6,45 @@
 // --------------------------------------------------------------------
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
+
+// 1. Receber e desencriptar o ID
+$idEncriptado = $_GET['id'] ?? null;
+$id = aes_decrypt($idEncriptado);
+ 
+// 2. Validar
+if (!$id || !is_numeric($id)) {
+    header('Location: /ProjetoSIBDAS/Frontend/private/views/localizações/lista_loc.php');
+    exit;
+}
+ 
+// 3. Buscar dados da BD
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ 
+    $stmt = $ligacao->prepare("
+        SELECT * FROM localizacoes WHERE id = :id LIMIT 1
+    ");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $loc = $stmt->fetch(PDO::FETCH_OBJ);
+ 
+    if (!$loc) {
+        header('Location: /ProjetoSIBDAS/Frontend/private/views/localizações/lista_loc.php');
+        exit;
+    }
+ 
+    $ligacao = null;
+ 
+} catch (PDOException $e) {
+    echo "<p class='text-danger'>Erro: " . $e->getMessage() . "</p>";
+    exit;
+}
+ 
 include __DIR__ . '/../../includes/header.php'; 
 ?>
 
@@ -17,7 +56,7 @@ include __DIR__ . '/../../includes/sidebar.php';
 
         
 
-        <div class="container-fluid p-4 min-vh-100" style="background-color: #fff4fb;">
+        <div class="container-fluid p-4" style="background-color: #fff4fb; min-height: calc(100vh - 70px);">
             <!-- Título -->
             <div class="mb-4">
                 <h2 style="color:#680447;">
@@ -39,22 +78,22 @@ include __DIR__ . '/../../includes/sidebar.php';
 
                         <div class="col-md-6">
                             <small class="text-muted">Edifício</small>
-                            <p class="fw-semibold mb-0"></p>
+                            <p class="fw-semibold mb-0"><?= htmlspecialchars($loc->edificio) ?></p>
                         </div>
 
                         <div class="col-md-6">
                             <small class="text-muted">Piso</small>
-                            <p class="fw-semibold mb-0"></p>
+                            <p class="fw-semibold mb-0"><?= htmlspecialchars($loc->piso) ?></p>
                         </div>
 
                         <div class="col-md-6">
                             <small class="text-muted">Serviço / Departamento</small>
-                            <p class="fw-semibold mb-0"></p>
+                            <p class="fw-semibold mb-0"><?= htmlspecialchars($loc->servico_depart) ?></p>
                         </div>
 
                         <div class="col-md-6">
                             <small class="text-muted">Sala / Gabinete</small>
-                            <p class="fw-semibold mb-0"></p>
+                            <p class="fw-semibold mb-0"><?= htmlspecialchars($loc->sala_gabinete) ?></p>
                         </div>
                     </div>
                 </div>

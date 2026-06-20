@@ -309,9 +309,9 @@ $ligacao = null;
                                     <td><?= htmlspecialchars($documentos->codigo_inventario) ?> — <?= htmlspecialchars($documentos->designacao_equipamento) ?></td>
                                     <td class="text-center align-middle">
                                         <div class="d-flex justify-content-center align-items-center gap-3">
-                                            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/documentação/detalhes_doc.php?id=<?= aes_encrypt($documentos->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/detalhes_doc.php?id=<?= aes_encrypt($documentos->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                             <span class="mx-2 text-muted">|</span>
-                                            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/documentação/editar_doc.php?id=<?= aes_encrypt($documentos->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/editar_doc.php?id=<?= aes_encrypt($documentos->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                         </div>
                                     </td>
                                 </tr>

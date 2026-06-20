@@ -22,13 +22,13 @@ $nome = $_SESSION['utilizador'];
         <div class="col d-flex align-items-center">
 
             <?php if ($pagina == 'index') : ?>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/home.php">
-                    <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECassets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php">
+                    <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
 
             <?php else : ?>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/home.php">
-                    <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECassets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php">
+                    <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
             <?php endif; ?>
 

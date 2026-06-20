@@ -24,7 +24,7 @@ if (!empty($_SESSION['server_error'])) {
 
 <?php
 $bodyClass = 'bg-login';
-include __DIR__ . '/../private/includes/header.php';
+include __DIR__ . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/includes/header.php';
 ?>
 
         <div class="container-fluid mt-5">
@@ -34,7 +34,7 @@ include __DIR__ . '/../private/includes/header.php';
                     <div class="card p-4" style="min-height: 500px;">
                         <div class="d-flex align-items-center justify-content-center my-4">
                             <!-- Imagem da empresa -->
-                            <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECassets/img/Imagem 3.jpeg" width="200">
+                            <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/img/Imagem 3.jpeg" width="200">
                         </div>
 
                         <div class="row">
@@ -61,7 +61,7 @@ include __DIR__ . '/../private/includes/header.php';
                                     </div>
 
                                     <div class="text-center mt-3 mb-3">
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECpublic/index.php"
+                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/index.php"
                                         class="btn btn-outline-secondary px-4">
                                             <i class="fa-solid fa-house me-2"></i> Voltar ao início
                                         </a>

@@ -150,7 +150,7 @@ $ligacao = null;
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Fornecedores</strong>
                 </h2>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/fornecedores/novo_forn.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/novo_forn.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo fornecedor
                 </a>
             </div>
@@ -297,9 +297,9 @@ $ligacao = null;
                                 <td><?= $fornecedor->tipo_fornecedor ?></td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/fornecedores/detalhes_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/detalhes_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/fornecedores/editar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/editar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                         <span class="mx-2 text-muted">|</span>
                                         <a href="#" class="btn-sm btn-acao"
                                         data-bs-toggle="modal"

@@ -6,7 +6,7 @@ session_start();
 // Se for acedido diretamente (por URL), será redirecionado para o login.
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     // Redireciona para o formulário de login (interface pública)
-    header('Location: ../public/login.php');
+    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
     // Encerra a execução do script imediatamente após o redirecionamento
     return;
 }
@@ -47,7 +47,7 @@ if (strlen($password) < 6 || strlen($password) > 12) {
 if (!empty($validation_errors)) {
     $_SESSION['validation_errors'] = $validation_errors;
     // Redireciona para a página de login 
-    header('Location: ../public/login.php'); 
+    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php'); 
     return;
 }
 
@@ -61,7 +61,7 @@ if (!$result['status']) {
     // Se o login for inválido, guarda uma mensagem de erro na sessão
     $_SESSION['server_error'] = 'Login inválido';
     // Redireciona o utilizador novamente para o formulário de login
-    header('Location: ../public/login.php'); // ou 'login_form.php'
+    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php'); // ou 'login_form.php'
     // Encerra o script para não continuar o processamento
     return;
 }

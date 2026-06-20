@@ -201,7 +201,7 @@ $ligacao = null;
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Equipamentos</strong>
                 </h2>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/equipamentos/novo.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/novo.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo equipamento
                 </a>
             </div>
@@ -456,9 +456,9 @@ $ligacao = null;
 
                                             <td class="text-center align-middle">
                                                 <div class="d-flex justify-content-center align-items-center gap-2">
-                                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/equipamentos/detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
-                                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/equipamentos/editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
                                                     <a href="#" class="btn-sm btn-acao" 
                                                        data-bs-toggle="modal" 
@@ -563,7 +563,7 @@ $ligacao = null;
         document.getElementById('modalCodigo').textContent    = btn.getAttribute('data-codigo');
         document.getElementById('modalDesignacao').textContent = btn.getAttribute('data-designacao');
         document.getElementById('modalMarca').textContent = btn.getAttribute('data-marca');
-        document.getElementById('btnConfirmarEliminar').href   = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/equipamentos/eliminar.php?id=' + btn.getAttribute('data-id');
+        document.getElementById('btnConfirmarEliminar').href   = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/eliminar.php?id=' + btn.getAttribute('data-id');
     });
 </script>
 

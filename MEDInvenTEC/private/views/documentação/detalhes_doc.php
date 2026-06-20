@@ -13,7 +13,7 @@ $id = aes_decrypt($idEncriptado);
  
 // 2. Validar
 if (!$id || !is_numeric($id)) {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/documentação/lista_doc.php');
+    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/lista_doc.php');
     exit;
 }
 
@@ -43,7 +43,7 @@ try {
     $doc = $stmt->fetch(PDO::FETCH_OBJ);
  
     if (!$doc) {
-        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/documentação/lista_doc.php');
+        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/lista_doc.php');
         exit;
     }
  
@@ -156,7 +156,7 @@ include __DIR__ . '/../../includes/sidebar.php';
             </div>
             <!-- Botoão -->
             <div class="d-flex justify-content-end gap-2 mt-4">
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECprivate/views/documentação/lista_doc.php" class="btn btn-outline-secondary">
+                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/lista_doc.php" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Voltar
                 </a>
             </div>

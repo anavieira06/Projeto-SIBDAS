@@ -177,6 +177,12 @@ $ligacao = null;
                     Localização atualizada com sucesso!
                 </div>
             <?php endif; ?>
+            <?php if (isset($_GET['desativado'])): ?>
+                <div class="alert alert-warning d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Localização desativada com sucesso.
+                </div>
+            <?php endif; ?>
 
             <div class="card border-0 shadow mb-4 rounded-4">
 
@@ -306,6 +312,11 @@ $ligacao = null;
                                         Sala / Gabinete
                                     </a>
                                 </th>
+                                <th>
+                                    <a href="#" class="text-decoration-none" style="color: #fff;">
+                                        Ativa | Inativa
+                                    </a>
+                                </th>
                                 <th class="text-center">Ações</th>
                             </tr>
                         </thead>
@@ -316,6 +327,13 @@ $ligacao = null;
                                 <td><?= htmlspecialchars($localizacao->piso) ?></td>
                                 <td><?= htmlspecialchars($localizacao->servico_depart) ?></td>
                                 <td><?= htmlspecialchars($localizacao->sala_gabinete) ?></td>
+                                <td>
+                                    <?php if ($localizacao->ativo == 1): ?>
+                                        <span class="ativo-badge ativo-ativo">Ativo</span>
+                                    <?php else: ?>
+                                        <span class="ativo-badge ativo-inativo">Inativo</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
                                         <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/detalhes_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
@@ -390,38 +408,49 @@ $ligacao = null;
 
         </div>  
         <div class="modal fade" id="modalEliminar" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-4">
-
+ 
                     <div class="modal-header">
                         <h5 class="modal-title" style="color:#680447;">
-                            Confirmar eliminação
+                            Confirmar desativação
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-
+ 
                     <div class="modal-body">
-                        <p>Tem a certeza que pretende eliminar esta localização?</p>
-
+                        <p>Tem a certeza que pretende desativar esta localização? O registo não será eliminado da base de dados.</p>
+ 
                         <p><strong>Edifício:</strong> <span id="modalEdificio"></span></p>
                         <p><strong>Piso:</strong> <span id="modalPiso"></span></p>
                         <p><strong>Serviço / Departamento:</strong> <span id="modalServico"></span></p>
                         <p><strong>Sala / Gabinete:</strong> <span id="modalSala"></span></p>
                     </div>
-
+ 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancelar
                         </button>
-
-                        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-bs-dismiss="modal">
-                            Eliminar
-                        </button>
+ 
+                        <a href="#" class="btn btn-danger" id="btnConfirmarEliminar">
+                            Desativar
+                        </a>
                     </div>
-
+ 
                 </div>
             </div>
         </div>
+
+<script>
+    document.getElementById('modalEliminar').addEventListener('show.bs.modal', function(e) {
+        const btn = e.relatedTarget;
+        document.getElementById('modalEdificio').textContent = btn.getAttribute('data-edificio');
+        document.getElementById('modalPiso').textContent    = btn.getAttribute('data-piso');
+        document.getElementById('modalServico').textContent = btn.getAttribute('data-servico');
+        document.getElementById('modalSala').textContent    = btn.getAttribute('data-sala');
+        document.getElementById('btnConfirmarEliminar').href = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/eliminar_loc.php?id=' + btn.getAttribute('data-id');
+    });
+</script>
 
         
 <!-- Custom JS -->

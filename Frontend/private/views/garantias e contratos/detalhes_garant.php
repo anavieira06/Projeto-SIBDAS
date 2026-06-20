@@ -30,7 +30,7 @@ try {
         SELECT gc.*,
                tc.tipo_contrato,
                p.periodicidade,
-               e.codigo_inventario, e.designacao_equipamento
+               e.codigo_inventario, e.designacao_equipamento, e.ativo
         FROM garantias_contratos gc
         LEFT JOIN tipo_contrato tc  ON gc.tipo_contrato_id  = tc.id
         LEFT JOIN periodicidade p   ON gc.periodicidade_id  = p.id
@@ -71,6 +71,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                 <h2 style="color:#680447;">
                     <i class="fa-solid fa-circle-info me-2"></i>
                     <strong>Detalhes da Garantia | Contrato</strong>
+                    <?php if ($garant->ativo == 1): ?>
+                        <span class="badge bg-success ms-2">Ativo</span>
+                    <?php else: ?>
+                        <span class="badge bg-secondary ms-2">Inativo</span>
+                    <?php endif; ?>
                 </h2>
             </div>
 

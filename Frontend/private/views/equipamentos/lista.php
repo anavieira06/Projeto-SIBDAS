@@ -466,7 +466,7 @@ $ligacao = null;
                                                        data-id="<?= aes_encrypt($equipamento->id) ?>"
                                                        data-codigo="<?= htmlspecialchars($equipamento->codigo_inventario) ?>"
                                                        data-designacao="<?= htmlspecialchars($equipamento->designacao_equipamento) ?>"
-                                                       data-designacao="<?= htmlspecialchars($equipamento->marca) ?>">
+                                                       data-marca="<?= htmlspecialchars($equipamento->marca) ?>">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </a>
                                                 </div>
@@ -562,6 +562,7 @@ $ligacao = null;
         const btn = e.relatedTarget;
         document.getElementById('modalCodigo').textContent    = btn.getAttribute('data-codigo');
         document.getElementById('modalDesignacao').textContent = btn.getAttribute('data-designacao');
+        document.getElementById('modalMarca').textContent = btn.getAttribute('data-marca');
         document.getElementById('btnConfirmarEliminar').href   = '/ProjetoSIBDAS/Frontend/private/views/equipamentos/eliminar.php?id=' + btn.getAttribute('data-id');
     });
 </script>

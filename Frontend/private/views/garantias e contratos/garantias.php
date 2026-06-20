@@ -89,7 +89,7 @@ try {
         SELECT gc.*,
                tc.tipo_contrato,
                p.periodicidade,
-               e.codigo_inventario, e.designacao_equipamento
+               e.codigo_inventario, e.designacao_equipamento, e.ativo
         FROM garantias_contratos gc
         LEFT JOIN tipo_contrato tc ON gc.tipo_contrato_id = tc.id
         LEFT JOIN periodicidade p ON gc.periodicidade_id = p.id
@@ -177,19 +177,6 @@ $ligacao = null;
             </div>
 
             <hr>
-            <!-- Área de sucesso -->
-            <?php if (isset($_GET['sucesso'])): ?>
-                <div class="alert alert-success d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
-                    <i class="fa-solid fa-circle-check"></i>
-                    Fornecedor inserido com sucesso!
-                </div>
-            <?php endif; ?>
-            <?php if (isset($_GET['atualizado'])): ?>
-                <div class="alert alert-success d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
-                    <i class="fa-solid fa-circle-check"></i>
-                    Fornecedor atualizado com sucesso!
-                </div>
-            <?php endif; ?>
 
             <div class="card border-0 shadow mb-4 rounded-4">
 
@@ -312,6 +299,11 @@ $ligacao = null;
                                         Entidade responsável
                                     </a>
                                 </th>
+                                <th>
+                                    <a href="#" class="text-decoration-none" style="color: #fff;">
+                                        Ativo | Inativo
+                                    </a>
+                                </th>
                                 <th class="text-center">Ações</th>
                             </tr>
                         </thead>
@@ -328,6 +320,13 @@ $ligacao = null;
                                     <?php endif; ?>
                                 </td>
                                 <td><?= htmlspecialchars($garantia->entidade_responsavel) ?></td>
+                                <td>
+                                    <?php if ($garantia->ativo == 1): ?>
+                                        <span class="ativo-badge ativo-ativo">Ativo</span>
+                                    <?php else: ?>
+                                        <span class="ativo-badge ativo-inativo">Inativo</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
                                         <a href="/ProjetoSIBDAS/Frontend/private/views/garantias e contratos/detalhes_garant.php?id=<?= aes_encrypt($garantia->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>

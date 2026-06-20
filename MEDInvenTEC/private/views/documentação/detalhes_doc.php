@@ -29,7 +29,7 @@ try {
     $stmt = $ligacao->prepare("
         SELECT d.*,
                td.tipo_doc,
-               e.codigo_inventario, e.designacao_equipamento,
+               e.codigo_inventario, e.designacao_equipamento, e.ativo,
                f.nome_empresa AS fornecedor_doc
         FROM documentos d
         LEFT JOIN tipo_doc td     ON d.tipo_doc_id    = td.id
@@ -70,6 +70,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                 <h2 style="color:#680447;">
                     <i class="fa-solid fa-circle-info me-2"></i>
                     <strong>Detalhes do Documento</strong>
+                    <?php if ($doc->ativo == 1): ?>
+                        <span class="badge bg-success ms-2">Ativo</span>
+                    <?php else: ?>
+                        <span class="badge bg-secondary ms-2">Inativo</span>
+                    <?php endif; ?>
                 </h2>
             </div>
 

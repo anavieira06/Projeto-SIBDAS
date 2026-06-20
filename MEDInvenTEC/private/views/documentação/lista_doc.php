@@ -165,20 +165,6 @@ $ligacao = null;
             </div>
 
             <hr>
-            <!-- Área de sucesso -->
-            <?php if (isset($_GET['sucesso'])): ?>
-                <div class="alert alert-success d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
-                    <i class="fa-solid fa-circle-check"></i>
-                    Fornecedor inserido com sucesso!
-                </div>
-            <?php endif; ?>
-            <?php if (isset($_GET['atualizado'])): ?>
-                <div class="alert alert-success d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
-                    <i class="fa-solid fa-circle-check"></i>
-                    Fornecedor atualizado com sucesso!
-                </div>
-            <?php endif; ?>
-
             <div class="card border-0 shadow mb-4 rounded-4">
 
                 <div class="card-body" style="background-color: #fff4fb;">
@@ -297,6 +283,11 @@ $ligacao = null;
                                         Equipamento associado
                                     </a>
                                 </th>
+                                <th>
+                                    <a href="#" class="text-decoration-none" style="color: #fff;">
+                                        Ativo | Inativo
+                                    </a>
+                                </th>
                                 <th class="text-center">Ações</th>
                             </tr>
                         </thead>
@@ -307,6 +298,13 @@ $ligacao = null;
                                     <td><?= htmlspecialchars($documentos->nome_doc) ?></td>
                                     <td><?= htmlspecialchars($documentos->data_doc) ?></td>
                                     <td><?= htmlspecialchars($documentos->codigo_inventario) ?> — <?= htmlspecialchars($documentos->designacao_equipamento) ?></td>
+                                    <td>
+                                        <?php if ($documentos->ativo == 1): ?>
+                                            <span class="ativo-badge ativo-ativo">Ativo</span>
+                                        <?php else: ?>
+                                            <span class="ativo-badge ativo-inativo">Inativo</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="text-center align-middle">
                                         <div class="d-flex justify-content-center align-items-center gap-3">
                                             <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/detalhes_doc.php?id=<?= aes_encrypt($documentos->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
@@ -378,7 +376,7 @@ $ligacao = null;
 <script>
     // tradução para português
     $(document).ready(function() {
-        $('#tabelaFornecedores').DataTable({
+        $('#tabelaDocumentos').DataTable({
             ordering: true,
             searching: false,
             paging: false,

@@ -933,3 +933,7 @@ body{
     white-space: nowrap;
     vertical-align: middle;
 }
+
+body.bg-doc {
+    background-color: #fff4fb;
+}

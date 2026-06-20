@@ -256,13 +256,20 @@ try {
         ORDER BY f.nome_empresa
     ")->fetchAll(PDO::FETCH_OBJ);
 
-    // Buscar fornecedores associados ao equipamento
+    // Buscar fornecedores associados ao equipamento (dados completos)
     $stmtFornEq = $ligacao->prepare("
-        SELECT fornecedor_id FROM equipamento_fornecedor WHERE equipamento_id = :id
+        SELECT f.id, f.nome_empresa, f.nif, f.morada, f.numero_telefonico,
+               f.email, f.website, f.pessoa_contacto, f.tel_pessoa_contacto,
+               tf.tipo_fornecedor
+        FROM fornecedores f
+        INNER JOIN equipamento_fornecedor ef ON ef.fornecedor_id = f.id
+        LEFT JOIN tipo_fornecedor tf ON f.tipo_fornecedor_id = tf.id
+        WHERE ef.equipamento_id = :id
+        ORDER BY f.nome_empresa
     ");
     $stmtFornEq->bindParam(':id', $idEquipamento, PDO::PARAM_INT);
     $stmtFornEq->execute();
-    $fornecedoresEquipamento = $stmtFornEq->fetchAll(PDO::FETCH_COLUMN);
+    $fornecedoresEquipamento = $stmtFornEq->fetchAll(PDO::FETCH_OBJ);
 
     // Buscar localizações para o select
     $listaLocalizacoes = $ligacao->query("
@@ -546,111 +553,119 @@ include __DIR__ . '/../../includes/sidebar.php';
                                         <div id="areaFornecedores">
 
                                             <!-- FORNECEDOR 1 -->
-                                            <div class="border rounded p-3 mb-4" id="blocoFornecedor1">
-
+                                            <?php foreach ($fornecedoresEquipamento as $i => $forn): ?>
+                                            <div class="border rounded p-3 mb-4" id="blocoFornecedor<?= $i + 1 ?>">
+ 
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="mb-0" style="color:#680447;">
-                                                        Fornecedor 1
+                                                        Fornecedor <?= $i + 1 ?>
                                                     </h6>
+                                                    <?php if ($i > 0): ?>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            onclick="this.closest('.border').remove()">
+                                                        <i class="fa-solid fa-trash-can me-1"></i> Remover
+                                                    </button>
+                                                    <?php endif; ?>
                                                 </div>
-
+ 
                                                 <!-- Selecionar fornecedor -->
                                                 <div class="row mb-4">
                                                     <div class="col-md-6">
                                                         <select class="form-control"
                                                                 name="fornecedor_id[]"
-                                                                onchange="preencherFornecedorBloco(this,1)"
+                                                                onchange="preencherFornecedorBloco(this,<?= $i + 1 ?>)"
                                                                 required>
                                                             <option value="" disabled>Escolha um fornecedor</option>
                                                             <?php foreach ($listaFornecedores as $f): ?>
-                                                                <option value="<?= $f->id ?>" <?= in_array($f->id, $fornecedoresEquipamento) ? 'selected' : '' ?>>
+                                                                <option value="<?= $f->id ?>" <?= $f->id == $forn->id ? 'selected' : '' ?>>
                                                                     <?= htmlspecialchars($f->nome_empresa) ?>
                                                                 </option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
                                                 </div>
-
-                                                <!-- Informação -->
-                                                <div id="infoFornecedor1" class="d-none">
-
+ 
+                                                <!-- Informação pré-preenchida -->
+                                                <div id="infoFornecedor<?= $i + 1 ?>">
+ 
                                                     <hr>
-
+ 
                                                     <h6 class="text-muted mb-4">
                                                         <i class="fa-solid fa-circle-info me-2"></i>
                                                         Informação do fornecedor
                                                     </h6>
-
+ 
                                                     <div class="row">
-
+ 
                                                         <!-- Coluna 1 -->
                                                         <div class="col-md-4">
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Nome da empresa</strong>
-                                                                <p id="f-nome-1">-</p>
+                                                                <p id="f-nome-<?= $i + 1 ?>"><?= htmlspecialchars($forn->nome_empresa) ?></p>
                                                             </div>
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>NIF</strong>
-                                                                <p id="f-nif-1">-</p>
+                                                                <p id="f-nif-<?= $i + 1 ?>"><?= htmlspecialchars($forn->nif) ?></p>
                                                             </div>
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Tipo de fornecedor</strong>
-                                                                <p id="f-tipo-1">-</p>
+                                                                <p id="f-tipo-<?= $i + 1 ?>"><?= htmlspecialchars($forn->tipo_fornecedor ?? '—') ?></p>
                                                             </div>
-
+ 
                                                         </div>
-
+ 
                                                         <!-- Coluna 2 -->
                                                         <div class="col-md-4">
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Morada</strong>
-                                                                <p id="f-morada-1">-</p>
+                                                                <p id="f-morada-<?= $i + 1 ?>"><?= htmlspecialchars($forn->morada) ?></p>
                                                             </div>
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Número telefónico</strong>
-                                                                <p id="f-telefone-1">-</p>
+                                                                <p id="f-telefone-<?= $i + 1 ?>"><?= htmlspecialchars($forn->numero_telefonico) ?></p>
                                                             </div>
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Email</strong>
-                                                                <p id="f-email-1">-</p>
+                                                                <p id="f-email-<?= $i + 1 ?>"><?= htmlspecialchars($forn->email) ?></p>
                                                             </div>
-
+ 
                                                         </div>
-
+ 
                                                         <!-- Coluna 3 -->
                                                         <div class="col-md-4">
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Website</strong>
-                                                                <p id="f-website-1">-</p>
+                                                                <p id="f-website-<?= $i + 1 ?>"><?= htmlspecialchars($forn->website) ?></p>
                                                             </div>
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Pessoa de contacto</strong>
-                                                                <p id="f-contacto-1">-</p>
+                                                                <p id="f-contacto-<?= $i + 1 ?>"><?= htmlspecialchars($forn->pessoa_contacto) ?></p>
                                                             </div>
-
+ 
                                                             <div class="mb-4">
                                                                 <strong>Telefone da pessoa de contacto</strong>
-                                                                <p id="f-tel-contacto-1">-</p>
+                                                                <p id="f-tel-contacto-<?= $i + 1 ?>"><?= htmlspecialchars($forn->tel_pessoa_contacto) ?></p>
                                                             </div>
-
+ 
                                                         </div>
-
+ 
                                                     </div>
-
+ 
                                                 </div>
-
+ 
                                             </div>
-
+                                            <?php endforeach; ?>
+ 
                                         </div>
-
+ 
                                         <!-- Botão adicionar -->
                                         <button type="button"
                                                 class="btn btn-outline-secondary mb-4"
@@ -658,16 +673,16 @@ include __DIR__ . '/../../includes/sidebar.php';
                                             <i class="fa-solid fa-plus me-1"></i>
                                             Adicionar fornecedor
                                         </button>
-
+ 
                                         <!-- Navegação -->
                                         <div class="d-flex justify-content-between">
-
+ 
                                             <button type="button"
                                                     class="btn btn-outline-secondary"
                                                     onclick="bootstrap.Tab.getOrCreateInstance(document.querySelector('#info-tab')).show();">
                                                 Anterior
                                             </button>
-
+ 
                                             <button type="button"
                                                     id="btnSeguinteFornecedor"
                                                     class="btn btn-guardar"
@@ -677,11 +692,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                     ">
                                                 Seguinte
                                             </button>
-
+ 
                                         </div>
-
+ 
                                     </div>
-
+ 
                                     <div class="tab-pane fade" id="infoLocalizacao" role="tabpanel">
                                         <!-- Secção: Localizações -->
                                         <h5 class="mt-4 mb-3" style="color:#680447;">

@@ -65,6 +65,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                 <h2 style="color:#680447;">
                     <i class="fa-solid fa-circle-info me-2"></i>
                     <strong>Detalhes do Fornecedor</strong>
+                    <?php if ($forn->ativo == 1): ?>
+                        <span class="badge bg-success ms-2">Ativo</span>
+                    <?php else: ?>
+                        <span class="badge bg-secondary ms-2">Inativo</span>
+                    <?php endif; ?>
                 </h2>
             </div>
 

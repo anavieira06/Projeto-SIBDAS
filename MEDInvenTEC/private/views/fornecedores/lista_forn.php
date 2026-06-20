@@ -170,6 +170,12 @@ $ligacao = null;
                     Fornecedor atualizado com sucesso!
                 </div>
             <?php endif; ?>
+            <?php if (isset($_GET['desativado'])): ?>
+                <div class="alert alert-warning d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Fornecedor desativado com sucesso.
+                </div>
+            <?php endif; ?>
 
             <div class="card border-0 shadow mb-4 rounded-4">
 
@@ -284,6 +290,11 @@ $ligacao = null;
                                         Tipo de fornecedor
                                     </a>
                                 </th>
+                                <th>
+                                    <a href="#" class="text-decoration-none" style="color: #fff;">
+                                        Ativo | Inativo
+                                    </a>
+                                </th>
                                 <th class="text-center">Ações</th>
                             </tr>
                         </thead>
@@ -295,6 +306,13 @@ $ligacao = null;
                                 <td><?= $fornecedor->numero_telefonico ?></td>
                                 <td><?= $fornecedor->email ?></td>
                                 <td><?= $fornecedor->tipo_fornecedor ?></td>
+                                <td>
+                                    <?php if ($fornecedor->ativo == 1): ?>
+                                        <span class="ativo-badge ativo-ativo">Ativo</span>
+                                    <?php else: ?>
+                                        <span class="ativo-badge ativo-inativo">Inativo</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
                                         <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/detalhes_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
@@ -370,37 +388,47 @@ $ligacao = null;
         </div> 
 
         <div class="modal fade" id="modalEliminar" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-4">
-
+ 
                     <div class="modal-header">
                         <h5 class="modal-title" style="color:#680447;">
-                            Confirmar eliminação
+                            Confirmar desativação
                         </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-
+ 
                     <div class="modal-body">
-                        <p>Tem a certeza que pretende eliminar este fornecedor?</p>
-
+                        <p>Tem a certeza que pretende desativar este fornecedor? O registo não será eliminado da base de dados.</p>
+ 
                         <p><strong>Empresa:</strong> <span id="modalEmpresa"></span></p>
                         <p><strong>Contacto telefónico:</strong> <span id="modalContacto"></span></p>
                         <p><strong>Tipo de fornecedor:</strong> <span id="modalFornecedor"></span></p>
                     </div>
-
+ 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancelar
                         </button>
-
-                        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-bs-dismiss="modal">
-                            Eliminar
-                        </button>
+ 
+                        <a href="#" class="btn btn-danger" id="btnConfirmarEliminar">
+                            Desativar
+                        </a>
                     </div>
-
+ 
                 </div>
             </div>
         </div>
+
+<script>
+    document.getElementById('modalEliminar').addEventListener('show.bs.modal', function(e) {
+        const btn = e.relatedTarget;
+        document.getElementById('modalEmpresa').textContent   = btn.getAttribute('data-empresa');
+        document.getElementById('modalContacto').textContent  = btn.getAttribute('data-contacto');
+        document.getElementById('modalFornecedor').textContent = btn.getAttribute('data-tipo');
+        document.getElementById('btnConfirmarEliminar').href  = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/eliminar_forn.php?id=' + btn.getAttribute('data-id');
+    });
+</script>
         
 <!-- Custom JS -->
 <script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECassets/js/1240811.js"></script>

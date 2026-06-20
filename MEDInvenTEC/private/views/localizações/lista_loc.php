@@ -419,7 +419,7 @@ $ligacao = null;
                     </div>
  
                     <div class="modal-body">
-                        <p>Tem a certeza que pretende desativar esta localização? O registo não será eliminado da base de dados.</p>
+                        <p>Tem a certeza que pretende desativar esta localização?</p>
  
                         <p><strong>Edifício:</strong> <span id="modalEdificio"></span></p>
                         <p><strong>Piso:</strong> <span id="modalPiso"></span></p>

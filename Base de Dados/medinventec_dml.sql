@@ -537,12 +537,19 @@ VALUES
 ========================================= */
 
 INSERT INTO utilizador
-(nome, email, password)
+(nome, email, password, perfil)
 VALUES
 ('Administrador',
  'admin@medinventec.pt',
- 'Adm!2025#Med'),
+ '$2y$10$XQqWc5Td6K./XUTtsf8ugertX7B6hq6g0XDvvWnW1WAs0WkbMey4S',
+ 'administrador'),
 
 ('Técnico de Equipamentos',
  'tecnico@medinventec.pt',
- 'Tec!2025#Hosp');
+ '$2y$10$QlOhTk6G66aa0Wfu78yuiefMXKQlolUjv3ZNzMl4BJF49UW/NmB4O',
+ 'tecnico'),
+
+('Profissional de Saúde',
+ 'saude@medinventec.pt',
+ '$2y$10$v6ToZARQjHtsLMYdxBUKme6POdWbfY7tM44mnaYL8ZNO.KzxZ2Q1C',
+ 'profissional_saude');

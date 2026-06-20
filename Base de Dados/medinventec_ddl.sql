@@ -197,7 +197,8 @@ CREATE TABLE `utilizador` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `email` varchar(50) UNIQUE NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `perfil` ENUM('administrador', 'tecnico', 'profissional_saude') NOT NULL DEFAULT 'profissional_saude'
 );
 
 ALTER TABLE `equipamentos` ADD FOREIGN KEY (`localizacao_id`) REFERENCES `localizacoes` (`id`);

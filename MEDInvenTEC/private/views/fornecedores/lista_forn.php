@@ -399,7 +399,7 @@ $ligacao = null;
                     </div>
  
                     <div class="modal-body">
-                        <p>Tem a certeza que pretende desativar este fornecedor? O registo não será eliminado da base de dados.</p>
+                        <p>Tem a certeza que pretende desativar este fornecedor?</p>
  
                         <p><strong>Empresa:</strong> <span id="modalEmpresa"></span></p>
                         <p><strong>Contacto telefónico:</strong> <span id="modalContacto"></span></p>

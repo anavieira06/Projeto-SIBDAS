@@ -111,6 +111,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                 <h2 style="color:#680447;">
                     <i class="fa-solid fa-circle-info me-2"></i>
                     <strong>Detalhes do Equipamento</strong>
+                    <?php if ($equip->ativo == 1): ?>
+                        <span class="badge bg-success">Ativo</span>
+                    <?php else: ?>
+                        <span class="badge bg-secondary">Inativo</span>
+                    <?php endif; ?>
                 </h2>
             </div>
 

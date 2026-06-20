@@ -794,6 +794,25 @@ body{
     background-color: #d34d5a;
 }
 
+/* Estado ativo/inativo dos equipamentos */
+.ativo-badge {
+    display: inline-block;
+    text-align: center;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: white;
+}
+
+.ativo-ativo {
+    background-color: #198754;
+}
+
+.ativo-inativo {
+    background-color: #6c757d;
+}
+
 /* Separadores dos detalhes do equipamento */
 .nav-tabs .nav-link {
     color: #680447;

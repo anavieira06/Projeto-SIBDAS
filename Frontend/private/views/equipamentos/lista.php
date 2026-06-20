@@ -220,6 +220,12 @@ $ligacao = null;
                     Equipamento atualizado com sucesso!
                 </div>
             <?php endif; ?>
+            <?php if (isset($_GET['desativado'])): ?>
+                <div class="alert alert-warning d-flex align-items-center gap-2 mx-4 mt-3" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Equipamento desativado com sucesso.
+                </div>
+            <?php endif; ?>
 
             <div class="card border-0 shadow mb-4 rounded-4">
 
@@ -405,6 +411,12 @@ $ligacao = null;
                                                 
                                             </a>
                                         </th>
+                                        <th>
+                                            <a href="#" class="text-decoration-none" style="color: #fff;">
+                                                Ativo | Inativo
+                                                
+                                            </a>
+                                        </th>
                                         <th class="text-center">Ações</th>
                                     </tr>
                                 </thead>
@@ -433,13 +445,30 @@ $ligacao = null;
                                                     <?= $equipamento->criticidade ?>
                                                 </span>
                                             </td>
+
+                                            <td>
+                                                <?php if ($equipamento->ativo == 1): ?>
+                                                    <span class="ativo-badge ativo-ativo">Ativo</span>
+                                                <?php else: ?>
+                                                    <span class="ativo-badge ativo-inativo">Inativo</span>
+                                                <?php endif; ?>
+                                            </td>
+
                                             <td class="text-center align-middle">
                                                 <div class="d-flex justify-content-center align-items-center gap-2">
                                                     <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
                                                     <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
-                                                    <a href="#" class="btn-sm btn-acao" data-bs-toggle="modal" data-bs-target="#modalEliminar"><i class="fa-solid fa-trash-can"></i></a>
+                                                    <a href="#" class="btn-sm btn-acao" 
+                                                       data-bs-toggle="modal" 
+                                                       data-bs-target="#modalEliminar"
+                                                       data-id="<?= aes_encrypt($equipamento->id) ?>"
+                                                       data-codigo="<?= htmlspecialchars($equipamento->codigo_inventario) ?>"
+                                                       data-designacao="<?= htmlspecialchars($equipamento->designacao_equipamento) ?>"
+                                                       data-designacao="<?= htmlspecialchars($equipamento->marca) ?>">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -502,13 +531,13 @@ $ligacao = null;
 
                     <div class="modal-header">
                         <h5 class="modal-title" style="color:#680447;">
-                            Confirmar eliminação
+                            Confirmar desativação
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <div class="modal-body">
-                        <p>Tem a certeza que pretende eliminar este equipamento?</p>
+                        <p>Tem a certeza que pretende desativar este equipamento?</p>
 
                         <p><strong>Código:</strong> <span id="modalCodigo"></span></p>
                         <p><strong>Designação:</strong> <span id="modalDesignacao"></span></p>
@@ -520,15 +549,22 @@ $ligacao = null;
                             Cancelar
                         </button>
 
-                        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-bs-dismiss="modal">
-                            Eliminar
-                        </button>
+                        <a href="#" class="btn btn-danger" id="btnConfirmarEliminar">
+                            Desativar
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-
+<script>
+    document.getElementById('modalEliminar').addEventListener('show.bs.modal', function(e) {
+        const btn = e.relatedTarget;
+        document.getElementById('modalCodigo').textContent    = btn.getAttribute('data-codigo');
+        document.getElementById('modalDesignacao').textContent = btn.getAttribute('data-designacao');
+        document.getElementById('btnConfirmarEliminar').href   = '/ProjetoSIBDAS/Frontend/private/views/equipamentos/eliminar.php?id=' + btn.getAttribute('data-id');
+    });
+</script>
 
 <!-- Custom JS -->
 <script src="/ProjetoSIBDAS/Frontend/assets/js/1240811.js"></script>

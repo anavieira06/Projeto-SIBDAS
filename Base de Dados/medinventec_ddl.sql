@@ -10,6 +10,7 @@ CREATE TABLE `equipamentos` (
   `ano_fabrico` int NOT NULL,
   `custo_aquisicao` decimal(10,2) NOT NULL,
   `observacoes` text,
+  `ativo` TINYINT(1) NOT NULL DEFAULT 1,
   `categoria_grupo_id` int NOT NULL,
   `estado_id` int NOT NULL,
   `criticidade_id` int NOT NULL,
@@ -49,6 +50,7 @@ CREATE TABLE `fornecedores` (
   `pessoa_contacto` varchar(100) NOT NULL,
   `tel_pessoa_contacto` varchar(20) NOT NULL,
   `observacoes` text,
+  `ativo` TINYINT(1) NOT NULL DEFAULT 1,
   `tipo_fornecedor_id` int NOT NULL
 );
 
@@ -68,7 +70,8 @@ CREATE TABLE `localizacoes` (
   `edificio` varchar(100) NOT NULL,
   `piso` varchar(20) NOT NULL,
   `servico_depart` varchar(100) NOT NULL,
-  `sala_gabinete` varchar(50) NOT NULL
+  `sala_gabinete` varchar(50) NOT NULL,
+  `ativo` TINYINT(1) NOT NULL DEFAULT 1
 );
 
 CREATE TABLE `documentos` (

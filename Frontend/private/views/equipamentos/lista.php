@@ -435,7 +435,7 @@ $ligacao = null;
                                             </td>
                                             <td class="text-center align-middle">
                                                 <div class="d-flex justify-content-center align-items-center gap-2">
-                                                    <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/detalhes.php?id=<?= $equipamento->id ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                                    <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
                                                     <a href="/ProjetoSIBDAS/Frontend/private/views/equipamentos/editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>

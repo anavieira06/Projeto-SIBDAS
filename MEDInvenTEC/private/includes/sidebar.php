@@ -10,14 +10,14 @@ $perfil = $_SESSION['perfil'] ?? '';
         <nav class="sidebar-menu">
 
             <!-- Todos os perfis -->
-            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-laptop"></i> &ensp; Equipamentos</a>
-            <hr>
-            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-location-dot"></i> &ensp; Localizações</a>
-            <hr>
             <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/dashboard/dashboard.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-chart-column"></i> &ensp; Dashboard</a>
+            <hr>
+            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-laptop"></i> &ensp; Equipamentos</a>
 
             <!-- Técnico e Administrador -->
             <?php if ($perfil == 'tecnico' || $perfil == 'administrador'): ?>
+            <hr>
+            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-location-dot"></i> &ensp; Localizações</a>
             <hr>
             <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-building"></i> &ensp; Fornecedores</a>
             <hr>
@@ -45,18 +45,18 @@ $perfil = $_SESSION['perfil'] ?? '';
         <div class="offcanvas-body">
 
             <!-- Todos os perfis -->
-            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php" class="sidebar-link">
-                <i class="fas fa-laptop"></i> Equipamentos
-            </a>
-            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php" class="sidebar-link">
-                <i class="fas fa-location-dot"></i> Localizações
-            </a>
             <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/dashboard/dashboard.php" class="sidebar-link">
                 <i class="fas fa-chart-column"></i> Dashboard
+            </a>
+            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php" class="sidebar-link">
+                <i class="fas fa-laptop"></i> Equipamentos
             </a>
 
             <!-- Técnico e Administrador -->
             <?php if ($perfil == 'tecnico' || $perfil == 'administrador'): ?>
+            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php" class="sidebar-link">
+                <i class="fas fa-location-dot"></i> Localizações
+            </a>
             <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php" class="sidebar-link">
                 <i class="fas fa-building"></i> Fornecedores
             </a>

@@ -201,9 +201,11 @@ $ligacao = null;
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Equipamentos</strong>
                 </h2>
+                <?php if ($_SESSION['perfil'] != 'profissional_saude'): ?>
                 <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/novo.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo equipamento
                 </a>
+                <?php endif; ?>
             </div>
 
             <hr>
@@ -457,6 +459,7 @@ $ligacao = null;
                                             <td class="text-center align-middle">
                                                 <div class="d-flex justify-content-center align-items-center gap-2">
                                                     <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                                    <?php if ($_SESSION['perfil'] != 'profissional_saude'): ?>
                                                     <span class="mx-2 text-muted">|</span>
                                                     <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                                     <span class="mx-2 text-muted">|</span>
@@ -469,6 +472,7 @@ $ligacao = null;
                                                        data-marca="<?= htmlspecialchars($equipamento->marca) ?>">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </a>
+                                                    <?php endif; ?>
                                                 </div>
                                             </td>
                                         </tr>

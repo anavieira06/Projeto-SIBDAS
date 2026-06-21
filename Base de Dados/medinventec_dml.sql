@@ -543,3 +543,54 @@ INSERT INTO utilizador (nome, email, password, perfil_id, created_at) VALUES
 ('Ana Vieira', 'admin@medinventec.pt', '$2y$10$XQqWc5Td6K./XUTtsf8ugertX7B6hq6g0XDvvWnW1WAs0WkbMey4S', 1, NOW()),
 ('José Rocha', 'tecnico@medinventec.pt', '$2y$10$QlOhTk6G66aa0Wfu78yuiefMXKQlolUjv3ZNzMl4BJF49UW/NmB4O', 2, NOW()),
 ('Jerusa Vinagre', 'saude@medinventec.pt', '$2y$10$v6ToZARQjHtsLMYdxBUKme6POdWbfY7tM44mnaYL8ZNO.KzxZ2Q1C', 3, NOW());
+
+
+* =========================================
+  GESTÃO DE CONTEÚDOS
+========================================= */
+
+INSERT INTO gestao_sobre_nos (menu_sobre_nos, titulo, conteudo, texto_botao, data_criacao, data_ultima_alteracao) VALUES
+('Sobre nós', 'Gestão Inteligente de Equipamentos Médicos', 'Organize, controle e otimize o seu inventário hospitalar.', 'Fale connosco!', NOW(), NOW());
+ 
+INSERT INTO gestao_problema_solucao (menu_problema_solucao, titulo1, paragrafo1, paragrafo2, paragrafo3, titulo2, paragrafo1_vant, paragrafo2_vant, paragrafo3_vant, data_criacao, data_ultima_alteracao) VALUES
+('Problema e Solução',
+'O Problema',
+'Em muitas unidades hospitalares, a gestão do inventário de equipamentos médicos é realizada de forma fragmentada, recorrendo a folhas de Excel, documentos isolados, registos em papel e várias bases de dados sem integração.',
+'Esta abordagem dificulta a organização da informação, a localização dos equipamentos e o rápido acesso à documentação técnica.',
+'Como consequência, surgem problemas como a duplicação de dados, falta de controlo do estado dos equipamentos e dificuldades na gestão de garantias, contratos e fornecedores.',
+'A Nossa Solução',
+'A nossa empresa foi desenvolvida com o objetivo de centralizar e organizar toda a informação relativa aos equipamentos médicos, promovendo uma gestão mais eficiente e estruturada do inventário hospitalar.',
+'Através de uma plataforma web intuitiva, é possível registar, consultar e atualizar dados em tempo real, garantindo um maior controlo sobre a localização, estado e documentação associada a cada equipamento.',
+'O sistema permite ainda melhorar a rastreabilidade dos dispositivos médicos e apoiar a tomada de decisões técnicas e administrativas.',
+NOW(), NOW());
+ 
+INSERT INTO gestao_vantagens (menu_vantagens, titulo, data_criacao, data_ultima_alteracao) VALUES
+('Vantagens', 'Vantagens', NOW(), NOW());
+ 
+INSERT INTO vantagens (gestao_vantagens_id, vantagem) VALUES
+(1, 'Centralização de toda a informação num único sistema, evitando dispersão de dados'),
+(1, 'Acesso rápido e em tempo real à informação dos equipamentos médicos'),
+(1, 'Melhoria no controlo do estado, localização e histórico de cada equipamento'),
+(1, 'Facilidade na gestão de garantias, contratos e fornecedores'),
+(1, 'Melhor rastreabilidade dos dispositivos médicos'),
+(1, 'Apoio à tomada de decisões técnicas e administrativas com base em dados atualizados'),
+(1, 'Interface intuitiva que facilita a utilização por diferentes profissionais');
+ 
+INSERT INTO gestao_funcionalidades (menu_funcionalidades, titulo, texto_introdutorio, data_criacao, data_ultima_alteracao) VALUES
+('Funcionalidades', 'Funcionalidades', 'Aqui encontram-se as funcionalidades da nossa página.', NOW(), NOW());
+ 
+INSERT INTO funcionalidades (gestao_funcionalidades_id, icone, titulo_funcionalidade, descricao) VALUES
+(1, 'fa-solid fa-laptop', 'Gestão de equipamentos', 'Registo, edição e consulta detalhada de equipamentos médicos, incluindo estado e criticidade.'),
+(1, 'fa-solid fa-location-dot', 'Gestão de localizações', 'Organização por edifício, serviço e sala, permitindo localizar rapidamente cada equipamento.'),
+(1, 'fa-solid fa-building', 'Gestão de fornecedores', 'Associação de fabricantes, distribuidores e empresas de assistência técnica aos equipamentos.'),
+(1, 'fa-solid fa-folder-open', 'Documentação', 'Upload e organização de manuais, certificados, contratos e relatórios técnicos.'),
+(1, 'fa-solid fa-file-signature', 'Garantias e Contratos', 'Controlo de garantias, contratos de manutenção e datas importantes associadas aos equipamentos.'),
+(1, 'fa-solid fa-magnifying-glass', 'Pesquisa inteligente', 'Pesquisa rápida por código, marca, modelo, serviço, estado ou criticidade.'),
+(1, 'fa-solid fa-chart-column', 'Dashboard', 'Indicadores em tempo real sobre equipamentos ativos, manutenção, garantias e estatísticas hospitalares.'),
+(1, 'fa-solid fa-shield-halved', 'Segurança', 'Sistema de autenticação e controlo de acesso para proteção dos dados hospitalares.');
+ 
+INSERT INTO gestao_contacto (menu_contacto, titulo, texto_introdutorio, etiqueta1, etiqueta2, etiqueta3, texto_botao, data_criacao, data_ultima_alteracao) VALUES
+('Contacto', 'Contacto', 'Entre em contacto conosco para tirar todas as suas dúvidas ou obter mais informações sobre a nossa plataforma.', 'Nome', 'Email', 'Mensagem', 'Enviar Mensagem', NOW(), NOW());
+ 
+INSERT INTO gestao_rodape (localizacao, morada, horario, horas, contactos, email, telefone, data_criacao, data_ultima_alteracao) VALUES
+('LOCALIZAÇÃO', 'Rua da Inovação, 42\n4690-945, Viseu\nPortugal', 'HORÁRIO', '2ª a 6ª Feira: 8h - 18h\nSábado e Feriados: 9h - 13h\nDomingo: Encerrado\nAtendimento online: 24/7', 'CONTACTOS', 'Email: suporte@MEDInvenTEC.pt', '+351 210 759 811', NOW(), NOW());

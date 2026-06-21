@@ -1,3 +1,32 @@
+<?php
+require_once __DIR__ . '/../private/includes/funcoes.php';
+
+// Buscar dados da BD
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sobreNos        = $ligacao->query("SELECT * FROM gestao_sobre_nos WHERE id=1")->fetch(PDO::FETCH_OBJ);
+    $problemaSolucao = $ligacao->query("SELECT * FROM gestao_problema_solucao WHERE id=1")->fetch(PDO::FETCH_OBJ);
+    $vantagens_hdr   = $ligacao->query("SELECT * FROM gestao_vantagens WHERE id=1")->fetch(PDO::FETCH_OBJ);
+    $vantagens       = $ligacao->query("SELECT * FROM vantagens WHERE gestao_vantagens_id=1")->fetchAll(PDO::FETCH_OBJ);
+    $func_hdr        = $ligacao->query("SELECT * FROM gestao_funcionalidades WHERE id=1")->fetch(PDO::FETCH_OBJ);
+    $funcionalidades = $ligacao->query("SELECT * FROM funcionalidades WHERE gestao_funcionalidades_id=1")->fetchAll(PDO::FETCH_OBJ);
+    $contacto        = $ligacao->query("SELECT * FROM gestao_contacto WHERE id=1")->fetch(PDO::FETCH_OBJ);
+    $rodape          = $ligacao->query("SELECT * FROM gestao_rodape WHERE id=1")->fetch(PDO::FETCH_OBJ);
+
+    $ligacao = null;
+
+} catch (PDOException $e) {
+    // Se falhar a BD, usa valores de fallback
+    $sobreNos = $problemaSolucao = $vantagens_hdr = $func_hdr = $contacto = $rodape = null;
+    $vantagens = $funcionalidades = [];
+}
+?>
 <!DOCTYPE html>
 <html lang="pt">
     <head>
@@ -30,11 +59,11 @@
 
             <!-- Links centrais -->
             <div class="container-navegacao">
-                <a href="#sobre-nos">Sobre nós</a>
-                <a href="#problema-solucao">Problema e Solução</a>
-                <a href="#vantagens">Vantagens</a>
-                <a href="#funcionalidades">Funcionalidades</a>
-                <a href="#contacto">Contacto</a> 
+                <a href="#sobre-nos"><?= htmlspecialchars($sobreNos->menu_sobre_nos ?? 'Sobre nós') ?></a>
+                <a href="#problema-solucao"><?= htmlspecialchars($problemaSolucao->menu_problema_solucao ?? 'Problema e Solução') ?></a>
+                <a href="#vantagens"><?= htmlspecialchars($vantagens_hdr->menu_vantagens ?? 'Vantagens') ?></a>
+                <a href="#funcionalidades"><?= htmlspecialchars($func_hdr->menu_funcionalidades ?? 'Funcionalidades') ?></a>
+                <a href="#contacto"><?= htmlspecialchars($contacto->menu_contacto ?? 'Contacto') ?></a>
             </div>
 
             <!-- Área Cliente -->
@@ -46,132 +75,89 @@
         <!-- Secção "Sobre nós"-->
         <section class="container-texto-generico" id="sobre-nos">
             <div class="sobre-nos-content">
-                <h1>Gestão Inteligente de Equipamentos Médicos</h1>
-                <p>Organize, controle e otimize o seu inventário hospitalar.</p>
-                <a href="#contacto" class="button">Fale connosco!</a>
+                <h1><?= htmlspecialchars($sobreNos->titulo ?? 'Gestão Inteligente de Equipamentos Médicos') ?></h1>
+                <p><?= htmlspecialchars($sobreNos->conteudo ?? '') ?></p>
+                <a href="#contacto" class="button"><?= htmlspecialchars($sobreNos->texto_botao ?? 'Fale connosco!') ?></a>
             </div>
         </section>
 
         <!-- Secção "Problema e Solução"-->
         <section class="container-texto-generico" id="problema-solucao">
             <div class="problema-solucao-content">
-                <h2>O Problema</h2>
-                <p>Em muitas unidades hospitalares, a gestão do inventário de equipamentos médicos é realizada de forma fragmentada, recorrendo a folhas de Excel, 
-                documentos isolados, registos em papel e várias bases de dados sem integração.</p>
-                <p>Esta abordagem dificulta a organização da informação, a localização dos equipamentos e o rápido acesso à documentação técnica.</p>
-                <p>Como consequência, surgem problemas como a duplicação de dados, falta de controlo do estado dos equipamentos e dificuldades na gestão de garantias, contratos e fornecedores.</p>
+                <h2><?= htmlspecialchars($problemaSolucao->titulo1 ?? 'O Problema') ?></h2>
+                <p><?= htmlspecialchars($problemaSolucao->paragrafo1 ?? '') ?></p>
+                <p><?= htmlspecialchars($problemaSolucao->paragrafo2 ?? '') ?></p>
+                <p><?= htmlspecialchars($problemaSolucao->paragrafo3 ?? '') ?></p>
             </div>
             <div class="problema-solucao-content">
-                <h2>A Nossa Solução</h2>
-                <p>A nossa empresa foi desenvolvida com o objetivo de centralizar e organizar toda a informação relativa aos equipamentos médicos, 
-                promovendo uma gestão mais eficiente e estruturada do inventário hospitalar.</p>
-                <p>Através de uma plataforma web intuitiva, é possível registar, consultar e atualizar dados em tempo real, garantindo um maior 
-                controlo sobre a localização, estado e documentação associada a cada equipamento.</p>
-                <p>O sistema permite ainda melhorar a rastreabilidade dos dispositivos médicos e apoiar a tomada de decisões técnicas e administrativas.</p>
+                <h2><?= htmlspecialchars($problemaSolucao->titulo2 ?? 'A Nossa Solução') ?></h2>
+                <p><?= htmlspecialchars($problemaSolucao->paragrafo1_vant ?? '') ?></p>
+                <p><?= htmlspecialchars($problemaSolucao->paragrafo2_vant ?? '') ?></p>
+                <p><?= htmlspecialchars($problemaSolucao->paragrafo3_vant ?? '') ?></p>
             </div>
         </section>
         
         <!-- Secção "Vantagens"-->
         <section class="container-texto-generico" id="vantagens">
             <div class="vantagens-content">
-                <h2>Vantagens</h2>
+                <h2><?= htmlspecialchars($vantagens_hdr->titulo ?? 'Vantagens') ?></h2>
                 <ul>
-                    <li>Centralização de toda a informação num único sistema, evitando dispersão de dados</li>
-                    <li>Acesso rápido e em tempo real à informação dos equipamentos médicos</li>
-                    <li>Melhoria no controlo do estado, localização e histórico de cada equipamento</li>
-                    <li>Facilidade na gestão de garantias, contratos e fornecedores</li>
-                    <li>Melhor rastreabilidade dos dispositivos médicos</li>
-                    <li>Apoio à tomada de decisões técnicas e administrativas com base em dados atualizados</li>
-                    <li>Interface intuitiva que facilita a utilização por diferentes profissionais</li>
+                    <?php foreach ($vantagens as $v): ?>
+                    <li><?= htmlspecialchars($v->vantagem) ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </section>
 
         <!-- Secção "Funcionalidades"-->
         <section id="funcionalidades">
-            <h2>Funcionalidades</h2>
-                <p>Aqui encontram-se as funcionalidades da nossa página.</p>
+            <h2><?= htmlspecialchars($func_hdr->titulo ?? 'Funcionalidades') ?></h2>
+            <p><?= htmlspecialchars($func_hdr->texto_introdutorio ?? '') ?></p>
             <div class="funcionalidades-container">
+                <?php foreach ($funcionalidades as $f): ?>
                 <div class="funcionalidades-content">
-                    <i class="fa-solid fa-laptop"></i>
-                    <h3>Gestão de equipamentos</h3>
-                    <p>Registo, edição e consulta detalhada de equipamentos médicos, incluindo estado e criticidade.</p>
+                    <i class="<?= htmlspecialchars($f->icone) ?>"></i>
+                    <h3><?= htmlspecialchars($f->titulo_funcionalidade) ?></h3>
+                    <p><?= htmlspecialchars($f->descricao) ?></p>
                 </div>
-                <div class="funcionalidades-content">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <h3>Gestão de localizações</h3>
-                    <p>Organização por edifício, serviço e sala, permitindo localizar rapidamente cada equipamento.</p>
-                </div>
-                <div class="funcionalidades-content">
-                    <i class="fa-solid fa-building"></i>
-                    <h3>Gestão de fornecedores</h3>
-                    <p>Associação de fabricantes, distribuidores e empresas de assistência técnica aos equipamentos.</p>
-                </div>
-                <div class="funcionalidades-content">
-                    <i class="fa-solid fa-folder-open"></i>
-                    <h3>Documentação</h3>
-                    <p>Upload e organização de manuais, certificados, contratos e relatórios técnicos.</p>
-                </div>
-                <div class="funcionalidades-content">
-                    <i class="fa-solid fa-file-signature"></i>
-                    <h3>Garantias e Contratos</h3>
-                    <p>Controlo de garantias, contratos de manutenção e datas importantes associadas aos equipamentos.</p>
-                </div>
-                <div class="funcionalidades-content">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <h3>Pesquisa inteligente</h3>
-                    <p>Pesquisa rápida por código, marca, modelo, serviço, estado ou criticidade.</p>
-                </div>
-                <div class="funcionalidades-content">
-                    <i class="fa-solid fa-chart-column"></i>
-                    <h3>Dashboard</h3>
-                    <p>Indicadores em tempo real sobre equipamentos ativos, manutenção, garantias e estatísticas hospitalares.</p>
-                </div>
-                <div class="funcionalidades-content">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>Segurança</h3>
-                    <p>Sistema de autenticação e controlo de acesso para proteção dos dados hospitalares.</p>
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
 
         <!--Secção "Contacto"-->
         <section id="contacto">
-            <h2>Contacto</h2>
-            <p>Entre em contacto conosco para tirar todas as suas dúvidas ou obter mais informações sobre a nossa plataforma.</p> 
+            <h2><?= htmlspecialchars($contacto->titulo ?? 'Contacto') ?></h2>
+            <p><?= htmlspecialchars($contacto->texto_introdutorio ?? '') ?></p>
             <form id="contactForm">
-                <label for="nome">Nome:</label>
+                <label for="nome"><?= htmlspecialchars($contacto->etiqueta1 ?? 'Nome') ?>:</label>
                 <input type="text" id="nome" name="nome" required>
 
-                <label for="email">Email:</label>
+                <label for="email"><?= htmlspecialchars($contacto->etiqueta2 ?? 'Email') ?>:</label>
                 <input type="email" id="email" name="email" required>
 
-                <label for="mensagem">Mensagem:</label>
+                <label for="mensagem"><?= htmlspecialchars($contacto->etiqueta3 ?? 'Mensagem') ?>:</label>
                 <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
 
-                <button type="submit">Enviar Mensagem</button> 
+                <button type="submit"><?= htmlspecialchars($contacto->texto_botao ?? 'Enviar Mensagem') ?></button>
             </form>
         </section>
 
         <!-- Rodapé -->
         <footer class="footer-container">
             <div class="footer-section">
-                <strong>LOCALIZAÇÃO</strong>
-                <p> Rua da Inovação, 42 <br> 4690-945, Viseu <br> Portugal</p>
+                <strong><?= htmlspecialchars($rodape->localizacao ?? 'LOCALIZAÇÃO') ?></strong>
+                <p><?= nl2br(htmlspecialchars($rodape->morada ?? '')) ?></p>
             </div>
             
             <div class="footer-section">
-                <strong>HORÁRIO</strong>
-                <p>2ª a 6ª Feira: 8h - 18h</p>
-                <p>Sábado e Feriados: 9h - 13h</p>
-                <p>Domingo: Encerrado</p>
-                <p>Atendimento online: 24/7</p>
+                <strong><?= htmlspecialchars($rodape->horario ?? 'HORÁRIO') ?></strong>
+                <p><?= nl2br(htmlspecialchars($rodape->horas ?? '')) ?></p>
             </div>
 
             <div class="footer-section">
-                <strong>CONTACTOS</strong>
-                <p>Email: suporte@MEDInvenTEC.pt</p>
-                <p>Telefone: +351 210 759 811</p>
+                <strong><?= htmlspecialchars($rodape->contactos ?? 'CONTACTOS') ?></strong>
+                <p><?= htmlspecialchars($rodape->email ?? '') ?></p>
+                <p><?= htmlspecialchars($rodape->telefone ?? '') ?></p>
             </div>
         </footer>
     </body>

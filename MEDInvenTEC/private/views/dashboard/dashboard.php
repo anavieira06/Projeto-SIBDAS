@@ -7,6 +7,96 @@
 require_once __DIR__ . '/../../includes/funcoes.php';
 redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o utilizador está autenticado
 
+// Buscar dados da BD para o dashboard
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ 
+    // Total de equipamentos
+    $totalEquipamentos  = $ligacao->query("SELECT COUNT(*) FROM equipamentos")->fetchColumn();
+
+    // Total de fornecedores ativos
+    $totalFornecedores  = $ligacao->query("SELECT COUNT(*) FROM fornecedores WHERE ativo = 1")->fetchColumn();
+
+    // Total de localizações ativas
+    $totalLocalizacoes  = $ligacao->query("SELECT COUNT(*) FROM localizacoes WHERE ativo = 1")->fetchColumn();
+
+    // Total de documentos
+    $totalDocumentos    = $ligacao->query("SELECT COUNT(*) FROM documentos")->fetchColumn();
+ 
+ 
+    // Equipamentos por estado
+    $porEstado = $ligacao->query("
+        SELECT est.estado, COUNT(*) as total
+        FROM equipamentos e
+        INNER JOIN estado est ON e.estado_id = est.id
+        GROUP BY est.estado
+    ")->fetchAll(PDO::FETCH_OBJ);
+ 
+    // Equipamentos por categoria
+    $porCategoria = $ligacao->query("
+        SELECT cg.categoria_grupo, COUNT(*) as total
+        FROM equipamentos e
+        INNER JOIN categoria_grupo cg ON e.categoria_grupo_id = cg.id
+        GROUP BY cg.categoria_grupo
+    ")->fetchAll(PDO::FETCH_OBJ);
+ 
+    // Equipamentos por serviço/departamento
+    $porServico = $ligacao->query("
+        SELECT l.servico_depart, COUNT(*) as total
+        FROM equipamentos e
+        INNER JOIN localizacoes l ON e.localizacao_id = l.id
+        GROUP BY l.servico_depart
+        ORDER BY total DESC
+        LIMIT 5
+    ")->fetchAll(PDO::FETCH_OBJ);
+ 
+    // Alertas
+    $garantiaExpirando = $ligacao->query("
+        SELECT COUNT(*) FROM garantias_contratos gc
+        INNER JOIN equipamentos e ON e.garantia_contrato_id = gc.id
+        WHERE gc.data_fim BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 30 DAY)
+    ")->fetchColumn();
+ 
+    $garantiaExpirada = $ligacao->query("
+        SELECT COUNT(*) FROM garantias_contratos gc
+        INNER JOIN equipamentos e ON e.garantia_contrato_id = gc.id
+        WHERE gc.data_fim < NOW()
+    ")->fetchColumn();
+ 
+    $semDocumentacao = $ligacao->query("
+        SELECT COUNT(*) FROM equipamentos e
+        LEFT JOIN documentos d ON d.equipamento_id = e.id
+        WHERE d.id IS NULL
+    ")->fetchColumn();
+ 
+    $criticidadeElevada = $ligacao->query("
+        SELECT COUNT(*) FROM equipamentos e
+        INNER JOIN criticidade c ON e.criticidade_id = c.id
+        WHERE c.criticidade IN ('Alta', 'Suporte de Vida')
+    ")->fetchColumn();
+ 
+    $ligacao = null;
+ 
+} catch (PDOException $e) {
+    $totalEquipamentos = $equipamentosAtivos = $equipamentosInativos = $equipamentosManutencao = 0;
+    $totalFornecedores = $totalLocalizacoes = $totalDocumentos = 0;
+    $porEstado = $porCategoria = $porServico = [];
+    $garantiaExpirando = $garantiaExpirada = $semDocumentacao = $criticidadeElevada = 0;
+}
+ 
+// Preparar dados para os gráficos
+$estadoLabels  = json_encode(array_column((array)$porEstado,    'estado'));
+$estadoData    = json_encode(array_column((array)$porEstado,    'total'));
+$catLabels     = json_encode(array_column((array)$porCategoria, 'categoria_grupo'));
+$catData       = json_encode(array_column((array)$porCategoria, 'total'));
+$servicoLabels = json_encode(array_column((array)$porServico,   'servico_depart'));
+$servicoData   = json_encode(array_column((array)$porServico,   'total'));
+
 
 include __DIR__ . '/../../includes/header.php'; 
 
@@ -14,7 +104,6 @@ $pagina = 'normal';
 include __DIR__ . '/../../includes/nav.php';
 include __DIR__ . '/../../includes/sidebar.php';
 ?>
-
 
         <!-- Conteúdo Principal -->
         <div class="container-fluid p-4">
@@ -35,7 +124,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 <i class="fa-solid fa-laptop-medical"></i>
                             </div>
                             <div>
-                                <div class="stat-number" id="totalEquipamentos">1247</div>
+                                <div class="stat-number" id="totalEquipamentos"><?= $totalEquipamentos ?></div>
                                 <div class="stat-label">Total de Equipamentos</div>
                             </div>
                         </div>
@@ -46,11 +135,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                     <div class="card stat-card">
                         <div class="card-body d-flex align-items-center gap-3">
                             <div class="stat-icon">
-                                <i class="fa-solid fa-circle-check"></i>
+                                <i class="fa-solid fa-building"></i>
                             </div>
                             <div>
-                                <div class="stat-number" id="equipamentosAtivos">1103</div>
-                                <div class="stat-label">Equipamentos Ativos</div>
+                                <div class="stat-number"><?= $totalFornecedores ?></div>
+                                <div class="stat-label">Fornecedores Ativos</div>
                             </div>
                         </div>
                     </div>
@@ -60,11 +149,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                     <div class="card stat-card">
                         <div class="card-body d-flex align-items-center gap-3">
                             <div class="stat-icon">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <i class="fa-solid fa-location-dot"></i>
                             </div>
                             <div>
-                                <div class="stat-number" id="equipamentosManutencao">89</div>
-                                <div class="stat-label">Equipamentos em Manutenção</div>
+                                <div class="stat-number"><?= $totalLocalizacoes ?></div>
+                                <div class="stat-label">Localizações ativas</div>
                             </div>
                         </div>
                     </div>
@@ -74,11 +163,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                     <div class="card stat-card">
                         <div class="card-body d-flex align-items-center gap-3">
                             <div class="stat-icon">
-                                <i class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-file-lines"></i>
                             </div>
                             <div>
-                                <div class="stat-number" id="equipamentosInativos">55</div>
-                                <div class="stat-label">Equipamentos Inativos</div>
+                                <div class="stat-number"><?= $totalDocumentos ?></div>
+                                <div class="stat-label">Documentos</div>
                             </div>
                         </div>
                     </div>
@@ -135,19 +224,19 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 </h5>
 
                                 <div class="alert-item">
-                                    <strong>12 equipamentos</strong> com garantia a expirar nos próximos 30 dias
+                                    <strong><?= $garantiaExpirando ?> equipamentos</strong> com garantia a expirar nos próximos 30 dias
                                 </div>
 
                                 <div class="alert-item">
-                                    <strong>9 equipamentos</strong> com garantia expirada
+                                    <strong><?= $garantiaExpirada ?> equipamentos</strong> com garantia expirada
                                 </div>
 
                                 <div class="alert-item">
-                                    <strong>5 equipamentos</strong> sem documentação associada
+                                    <strong><?= $semDocumentacao ?> equipamentos</strong> sem documentação associada
                                 </div>
 
                                 <div class="alert-item">
-                                    <strong>18 equipamentos</strong> de criticidade elevada
+                                    <strong><?= $criticidadeElevada ?> equipamentos</strong> de criticidade elevada
                                 </div>
 
                             </div>
@@ -156,56 +245,63 @@ include __DIR__ . '/../../includes/sidebar.php';
                 </div>
             </div>
 
+<!-- Chart.js -->
+<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/chart/chart.min.js"></script>
+
 <script>
     // Gráfico por estado
     new Chart(document.getElementById('estadoChart'), {
         type: 'pie',
         data: {
-            labels: ['Ativos', 'Manutenção', 'Inativos'],
+            labels: <?= $estadoLabels ?>,
             datasets: [{
-                data: [1103, 89, 55],
-                backgroundColor: ['#680447', '#d63384', '#f4a6d7']
+                data: <?= $estadoData ?>,
+                backgroundColor: ['#680447','#9b0a68', '#d63384', '#d556a0', '#e489c3', '#f7c6e0']
             }]
         }
     });
-
+ 
     // Gráfico por serviço
     new Chart(document.getElementById('servicoChart'), {
         type: 'bar',
         data: {
-            labels: ['UCI', 'Urgência', 'Bloco Operatório', 'Imagiologia', 'Laboratório'],
+            labels: <?= $servicoLabels ?>,
             datasets: [{
                 label: 'Equipamentos',
-                data: [120, 95, 72, 48, 60],
+                data: <?= $servicoData ?>,
                 backgroundColor: '#bb226f'
             }]
         },
         options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        x: {
+            ticks: {
+                display: false
             }
         }
+    }
+}
     });
-
+ 
     // Gráfico por categoria
     new Chart(document.getElementById('categoriaChart'), {
         type: 'pie',
         data: {
-            labels: ['Monitorização', 'Diagnóstico', 'Suporte de Vida', 'Laboratório', 'Terapia', 'Esterilização', 'Reabilitação'],
+            labels: <?= $catLabels ?>,
             datasets: [{
-                data: [25, 23, 17, 12, 10, 10, 8],
+                data: <?= $catData ?>,
                 backgroundColor: ['#680447', '#9b0a68', '#c3186d', '#d24497', '#f083c3', '#f7c6e0', '#fff4fb']
             }]
         }
     });
 </script>
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECassets/js/1240811.js"></script>
+<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

@@ -18,7 +18,12 @@ try {
     );
     $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
-    $stmt = $ligacao->prepare("UPDATE equipamentos SET ativo = 0 WHERE id = :id");
+    $stmt = $ligacao->prepare("
+    UPDATE equipamentos 
+    SET ativo = 0, 
+        estado_id = (SELECT id FROM estado WHERE estado = 'Abatido')
+    WHERE id = :id
+    ");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
  

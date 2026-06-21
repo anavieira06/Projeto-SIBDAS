@@ -316,6 +316,7 @@ $ligacao = null;
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
                                         <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/detalhes_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                        <?php if ($fornecedor->ativo == 1): ?>
                                         <span class="mx-2 text-muted">|</span>
                                         <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/editar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                         <span class="mx-2 text-muted">|</span>
@@ -328,6 +329,12 @@ $ligacao = null;
                                         data-tipo="<?= htmlspecialchars($fornecedor->tipo_fornecedor) ?>">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
+                                        <?php else: ?>
+                                        <span class="mx-2 text-muted">|</span>
+                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/reativar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao" title="Reativar fornecedor">
+                                            <i class="fa-solid fa-rotate-left"></i>
+                                        </a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>

@@ -458,18 +458,21 @@ $ligacao = null;
 
                                             <td class="text-center align-middle">
                                                 <div class="d-flex justify-content-center align-items-center gap-2">
-                                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>"  class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
-                                                    <?php if ($_SESSION['perfil'] != 'profissional_saude'): ?>
+                                                    <a href="detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao">
+                                                        <i class="fa-solid fa-eye me-2"></i>
+                                                    </a>
+                                                    <?php if ($_SESSION['perfil'] != 'profissional_saude' && $equipamento->ativo == 1): ?>
                                                     <span class="mx-2 text-muted">|</span>
-                                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                                    <a href="editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao">
+                                                        <i class="fa-regular fa-pen-to-square me-2"></i>
+                                                    </a>
                                                     <span class="mx-2 text-muted">|</span>
                                                     <a href="#" class="btn-sm btn-acao" 
-                                                       data-bs-toggle="modal" 
-                                                       data-bs-target="#modalEliminar"
-                                                       data-id="<?= aes_encrypt($equipamento->id) ?>"
-                                                       data-codigo="<?= htmlspecialchars($equipamento->codigo_inventario) ?>"
-                                                       data-designacao="<?= htmlspecialchars($equipamento->designacao_equipamento) ?>"
-                                                       data-marca="<?= htmlspecialchars($equipamento->marca) ?>">
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#modalEliminar"
+                                                    data-id="<?= aes_encrypt($equipamento->id) ?>"
+                                                    data-codigo="<?= htmlspecialchars($equipamento->codigo_inventario) ?>"
+                                                    data-designacao="<?= htmlspecialchars($equipamento->designacao_equipamento) ?>">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </a>
                                                     <?php endif; ?>

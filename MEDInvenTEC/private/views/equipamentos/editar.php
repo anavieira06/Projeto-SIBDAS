@@ -9,7 +9,7 @@ redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o u
 require_once __DIR__ . '/../../includes/validacoes.php';
 
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
-    header('Location: ' . BASE_URL . '/public/login.php');
+    header('Location: ' . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
     exit;
 }
 
@@ -253,6 +253,7 @@ try {
             tf.tipo_fornecedor
         FROM fornecedores f
         LEFT JOIN tipo_fornecedor tf ON f.tipo_fornecedor_id = tf.id
+        WHERE f.ativo = 1
         ORDER BY f.nome_empresa
     ")->fetchAll(PDO::FETCH_OBJ);
 
@@ -275,6 +276,7 @@ try {
     $listaLocalizacoes = $ligacao->query("
         SELECT id, servico_depart, edificio, piso, sala_gabinete
         FROM localizacoes
+        WHERE ativo = 1
         ORDER BY servico_depart
     ")->fetchAll(PDO::FETCH_OBJ);
 
@@ -1032,6 +1034,6 @@ const localizacoes = {
 </script>
 
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECassets/js/1240811.js"></script>
+<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

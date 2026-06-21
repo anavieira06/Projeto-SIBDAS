@@ -390,7 +390,7 @@ $ligacao = null;
         </div>  
         
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECassets/js/1240811.js"></script>
+<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
 
 <!-- Datatables -->
 <script>

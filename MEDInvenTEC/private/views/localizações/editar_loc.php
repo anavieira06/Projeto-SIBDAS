@@ -9,7 +9,7 @@ redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o u
 require_once __DIR__ . '/../../includes/validacoes.php';
 
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
-    header('Location: ' . BASE_URL . '/public/login.php');
+    header('Location: ' . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
     exit;
 }
  

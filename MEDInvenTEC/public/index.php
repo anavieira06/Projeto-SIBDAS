@@ -128,7 +128,21 @@ try {
         <section id="contacto">
             <h2><?= htmlspecialchars($contacto->titulo ?? 'Contacto') ?></h2>
             <p><?= htmlspecialchars($contacto->texto_introdutorio ?? '') ?></p>
-            <form id="contactForm">
+
+            <?php if (isset($_GET['enviado'])): ?>
+                <div style="background-color:#d1e7dd; color:#0a3622; padding:12px 16px; border-radius:8px; display:flex; align-items:center; gap:8px; margin-top:12px;">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Mensagem enviada com sucesso!
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_GET['erro'])): ?>
+                <div style="background-color:#f8d7da; color:#842029; padding:12px 16px; border-radius:8px; display:flex; align-items:center; gap:8px; margin-top:12px;">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Erro ao enviar. Verifique os campos.
+                </div>
+            <?php endif; ?>
+
+            <form id="contactForm" action="processar_contacto.php" method="POST">
                 <label for="nome"><?= htmlspecialchars($contacto->etiqueta1 ?? 'Nome') ?>:</label>
                 <input type="text" id="nome" name="nome" required>
 

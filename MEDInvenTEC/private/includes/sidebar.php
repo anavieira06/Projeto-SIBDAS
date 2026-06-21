@@ -30,6 +30,8 @@ $perfil = $_SESSION['perfil'] ?? '';
             <?php if ($perfil == 'administrador'): ?>
             <hr>
             <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/gestão de conteúdos/gestao_cont.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-globe"></i> &ensp; Gestão de conteúdos públicos</a>
+            <hr>
+            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/gestão de conteúdos/mensagens.php" class="px-0 mb-2 d-block sidebar-link"><i class="fas fa-envelope"></i> &ensp; Mensagens de contacto</a>
             <?php endif; ?>
 
         </nav>
@@ -72,6 +74,10 @@ $perfil = $_SESSION['perfil'] ?? '';
             <?php if ($perfil == 'administrador'): ?>
             <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/gestão de conteúdos/gestao_cont.php" class="sidebar-link">
                 <i class="fas fa-globe"></i> Gestão de conteúdos públicos
+            </a>
+            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/gestão de conteúdos/mensagens.php" class="sidebar-link">
+                <i class="fas fa-envelope"></i>
+                Mensagens de contacto
             </a>
             <?php endif; ?>
 

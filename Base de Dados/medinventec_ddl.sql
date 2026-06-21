@@ -209,6 +209,15 @@ CREATE TABLE `utilizador` (
   `created_at` datetime DEFAULT NOW()
 );
 
+CREATE TABLE `mensagens_contacto` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `mensagem` text NOT NULL,
+  `data_envio` datetime DEFAULT NOW(),
+  `lida` TINYINT(1) NOT NULL DEFAULT 0
+);
+
 ALTER TABLE `equipamentos` ADD FOREIGN KEY (`localizacao_id`) REFERENCES `localizacoes` (`id`);
 
 ALTER TABLE `equipamentos` ADD FOREIGN KEY (`garantia_contrato_id`) REFERENCES `garantias_contratos` (`id`);

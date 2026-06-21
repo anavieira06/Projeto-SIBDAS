@@ -18,7 +18,7 @@ function redirect_if_not_logged($redirect_to = '/sibdas/1240811/ProjetoSIBDAS/ME
 {
     start_session();
     if (!check_session()) {
-        header("Location: " . BASE_URL . $redirect_to);
+        header("Location: " . $redirect_to);
         exit;
     }
 }
@@ -28,7 +28,7 @@ function logout_and_redirect($redirect_to = '/sibdas/1240811/ProjetoSIBDAS/MEDIn
     start_session();
     session_unset();
     session_destroy();
-    header("Location: " . BASE_URL . $redirect_to);
+    header("Location: " . $redirect_to);
     exit;
 }
 

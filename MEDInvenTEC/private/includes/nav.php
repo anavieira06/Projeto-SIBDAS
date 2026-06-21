@@ -43,13 +43,7 @@ $nome = $_SESSION['utilizador'];
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa-solid fa-key me-2"></i>Alterar password
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item" href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTECpublic/logout.php">
+                            <a class="dropdown-item" href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/logout.php">
                                 <i class="fa-solid fa-right-from-bracket me-2"></i>Sair
                             </a>
                         </li>

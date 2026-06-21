@@ -2,6 +2,23 @@
 // Inicia a sessão 
 session_start();
 
+// Buscar utilizadores de teste da BD
+$utilizadores_teste = [];
+try {
+    require_once __DIR__ . '/../private/includes/funcoes.php';
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD
+    );
+    $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $ligacao->query("SELECT nome, email, perfil_id FROM utilizador ORDER BY perfil_id ASC");
+    $utilizadores_teste = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $ligacao = null;
+} catch (PDOException $e) {
+    // silencioso — não afeta o login
+}
+
 // Inicializa a variável que irá conter os erros de validação
 $validation_errors = [];
 // Verifica se existem erros de validação guardados na sessão
@@ -24,7 +41,7 @@ if (!empty($_SESSION['server_error'])) {
 
 <?php
 $bodyClass = 'bg-login';
-include __DIR__ . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/includes/header.php';
+include __DIR__ . '/../private/includes/header.php';
 ?>
 
         <div class="container-fluid mt-5">
@@ -40,7 +57,7 @@ include __DIR__ . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/includes/he
                         <div class="row">
                             <div class="col">
                                 <!-- Formulário -->
-                                <form action="../private/processa_login.php" method="post">
+                                <form name="formulario" action="../private/processa_login.php" method="post">
                                     <div class="mb-3">
                                         <!-- Utilizador -->
                                         <label for="email" class="form-label">Utilizador</label>
@@ -60,9 +77,29 @@ include __DIR__ . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/includes/he
                                         </button>
                                     </div>
 
-                                    <div class="text-center mt-3 mb-3">
+                                    <!-- Botões de preenchimento automático (Fase de Testes) -->
+                                    <?php
+                                    $perfil_label = [
+                                        1 => 'Administrador',
+                                        2 => 'Técnico',
+                                        3 => 'Profissional de Saúde'
+                                    ];
+                                    ?>
+                                    <div class="mt-4 d-flex justify-content-center gap-4">
+                                        <?php foreach ($utilizadores_teste as $u): ?>
+                                        <button type="button"
+                                                class="btn btn-outline-secondary btn-teste"
+                                                data-email="<?= htmlspecialchars($u->email) ?>"
+                                                data-perfil="<?= $u->perfil_id ?>"
+                                                title="<?= $perfil_label[$u->perfil_id] ?? '' ?>">
+                                            <?= htmlspecialchars($u->nome) ?>
+                                        </button>
+                                        <?php endforeach; ?>
+                                    </div>
+
+                                    <div class="text-center mt-4 mb-3">
                                         <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/index.php"
-                                        class="btn btn-outline-secondary px-4">
+                                        class="btn btn-sm btn-outline-secondary px-4">
                                             <i class="fa-solid fa-house me-2"></i> Voltar ao início
                                         </a>
                                     </div>
@@ -95,3 +132,20 @@ include __DIR__ . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/includes/he
             </div>
         </div>
 <?php include __DIR__ . '/../private/includes/footer.php'; ?>
+
+<script>
+    const passwords = {
+        'admin@medinventec.pt':   'Adm!2025#Med',
+        'tecnico@medinventec.pt': 'Tec!2025#Hosp',
+        'saude@medinventec.pt':   'Sau!2025#Hosp'
+    };
+
+    document.querySelectorAll('.btn-teste').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const f = document.forms['formulario'];
+            const email = btn.getAttribute('data-email');
+            f['text_username'].value = email;
+            f['text_password'].value = passwords[email] ?? '';
+        });
+    });
+</script>

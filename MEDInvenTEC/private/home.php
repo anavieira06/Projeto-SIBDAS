@@ -28,6 +28,7 @@ include __DIR__ . '/includes/nav.php';
 
 <div class="container-fluid">
     <div class="row">
+
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
         <!-- Conteúdo Principal -->
         <main class="col-8 col-md-9 col-lg-10 p-4">

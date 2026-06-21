@@ -193,12 +193,20 @@ CREATE TABLE `gestao_rodape` (
   `data_ultima_alteracao` datetime
 );
 
+CREATE TABLE `perfil` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `perfil` varchar(50) NOT NULL
+);
+
 CREATE TABLE `utilizador` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `email` varchar(50) UNIQUE NOT NULL,
   `password` varchar(255) NOT NULL,
-  `perfil` ENUM('administrador', 'tecnico', 'profissional_saude') NOT NULL DEFAULT 'profissional_saude'
+  `perfil_id` int NOT NULL,
+  `ativo` TINYINT(1) NOT NULL DEFAULT 1,
+  `last_login` datetime,
+  `created_at` datetime DEFAULT NOW()
 );
 
 ALTER TABLE `equipamentos` ADD FOREIGN KEY (`localizacao_id`) REFERENCES `localizacoes` (`id`);
@@ -233,4 +241,5 @@ ALTER TABLE `vantagens` ADD FOREIGN KEY (`gestao_vantagens_id`) REFERENCES `gest
 
 ALTER TABLE `funcionalidades` ADD FOREIGN KEY (`gestao_funcionalidades_id`) REFERENCES `gestao_funcionalidades` (`id`);
 
+ALTER TABLE `utilizador` ADD FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`id`);
 

@@ -11,16 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     return;
 }
 
-// Recolha dos dados enviados pelo formulário
+
 // Verifica se os campos foram enviados via POST.
-$username = isset($_POST['text_username']) ? $_POST['text_username'] : '';
+// Recolha dos dados enviados pelo formulário
+$email = isset($_POST['text_username']) ? $_POST['text_username'] : '';
 $password = isset($_POST['text_password']) ? $_POST['text_password'] : '';
 // Se sim, guarda-os nas variáveis $username e $password. Caso contrário, usa string vazia.
-
-//Apresentação dos dados recebidos
-echo "Utilizador: " . $username . "<br>";
-echo "Password: " . $password;
-
 
 // VALIDAÇÃO DOS DADOS (sanitização)
 
@@ -28,18 +24,18 @@ echo "Password: " . $password;
 $validation_errors = [];
 // Verifica se o nome de utilizador (username) é um endereço de email válido
 // Se não for, adiciona uma mensagem de erro ao array
-if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $validation_errors[] = 'O username tem que ser um email válido.';
 }
 // Verifica se o nome de utilizador tem um comprimento entre 5 e 50 caracteres
 // Isto evita usernames demasiado curtos ou excessivamente longos
-if (strlen($username) < 5 || strlen($username) > 50) {
+if (strlen($email) < 5 || strlen($email) > 50) {
     $validation_errors[] = 'O username deve ter entre 5 e 50 caracteres.';
 }
 // Verifica se a password tem um comprimento entre 6 e 12 caracteres
 // Garante uma password minimamente segura, mas fácil de recordar
-if (strlen($password) < 6 || strlen($password) > 12) {
-    $validation_errors[] = 'A password deve ter entre 6 e 12 caracteres.';
+if (strlen($password) < 6 || strlen($password) > 20) {
+    $validation_errors[] = 'A password deve ter entre 6 e 20 caracteres.';
 }
 
 // Se existirem erros de validação, guarda-os na sessão
@@ -51,28 +47,51 @@ if (!empty($validation_errors)) {
     return;
 }
 
-//###########
-// Simula o resultado do login antes da ligação à base de dados
-// Neste caso, assume-se que o login é válido (status = 1)
-$result['status'] = 1; // 1 = login válido, 0 = inválido
+// LIGAÇÃO À BASE DE DADOS E VERIFICAÇÃO DO LOGIN
+try {
+    $ligacao = new PDO(
+        "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
+        MYSQL_USERNAME,
+        MYSQL_PASSWORD,
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+ 
+    // Buscar utilizador pelo email
+    $stmt = $ligacao->prepare("
+        SELECT u.*, p.perfil
+        FROM utilizador u
+        INNER JOIN perfil p ON u.perfil_id = p.id
+        WHERE u.email = :email
+        AND u.ativo = 1
+        LIMIT 1
+    ");
+    $stmt->execute([':email' => $email]);
+    $utilizador = $stmt->fetch(PDO::FETCH_OBJ);
 
-// Verifica se o status retornado indica login inválido
-if (!$result['status']) {
-    // Se o login for inválido, guarda uma mensagem de erro na sessão
-    $_SESSION['server_error'] = 'Login inválido';
-    // Redireciona o utilizador novamente para o formulário de login
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php'); // ou 'login_form.php'
-    // Encerra o script para não continuar o processamento
+    // Verificar se o utilizador existe e se a password está correta
+    if (!$utilizador || !password_verify($password, $utilizador->password)) {
+        $_SESSION['server_error'] = 'Login inválido';
+        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
+        return;
+    }
+    // Atualizar last_login
+    $stmtUpdate = $ligacao->prepare("UPDATE utilizador SET last_login = NOW() WHERE id = :id");
+    $stmtUpdate->execute([':id' => $utilizador->id]);
+ 
+    $ligacao = null;
+ 
+    // Guardar dados na sessão
+    $_SESSION['utilizador'] = $utilizador->nome;
+    $_SESSION['email']      = $utilizador->email;
+    $_SESSION['perfil']     = $utilizador->perfil;
+    $_SESSION['perfil_id']  = $utilizador->perfil_id;
+ 
+    // Redirecionar para a página principal privada
+    header('Location: home.php');
+    exit;
+ 
+} catch (PDOException $e) {
+    $_SESSION['server_error'] = 'Erro ao ligar à base de dados.';
+    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
     return;
 }
-// Se o status for 1 (válido), o código continuará 
-//############
-
-
-// Guarda o nome de utilizador na sessão para identificar o utilizador autenticado
-$_SESSION['utilizador'] = $username;
-
-// Redirecionar para a página principal privada
-header('Location: home.php');
-exit;
-?>

@@ -280,18 +280,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             data_inicio          = :data_inicio,
             data_fim             = :data_fim,
             contrato_manutencao  = :contrato,
+            tipo_contrato_id     = :tipo_contrato,
+            periodicidade_id     = :periodicidade,
             entidade_responsavel = :entidade,
             observacoes_garant   = :obs
             WHERE id = (SELECT garantia_contrato_id FROM equipamentos WHERE id = :eq_id)");
 
-            $stmtG->bindParam(':data_inicio', $data_inicio, PDO::PARAM_STR);
-            $stmtG->bindParam(':data_fim',    $data_fim,    PDO::PARAM_STR);
-            $contratoValor = $contrato === 'Sim' ? 1 : 0;
-            $stmtG->bindParam(':contrato',    $contratoValor, PDO::PARAM_INT);
-            $stmtG->bindParam(':entidade',    $entidade,    PDO::PARAM_STR);
-            $stmtG->bindParam(':obs',         $obs_garantia, PDO::PARAM_STR);
-            $stmtG->bindParam(':eq_id',       $idEquipamento, PDO::PARAM_INT);
-            $stmtG->execute();
+            $tipoContratoId = null;
+            if (!empty($tipo_contrato)) {
+                $stmtTC = $ligacao->prepare("SELECT id FROM tipo_contrato WHERE tipo_contrato = :tc LIMIT 1");
+                $stmtTC->execute([':tc' => $tipo_contrato]);
+                $tipoContratoId = $stmtTC->fetchColumn() ?: null;
+            }
+
+            $periodicidadeId = null;
+            if (!empty($periodicidade)) {
+                $stmtP = $ligacao->prepare("SELECT id FROM periodicidade WHERE periodicidade = :p LIMIT 1");
+                $stmtP->execute([':p' => $periodicidade]);
+                $periodicidadeId = $stmtP->fetchColumn() ?: null;
+            }
+
+            $stmtG->execute([
+                ':data_inicio'   => $data_inicio,
+                ':data_fim'      => $data_fim,
+                ':contrato'      => $contrato === 'Sim' ? 1 : 0,
+                ':tipo_contrato' => $tipoContratoId,
+                ':periodicidade' => $periodicidadeId,
+                ':entidade'      => $entidade,
+                ':obs'           => $obs_garantia ?: null,
+                ':eq_id'         => $idEquipamento,
+            ]);
 
             $ligacao = null;
 
@@ -520,7 +538,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 <select class="form-control" id="categoria_grupo" name="categoria_grupo" required> 
                                                     <option value="" disabled>Escolha uma opção</option>
                                                     <option value="Monitorização"  <?= ($equipamento->categoria ?? '') === 'Monitorização'  ? 'selected' : '' ?>>Monitorização</option>
-                                                    <option value="Suporte de vida" <?= ($equipamento->categoria ?? '') === 'Suporte de vida' ? 'selected' : '' ?>>Suporte de vida</option>
+                                                    <option value="Suporte de Vida" <?= ($equipamento->categoria ?? '') === 'Suporte de Vida' ? 'selected' : '' ?>>Suporte de vida</option>
                                                     <option value="Terapia"        <?= ($equipamento->categoria ?? '') === 'Terapia'        ? 'selected' : '' ?>>Terapia</option>
                                                     <option value="Diagnóstico"    <?= ($equipamento->categoria ?? '') === 'Diagnóstico'    ? 'selected' : '' ?>>Diagnóstico</option>
                                                     <option value="Laboratório"    <?= ($equipamento->categoria ?? '') === 'Laboratório'    ? 'selected' : '' ?>>Laboratório</option>

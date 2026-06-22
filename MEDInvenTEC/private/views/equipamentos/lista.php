@@ -477,16 +477,16 @@ $ligacao = null;
 
                                             <td class="text-center align-middle">
                                                 <div class="d-flex justify-content-center align-items-center gap-2">
-                                                    <a href="detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao">
+                                                    <a href="detalhes.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-acao">
                                                         <i class="fa-solid fa-eye me-2"></i>
                                                     </a>
                                                     <?php if ($_SESSION['perfil'] != 'profissional_saude' && $equipamento->ativo == 1): ?>
                                                     <span class="mx-2 text-muted">|</span>
-                                                    <a href="editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-sm btn-acao">
+                                                    <a href="editar.php?id=<?= aes_encrypt($equipamento->id) ?>" class="btn-acao">
                                                         <i class="fa-regular fa-pen-to-square me-2"></i>
                                                     </a>
                                                     <span class="mx-2 text-muted">|</span>
-                                                    <a href="#" class="btn-sm btn-acao" 
+                                                    <a href="#" class="btn-acao" 
                                                     data-bs-toggle="modal" 
                                                     data-bs-target="#modalEliminar"
                                                     data-id="<?= aes_encrypt($equipamento->id) ?>"

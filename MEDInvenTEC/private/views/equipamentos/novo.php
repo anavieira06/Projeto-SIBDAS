@@ -229,19 +229,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // 1. Inserir garantia/contrato primeiro (porque equipamentos tem garantia_contrato_id)
             $sqlGarantia = "INSERT INTO garantias_contratos (
                 data_inicio, data_fim, contrato_manutencao,
+                tipo_contrato_id, periodicidade_id,
                 entidade_responsavel, observacoes_garant
             ) VALUES (
                 :data_inicio, :data_fim, :contrato,
+                :tipo_contrato, :periodicidade,
                 :entidade, :obs
             )";
 
+            // Buscar IDs de tipo_contrato e periodicidade
+            $tipoContratoId = null;
+            if (!empty($tipo_contrato)) {
+                $stmtTC = $ligacao->prepare("SELECT id FROM tipo_contrato WHERE tipo_contrato = :tc LIMIT 1");
+                $stmtTC->execute([':tc' => $tipo_contrato]);
+                $tipoContratoId = $stmtTC->fetchColumn() ?: null;
+            }
+ 
+            $periodicidadeId = null;
+            if (!empty($periodicidade)) {
+                $stmtP = $ligacao->prepare("SELECT id FROM periodicidade WHERE periodicidade = :p LIMIT 1");
+                $stmtP->execute([':p' => $periodicidade]);
+                $periodicidadeId = $stmtP->fetchColumn() ?: null;
+            }
+ 
             $stmtG = $ligacao->prepare($sqlGarantia);
             $stmtG->execute([
-                ':data_inicio' => $data_inicio,
-                ':data_fim'    => $data_fim,
-                ':contrato'    => $contrato === 'Sim' ? 1 : 0,
-                ':entidade'    => $entidade,
-                ':obs'         => $obs_garantia ?: null,
+                ':data_inicio'   => $data_inicio,
+                ':data_fim'      => $data_fim,
+                ':contrato'      => $contrato === 'Sim' ? 1 : 0,
+                ':tipo_contrato' => $tipoContratoId,
+                ':periodicidade' => $periodicidadeId,
+                ':entidade'      => $entidade,
+                ':obs'           => $obs_garantia ?: null,
             ]);
 
             $garantiaId = $ligacao->lastInsertId();
@@ -489,7 +508,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 <select class="form-control" id="categoria_grupo" name="categoria_grupo" required> 
                                                     <option value="" disabled <?= $categoria === '' ? 'selected' : '' ?>>Escolha uma opção</option>
                                                     <option value="Monitorização"  <?= $categoria === 'Monitorização'  ? 'selected' : '' ?>>Monitorização</option>
-                                                    <option value="Suporte de vida" <?= $categoria === 'Suporte de vida' ? 'selected' : '' ?>>Suporte de vida</option>
+                                                    <option value="Suporte de Vida" <?= $categoria === 'Suporte de Vida' ? 'selected' : '' ?>>Suporte de Vida</option>
                                                     <option value="Terapia"        <?= $categoria === 'Terapia'        ? 'selected' : '' ?>>Terapia</option>
                                                     <option value="Diagnóstico"    <?= $categoria === 'Diagnóstico'    ? 'selected' : '' ?>>Diagnóstico</option>
                                                     <option value="Laboratório"    <?= $categoria === 'Laboratório'    ? 'selected' : '' ?>>Laboratório</option>
@@ -569,12 +588,12 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 <label for="estado" class="form-label">Estado atual <span class="text-danger">*</span></label>
                                                 <select class="form-control" id="estado" name="estado" required> 
                                                     <option value="" disabled <?= $estado === '' ? 'selected' : '' ?>>Escolha uma opção</option>
-                                                    <option value="Ativo"      <?= $estado === 'Ativo'      ? 'selected' : '' ?>>Ativo</option>
-                                                    <option value="Inativo"    <?= $estado === 'Inativo'    ? 'selected' : '' ?>>Inativo</option>
-                                                    <option value="Manutenção" <?= $estado === 'Manutenção' ? 'selected' : '' ?>>Em Manutenção</option>
-                                                    <option value="Calibração" <?= $estado === 'Calibração' ? 'selected' : '' ?>>Em Calibração</option>
-                                                    <option value="Quarentena" <?= $estado === 'Quarentena' ? 'selected' : '' ?>>Em Quarentena</option>
-                                                    <option value="Abatido"    <?= $estado === 'Abatido'    ? 'selected' : '' ?>>Abatido</option>
+                                                    <option value="Ativo"         <?= $estado === 'Ativo'         ? 'selected' : '' ?>>Ativo</option>
+                                                    <option value="Inativo"       <?= $estado === 'Inativo'       ? 'selected' : '' ?>>Inativo</option>
+                                                    <option value="Em Manutenção" <?= $estado === 'Em Manutenção' ? 'selected' : '' ?>>Em Manutenção</option>
+                                                    <option value="Em Calibração" <?= $estado === 'Em Calibração' ? 'selected' : '' ?>>Em Calibração</option>
+                                                    <option value="Em Quarentena" <?= $estado === 'Em Quarentena' ? 'selected' : '' ?>>Em Quarentena</option>
+                                                    <option value="Abatido"       <?= $estado === 'Abatido'       ? 'selected' : '' ?>>Abatido</option>
                                                 </select>
                                             </div>   
                                             <div class="col-md-4">

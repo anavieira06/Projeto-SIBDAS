@@ -341,12 +341,12 @@ $ligacao = null;
                                 </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/detalhes_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/detalhes_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class=" btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                         <?php if ($localizacao->ativo == 1): ?>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/editar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/editar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class=" btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="#" class="btn-sm btn-acao"
+                                        <a href="#" class="btn-acao"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modalEliminar"
                                         data-id="<?= aes_encrypt($localizacao->id) ?>"
@@ -358,7 +358,7 @@ $ligacao = null;
                                         </a>
                                         <?php else: ?>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/reativar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao" title="Reativar localização">
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/reativar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-acao" title="Reativar localização">
                                             <i class="fa-solid fa-rotate-left"></i>
                                         </a>
                                         <?php endif; ?>

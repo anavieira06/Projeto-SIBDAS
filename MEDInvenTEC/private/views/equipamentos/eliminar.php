@@ -6,7 +6,7 @@ $idEncriptado = $_GET['id'] ?? null;
 $id = aes_decrypt($idEncriptado);
  
 if (!$id || !is_numeric($id)) {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/lista.php');
     exit;
 }
  
@@ -52,7 +52,7 @@ try {
  
     $ligacao = null;
  
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php?desativado=1');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/lista.php?desativado=1');
     exit;
  
 } catch (PDOException $e) {

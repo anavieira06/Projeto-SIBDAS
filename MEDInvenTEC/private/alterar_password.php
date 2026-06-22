@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ligacao = null;
                 registar_evento('PASSWORD ALTERADA', $_SESSION['email']);
                 $_SESSION['password_alterada'] = true;
-                header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php?password_alterada=1');
+                header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/home.php?password_alterada=1');
                 exit;
             }
 
@@ -98,7 +98,7 @@ include __DIR__ . '/includes/nav.php';
                             <input type="password" class="form-control" name="password_confirmacao" required>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
-                            <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php" class="btn btn-outline-secondary">
+                            <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/home.php" class="btn btn-outline-secondary">
                                 Cancelar
                             </a>
                             <button type="submit" class="btn btn-guardar">

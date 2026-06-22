@@ -6,7 +6,7 @@ session_start();
 // Se for acedido diretamente (por URL), será redirecionado para o login.
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     // Redireciona para o formulário de login (interface pública)
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/public/login.php');
     // Encerra a execução do script imediatamente após o redirecionamento
     return;
 }
@@ -43,7 +43,7 @@ if (strlen($password) < 6 || strlen($password) > 20) {
 if (!empty($validation_errors)) {
     $_SESSION['validation_errors'] = $validation_errors;
     // Redireciona para a página de login 
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php'); 
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/public/login.php'); 
     return;
 }
 
@@ -72,7 +72,7 @@ try {
     if (!$utilizador || !password_verify($password, $utilizador->password)) {
         registar_evento('TENTATIVA DE AUTENTICAÇÃO FALHADA', $email);
         $_SESSION['server_error'] = 'Login inválido';
-        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
+        header('Location: /sibdas/1240811/projeto-sibdas/medinventec/public/login.php');
         return;
     }
     // Atualizar last_login
@@ -95,6 +95,6 @@ try {
  
 } catch (PDOException $e) {
     $_SESSION['server_error'] = 'Erro ao ligar à base de dados.';
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/public/login.php');
     return;
 }

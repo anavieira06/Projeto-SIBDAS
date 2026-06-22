@@ -150,7 +150,7 @@ $ligacao = null;
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Fornecedores</strong>
                 </h2>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/novo_forn.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/novo_forn.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo fornecedor
                 </a>
             </div>
@@ -315,10 +315,10 @@ $ligacao = null;
                                 </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/detalhes_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/detalhes_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                         <?php if ($fornecedor->ativo == 1): ?>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/editar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/editar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                         <span class="mx-2 text-muted">|</span>
                                         <a href="#" class="btn-sm btn-acao"
                                         data-bs-toggle="modal"
@@ -331,7 +331,7 @@ $ligacao = null;
                                         </a>
                                         <?php else: ?>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/reativar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao" title="Reativar fornecedor">
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/reativar_forn.php?id=<?= aes_encrypt($fornecedor->id) ?>" class="btn-sm btn-acao" title="Reativar fornecedor">
                                             <i class="fa-solid fa-rotate-left"></i>
                                         </a>
                                         <?php endif; ?>
@@ -433,12 +433,12 @@ $ligacao = null;
         document.getElementById('modalEmpresa').textContent   = btn.getAttribute('data-empresa');
         document.getElementById('modalContacto').textContent  = btn.getAttribute('data-contacto');
         document.getElementById('modalFornecedor').textContent = btn.getAttribute('data-tipo');
-        document.getElementById('btnConfirmarEliminar').href  = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/eliminar_forn.php?id=' + btn.getAttribute('data-id');
+        document.getElementById('btnConfirmarEliminar').href  = '/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/eliminar_forn.php?id=' + btn.getAttribute('data-id');
     });
 </script>
         
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <!-- Datatables -->
 <script>

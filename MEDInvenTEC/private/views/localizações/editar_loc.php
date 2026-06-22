@@ -9,7 +9,7 @@ redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o u
 require_once __DIR__ . '/../../includes/validacoes.php';
 
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
-    header('Location: ' . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
+    header('Location: ' . '/sibdas/1240811/projeto-sibdas/medinventec/public/login.php');
     exit;
 }
  
@@ -18,7 +18,7 @@ $idLocalizacaoEncriptado = $_GET['id'] ?? null;
 $idLocalizacao = aes_decrypt($idLocalizacaoEncriptado);
  
 if (!$idLocalizacao || !is_numeric($idLocalizacao)) {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/lista_loc.php');
     exit;
 }
 
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
             $ligacao = null;
  
-            header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php?atualizado=1');
+            header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/lista_loc.php?atualizado=1');
             exit;
  
         } catch (PDOException $err) {
@@ -109,7 +109,7 @@ try {
     $localizacao = $stmtLoc->fetch(PDO::FETCH_OBJ);
  
     if (!$localizacao) {
-        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php');
+        header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/lista_loc.php');
         exit;
     }
  
@@ -196,7 +196,7 @@ include __DIR__ . '/../../includes/sidebar.php';
 
                                 <!-- Botões -->
                                 <div class="d-flex justify-content-end gap-2 mb-4">
-                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php" class="btn btn-outline-secondary">
+                                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/lista_loc.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar 
                                     </a>
                                     <button type="submit" class="btn btn-guardar">

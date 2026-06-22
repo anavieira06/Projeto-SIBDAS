@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
             $ligacao = null;
  
-            header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php?sucesso=1');
+            header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/lista_loc.php?sucesso=1');
             exit;
  
         } catch (PDOException $err) {
@@ -146,7 +146,7 @@ include __DIR__ . '/../../includes/sidebar.php';
 
                                 <!-- Botões -->
                                 <div class="d-flex justify-content-end gap-2 mb-4">
-                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/lista_loc.php" class="btn btn-outline-secondary">
+                                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/lista_loc.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar 
                                     </a>
                                     <button type="submit" class="btn btn-guardar">
@@ -160,6 +160,6 @@ include __DIR__ . '/../../includes/sidebar.php';
             </main>
 
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

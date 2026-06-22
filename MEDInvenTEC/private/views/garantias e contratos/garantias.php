@@ -329,9 +329,9 @@ $ligacao = null;
                                 </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/garantias e contratos/detalhes_garant.php?id=<?= aes_encrypt($garantia->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/garantias e contratos/detalhes_garant.php?id=<?= aes_encrypt($garantia->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/garantias e contratos/editar_garant.php?id=<?= aes_encrypt($garantia->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/garantias e contratos/editar_garant.php?id=<?= aes_encrypt($garantia->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -390,7 +390,7 @@ $ligacao = null;
         </div>  
         
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <!-- Datatables -->
 <script>

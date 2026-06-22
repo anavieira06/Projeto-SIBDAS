@@ -10,7 +10,7 @@ require_once __DIR__ . '/../../includes/validacoes.php';
 
 
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
-    header('Location: ' . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
+    header('Location: ' . '/sibdas/1240811/projeto-sibdas/medinventec/public/login.php');
     exit;
 }
 
@@ -19,7 +19,7 @@ $idFornecedorEncriptado = $_GET['id'] ?? null;
 $idFornecedor = aes_decrypt($idFornecedorEncriptado);
  
 if (!$idFornecedor || !is_numeric($idFornecedor)) {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/lista_forn.php');
     exit;
 }
 
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
             $ligacao = null;
  
-            header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php?atualizado=1');
+            header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/lista_forn.php?atualizado=1');
             exit;
  
         } catch (PDOException $err) {
@@ -145,7 +145,7 @@ try {
     $fornecedor = $stmtForn->fetch(PDO::FETCH_OBJ);
  
     if (!$fornecedor) {
-        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php');
+        header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/lista_forn.php');
         exit;
     }
  
@@ -299,7 +299,7 @@ include __DIR__ . '/../../includes/sidebar.php';
 
                                 <!-- Botões -->
                                 <div class="d-flex justify-content-end gap-2 mb-4">
-                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php" class="btn btn-outline-secondary">
+                                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/lista_forn.php" class="btn btn-outline-secondary">
                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar 
                                     </a>
                                     <button type="submit" class="btn btn-guardar">
@@ -312,6 +312,6 @@ include __DIR__ . '/../../includes/sidebar.php';
             </main>
 
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

@@ -13,7 +13,7 @@ $id = aes_decrypt($idEncriptado);
  
 // 2. Validar
 if (!$id || !is_numeric($id)) {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/lista_doc.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/documentação/lista_doc.php');
     exit;
 }
 
@@ -43,7 +43,7 @@ try {
     $doc = $stmt->fetch(PDO::FETCH_OBJ);
  
     if (!$doc) {
-        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/lista_doc.php');
+        header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/documentação/lista_doc.php');
         exit;
     }
  
@@ -158,7 +158,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                             <div>
                                 <small class="text-muted">Abrir ficheiro</small>
                                 <p class="fw-semibold mb-0">
-                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/uploads/<?= htmlspecialchars($doc->ficheiro) ?>" target="_blank" style="color:#680447;">
+                                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/uploads/<?= htmlspecialchars($doc->ficheiro) ?>" target="_blank" style="color:#680447;">
                                         <i class="fa-solid fa-download me-1"></i> Abrir / Descarregar
                                     </a>
                                 </p>
@@ -171,7 +171,7 @@ include __DIR__ . '/../../includes/sidebar.php';
             </div>
             <!-- Botoão -->
             <div class="d-flex justify-content-end gap-2 mt-4">
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/documentação/lista_doc.php" class="btn btn-outline-secondary">
+                <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/documentação/lista_doc.php" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Voltar
                 </a>
             </div>

@@ -246,7 +246,7 @@ include __DIR__ . '/../../includes/sidebar.php';
             </div>
 
 <!-- Chart.js -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/chart/chart.min.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/chart/chart.min.js"></script>
 
 <script>
     // Gráfico por estado
@@ -302,6 +302,6 @@ include __DIR__ . '/../../includes/sidebar.php';
 </script>
 
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

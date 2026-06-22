@@ -158,7 +158,7 @@ $ligacao = null;
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Localizações</strong>
                 </h2>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/novo_loc.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/novo_loc.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Nova localização
                 </a>
             </div>
@@ -336,10 +336,10 @@ $ligacao = null;
                                 </td>
                                 <td class="text-center align-middle">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/detalhes_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/detalhes_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao"><i class="fa-solid fa-eye me-2"></i></a>
                                         <?php if ($localizacao->ativo == 1): ?>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/editar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/editar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao"><i class="fa-regular fa-pen-to-square me-2"></i></a>
                                         <span class="mx-2 text-muted">|</span>
                                         <a href="#" class="btn-sm btn-acao"
                                         data-bs-toggle="modal"
@@ -353,7 +353,7 @@ $ligacao = null;
                                         </a>
                                         <?php else: ?>
                                         <span class="mx-2 text-muted">|</span>
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/reativar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao" title="Reativar localização">
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/reativar_loc.php?id=<?= aes_encrypt($localizacao->id) ?>" class="btn-sm btn-acao" title="Reativar localização">
                                             <i class="fa-solid fa-rotate-left"></i>
                                         </a>
                                         <?php endif; ?>
@@ -455,13 +455,13 @@ $ligacao = null;
         document.getElementById('modalPiso').textContent    = btn.getAttribute('data-piso');
         document.getElementById('modalServico').textContent = btn.getAttribute('data-servico');
         document.getElementById('modalSala').textContent    = btn.getAttribute('data-sala');
-        document.getElementById('btnConfirmarEliminar').href = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/localizações/eliminar_loc.php?id=' + btn.getAttribute('data-id');
+        document.getElementById('btnConfirmarEliminar').href = '/sibdas/1240811/projeto-sibdas/medinventec/private/views/localizações/eliminar_loc.php?id=' + btn.getAttribute('data-id');
     });
 </script>
 
         
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <!-- Datatables -->
 <script>

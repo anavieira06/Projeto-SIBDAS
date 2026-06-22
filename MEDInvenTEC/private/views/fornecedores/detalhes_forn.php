@@ -13,7 +13,7 @@ $id = aes_decrypt($idEncriptado);
  
 // 2. Validar
 if (!$id || !is_numeric($id)) {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/lista_forn.php');
     exit;
 }
 // 3. Buscar dados da BD
@@ -37,7 +37,7 @@ try {
     $forn = $stmt->fetch(PDO::FETCH_OBJ);
  
     if (!$forn) {
-        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php');
+        header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/lista_forn.php');
         exit;
     }
  
@@ -184,7 +184,7 @@ include __DIR__ . '/../../includes/sidebar.php';
 
             <!-- Botoão -->
             <div class="d-flex justify-content-end gap-2 mt-4">
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/fornecedores/lista_forn.php" class="btn btn-outline-secondary">
+                <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/lista_forn.php" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Voltar
                 </a>
             </div>

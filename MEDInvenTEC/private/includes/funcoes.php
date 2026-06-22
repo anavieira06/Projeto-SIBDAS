@@ -14,7 +14,7 @@ function check_session()
 }
 
 // Redireciona automaticamente se não houver sessão iniciada
-function redirect_if_not_logged($redirect_to = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php')
+function redirect_if_not_logged($redirect_to = '/sibdas/1240811/projeto-sibdas/medinventec/public/login.php')
 {
     start_session();
     if (!check_session()) {
@@ -23,7 +23,7 @@ function redirect_if_not_logged($redirect_to = '/sibdas/1240811/ProjetoSIBDAS/ME
     }
 }
 
-function logout_and_redirect($redirect_to = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php')
+function logout_and_redirect($redirect_to = '/sibdas/1240811/projeto-sibdas/medinventec/public/login.php')
 {
     start_session();
     session_unset();

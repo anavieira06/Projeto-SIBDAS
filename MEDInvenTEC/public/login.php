@@ -51,7 +51,7 @@ include __DIR__ . '/../private/includes/header.php';
                     <div class="card p-4" style="min-height: 500px;">
                         <div class="d-flex align-items-center justify-content-center my-4">
                             <!-- Imagem da empresa -->
-                            <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/img/Imagem 3.jpeg" width="200">
+                            <img src="/sibdas/1240811/projeto-sibdas/medinventec/assets/img/Imagem 3.jpeg" width="200">
                         </div>
 
                         <div class="row">
@@ -98,7 +98,7 @@ include __DIR__ . '/../private/includes/header.php';
                                     </div>
 
                                     <div class="text-center mt-4 mb-3">
-                                        <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/index.php"
+                                        <a href="/sibdas/1240811/projeto-sibdas/medinventec/public/index.php"
                                         class="btn btn-sm btn-outline-secondary px-4">
                                             <i class="fa-solid fa-house me-2"></i> Voltar ao início
                                         </a>

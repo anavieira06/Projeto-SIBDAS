@@ -202,7 +202,7 @@ $ligacao = null;
                     <strong>Listagem de Equipamentos</strong>
                 </h2>
                 <?php if ($_SESSION['perfil'] != 'profissional_saude'): ?>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/novo.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
+                <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/novo.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo equipamento
                 </a>
                 <?php endif; ?>
@@ -571,12 +571,12 @@ $ligacao = null;
         document.getElementById('modalCodigo').textContent    = btn.getAttribute('data-codigo');
         document.getElementById('modalDesignacao').textContent = btn.getAttribute('data-designacao');
         document.getElementById('modalMarca').textContent = btn.getAttribute('data-marca');
-        document.getElementById('btnConfirmarEliminar').href   = '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/eliminar.php?id=' + btn.getAttribute('data-id');
+        document.getElementById('btnConfirmarEliminar').href   = '/sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/eliminar.php?id=' + btn.getAttribute('data-id');
     });
 </script>
 
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <!-- Datatables -->
 <script>

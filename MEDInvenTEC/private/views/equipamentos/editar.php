@@ -9,7 +9,7 @@ redirect_if_not_logged(); // Inicia a sessão (se necessário) e verifica se o u
 require_once __DIR__ . '/../../includes/validacoes.php';
 
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
-    header('Location: ' . '/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
+    header('Location: ' . '/sibdas/1240811/projeto-sibdas/medinventec/public/login.php');
     exit;
 }
 
@@ -18,7 +18,7 @@ $idEquipamentoEncriptado = $_GET['id'] ?? null;
 $idEquipamento = aes_decrypt($idEquipamentoEncriptado);
 
 if (!$idEquipamento || !is_numeric($idEquipamento)) {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/lista.php');
     exit;
 }
 
@@ -295,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $ligacao = null;
 
-            header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php?atualizado=1');
+            header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/lista.php?atualizado=1');
             exit;
 
         } catch (PDOException $err) {
@@ -395,7 +395,7 @@ try {
     $documentosEquipamento = $stmtDocs->fetchAll(PDO::FETCH_OBJ);
 
     if (!$equipamento) {
-        header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php');
+        header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/lista.php');
         exit;
     }
 
@@ -1090,7 +1090,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 </button>
 
                                                 <div>
-                                                    <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/views/equipamentos/lista.php" class="btn btn-outline-secondary mb-4">
+                                                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/equipamentos/lista.php" class="btn btn-outline-secondary mb-4">
                                                         <i class="fa-solid fa-xmark me-1"></i> Cancelar
                                                     </a>
 
@@ -1137,6 +1137,6 @@ const localizacoes = {
 </script>
 
 <!-- Custom JS -->
-<script src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/js/1240811.js"></script>
+<script src="/sibdas/1240811/projeto-sibdas/medinventec/assets/js/1240811.js"></script>
 
 <?php include __DIR__ . '/../../includes/footer.php'; ?>

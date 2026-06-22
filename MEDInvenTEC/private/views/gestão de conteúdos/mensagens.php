@@ -4,7 +4,7 @@ redirect_if_not_logged();
 
 // Só administrador pode ver mensagens
 if ($_SESSION['perfil'] !== 'administrador') {
-    header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php');
+    header('Location: /sibdas/1240811/projeto-sibdas/medinventec/private/home.php');
     exit;
 }
 

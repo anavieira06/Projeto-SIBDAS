@@ -22,13 +22,13 @@ $nome = $_SESSION['utilizador'];
         <div class="col d-flex align-items-center">
 
             <?php if ($pagina == 'index') : ?>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php">
-                    <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/home.php">
+                    <img src="/sibdas/1240811/projeto-sibdas/medinventec/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
 
             <?php else : ?>
-                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php">
-                    <img src="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
+                <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/home.php">
+                    <img src="/sibdas/1240811/projeto-sibdas/medinventec/assets/img/Imagem 3.jpeg" alt="Logo da empresa" class="logo">
                 </a>
             <?php endif; ?>
 
@@ -43,13 +43,13 @@ $nome = $_SESSION['utilizador'];
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/alterar_password.php">
+                            <a class="dropdown-item" href="/sibdas/1240811/projeto-sibdas/medinventec/private/alterar_password.php">
                                 <i class="fa-solid fa-key me-2"></i>Alterar password
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/logout.php">
+                            <a class="dropdown-item" href="/sibdas/1240811/projeto-sibdas/medinventec/public/logout.php">
                                 <i class="fa-solid fa-right-from-bracket me-2"></i>Sair
                             </a>
                         </li>

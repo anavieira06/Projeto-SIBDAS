@@ -931,11 +931,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <label class="form-label">Data <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" name="data_doc[]" value="<?= htmlspecialchars($doc->data_doc) ?>" required>
+                                                            <input type="text" class="form-control" name="data_doc[]" id="data_doc" value="<?= htmlspecialchars($doc->data_doc) ?>" required>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="form-label">Data de validade</label>
-                                                            <input type="text" class="form-control" name="data_validade[]" value="<?= htmlspecialchars($doc->data_validade ?? '') ?>">
+                                                            <input type="text" class="form-control" name="data_validade[]" id="data_validade" value="<?= htmlspecialchars($doc->data_validade ?? '') ?>">
                                                         </div>
                                                     </div>
 
@@ -1134,6 +1134,14 @@ const localizacoes = {
     },
     <?php endforeach; ?>
 };
+</script>
+
+<script>
+flatpickr("#data_aquisicao", { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_inicio",    { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_fim",       { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_doc",       { dateFormat: "Y-m-d", locale: "pt" });
+flatpickr("#data_validade",  { dateFormat: "Y-m-d", locale: "pt" });
 </script>
 
 <!-- Custom JS -->

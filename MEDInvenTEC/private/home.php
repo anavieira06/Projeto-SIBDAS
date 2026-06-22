@@ -31,7 +31,7 @@ include __DIR__ . '/includes/nav.php';
 
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
         <!-- Conteúdo Principal -->
-        <main class="col-8 col-md-9 col-lg-10 p-4">
+        <main class="col-9 col-md-9 col-lg-10 p-4">
             <section class="main-section">
                 <?php if (isset($_GET['password_alterada'])): ?>
                     <div class="alert alert-success d-flex align-items-center gap-2 mb-4" id="alertPassword" role="alert">

@@ -1,0 +1,319 @@
+Table equipamentos {
+  id int [pk, increment]
+
+  codigo_inventario varchar(20) [not null, unique]
+  designacao_equipamento varchar(100) [not null]
+  marca varchar(100) [not null]
+  modelo varchar(100) [not null]
+  numero_serie varchar(100) [not null, unique]
+  fabricante varchar(100) [not null]
+
+  data_aquisicao date [not null]
+  ano_fabrico int [not null]
+  custo_aquisicao decimal(10,2) [not null]
+
+  observacoes text
+
+  categoria_grupo_id int [not null]
+  estado_id int [not null]
+  criticidade_id int [not null]
+  tipo_entrada_id int [not null]
+
+  localizacao_id int [not null]
+  garantia_contrato_id int [unique]
+
+  ativo TINYINT(1) [not null, default: 1]
+}
+
+Table categoria_grupo {
+  id int [pk, increment]
+  categoria_grupo varchar(50) [not null]
+}
+
+Table estado {
+  id int [pk, increment]
+  estado varchar(50) [not null]
+}
+
+Table criticidade {
+  id int [pk, increment]
+  criticidade varchar(50) [not null]
+}
+
+Table tipo_entrada {
+  id int [pk, increment]
+  tipo_entrada varchar(50) [not null]
+}
+
+Table fornecedores {
+  id int [pk, increment]
+
+  nome_empresa varchar(100) [not null]
+  nif varchar(9) [not null, unique]
+  morada varchar(255) [not null]
+
+  numero_telefonico varchar(20) [not null]
+  email varchar(255) [not null]
+  website varchar(255) [not null]
+
+  pessoa_contacto varchar(100) [not null]
+  tel_pessoa_contacto varchar(20) [not null]
+
+  observacoes text
+
+  tipo_fornecedor_id int [not null]
+
+  ativo TINYINT(1) [not null, default: 1]
+}
+
+Table tipo_fornecedor {
+  id int [pk, increment]
+  tipo_fornecedor varchar(100) [not null]
+}
+
+Table equipamento_fornecedor {
+  equipamento_id int [not null]
+  fornecedor_id int [not null]
+
+  indexes {
+    (equipamento_id, fornecedor_id) [pk]
+  }
+}
+
+Table localizacoes {
+  id int [pk, increment]
+
+  edificio varchar(100) [not null]
+  piso varchar(20) [not null]
+  servico_depart varchar(100) [not null]
+  sala_gabinete varchar(50) [not null]
+
+  ativo TINYINT(1) [not null, default: 1]
+}
+
+Table documentos {
+  id int [pk, increment]
+
+  equipamento_id int [not null]
+  fornecedor_id int
+
+  tipo_doc_id int [not null]
+  nome_doc varchar(255) [not null]
+  data_doc date [not null]
+  data_validade date
+
+  ficheiro varchar(255) [not null]
+}
+
+Table tipo_doc {
+  id int [pk, increment]
+  tipo_doc varchar(100) [not null]
+}
+
+Table garantias_contratos {
+  id int [pk, increment]
+
+  data_inicio date [not null]
+  data_fim date [not null]
+
+  contrato_manutencao boolean [not null]
+  tipo_contrato_id int 
+  periodicidade_id int 
+
+  entidade_responsavel varchar(100) [not null]
+  observacoes_garant text
+}
+
+Table tipo_contrato {
+  id int [pk, increment]
+  tipo_contrato varchar(100) [not null]
+}
+
+Table periodicidade {
+  id int [pk, increment]
+  periodicidade varchar(50) [not null]
+}
+
+/* Gestão de Conteúdos Públicos */
+
+Table gestao_sobre_nos {
+  id int [pk, increment]
+
+  menu_sobre_nos varchar(100)
+  titulo varchar(255)
+  conteudo text
+  texto_botao varchar(100)
+
+  data_criacao datetime
+  data_ultima_alteracao datetime
+}
+
+Table gestao_problema_solucao {
+  id int [pk, increment]
+
+  menu_problema_solucao varchar(100)
+
+  titulo1 varchar(255)
+  paragrafo1 text
+  paragrafo2 text
+  paragrafo3 text
+
+  titulo2 varchar(255)
+  paragrafo1_vant text
+  paragrafo2_vant text
+  paragrafo3_vant text
+
+  data_criacao datetime
+  data_ultima_alteracao datetime
+}
+
+Table gestao_vantagens {
+  id int [pk, increment]
+
+  menu_vantagens varchar(100)
+  titulo varchar(255)
+
+  data_criacao datetime
+  data_ultima_alteracao datetime
+}
+
+Table vantagens {
+  id int [pk, increment]
+
+  gestao_vantagens_id int [not null]
+  vantagem text
+}
+
+Table gestao_funcionalidades {
+  id int [pk, increment]
+
+  menu_funcionalidades varchar(100)
+  titulo varchar(255)
+  texto_introdutorio text
+
+  data_criacao datetime
+  data_ultima_alteracao datetime
+}
+
+Table funcionalidades {
+  id int [pk, increment]
+
+  gestao_funcionalidades_id int [not null]
+
+  icone varchar(100)
+  titulo_funcionalidade varchar(255)
+  descricao text
+}
+
+Table gestao_contacto {
+  id int [pk, increment]
+
+  menu_contacto varchar(100)
+  titulo varchar(255)
+
+  texto_introdutorio text
+
+  etiqueta1 varchar(100)
+  etiqueta2 varchar(100)
+  etiqueta3 varchar(100)
+
+  texto_botao varchar(100)
+
+  data_criacao datetime
+  data_ultima_alteracao datetime
+}
+
+Table gestao_rodape {
+  id int [pk, increment]
+
+  localizacao varchar(100)
+  morada text
+
+  horario varchar(100)
+  horas text
+
+  contactos text
+  email varchar(255)
+  telefone varchar(20)
+
+  data_criacao datetime
+  data_ultima_alteracao datetime
+}
+
+/* Utilizadores */
+Table perfil {
+  id int [pk, increment]
+  perfil varchar(50) [not null]
+}
+
+Table utilizador {
+  id int [pk, increment]
+
+  nome varchar(100) [not null]
+  email varchar(50) [not null, unique]
+  password varchar(255) [not null]
+
+  perfil_id int [not null]
+
+  ativo boolean [not null, default: 1]
+
+  last_login datetime
+  created_at datetime [default: `NOW()`]
+}
+
+Table mensagens_contacto {
+  id int [pk, increment]
+
+  nome varchar(100) [not null]
+  email varchar(255) [not null]
+
+  mensagem text [not null]
+
+  data_envio datetime [default: `NOW()`]
+  lida boolean [not null, default: 0]
+}
+
+Table historico_movimentacoes {
+  id int [pk, increment]
+
+  equipamento_id int [not null]
+  utilizador_id int [not null]
+
+  tipo_alteracao varchar(100) [not null]
+
+  valor_anterior varchar(255)
+  valor_novo varchar(255)
+
+  data_alteracao datetime [default: `NOW()`]
+}
+
+/* Relações */
+
+Ref: equipamentos.localizacao_id > localizacoes.id
+Ref: equipamentos.garantia_contrato_id > garantias_contratos.id
+
+Ref: equipamentos.categoria_grupo_id > categoria_grupo.id
+Ref: equipamentos.estado_id > estado.id
+Ref: equipamentos.criticidade_id > criticidade.id
+Ref: equipamentos.tipo_entrada_id > tipo_entrada.id
+
+Ref: fornecedores.tipo_fornecedor_id > tipo_fornecedor.id
+
+Ref: documentos.equipamento_id > equipamentos.id
+Ref: documentos.fornecedor_id > fornecedores.id
+Ref: documentos.tipo_doc_id > tipo_doc.id
+
+Ref: equipamento_fornecedor.equipamento_id > equipamentos.id
+Ref: equipamento_fornecedor.fornecedor_id > fornecedores.id
+
+Ref: garantias_contratos.tipo_contrato_id > tipo_contrato.id
+Ref: garantias_contratos.periodicidade_id > periodicidade.id
+
+Ref: vantagens.gestao_vantagens_id > gestao_vantagens.id
+
+Ref: funcionalidades.gestao_funcionalidades_id > gestao_funcionalidades.id
+
+Ref: utilizador.perfil_id > perfil.id
+
+Ref: historico_movimentacoes.equipamento_id > equipamentos.id
+Ref: historico_movimentacoes.utilizador_id > utilizador.id

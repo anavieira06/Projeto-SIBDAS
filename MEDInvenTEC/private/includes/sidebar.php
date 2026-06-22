@@ -5,7 +5,7 @@ $perfil = $_SESSION['perfil'] ?? '';
 
 <?php if ($pagina == 'index') : ?>
     <!-- Sidebar -->
-    <aside class="col-4 col-md-3 col-lg-2 p-3 min-vh-100 custom-sidebar">
+    <aside class="col-3 col-md-3 col-lg-2 p-3 min-vh-100 custom-sidebar">
         <h4 class="sidebar-title" style="color:#945880; font-weight:bold">Menu</h4>
         <nav class="sidebar-menu">
 

@@ -1,0 +1,176 @@
+a352e6d - Ana Margarida Vieira - 2026-06-22 12:40:59 +0100 - Exportação de dados (CSV, JSON, PDF)
+57d8332 - Ana Margarida Vieira - 2026-06-22 11:43:59 +0100 - Clendário no editar equipamento
+00438a0 - Ana Margarida Vieira - 2026-06-22 11:18:02 +0100 - Alteração de caminhos com letra minúscula
+986e258 - Ana Margarida Vieira - 2026-06-22 11:15:05 +0100 - Correção do modal de eliminar equipamentos
+4d6af0c - Ana Margarida Vieira - 2026-06-22 10:45:16 +0100 - Registo de eventos
+b5db5ec - Ana Margarida Vieira - 2026-06-22 03:46:55 +0100 - Alterar password
+063f243 - Ana Margarida Vieira - 2026-06-22 01:39:40 +0100 - Histórico dos equipamentos
+cf01c22 - Ana Margarida Vieira - 2026-06-22 00:24:07 +0100 - Permitir abrir o documento associado ao equipamento
+bd5d38f - Ana Margarida Vieira - 2026-06-22 00:02:59 +0100 - Apenas selecionar fornecedores e localizações ativas
+5d104f1 - Ana Margarida Vieira - 2026-06-21 23:37:49 +0100 - Reativar localizações e fornecedores
+b305732 - Ana Margarida Vieira - 2026-06-21 22:28:39 +0100 - Receber mensagens da área pública
+c2e576b - Ana Margarida Vieira - 2026-06-21 17:58:25 +0100 - Redirecionar para o login quando não autenticado
+8c79f84 - Ana Margarida Vieira - 2026-06-21 17:34:15 +0100 - Gestão de conteúdos
+1371071 - Ana Margarida Vieira - 2026-06-21 15:51:06 +0100 - Dashboard preenchida com os dados da base de dados
+a47471e - Ana Margarida Vieira - 2026-06-21 11:45:28 +0100 - Controlo de acesso por perfil
+1f3e71c - Ana Margarida Vieira - 2026-06-21 10:51:57 +0100 - Agentes para login
+d2c9ac0 - Ana Margarida Vieira - 2026-06-20 21:56:16 +0100 - Alteração da tabela do utilizador na base de dados
+94076e7 - Ana Margarida Vieira - 2026-06-20 21:06:28 +0100 - Desativação de localizações
+48b5f41 - Ana Margarida Vieira - 2026-06-20 20:50:22 +0100 - Desativar fornecedores
+4ee0e49 - Ana Margarida Vieira - 2026-06-20 19:49:47 +0100 - Ativo | Inativo dos documentos
+a729f76 - Ana Margarida Vieira - 2026-06-20 19:32:00 +0100 - Atualização de caminhos
+3651f5d - Ana Margarida Vieira - 2026-06-20 19:16:49 +0100 - Mudança de pastas e caminhos
+37cc2f4 - Ana Margarida Vieira - 2026-06-20 18:51:12 +0100 - Ativo | Inativo das garantias
+ae0f26f - Ana Margarida Vieira - 2026-06-20 18:20:35 +0100 - Desativar equipamentos
+d2be1c5 - Ana Margarida Vieira - 2026-06-20 12:20:32 +0100 - Detalhes da localização
+5e6d58d - Ana Margarida Vieira - 2026-06-20 12:14:42 +0100 - Detalhes das garantias
+8f2b946 - Ana Margarida Vieira - 2026-06-20 11:35:23 +0100 - Detalhes do fornecedor
+2f6f4dd - Ana Margarida Vieira - 2026-06-20 11:22:14 +0100 - Detalhes da documentação
+140361c - Ana Margarida Vieira - 2026-06-20 02:09:41 +0100 - Detalhes do equipamento
+4e1e2af - Ana Margarida Vieira - 2026-06-18 23:13:46 +0100 - Edição de localizações
+9b08b05 - Ana Margarida Vieira - 2026-06-18 22:51:32 +0100 - Edição de fornecedores
+5e4098d - Ana Margarida Vieira - 2026-06-18 02:41:42 +0100 - Adicionar nova localização
+c35f302 - Ana Margarida Vieira - 2026-06-18 02:33:40 +0100 - Adicionar novo fornecedor
+f04dcf3 - Ana Margarida Vieira - 2026-06-18 00:31:16 +0100 - Alteração de caminhos novamente
+2d2de46 - Ana Margarida Vieira - 2026-06-18 00:02:38 +0100 - Mudança de caminhos
+ee1b15c - Ana Margarida Vieira - 2026-06-17 23:41:56 +0100 - Listagem das garantias/contratos
+861d5df - Ana Margarida Vieira - 2026-06-17 17:55:41 +0100 - Listagem de documentos
+fefcb96 - Ana Margarida Vieira - 2026-06-17 15:51:04 +0100 - Listagem das localizações
+62c3734 - Ana Margarida Vieira - 2026-06-17 01:04:01 +0100 - Listagem de fornecedores
+49fedab - Ana Margarida Vieira - 2026-06-16 14:21:06 +0100 - Criação de validacoes.php para não haver dupliação de código
+8f14f5c - Ana Margarida Vieira - 2026-06-16 12:46:52 +0100 - Mensagem de sucesso para qaundo o equipamento é atualizado
+50f24c6 - Ana Margarida Vieira - 2026-06-16 12:44:49 +0100 - Área dos erros
+d83bee5 - Ana Margarida Vieira - 2026-06-16 12:21:58 +0100 - Fazer UPDATE dos dados do formulário
+ce5bc59 - Ana Margarida Vieira - 2026-06-16 12:00:01 +0100 - Preencher dados do formulário com a BD
+d754e3d - Ana Margarida Vieira - 2026-06-16 01:07:36 +0100 - Editar equipamento com GET/POST
+aa2693c - Ana Margarida Vieira - 2026-06-15 02:13:47 +0100 - Encriptação de dados dos equipamentos
+f410db7 - Ana Margarida Vieira - 2026-06-14 16:42:16 +0100 - Adição de mensagem de sucesso quando adicionado
+32e44de - Ana Margarida Vieira - 2026-06-14 16:39:12 +0100 - Adição do novo equipamento à base de dados
+3b4db00 - Ana Margarida Vieira - 2026-06-14 16:31:49 +0100 - Normalização de dados
+5b0bc7d - Ana Margarida Vieira - 2026-06-14 16:24:44 +0100 - Campo dos erros de inserir equipamentos
+6ff7aa0 - Ana Margarida Vieira - 2026-06-14 16:05:35 +0100 - Alterar as validações das datas
+e5cfdf3 - Ana Margarida Vieira - 2026-06-14 15:43:51 +0100 - Implementação de flatpickr para as datas
+e7a0b66 - Ana Margarida Vieira - 2026-06-14 15:09:51 +0100 - Popular selects dos fornecedores e localizações a partir da base de dados
+c073b97 - Ana Margarida Vieira - 2026-06-14 11:54:12 +0100 - Validações para quando se adiciona um equipamento novo
+1c22801 - Ana Margarida Vieira - 2026-06-13 00:31:08 +0100 - Módulo de pesquisa e filtragem de equipamentos
+c9175b0 - Ana Margarida Vieira - 2026-06-12 23:52:11 +0100 - Paginação da tabela de listagem de equipamentos
+fc39a8e - Ana Margarida Vieira - 2026-06-12 18:44:27 +0100 - Contagem de equipamentos
+c02424b - Ana Margarida Vieira - 2026-06-12 18:12:46 +0100 - Preencher tabela dos equipamentos com a base de dados
+16e02f1 - Ana Margarida Vieira - 2026-06-12 11:30:36 +0100 - Ligação à minha base de dados
+e18fa94 - Ana Margarida Vieira - 2026-06-12 11:04:55 +0100 - Redireciona todas as páginas para o login quando não autenticado
+1b59886 - Ana Margarida Vieira - 2026-06-12 01:15:19 +0100 - Alteração dos caminhos de HTML para PHP
+3f6120d - Ana Margarida Vieira - 2026-06-11 23:55:46 +0100 - Remoção de dois campos obrigatórios relativos aos documentos
+f6e1b1a - Ana Margarida Vieira - 2026-06-11 23:52:44 +0100 - Criação dos ficheiros sql para base de dados
+88b0508 - Ana Margarida Vieira - 2026-06-10 00:37:33 +0100 - Implementação completa da funcionalidade de fazer login e logout
+e0a5b9b - Ana Margarida Vieira - 2026-06-10 00:01:09 +0100 - Criação do logout para permitir terminar sessão
+1732d0e - Ana Margarida Vieira - 2026-06-09 23:53:44 +0100 - Colocação do username no botão de utilizador na página principal do private
+0818f3f - Ana Margarida Vieira - 2026-06-09 23:27:30 +0100 - Implementação de mensagens de erro na página de login
+21af243 - Ana Margarida Vieira - 2026-06-09 22:00:06 +0100 - Garantir que se se pesquisar diretamente por index.php é redirecionado para login.php
+65be887 - Ana Margarida Vieira - 2026-06-09 11:25:44 +0100 - Alteração dos caminhos do login
+214dca8 - Ana Margarida Vieira - 2026-06-09 01:48:43 +0100 - Alteração do noma da pasta raíz
+bbba764 - Ana Margarida Vieira - 2026-06-09 01:31:19 +0100 - Atualização dos caminhos
+d5513dd - Ana Margarida Vieira - 2026-06-09 01:22:26 +0100 - Implementação da sidebar.php nas restantes páginas
+1728be9 - Ana Margarida Vieira - 2026-06-09 01:09:11 +0100 - Criação de sidebar.php com a mesma lógica que nav.php
+b4a2a5c - Ana Margarida Vieira - 2026-06-09 00:59:56 +0100 - Implementação de nav.php nas restantes páginas
+372db14 - Ana Margarida Vieira - 2026-06-09 00:42:07 +0100 - Criação de nav.php de forma a ser funcional para o index e para as restantes páginas que apresentam ligeira diferença
+db832a5 - Ana Margarida Vieira - 2026-06-08 23:56:36 +0100 - Passagem de HTML para PHP dos links da sidebar do index da página privada
+cdfc527 - Ana Margarida Vieira - 2026-06-08 23:46:16 +0100 - Criação do ficheiro reutelizável (footer.php) e implementação do mesmo nos ficheiros anteriores
+d905248 - Ana Margarida Vieira - 2026-06-08 23:15:41 +0100 - Criação do ficheiro reutelizável (header.php) e implementação do mesmo nos ficheiros anteriores
+4f4868f - Ana Margarida Vieira - 2026-06-08 22:58:10 +0100 - Criação do ficheiro config.php
+256693e - Ana Margarida Vieira - 2026-06-08 22:51:57 +0100 - Passagem do login para a pasta public
+b621305 - Ana Margarida Vieira - 2026-06-08 10:20:27 +0100 - Passagem dos ficheiros HTML para PHP
+e5ed8e9 - Ana Margarida Vieira - 2026-06-06 15:17:12 +0100 - Adição dos campos relativos aos links do navbar na gestão de conteúdos
+c0b8025 - Ana Margarida Vieira - 2026-06-06 01:19:42 +0100 - Alteração dos id's dos campos
+a18e973 - Ana Margarida Vieira - 2026-06-05 12:20:48 +0100 - Implementação de separadores na página de editar equipamento
+f1822de - Ana Margarida Vieira - 2026-06-05 10:58:30 +0100 - Alteração do código de forma a permitir adicionar mais do que um documento a cada equipamento
+66262b6 - Ana Margarida Vieira - 2026-06-05 10:32:03 +0100 - Alteração de código de forma a ser possível adicionar mais do que um fornecedor a um equipamento
+8ba72cd - Ana Margarida Vieira - 2026-06-05 02:23:26 +0100 - Associar fornecedor ao equipamento quando se adiciona
+4cc9063 - Ana Margarida Vieira - 2026-06-05 01:40:06 +0100 - Implementação completa do separador das localizações
+ae8e305 - Ana Margarida Vieira - 2026-06-05 00:31:45 +0100 - Adicionar documento dentro do equipamento
+65c7d67 - Ana Margarida Vieira - 2026-06-04 23:11:02 +0100 - Criação dos restantes separadores
+3682a98 - Ana Margarida Vieira - 2026-06-04 16:51:33 +0100 - Configuração dos separadores para só ser possível avançar qaundo preenchido
+8569c51 - Ana Margarida Vieira - 2026-06-04 12:54:46 +0100 - Colocar separadores na página de adicionar equipamento
+20aa809 - Ana Margarida Vieira - 2026-06-04 12:08:27 +0100 - Alteração da tabela de listagem de equipamentos
+b2bdc1b - Ana Margarida Vieira - 2026-06-04 11:45:32 +0100 - Implementação da página de detalhes das garantias e contratos
+3bf57a3 - Ana Margarida Vieira - 2026-06-04 11:28:28 +0100 - Implementação da página de listagem de garantias e contratos
+ba4ead2 - Ana Margarida Vieira - 2026-06-04 10:51:11 +0100 - Adição de "Garantias e Contratos" ao menu
+69eafe2 - Ana Margarida Vieira - 2026-06-04 01:21:36 +0100 - Melhoria da gestão de conteúdos
+86f5bcc - Ana Margarida Vieira - 2026-06-03 11:56:34 +0100 - Implementação de um modal para editar conteúdo do rodapé
+bb76d67 - Ana Margarida Vieira - 2026-06-03 11:47:01 +0100 - Implementação de um modal para edição do conteúdo contacto
+f6beac5 - Ana Margarida Vieira - 2026-06-03 11:28:29 +0100 - Implementação de um modal para edição do conteúdo das funcionalidades
+049efbb - Ana Margarida Vieira - 2026-06-03 11:00:42 +0100 - Implementação de um modal para edição da secção vantagens
+b46b66a - Ana Margarida Vieira - 2026-06-03 10:39:44 +0100 - Implementação de um modal para editar conteúdo da secção Problema e Solução
+4976b5b - Ana Margarida Vieira - 2026-06-02 15:06:37 +0100 - Implementação de um modal para edição da secção Sobre nós
+8c38ed3 - Ana Margarida Vieira - 2026-06-02 14:32:26 +0100 - Inserção de uma tabela com as secções editáveis da área pública
+88875b5 - Ana Margarida Vieira - 2026-06-02 11:39:55 +0100 - Adição da página nos vários menus
+84e805e - Ana Margarida Vieira - 2026-06-02 11:32:58 +0100 - Criação da página html para gestão de conteúdos
+08fe5fe - Ana Margarida Vieira - 2026-06-02 10:46:10 +0100 - Remoção dos campos obrigatórios para impedir dupla verificação
+c43dbfb - Ana Margarida Vieira - 2026-06-02 10:35:15 +0100 - Pesquisa e filtragem na página das localizações
+8d269f9 - Ana Margarida Vieira - 2026-06-01 21:08:40 +0100 - Pesquisa e filtragem na página dos fornecedores
+3e610cb - Ana Margarida Vieira - 2026-06-01 20:45:48 +0100 - Pesquisa e filtragem na página da documentação
+2f4110b - Ana Margarida Vieira - 2026-06-01 18:15:28 +0100 - Alteração na disposição dos gráficos
+0be77c1 - Ana Margarida Vieira - 2026-06-01 15:06:27 +0100 - Alteração do tamanho dos gráficos na dashboard
+50f9855 - Ana Margarida Vieira - 2026-06-01 14:53:11 +0100 - Implementação de css na dashboard para titulos, cores e formatações das caixas
+ebbb1f9 - Ana Margarida Vieira - 2026-06-01 12:55:58 +0100 - Indicadores sobre os equipamentos na dashboard
+dafe810 - Ana Margarida Vieira - 2026-06-01 11:40:28 +0100 - Implementação da dashboard no menu
+3e9134c - Ana Margarida Vieira - 2026-05-31 23:01:31 +0100 - Detalhes dos fornecedores, das localizações, etc de cada equipamento
+dc40efe - Ana Margarida Vieira - 2026-05-31 19:41:26 +0100 - Criação de separadores nos detalhes do equipamento
+129e007 - Ana Margarida Vieira - 2026-05-30 14:45:16 +0100 - Alteração da secção de pesquisa e filtragem
+ddc7a92 - Ana Margarida Vieira - 2026-05-30 00:39:29 +0100 - Ordenação das várias caracteristicas dos fornecedores
+0ab12f7 - Ana Margarida Vieira - 2026-05-30 00:04:08 +0100 - Pesquisa e filtragem de equipamentos
+27dbd7b - Ana Margarida Vieira - 2026-05-29 19:35:22 +0100 - Destaque para os estados de criticidade dos equipamentos
+e85fe0b - Ana Margarida Vieira - 2026-05-29 18:25:20 +0100 - Configuração da página de detalhes dos documentos
+2f36704 - Ana Margarida Vieira - 2026-05-29 17:16:16 +0100 - Configuração da página para editar documentos
+dd407b2 - Ana Margarida Vieira - 2026-05-29 12:19:14 +0100 - Configuração da página para adicionar novo documento
+96e41f8 - Ana Margarida Vieira - 2026-05-29 00:27:19 +0100 - Configuração da página para listar documentos
+daf6b5c - Ana Margarida Vieira - 2026-05-28 23:52:47 +0100 - Adição da documentação no Menu
+f8f8495 - Ana Margarida Vieira - 2026-05-28 23:37:09 +0100 - Organização dos ficheiros dos fornecedores
+f1d1de1 - Ana Margarida Vieira - 2026-05-28 23:30:17 +0100 - Criação dos ficheiros html para a documentação
+0e1f97b - Ana Margarida Vieira - 2026-05-28 23:19:27 +0100 - Adição das informações sobre garantias e contratos nos detalhes do equipamento
+d2042af - Ana Margarida Vieira - 2026-05-28 18:38:11 +0100 - Criação dos campos das garantias no editar equipamento
+4b579a9 - Ana Margarida Vieira - 2026-05-28 18:29:49 +0100 - Alteração da organização da adição de novos equipamentos
+0f389ec - Ana Margarida Vieira - 2026-05-28 18:24:03 +0100 - Criação dos campos à cerca das garantias e contratos dos equipamentos para novos
+25c8923 - Ana Margarida Vieira - 2026-05-22 15:27:05 +0100 - Configuração da página dos detalhes sobre as localizações
+7279f7f - Ana Margarida Vieira - 2026-05-22 12:48:03 +0100 - Configuração da página para editar localizações
+c643bb1 - Ana Margarida Vieira - 2026-05-22 12:41:08 +0100 - Configuração da página para adicionar novas localizações
+b572d1f - Ana Margarida Vieira - 2026-05-22 12:18:22 +0100 - Configuração da página para listar localizações
+f18d51a - Ana Margarida Vieira - 2026-05-22 11:58:54 +0100 - Adição das localizações no menu
+5ac6722 - Ana Margarida Vieira - 2026-05-22 01:33:06 +0100 - Configuração da página para consultar fornecedores
+9a21af9 - Ana Margarida Vieira - 2026-05-22 01:21:08 +0100 - Configuração da página para editar fornecedores
+6a968f7 - Ana Margarida Vieira - 2026-05-22 01:05:10 +0100 - Alteração do valor dos campos
+5dca941 - Ana Margarida Vieira - 2026-05-22 00:57:41 +0100 - Configuração da página para adicionar novo fornecedor
+57996b8 - Ana Margarida Vieira - 2026-05-21 19:31:08 +0100 - Configuração da página de listagem de fornecedores
+0a95b45 - Ana Margarida Vieira - 2026-05-21 18:27:06 +0100 - Criação dos ficheiros html para os fornecedores
+7ac9daa - Ana Margarida Vieira - 2026-05-21 17:50:52 +0100 - Edição dos cards da página de detalhes dos equipamentos
+4f6e234 - Ana Margarida Vieira - 2026-05-21 15:56:56 +0100 - Implementação da página de detalhes apenas com as informações relativas ao próprio equipamento
+87440ee - Ana Margarida Vieira - 2026-05-21 12:40:23 +0100 - Criação de novas pastas
+73a6d9a - Ana Margarida Vieira - 2026-05-21 12:18:37 +0100 - Campos de sucesso e erro dos equipamentos
+e1d6fe3 - Ana Margarida Vieira - 2026-05-20 22:25:23 +0100 - Melhoria da simulação JS para eliminar equipamentos
+11328a4 - Ana Margarida Vieira - 2026-05-20 21:37:15 +0100 - Definição dos campos obrigatórios para adicionar/editar equipamentos
+78e40a1 - Ana Margarida Vieira - 2026-05-20 12:32:03 +0100 - Adição de mensagem de sucesso após adicionar novo equipamento
+7737302 - Ana Margarida Vieira - 2026-05-20 12:04:24 +0100 - Implementação de JavaScript para adição e listagem de novos equipamentos
+3785dce - Ana Margarida Vieira - 2026-05-20 10:30:17 +0100 - Adição de mensagem de sucesso após eliminação de um equipamento
+a1b81aa - Ana Margarida Vieira - 2026-05-20 10:14:57 +0100 - Implementação de JavaScript para simular a eliminação de equipamentos
+95ad5ed - Ana Margarida Vieira - 2026-05-20 09:21:53 +0100 - Implementação de uma janela para apagar equipamento em html
+bd43dd1 - Ana Margarida Vieira - 2026-05-19 23:55:26 +0100 - Página para editar equipamentos
+eec4b9a - Ana Margarida Vieira - 2026-05-19 20:56:15 +0100 - Modificação de campos no adicionar equipamento
+e35d9c2 - Ana Margarida Vieira - 2026-05-19 14:20:21 +0100 - Configuração da tabela de listagem de equipamentos
+8ea6fb4 - Ana Margarida Vieira - 2026-05-19 10:51:38 +0100 - Implementação dos efeitos do botão "Novo equipamento" com css
+b5c0269 - Ana Margarida Vieira - 2026-05-19 10:47:25 +0100 - Página da listagem de equipamentos com título e botão para adicionar
+155a9fd - Ana Margarida Vieira - 2026-05-19 10:16:48 +0100 - Configuração da página para adicionar novo equipamento
+52d22b6 - Ana Margarida Vieira - 2026-05-18 22:02:31 +0100 - Configuração de todas as páginas relativas a equipamentos com a mesma página base
+8e92c8b - Ana Margarida Vieira - 2026-05-18 21:35:54 +0100 - Melhoria da página do login
+edce97e - Ana Margarida Vieira - 2026-05-18 17:48:10 +0100 - Base da página onde se irão listar (etc) equipamentos
+ffec63f - Ana Margarida Vieira - 2026-05-18 11:03:59 +0100 - Configuração da página inicial do private
+d97fa39 - Ana Margarida Vieira - 2026-05-17 21:59:22 +0100 - Implementação de responsividade com recurso a css
+255d0e6 - Ana Margarida Vieira - 2026-05-17 12:02:05 +0100 - Criação da navbar da página privada
+fafbcb3 - Ana Margarida Vieira - 2026-05-17 10:38:10 +0100 - Criação da página private
+6068153 - Ana Margarida Vieira - 2026-05-16 23:31:01 +0100 - Configuração da secção contacto da página inicial
+9c44e97 - Ana Margarida Vieira - 2026-05-16 17:31:52 +0100 - Configuração da secção funcionalidades
+8260f0c - Ana Margarida Vieira - 2026-05-16 10:52:09 +0100 - Configuração da secção vantagens da página inicial
+e815227 - Ana Margarida Vieira - 2026-05-16 00:51:48 +0100 - Configuração da secção problema e solução
+f454c6c - Ana Margarida Vieira - 2026-05-15 18:17:48 +0100 - Configuração do botão de iniciar sessão
+eb8a575 - Ana Margarida Vieira - 2026-05-15 17:09:28 +0100 - Ínicio da página incial em css
+48b5807 - Ana Margarida Vieira - 2026-05-04 18:18:38 +0100 - Página de login (html)
+f14c6f5 - Ana Margarida Vieira - 2026-05-04 17:23:12 +0100 - Página inicial do site (html)
+3623cdf - Ana Margarida Vieira - 2026-04-08 11:41:37 +0100 - Início do projeto com pasta Frontend

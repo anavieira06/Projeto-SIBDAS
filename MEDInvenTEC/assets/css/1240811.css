@@ -462,6 +462,27 @@ body{
     transform: translateX(5px); /* Desloca-se ligeiramente para o lado */
 }
 
+@media (max-width: 768px) {
+    .custom-sidebar {
+        padding: 15px 8px;
+    }
+    .sidebar-link {
+        font-size: 0.75rem;
+        padding: 8px 6px;
+        gap: 5px;
+    }
+    .sidebar-title {
+        font-size: 1rem;
+    }
+    .logo {
+        max-height: 45px;
+    }
+    .custom-btn {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+}
+
 .main-section {
     padding: 30px; /* Tamanho da caixa */
     border-radius: 18px;

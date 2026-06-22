@@ -472,7 +472,8 @@ $ligacao = null;
                                                     data-bs-target="#modalEliminar"
                                                     data-id="<?= aes_encrypt($equipamento->id) ?>"
                                                     data-codigo="<?= htmlspecialchars($equipamento->codigo_inventario) ?>"
-                                                    data-designacao="<?= htmlspecialchars($equipamento->designacao_equipamento) ?>">
+                                                    data-designacao="<?= htmlspecialchars($equipamento->designacao_equipamento) ?>"
+                                                    data-marca="<?= htmlspecialchars($equipamento->marca) ?>">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </a>
                                                     <?php endif; ?>
@@ -535,27 +536,27 @@ $ligacao = null;
         <div class="modal fade" id="modalEliminar" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
                 <div class="modal-content rounded-4">
-
+ 
                     <div class="modal-header">
                         <h5 class="modal-title" style="color:#680447;">
                             Confirmar desativação
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-
+ 
                     <div class="modal-body">
                         <p>Tem a certeza que pretende desativar este equipamento?</p>
-
+ 
                         <p><strong>Código:</strong> <span id="modalCodigo"></span></p>
                         <p><strong>Designação:</strong> <span id="modalDesignacao"></span></p>
                         <p><strong>Marca:</strong> <span id="modalMarca"></span></p>
                     </div>
-
+ 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancelar
                         </button>
-
+ 
                         <a href="#" class="btn btn-danger" id="btnConfirmarEliminar">
                             Desativar
                         </a>
@@ -563,7 +564,7 @@ $ligacao = null;
                 </div>
             </div>
         </div>
-
+ 
 <script>
     document.getElementById('modalEliminar').addEventListener('show.bs.modal', function(e) {
         const btn = e.relatedTarget;

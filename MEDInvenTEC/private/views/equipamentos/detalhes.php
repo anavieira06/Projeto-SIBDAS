@@ -537,11 +537,21 @@ include __DIR__ . '/../../includes/sidebar.php';
                                             <i class="fa-solid fa-paperclip me-2"></i>
                                             Ficheiro
                                         </h5>
-
+ 
                                         <div class="mb-3">
                                             <small class="text-muted">Nome do ficheiro</small>
                                             <p class="fw-semibold mb-0"><?= htmlspecialchars($doc->ficheiro ?? '—') ?></p>
                                         </div>
+                                        <?php if ($doc->ficheiro): ?>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Abrir ficheiro</small>
+                                            <p class="fw-semibold mb-0">
+                                                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/uploads/<?= htmlspecialchars($doc->ficheiro) ?>" target="_blank" style="color:#680447;">
+                                                    <i class="fa-solid fa-download me-1"></i> Abrir / Descarregar
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

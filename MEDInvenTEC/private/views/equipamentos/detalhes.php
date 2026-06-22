@@ -88,6 +88,19 @@ try {
     $stmtDoc->execute();
     $documentos = $stmtDoc->fetchAll(PDO::FETCH_OBJ);
  
+    // Buscar histórico de movimentações
+    $stmtHist = $ligacao->prepare("
+        SELECT h.tipo_alteracao, h.valor_anterior, h.valor_novo, h.data_alteracao,
+               u.nome AS utilizador
+        FROM historico_movimentacoes h
+        LEFT JOIN utilizador u ON h.utilizador_id = u.id
+        WHERE h.equipamento_id = :id
+        ORDER BY h.data_alteracao DESC
+    ");
+    $stmtHist->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmtHist->execute();
+    $historico = $stmtHist->fetchAll(PDO::FETCH_OBJ);
+
     $ligacao = null;
  
 } catch (PDOException $e) {
@@ -164,6 +177,15 @@ include __DIR__ . '/../../includes/sidebar.php';
                             data-bs-target="#garantia">
                         <i class="fa-solid fa-file-signature"></i>
                         Garantia | Contrato
+                    </button>
+                </li>
+
+                <li class="nav-item">
+                    <button class="nav-link"
+                            data-bs-toggle="tab"
+                            data-bs-target="#historico">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        Histórico
                     </button>
                 </li>
 
@@ -515,21 +537,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                                             <i class="fa-solid fa-paperclip me-2"></i>
                                             Ficheiro
                                         </h5>
- 
+
                                         <div class="mb-3">
                                             <small class="text-muted">Nome do ficheiro</small>
                                             <p class="fw-semibold mb-0"><?= htmlspecialchars($doc->ficheiro ?? '—') ?></p>
                                         </div>
-                                        <?php if ($doc->ficheiro): ?>
-                                        <div class="mb-3">
-                                            <small class="text-muted">Abrir ficheiro</small>
-                                            <p class="fw-semibold mb-0">
-                                                <a href="/sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/uploads/<?= htmlspecialchars($doc->ficheiro) ?>" target="_blank" style="color: #680447;">
-                                                    <i class="fa-solid fa-download me-1"></i> Abrir / Descarregar
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -598,7 +610,41 @@ include __DIR__ . '/../../includes/sidebar.php';
                             </div>
                         </div>
                     </div>
+                
+
+                    <!-- Histórico -->
+                    <div class="tab-pane fade" id="historico">
+                        <?php if (empty($historico)): ?>
+                            <p class="text-muted">Nenhuma movimentação registada.</p>
+                        <?php else: ?>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de alteração</th>
+                                        <th>Valor anterior</th>
+                                        <th>Novo valor</th>
+                                        <th>Data</th>
+                                        <th>Utilizador</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($historico as $h): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($h->tipo_alteracao) ?></td>
+                                        <td><?= htmlspecialchars($h->valor_anterior ?? '—') ?></td>
+                                        <td><?= htmlspecialchars($h->valor_novo ?? '—') ?></td>
+                                        <td><?= date('d/m/Y H:i', strtotime($h->data_alteracao)) ?></td>
+                                        <td><?= htmlspecialchars($h->utilizador ?? '—') ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
+
             </div>
 
             <!-- Botoão -->

@@ -135,6 +135,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtTipoEntrada->execute([':tipo' => $tipo_entrada]);
             $tipoEntradaId = $stmtTipoEntrada->fetchColumn();
 
+            // Buscar dados atuais para comparar
+            $stmtAtual = $ligacao->prepare("
+                SELECT e.estado_id, e.localizacao_id, e.criticidade_id,
+                       est.estado, l.servico_depart, c.criticidade
+                FROM equipamentos e
+                INNER JOIN estado est ON e.estado_id = est.id
+                INNER JOIN localizacoes l ON e.localizacao_id = l.id
+                INNER JOIN criticidade c ON e.criticidade_id = c.id
+                WHERE e.id = :id
+            ");
+            $stmtAtual->execute([':id' => $idEquipamento]);
+            $atual = $stmtAtual->fetch(PDO::FETCH_OBJ);
+ 
+            $utilizadorId = $_SESSION['perfil_id'] ?? null;
+ 
+            // Buscar nome da nova localização
+            $stmtNovaLoc = $ligacao->prepare("SELECT servico_depart FROM localizacoes WHERE id = :id");
+            $stmtNovaLoc->execute([':id' => $localizacao]);
+            $novaLoc = $stmtNovaLoc->fetchColumn();
+ 
+            // Buscar nome da nova criticidade
+            $stmtNovaCrit = $ligacao->prepare("SELECT criticidade FROM criticidade WHERE id = :id");
+            $stmtNovaCrit->execute([':id' => $criticidade]);
+            $novaCrit = $stmtNovaCrit->fetchColumn();
+ 
+            $stmtHist = $ligacao->prepare("INSERT INTO historico_movimentacoes (equipamento_id, utilizador_id, tipo_alteracao, valor_anterior, valor_novo) VALUES (:eq_id, :user_id, :tipo, :anterior, :novo)");
+ 
+            // Registar alteração de estado
+            if ($atual->estado !== $estado) {
+                $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => 'Estado', ':anterior' => $atual->estado, ':novo' => $estado]);
+            }
+ 
+            // Registar alteração de localização
+            if ((int)$atual->localizacao_id !== (int)$localizacao) {
+                $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => 'Localização', ':anterior' => $atual->servico_depart, ':novo' => $novaLoc]);
+            }
+ 
+            // Registar alteração de criticidade
+            if ((int)$atual->criticidade_id !== (int)$criticidade) {
+                $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => 'Criticidade', ':anterior' => $atual->criticidade, ':novo' => $novaCrit]);
+            }
+
             // UPDATE equipamento
             $stmtE = $ligacao->prepare("UPDATE equipamentos SET
             codigo_inventario      = :codigo,

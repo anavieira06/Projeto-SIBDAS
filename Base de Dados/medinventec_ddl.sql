@@ -218,6 +218,19 @@ CREATE TABLE `mensagens_contacto` (
   `lida` TINYINT(1) NOT NULL DEFAULT 0
 );
 
+CREATE TABLE `historico_movimentacoes` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `equipamento_id` int NOT NULL,
+  `utilizador_id` int NOT NULL,
+  `tipo_alteracao` varchar(100) NOT NULL,
+  `valor_anterior` varchar(255),
+  `valor_novo` varchar(255),
+  `data_alteracao` datetime DEFAULT NOW()
+);
+
+ALTER TABLE `historico_movimentacoes` ADD FOREIGN KEY (`equipamento_id`) REFERENCES `equipamentos` (`id`);
+ALTER TABLE `historico_movimentacoes` ADD FOREIGN KEY (`utilizador_id`) REFERENCES `utilizador` (`id`);
+
 ALTER TABLE `equipamentos` ADD FOREIGN KEY (`localizacao_id`) REFERENCES `localizacoes` (`id`);
 
 ALTER TABLE `equipamentos` ADD FOREIGN KEY (`garantia_contrato_id`) REFERENCES `garantias_contratos` (`id`);

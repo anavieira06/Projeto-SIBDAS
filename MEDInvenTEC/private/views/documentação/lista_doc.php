@@ -158,7 +158,7 @@ $ligacao = null;
         <!-- Conteúdo Principal -->
         <div class="container-fluid p-4">
             <div class="d-flex align-items-center mb-3 w-100">
-                <h2 class="mb-0" style="color: #680447;">
+                <h2 class="mb-0 titulo-listagem" style="color: #680447;">
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Documentos</strong>
                 </h2>

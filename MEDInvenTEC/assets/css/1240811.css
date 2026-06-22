@@ -481,6 +481,20 @@ body{
         font-size: 0.75rem;
         padding: 6px 10px;
     }
+   .titulo-listagem {
+        font-size: 1rem;
+    }
+    .titulo-listagem strong {
+        font-size: 1rem;
+    }
+    .btn-novo {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+    .btn-sm {
+        font-size: 0.65rem;
+        padding: 4px 6px;
+    }
 }
 
 .main-section {

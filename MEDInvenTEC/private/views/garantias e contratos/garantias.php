@@ -174,6 +174,11 @@ $ligacao = null;
                     <i class="fa-solid fa-list-check me-2"></i>
                     <strong>Listagem de Garantias e Contratos</strong>
                 </h2>
+                <div class="ms-auto d-flex gap-2">
+                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/includes/exportar.php?tabela=garantias&formato=csv" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-csv me-1"></i> CSV</a>
+                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/includes/exportar.php?tabela=garantias&formato=json" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-code me-1"></i> JSON</a>
+                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/includes/exportar.php?tabela=garantias&formato=pdf" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-solid fa-file-pdf me-1"></i> PDF</a>
+                </div>
             </div>
 
             <hr>

@@ -153,6 +153,11 @@ $ligacao = null;
                 <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/views/fornecedores/novo_forn.php" class="btn ms-auto btn-novo" style="background-color: #680447; color: white;">
                     <i class="fa-solid fa-plus me-1"></i> Novo fornecedor
                 </a>
+                <div class="ms-2 d-flex gap-2">
+                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/includes/exportar.php?tabela=fornecedores&formato=csv" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-csv me-1"></i> CSV</a>
+                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/includes/exportar.php?tabela=fornecedores&formato=json" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-file-code me-1"></i> JSON</a>
+                    <a href="/sibdas/1240811/projeto-sibdas/medinventec/private/includes/exportar.php?tabela=fornecedores&formato=pdf" class="btn btn-outline-secondary btn-sm" target="_blank"><i class="fa-solid fa-file-pdf me-1"></i> PDF</a>
+                </div>
             </div>
 
             <hr>

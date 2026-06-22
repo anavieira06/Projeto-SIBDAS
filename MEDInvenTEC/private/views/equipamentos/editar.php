@@ -137,16 +137,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Buscar dados atuais para comparar
             $stmtAtual = $ligacao->prepare("
-                SELECT e.estado_id, e.localizacao_id, e.criticidade_id,
-                       est.estado, l.servico_depart, c.criticidade
+                SELECT e.estado_id, e.localizacao_id, e.criticidade_id, e.tipo_entrada_id,
+                       e.codigo_inventario, e.designacao_equipamento, e.marca, e.modelo,
+                       e.numero_serie, e.fabricante, e.data_aquisicao, e.ano_fabrico,
+                       e.custo_aquisicao, e.observacoes,
+                       est.estado, l.servico_depart, c.criticidade, te.tipo_entrada,
+                       gc.data_inicio, gc.data_fim, gc.contrato_manutencao,
+                       gc.entidade_responsavel, gc.observacoes_garant
                 FROM equipamentos e
                 INNER JOIN estado est ON e.estado_id = est.id
                 INNER JOIN localizacoes l ON e.localizacao_id = l.id
                 INNER JOIN criticidade c ON e.criticidade_id = c.id
+                INNER JOIN tipo_entrada te ON e.tipo_entrada_id = te.id
+                LEFT JOIN garantias_contratos gc ON e.garantia_contrato_id = gc.id
                 WHERE e.id = :id
             ");
             $stmtAtual->execute([':id' => $idEquipamento]);
             $atual = $stmtAtual->fetch(PDO::FETCH_OBJ);
+
+            // Buscar fornecedores atuais
+            $stmtFornAtual = $ligacao->prepare("
+                SELECT GROUP_CONCAT(f.nome_empresa ORDER BY f.nome_empresa SEPARATOR ', ') as fornecedores
+                FROM equipamento_fornecedor ef
+                INNER JOIN fornecedores f ON ef.fornecedor_id = f.id
+                WHERE ef.equipamento_id = :id
+            ");
+            $stmtFornAtual->execute([':id' => $idEquipamento]);
+            $fornecedoresAtuais = $stmtFornAtual->fetchColumn();
  
             $utilizadorId = $_SESSION['perfil_id'] ?? null;
  
@@ -159,22 +176,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtNovaCrit = $ligacao->prepare("SELECT criticidade FROM criticidade WHERE id = :id");
             $stmtNovaCrit->execute([':id' => $criticidade]);
             $novaCrit = $stmtNovaCrit->fetchColumn();
+
+            // Buscar nome do novo tipo entrada
+            $stmtNovaTipoEntrada = $ligacao->prepare("SELECT tipo_entrada FROM tipo_entrada WHERE id = :id");
+            $stmtNovaTipoEntrada->execute([':id' => $tipoEntradaId]);
+            $novaTipoEntrada = $stmtNovaTipoEntrada->fetchColumn();
+
+            // Buscar nomes dos novos fornecedores
+            if (!empty($fornecedor)) {
+                $placeholders = implode(',', array_fill(0, count($fornecedor), '?'));
+                $stmtNovosForn = $ligacao->prepare("SELECT GROUP_CONCAT(nome_empresa ORDER BY nome_empresa SEPARATOR ', ') FROM fornecedores WHERE id IN ($placeholders)");
+                $stmtNovosForn->execute($fornecedor);
+                $novosFornecedores = $stmtNovosForn->fetchColumn();
+            } else {
+                $novosFornecedores = '';
+            }
  
             $stmtHist = $ligacao->prepare("INSERT INTO historico_movimentacoes (equipamento_id, utilizador_id, tipo_alteracao, valor_anterior, valor_novo) VALUES (:eq_id, :user_id, :tipo, :anterior, :novo)");
- 
-            // Registar alteração de estado
-            if ($atual->estado !== $estado) {
-                $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => 'Estado', ':anterior' => $atual->estado, ':novo' => $estado]);
+
+            // Campos simples do equipamento
+            $camposEquip = [
+                'Código'          => [$atual->codigo_inventario,        $codigo],
+                'Designação'      => [$atual->designacao_equipamento,   $designacao],
+                'Marca'           => [$atual->marca,                    $marca],
+                'Modelo'          => [$atual->modelo,                   $modelo],
+                'Nº de série'     => [$atual->numero_serie,             $numero_serie],
+                'Fabricante'      => [$atual->fabricante,               $fabricante],
+                'Data de aquisição' => [$atual->data_aquisicao,         $data_aquisicao],
+                'Ano de fabrico'  => [(string)$atual->ano_fabrico,      $ano_fabrico],
+                'Custo de aquisição' => [(string)$atual->custo_aquisicao, $custo_aquisicao],
+                'Observações'     => [$atual->observacoes,              $observacoes],
+                'Estado'          => [$atual->estado,                   $estado],
+                'Criticidade'     => [$atual->criticidade,              $novaCrit],
+                'Tipo de entrada' => [$atual->tipo_entrada,             $novaTipoEntrada],
+                'Localização'     => [$atual->servico_depart,           $novaLoc],
+            ];
+
+            foreach ($camposEquip as $tipo => [$anterior, $novo]) {
+                if ((string)$anterior !== (string)$novo) {
+                    $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => $tipo, ':anterior' => $anterior, ':novo' => $novo]);
+                }
             }
- 
-            // Registar alteração de localização
-            if ((int)$atual->localizacao_id !== (int)$localizacao) {
-                $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => 'Localização', ':anterior' => $atual->servico_depart, ':novo' => $novaLoc]);
+
+            // Fornecedores
+            if ($fornecedoresAtuais !== $novosFornecedores) {
+                $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => 'Fornecedores', ':anterior' => $fornecedoresAtuais, ':novo' => $novosFornecedores]);
             }
- 
-            // Registar alteração de criticidade
-            if ((int)$atual->criticidade_id !== (int)$criticidade) {
-                $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => 'Criticidade', ':anterior' => $atual->criticidade, ':novo' => $novaCrit]);
+
+            // Garantia
+            $camposGarantia = [
+                'Início de Garantia' => [$atual->data_inicio,           $data_inicio],
+                'Fim de Garantia'    => [$atual->data_fim,              $data_fim],
+                'Contrato Manutenção'=> [$atual->contrato_manutencao ? 'Sim' : 'Não', $contrato],
+                'Entidade Responsável'=> [$atual->entidade_responsavel, $entidade],
+                'Observações Garantia'=> [$atual->observacoes_garant,   $obs_garantia],
+            ];
+
+            foreach ($camposGarantia as $tipo => [$anterior, $novo]) {
+                if ((string)$anterior !== (string)$novo) {
+                    $stmtHist->execute([':eq_id' => $idEquipamento, ':user_id' => $utilizadorId, ':tipo' => $tipo, ':anterior' => $anterior, ':novo' => $novo]);
+                }
             }
 
             // UPDATE equipamento

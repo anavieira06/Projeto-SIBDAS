@@ -540,7 +540,7 @@ INSERT INTO perfil (perfil) VALUES ('administrador'), ('tecnico'), ('profissiona
 
 
 INSERT INTO utilizador (nome, email, password, perfil_id, created_at) VALUES
-('Ana Vieira', 'admin@medinventec.pt', '$2y$10$XQqWc5Td6K./XUTtsf8ugertX7B6hq6g0XDvvWnW1WAs0WkbMey4S', 1, NOW()),
+('Ana Vieira', 'admin@medinventec.pt', '$2y$10$wVf0HGRWiZkDqv69j4NvFOcV8Fzqd648CJhQlXVYpLw4D5E8B3HzC', 1, NOW()),
 ('José Rocha', 'tecnico@medinventec.pt', '$2y$10$QlOhTk6G66aa0Wfu78yuiefMXKQlolUjv3ZNzMl4BJF49UW/NmB4O', 2, NOW()),
 ('Jerusa Vinagre', 'saude@medinventec.pt', '$2y$10$v6ToZARQjHtsLMYdxBUKme6POdWbfY7tM44mnaYL8ZNO.KzxZ2Q1C', 3, NOW());
 

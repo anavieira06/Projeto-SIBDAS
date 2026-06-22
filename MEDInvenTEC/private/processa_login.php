@@ -70,6 +70,7 @@ try {
 
     // Verificar se o utilizador existe e se a password está correta
     if (!$utilizador || !password_verify($password, $utilizador->password)) {
+        registar_evento('TENTATIVA DE AUTENTICAÇÃO FALHADA', $email);
         $_SESSION['server_error'] = 'Login inválido';
         header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/public/login.php');
         return;
@@ -85,6 +86,8 @@ try {
     $_SESSION['email']      = $utilizador->email;
     $_SESSION['perfil']     = $utilizador->perfil;
     $_SESSION['perfil_id']  = $utilizador->perfil_id;
+
+    registar_evento('AUTENTICAÇÃO BEM SUCEDIDA', $utilizador->email);
  
     // Redirecionar para a página principal privada
     header('Location: home.php');

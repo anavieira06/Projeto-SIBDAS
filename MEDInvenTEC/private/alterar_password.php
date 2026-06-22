@@ -42,7 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $novoHash = password_hash($password_nova, PASSWORD_DEFAULT);
                 $stmtUpdate = $ligacao->prepare("UPDATE utilizador SET password = :password WHERE email = :email");
                 $stmtUpdate->execute([':password' => $novoHash, ':email' => $_SESSION['email']]);
-                $sucesso = true;
+                $ligacao = null;
+                registar_evento('PASSWORD ALTERADA', $_SESSION['email']);
+                $_SESSION['password_alterada'] = true;
+                header('Location: /sibdas/1240811/ProjetoSIBDAS/MEDInvenTEC/private/home.php?password_alterada=1');
+                exit;
             }
 
             $ligacao = null;
@@ -68,13 +72,6 @@ include __DIR__ . '/includes/nav.php';
                         <strong>Alterar Password</strong>
                     </h4>
                     <hr>
-
-                    <?php if ($sucesso): ?>
-                        <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
-                            <i class="fa-solid fa-circle-check"></i>
-                            Password alterada com sucesso!
-                        </div>
-                    <?php endif; ?>
 
                     <?php if (!empty($erros)): ?>
                         <div class="alert alert-danger" role="alert">

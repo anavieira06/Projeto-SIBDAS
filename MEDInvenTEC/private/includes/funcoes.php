@@ -56,3 +56,18 @@ function aes_decrypt($value) {
         OPENSSL_IV
     );
 }
+
+// ============================================================
+// Registo de eventos no ficheiro de log
+// ============================================================
+function registar_evento($tipo, $email = null) {
+    $pasta = __DIR__ . '/../../logs';
+    if (!is_dir($pasta)) {
+        mkdir($pasta, 0755, true);
+    }
+    $ficheiro = $pasta . '/eventos.log';
+    $data     = date('Y-m-d H:i:s');
+    $emailStr = $email ? " | utilizador: $email" : '';
+    $linha    = "[$data] $tipo$emailStr" . PHP_EOL;
+    file_put_contents($ficheiro, $linha, FILE_APPEND | LOCK_EX);
+}

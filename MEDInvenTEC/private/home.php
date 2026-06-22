@@ -33,6 +33,18 @@ include __DIR__ . '/includes/nav.php';
         <!-- Conteúdo Principal -->
         <main class="col-8 col-md-9 col-lg-10 p-4">
             <section class="main-section">
+                <?php if (isset($_GET['password_alterada'])): ?>
+                    <div class="alert alert-success d-flex align-items-center gap-2 mb-4" id="alertPassword" role="alert">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Password alterada com sucesso!
+                    </div>
+                    <script>
+                        history.replaceState(null, '', window.location.pathname);
+                        setTimeout(() => {
+                            document.getElementById('alertPassword').style.display = 'none';
+                        }, 4000);
+                    </script>
+                <?php endif; ?>
                 <h2>Bem-vindo a MEDInvenTEC</h2>
                 <p>Gere equipamentos médicos e muito mais, de forma simples e eficiente. </p>
                 <p>Utilize o menu lateral para aceder às funcionalidades do sistema.</p>

@@ -134,18 +134,13 @@ include __DIR__ . '/../private/includes/header.php';
 <?php include __DIR__ . '/../private/includes/footer.php'; ?>
 
 <script>
-    const passwords = {
-        'admin@medinventec.pt':   'Adm!2025#Med',
-        'tecnico@medinventec.pt': 'Tec!2025#Hosp',
-        'saude@medinventec.pt':   'Sau!2025#Hosp'
-    };
-
     document.querySelectorAll('.btn-teste').forEach(btn => {
         btn.addEventListener('click', () => {
             const f = document.forms['formulario'];
             const email = btn.getAttribute('data-email');
             f['text_username'].value = email;
-            f['text_password'].value = passwords[email] ?? '';
+            f['text_password'].value = '';
+            f['text_password'].focus();
         });
     });
 </script>

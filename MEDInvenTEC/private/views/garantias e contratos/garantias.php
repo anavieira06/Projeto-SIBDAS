@@ -51,12 +51,14 @@ try {
  
     if ($pesquisa !== '') {
         $condicoes[] = "(gc.entidade_responsavel LIKE :pesquisa
-            OR gc.data_inicio LIKE :pesquisa
-            OR gc.data_fim LIKE :pesquisa
-            OR tc.tipo_contrato LIKE :pesquisa
-            OR p.periodicidade LIKE :pesquisa
-            OR e.codigo_inventario LIKE :pesquisa
-            OR e.designacao_equipamento LIKE :pesquisa)";
+    OR gc.data_inicio LIKE :pesquisa
+    OR gc.data_fim LIKE :pesquisa
+    OR tc.tipo_contrato LIKE :pesquisa
+    OR p.periodicidade LIKE :pesquisa
+    OR e.codigo_inventario LIKE :pesquisa
+    OR e.designacao_equipamento LIKE :pesquisa
+    OR (gc.contrato_manutencao = 1 AND 'Sim' LIKE :pesquisa)
+    OR (gc.contrato_manutencao = 0 AND 'Não' LIKE :pesquisa))";
         $parametros[':pesquisa'] = '%' . $pesquisa . '%';
     }
  
@@ -315,7 +317,7 @@ $ligacao = null;
                         <tbody>
                             <?php foreach ($resultados as $garantia): ?>
                             <tr>
-                                <td><?= htmlspecialchars($garantia->codigo_inventario) ?> — <?= htmlspecialchars($garantia->designacao_equipamento) ?></td>
+                                <td><?= htmlspecialchars($garantia->codigo_inventario ?? '') ?> — <?= htmlspecialchars($garantia->designacao_equipamento ?? '') ?></td>
                                 <td><?= htmlspecialchars($garantia->data_fim) ?></td>
                                 <td>
                                     <?php if ($garantia->contrato_manutencao): ?>

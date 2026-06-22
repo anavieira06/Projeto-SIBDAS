@@ -54,7 +54,11 @@ try {
             OR e.designacao_equipamento LIKE :pesquisa
             OR e.marca LIKE :pesquisa
             OR e.modelo LIKE :pesquisa
-            OR e.numero_serie LIKE :pesquisa)";
+            OR e.numero_serie LIKE :pesquisa
+            OR es.estado LIKE :pesquisa
+            OR c.criticidade LIKE :pesquisa
+            OR cg.categoria_grupo LIKE :pesquisa
+            OR l.servico_depart LIKE :pesquisa)";
         $parametros[':pesquisa'] = '%' . $pesquisa . '%';
     }
 
@@ -145,8 +149,12 @@ try {
     $sqlTotal = "
         SELECT COUNT(DISTINCT e.id) AS total
         FROM equipamentos e
-        LEFT JOIN equipamento_fornecedor ef
-            ON e.id = ef.equipamento_id
+        LEFT JOIN categoria_grupo cg ON e.categoria_grupo_id = cg.id
+        LEFT JOIN estado es ON e.estado_id = es.id
+        LEFT JOIN criticidade c ON e.criticidade_id = c.id
+        LEFT JOIN localizacoes l ON e.localizacao_id = l.id
+        LEFT JOIN equipamento_fornecedor ef ON e.id = ef.equipamento_id
+        LEFT JOIN fornecedores f ON ef.fornecedor_id = f.id
         " . $whereSql . "
     ";
 

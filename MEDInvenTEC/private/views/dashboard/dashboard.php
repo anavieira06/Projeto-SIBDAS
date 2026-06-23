@@ -70,8 +70,12 @@ try {
  
     $semDocumentacao = $ligacao->query("
         SELECT COUNT(*) FROM equipamentos e
-        LEFT JOIN documentos d ON d.equipamento_id = e.id
-        WHERE d.id IS NULL
+        WHERE e.ativo = 1
+        AND EXISTS (
+            SELECT 1 FROM documentos d 
+            WHERE d.equipamento_id = e.id 
+            AND (d.ficheiro IS NULL OR d.ficheiro = '')
+        )
     ")->fetchColumn();
  
     $criticidadeElevada = $ligacao->query("
@@ -232,7 +236,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                 </div>
 
                                 <div class="alert-item">
-                                    <strong><?= $semDocumentacao ?> equipamentos</strong> sem documentação associada
+                                    <strong><?= $semDocumentacao ?> equipamentos</strong> com documento sem ficheiro associado
                                 </div>
 
                                 <div class="alert-item">

@@ -9,7 +9,7 @@ CREATE TABLE `equipamentos` (
   `data_aquisicao` date NOT NULL,
   `ano_fabrico` int NOT NULL,
   `custo_aquisicao` decimal(10,2) NOT NULL,
-  `observacoes` text,
+  `observacoes` text DEFAULT NULL,
   `ativo` TINYINT(1) NOT NULL DEFAULT 1,
   `categoria_grupo_id` int NOT NULL,
   `estado_id` int NOT NULL,
@@ -49,7 +49,6 @@ CREATE TABLE `fornecedores` (
   `website` varchar(255) NOT NULL,
   `pessoa_contacto` varchar(100) NOT NULL,
   `tel_pessoa_contacto` varchar(20) NOT NULL,
-  `observacoes` text,
   `ativo` TINYINT(1) NOT NULL DEFAULT 1,
   `tipo_fornecedor_id` int NOT NULL
 );
@@ -77,12 +76,12 @@ CREATE TABLE `localizacoes` (
 CREATE TABLE `documentos` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `equipamento_id` int NOT NULL,
-  `fornecedor_id` int,
+  `fornecedor_id` int DEFAULT NULL,
   `tipo_doc_id` int NOT NULL,
   `nome_doc` varchar(255) NOT NULL,
   `data_doc` date NOT NULL,
-  `data_validade` date,
-  `ficheiro` varchar(255) NOT NULL
+  `data_validade` date DEFAULT NULL,
+  `ficheiro` varchar(255) DEFAULT NULL
 );
 
 CREATE TABLE `tipo_doc` (
@@ -95,10 +94,10 @@ CREATE TABLE `garantias_contratos` (
   `data_inicio` date NOT NULL,
   `data_fim` date NOT NULL,
   `contrato_manutencao` boolean NOT NULL,
-  `tipo_contrato_id` int,
-  `periodicidade_id` int,
+  `tipo_contrato_id` int DEFAULT NULL,
+  `periodicidade_id` int DEFAULT NULL,
   `entidade_responsavel` varchar(100) NOT NULL,
-  `observacoes_garant` text
+  `observacoes_garant` text DEFAULT NULL
 );
 
 CREATE TABLE `tipo_contrato` (

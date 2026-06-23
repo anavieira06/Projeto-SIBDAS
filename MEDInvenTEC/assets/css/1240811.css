@@ -74,7 +74,7 @@ body{
     padding: 10px 20px; /* Espaçamento interno */ 
     background-color: #ffeafd; /* Cor do botão */
 
-    border: 2px solid #945880; /* Borda esterna do botão */
+    border: 2px solid #945880 !important; /* Borda esterna do botão */
 
     transition: /* Cria uma transição mais suave e controlada */
         box-shadow 0.25s ease,

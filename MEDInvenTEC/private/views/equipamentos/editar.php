@@ -694,6 +694,9 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 <!-- Selecionar fornecedor -->
                                                 <div class="row mb-4">
                                                     <div class="col-md-6">
+                                                        <label for="selectLocalizacao" class="form-label">
+                                                            Selecionar fornecedor <span class="text-danger">*</span>
+                                                        </label>
                                                         <select class="form-control"
                                                                 name="fornecedor_id[]"
                                                                 onchange="preencherFornecedorBloco(this,<?= $i + 1 ?>)"
@@ -830,7 +833,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                         <div class="row mb-4">
                                             <div class="col-md-6">
                                                 <label for="selectLocalizacao" class="form-label">
-                                                    Selecionar localização
+                                                    Selecionar localização <span class="text-danger">*</span>
                                                 </label>
 
                                                 <select class="form-control"

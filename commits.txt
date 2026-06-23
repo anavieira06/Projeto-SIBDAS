@@ -1,3 +1,5 @@
+24d29b8 - Ana Margarida Vieira - 2026-06-23 00:58:49 +0100 - Exportação da base de dados
+0624200 - Ana Margarida Vieira - 2026-06-22 21:20:06 +0100 - Correção das edições e adições
 c9b8d16 - Ana Margarida Vieira - 2026-06-22 18:09:17 +0100 - Responsividade dos botões das listagens
 30d134f - Ana Margarida Vieira - 2026-06-22 17:58:13 +0100 - Melhoria da área da pesquisa
 a476772 - Ana Margarida Vieira - 2026-06-22 17:27:42 +0100 - Responsividade da página inicial do private

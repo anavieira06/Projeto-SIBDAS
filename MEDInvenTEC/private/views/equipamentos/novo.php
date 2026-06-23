@@ -151,9 +151,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $erros[] = "A data do documento " . ($i + 1) . " não pode ser superior à data atual.";
                 }
             }
-            if (empty($fich)) {
-                $erros[] = "O ficheiro do documento " . ($i + 1) . " é obrigatório.";
-            }
         }
     }
 
@@ -658,6 +655,10 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 <div class="row mb-4">
                                                     <div class="col-md-6">
 
+                                                        <label for="selectLocalizacao" class="form-label"> <span class="text-danger">*</span>
+                                                            Selecionar fornecedor
+                                                        </label>
+
                                                         <select class="form-control"
                                                                 name="fornecedor_id[]"
                                                                 onchange="preencherFornecedorBloco(this,1)"
@@ -793,7 +794,7 @@ include __DIR__ . '/../../includes/sidebar.php';
 
                                         <div class="row mb-4">
                                             <div class="col-md-6">
-                                                <label for="selectLocalizacao" class="form-label">
+                                                <label for="selectLocalizacao" class="form-label"> <span class="text-danger">*</span>
                                                     Selecionar localização
                                                 </label>
 
@@ -955,13 +956,13 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label for="ficheiro" class="form-label">Selecionar ficheiro <span class="text-danger">*</span></label>
+                                                        <label for="ficheiro" class="form-label">Selecionar ficheiro</label>
                                                         <input type="file"
                                                             class="form-control"
                                                             name="ficheiro[]"
                                                             id="ficheiro"
                                                             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                                                            required>
+                                                            >
                                                     </div>
                                                 </div>
 

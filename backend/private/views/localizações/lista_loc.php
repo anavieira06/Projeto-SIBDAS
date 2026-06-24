@@ -375,6 +375,15 @@ $ligacao = null;
             $fim = min($totalPaginas, $paginaAtual + 2);
             ?>
 
+            <?php
+            $queryFiltros = http_build_query([
+                'pesquisa' => $pesquisa,
+                'edificio' => $filtroEdificio,
+                'piso'     => $filtroPiso,
+                'servico'  => $filtroServico,
+                'sala'     => $filtroSala,
+            ]);
+            ?>
             <nav class="mt-4">
                 <ul class="pagination justify-content-center">
 

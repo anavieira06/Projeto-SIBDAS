@@ -9,7 +9,7 @@ Número de Estudante: 1240811
 
 ====================================================
 
-projeto-sibdas/
+medinventec/
 │
 ├── README.txt
 ├── commits.txt
@@ -20,7 +20,7 @@ projeto-sibdas/
 │   ├── modelo.dbml
 │   └── modelo_relacional.pdf
 │
-└── medinventec/
+└── backend/
     │
     ├── config/
     │   └── config.php

@@ -352,6 +352,15 @@ $ligacao = null;
             $fim = min($totalPaginas, $paginaAtual + 2);
             ?>
  
+            <?php
+            $queryFiltros = http_build_query([
+                'pesquisa'      => $pesquisa,
+                'contrato'      => $filtroContrato,
+                'tipo_contrato' => $filtroTipoContrato,
+                'periodicidade' => $filtroPeriodicidade,
+                'entidade'      => $filtroEntidade,
+            ]);
+            ?>
             <nav class="mt-4">
                 <ul class="pagination justify-content-center">
  

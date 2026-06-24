@@ -511,47 +511,48 @@ $ligacao = null;
         $fim = min($totalPaginas, $paginaAtual + 2);
         ?>
 
-        <nav class="mt-4">
-            <ul class="pagination justify-content-center">
+        <?php
+// Construir string com os filtros atuais para passar na paginação
+$queryFiltros = http_build_query([
+    'pesquisa'    => $pesquisa,
+    'estado'      => $filtroEstado,
+    'categoria'   => $filtroCategoria,
+    'criticidade' => $filtroCriticidade,
+    'localizacao' => $filtroLocalizacao,
+    'fornecedor'  => $filtroFornecedor,
+]);
+?>
 
-                <?php if ($paginaAtual > 1) : ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?pagina=1#tabelaEquipamentos">
-                            Primeira
-                        </a>
-                    </li>
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
 
-                    <li class="page-item">
-                        <a class="page-link" href="?pagina=<?= $paginaAtual - 1 ?>#tabelaEquipamentos">
-                            Anterior
-                        </a>
-                    </li>
-                <?php endif; ?>
+        <?php if ($paginaAtual > 1) : ?>
+            <li class="page-item">
+                <a class="page-link" href="?pagina=1&<?= $queryFiltros ?>#tabelaEquipamentos">Primeira</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?pagina=<?= $paginaAtual - 1 ?>&<?= $queryFiltros ?>#tabelaEquipamentos">Anterior</a>
+            </li>
+        <?php endif; ?>
 
-                <?php for ($i = $inicio; $i <= $fim; $i++) : ?>
-                    <li class="page-item <?= ($i == $paginaAtual) ? 'active' : '' ?>">
-                        <a class="page-link" href="?pagina=<?= $i ?>#tabelaEquipamentos">
-                            <?= $i ?>
-                        </a>
-                    </li>
-                <?php endfor; ?>
+        <?php for ($i = $inicio; $i <= $fim; $i++) : ?>
+            <li class="page-item <?= ($i == $paginaAtual) ? 'active' : '' ?>">
+                <a class="page-link" href="?pagina=<?= $i ?>&<?= $queryFiltros ?>#tabelaEquipamentos"><?= $i ?></a>
+            </li>
+        <?php endfor; ?>
 
-                <?php if ($paginaAtual < $totalPaginas) : ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?pagina=<?= $paginaAtual + 1 ?>#tabelaEquipamentos">
-                            Seguinte
-                        </a>
-                    </li>
+        <?php if ($paginaAtual < $totalPaginas) : ?>
+            <li class="page-item">
+                <a class="page-link" href="?pagina=<?= $paginaAtual + 1 ?>&<?= $queryFiltros ?>#tabelaEquipamentos">Seguinte</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?pagina=<?= $totalPaginas ?>&<?= $queryFiltros ?>#tabelaEquipamentos">Última</a>
+            </li>
+        <?php endif; ?>
 
-                    <li class="page-item">
-                        <a class="page-link" href="?pagina=<?= $totalPaginas ?>#tabelaEquipamentos">
-                            Última
-                        </a>
-                    </li>
-                <?php endif; ?>
+    </ul>
+</nav>
 
-            </ul>
-        </nav>
         <div class="modal fade" id="modalEliminar" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered"> <!-- Cria uma pequena janela centrada -->
                 <div class="modal-content rounded-4">

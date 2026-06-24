@@ -1,3 +1,4 @@
+9936407 - Ana Margarida Vieira - 2026-06-24 10:15:51 +0100 - Alteração do nome das pastas para entrega
 33f3998 - Ana Margarida Vieira - 2026-06-24 06:03:11 +0100 - Colocação do fuso-horário correto
 9bd2f29 - Ana Margarida Vieira - 2026-06-24 05:39:50 +0100 - Alterar a hora registada
 961b8aa - Ana Margarida Vieira - 2026-06-23 23:30:17 +0100 - Alteração na dashboard relativamente aos documentos

@@ -205,7 +205,7 @@ CREATE TABLE `utilizador` (
   `perfil_id` int NOT NULL,
   `ativo` TINYINT(1) NOT NULL DEFAULT 1,
   `last_login` datetime,
-  `created_at` datetime DEFAULT NOW()
+  `created_at` datetime 
 );
 
 CREATE TABLE `mensagens_contacto` (
@@ -213,7 +213,7 @@ CREATE TABLE `mensagens_contacto` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mensagem` text NOT NULL,
-  `data_envio` datetime DEFAULT NOW(),
+  `data_envio` datetime,
   `lida` TINYINT(1) NOT NULL DEFAULT 0
 );
 
@@ -224,7 +224,7 @@ CREATE TABLE `historico_movimentacoes` (
   `tipo_alteracao` varchar(100) NOT NULL,
   `valor_anterior` varchar(255),
   `valor_novo` varchar(255),
-  `data_alteracao` datetime DEFAULT NOW()
+  `data_alteracao` datetime 
 );
 
 ALTER TABLE `historico_movimentacoes` ADD FOREIGN KEY (`equipamento_id`) REFERENCES `equipamentos` (`id`);

@@ -9,12 +9,14 @@ if ($_SESSION['perfil'] !== 'administrador') {
 }
 
 try {
+    
     $ligacao = new PDO(
         "mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DATABASE . ";charset=utf8",
         MYSQL_USERNAME,
         MYSQL_PASSWORD
     );
     $ligacao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 
     // Marcar como lida se pedido
     if (isset($_GET['ler'])) {
@@ -74,7 +76,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                     <td><?= htmlspecialchars($m->nome) ?></td>
                                     <td><?= htmlspecialchars($m->email) ?></td>
                                     <td><?= htmlspecialchars(mb_strimwidth($m->mensagem, 0, 60, '...')) ?></td>
-                                    <td><?= date('d/m/Y H:i', strtotime($m->data_envio)) ?></td>
+                                    <td><?= date('d/m/Y H:i', strtotime($m->data_envio) + 3600) ?></td>
                                     <td>
                                         <?php if ($m->lida): ?>
                                             <span class="badge bg-secondary">Lida</span>
@@ -89,7 +91,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 data-nome="<?= htmlspecialchars($m->nome) ?>"
                                                 data-email="<?= htmlspecialchars($m->email) ?>"
                                                 data-mensagem="<?= htmlspecialchars($m->mensagem) ?>"
-                                                data-data="<?= date('d/m/Y H:i', strtotime($m->data_envio)) ?>"
+                                                data-data="<?= date('d/m/Y H:i', strtotime($m->data_envio) + 3600) ?>"
                                                 data-id="<?= $m->id ?>">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>

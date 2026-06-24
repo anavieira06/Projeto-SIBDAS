@@ -644,7 +644,7 @@ include __DIR__ . '/../../includes/sidebar.php';
                                         <td><?= htmlspecialchars($h->tipo_alteracao) ?></td>
                                         <td><?= htmlspecialchars($h->valor_anterior ?? '—') ?></td>
                                         <td><?= htmlspecialchars($h->valor_novo ?? '—') ?></td>
-                                        <td><?= date('d/m/Y H:i', strtotime($h->data_alteracao)) ?></td>
+                                        <td><?= date('d/m/Y H:i', strtotime($h->data_alteracao) + 3600) ?></td>
                                         <td><?= htmlspecialchars($h->utilizador ?? '—') ?></td>
                                     </tr>
                                     <?php endforeach; ?>

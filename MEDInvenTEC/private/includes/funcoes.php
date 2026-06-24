@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('Europe/Lisbon');
 require_once __DIR__ . '/../../config/config.php';
 // Inicia a sessão se ainda não estiver iniciada
 function start_session()
@@ -67,7 +66,7 @@ function registar_evento($tipo, $email = null) {
         mkdir($pasta, 0755, true);
     }
     $ficheiro = $pasta . '/eventos.log';
-    $data     = date('Y-m-d H:i:s');
+    $data     = (new DateTime('now', new DateTimeZone('Europe/Lisbon')))->format('Y-m-d H:i:s');
     $emailStr = $email ? " | utilizador: $email" : '';
     $linha    = "[$data] $tipo$emailStr" . PHP_EOL;
     file_put_contents($ficheiro, $linha, FILE_APPEND | LOCK_EX);

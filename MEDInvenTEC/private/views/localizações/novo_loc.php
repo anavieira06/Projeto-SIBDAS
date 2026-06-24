@@ -87,7 +87,7 @@ include __DIR__ . '/../../includes/sidebar.php';
         
 
         <!-- Conteúdo Principal -->
-            <main class="container-fluid p-4" style="background-color: #fff4fb;">
+            <main class="container-fluid p-4" style="background-color: #fff4fb; min-height:100vh">
                 <div class="d-flex justify-content-center mt-4">
                     <div class="card w-100 shadow rounded" style="max-width: 1200px;">
                         <div class="card-body">

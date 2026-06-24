@@ -1,3 +1,4 @@
+961b8aa - Ana Margarida Vieira - 2026-06-23 23:30:17 +0100 - Alteração na dashboard relativamente aos documentos
 24d29b8 - Ana Margarida Vieira - 2026-06-23 00:58:49 +0100 - Exportação da base de dados
 0624200 - Ana Margarida Vieira - 2026-06-22 21:20:06 +0100 - Correção das edições e adições
 c9b8d16 - Ana Margarida Vieira - 2026-06-22 18:09:17 +0100 - Responsividade dos botões das listagens

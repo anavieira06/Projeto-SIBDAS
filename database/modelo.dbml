@@ -102,7 +102,7 @@ Table documentos {
   data_doc date [not null]
   data_validade date
 
-  ficheiro varchar(255)
+  ficheiro varchar(255) 
 }
 
 Table tipo_doc {
@@ -258,7 +258,7 @@ Table utilizador {
   ativo boolean [not null, default: 1]
 
   last_login datetime
-  created_at datetime [default: `NOW()`]
+  created_at datetime 
 }
 
 Table mensagens_contacto {
@@ -269,7 +269,7 @@ Table mensagens_contacto {
 
   mensagem text [not null]
 
-  data_envio datetime [default: `NOW()`]
+  data_envio datetime 
   lida boolean [not null, default: 0]
 }
 
@@ -284,7 +284,7 @@ Table historico_movimentacoes {
   valor_anterior varchar(255)
   valor_novo varchar(255)
 
-  data_alteracao datetime [default: `NOW()`]
+  data_alteracao datetime 
 }
 
 /* Relações */

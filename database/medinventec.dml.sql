@@ -31,7 +31,7 @@ INSERT INTO `criticidade` (`id`, `criticidade`) VALUES
 	(3, 'Alta'),
 	(4, 'Suporte de Vida');
 
--- A despejar dados para tabela db1240811.documentos: ~41 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.documentos: ~44 rows (aproximadamente)
 INSERT INTO `documentos` (`id`, `equipamento_id`, `fornecedor_id`, `tipo_doc_id`, `nome_doc`, `data_doc`, `data_validade`, `ficheiro`) VALUES
 	(1, 1, 1, 1, 'Manual de Utilização Philips IntelliVue MX450', '2023-01-15', NULL, 'manual_philips_intellivue_mx450.pdf'),
 	(2, 1, NULL, 3, 'Certificado de Calibração Philips IntelliVue MX450', '2024-01-10', '2025-01-10', 'certificado_calibracao_philips_intellivue_mx450.pdf'),
@@ -76,16 +76,17 @@ INSERT INTO `documentos` (`id`, `equipamento_id`, `fornecedor_id`, `tipo_doc_id`
 	(41, 36, 1, 3, 'Certificado calib-table 2.0', '2026-06-11', '2027-06-17', 'doc_6a2f1bb2b0a91.pdf'),
 	(42, 37, 5, 3, 'Certificado calib-intelli', '2026-06-14', NULL, 'doc_6a386d62d9480.pdf'),
 	(43, 38, 6, 7, 'Relatório técnico-intellivue mx450', '2025-06-09', NULL, 'doc_6a3980d0f15d3.pdf'),
-	(44, 39, 6, 2, 'Manual de serviço - desfibrilhador zetec', '2026-06-22', NULL, 'doc_6a398a171bb50.pdf');
+	(44, 39, 6, 2, 'Manual de serviço - desfibrilhador zetec', '2026-06-22', NULL, 'doc_6a398a171bb50.pdf'),
+	(45, 40, NULL, 5, 'Fatura- microscópico opo 185', '2026-06-22', NULL, NULL);
 
--- A despejar dados para tabela db1240811.equipamentos: ~26 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.equipamentos: ~29 rows (aproximadamente)
 INSERT INTO `equipamentos` (`id`, `codigo_inventario`, `designacao_equipamento`, `marca`, `modelo`, `numero_serie`, `fabricante`, `data_aquisicao`, `ano_fabrico`, `custo_aquisicao`, `observacoes`, `categoria_grupo_id`, `estado_id`, `criticidade_id`, `tipo_entrada_id`, `localizacao_id`, `garantia_contrato_id`, `ativo`) VALUES
 	(1, 'EQ0001', 'Monitor Multiparamétrico', 'Philips', 'Intellivue Mx450', 'PH-MX450-002', 'Philips Healthcare Portugal', '2023-01-15', 2021, 8500.00, 'Equipamento em utilização regular na UCI.', 1, 1, 1, 1, 3, 1, 1),
-	(2, 'EQ0002', 'Ventilador pulmonar', 'Dräger', 'Evita V500', 'DR-EV500-002', 'Dräger', '2023-02-10', 2022, 18500.00, 'Equipamento crítico para suporte ventilatório.', 2, 2, 4, 1, 3, 2, 1),
-	(3, 'EQ0003', 'Bomba Infusora', 'B. Braun', 'Infusomat Space', 'BB-IS-004', 'B. Braun', '2023-03-12', 2021, 3200.00, '', 3, 1, 4, 1, 11, 3, 1),
-	(4, 'EQ0004', 'Ecógrafo Portátil', 'Siemens', 'Acuson Freestyle', 'SI-AF-004', 'Siemens Healthineers', '2023-04-05', 2022, 24500.00, 'Usado em exames rápidos junto ao doente.', 4, 1, 3, 1, 10, 4, 1),
-	(5, 'EQ0005', 'Aparelho de raio-X digital', 'GE HealthCare', 'Definium 656', 'GE-D656-005', 'GE HealthCare', '2023-05-20', 2021, 78000.00, NULL, 4, 1, 3, 1, 4, 5, 1),
-	(6, 'EQ0006', 'Desfibrilhador', 'Medtronic', 'Lifepak 20e', 'MD-LP20-006', 'Medtronic', '2023-06-08', 2022, 6900.00, 'Equipamento disponível na urgência.', 2, 3, 4, 1, 1, 6, 1),
+	(2, 'EQ0002', 'Ventilador Pulmonar', 'Dräger', 'Evita V500', 'DR-EV500-009', 'Dräger', '2023-02-10', 2022, 18500.00, 'Equipamento crítico para suporte ventilatório.', 2, 2, 4, 1, 3, 2, 1),
+	(3, 'EQ0003', 'Bomba Infusora', 'B. Braun', 'Infusomat Space', 'BB-IS-004', 'B. Braun', '2023-03-12', 2021, 3200.00, '', 3, 1, 2, 1, 11, 3, 1),
+	(4, 'EQ0004', 'Ecógrafo Portátil', 'Siemens', 'Acuson Freestyle 45x', 'SI-AF-004', 'Siemens Healthineers', '2023-04-05', 2022, 24500.00, 'Usado em exames rápidos junto ao doente.', 4, 1, 3, 1, 10, 4, 1),
+	(5, 'EQ0005', 'Aparelho De Raio-x Digital', 'Ge Healthcare', 'Definium 656', 'GE-D656-005', 'Ge Healthcare', '2023-05-20', 2021, 78000.00, '', 4, 1, 3, 3, 4, 5, 1),
+	(6, 'EQ0006', 'Desfibrilhador', 'Medtronic', 'Lifepak 20e', 'MD-LP20-006', 'Medtronic', '2023-06-08', 2022, 6900.00, 'Equipamento disponível na urgência.', 2, 1, 4, 1, 1, 6, 1),
 	(7, 'EQ0007', 'Monitor de sinais vitais', 'Mindray', 'VS 900', 'MI-VS900-007', 'Mindray', '2023-07-14', 2022, 2400.00, NULL, 1, 3, 1, 1, 10, 7, 1),
 	(8, 'EQ0008', 'Máquina de hemodiálise', 'Fresenius', '5008S CorDiax', 'FR-5008S-008', 'Fresenius Medical Care', '2023-08-01', 2021, 22000.00, 'Equipamento usado em tratamentos regulares.', 3, 6, 3, 1, 11, 8, 0),
 	(9, 'EQ0009', 'Endoscópio flexível', 'Olympus', 'EVIS EXERA III', 'OL-EVIS-009', 'Olympus', '2023-09-18', 2022, 31500.00, NULL, 4, 2, 3, 1, 10, 9, 1),
@@ -108,9 +109,10 @@ INSERT INTO `equipamentos` (`id`, `codigo_inventario`, `designacao_equipamento`,
 	(36, 'EQ0026', 'Mesa Cirúrgica', 'Zoll', 'Table 2.0', 'ZL-7681', 'Philips Healthcare', '2026-06-04', 2024, 50000.00, NULL, 3, 1, 1, 1, 2, 37, 1),
 	(37, 'EQ0027', 'Medidor De Tensão Arterial', 'Omron', 'Intelli Medi', 'INT-536-091', 'Philips Healthcare', '2026-06-04', 2019, 300.00, NULL, 1, 1, 3, 1, 5, 38, 1),
 	(38, 'EQ0028', 'Monitor De Sinais Vitais', 'Philips', 'Intellivue Mx450', 'PH-MX450-008', 'Philips Healthcare', '2025-06-11', 2022, 203933.00, NULL, 1, 4, 2, 3, 2, 44, 1),
-	(39, 'EQ0029', 'Desfibrilhador Automático', 'Zetec', 'Aed Plus', 'ZT-5464', 'Zoll Medical', '2026-06-22', 2025, 32000.00, NULL, 2, 4, 4, 3, 3, 47, 1);
+	(39, 'EQ0029', 'Desfibrilhador Automático', 'Zetec', 'Aed Plus', 'ZT-5464', 'Zoll Medical', '2026-06-22', 2025, 32000.00, NULL, 2, 4, 4, 3, 3, 47, 1),
+	(40, 'EQ0030', 'Microscópico ótico', 'Instlab', 'Opo 185', 'ITL-2838-02', 'Stryker', '2026-06-16', 2025, 2000.00, NULL, 5, 3, 3, 4, 7, 48, 1);
 
--- A despejar dados para tabela db1240811.equipamento_fornecedor: ~36 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.equipamento_fornecedor: ~40 rows (aproximadamente)
 INSERT INTO `equipamento_fornecedor` (`equipamento_id`, `fornecedor_id`) VALUES
 	(1, 1),
 	(1, 11),
@@ -151,7 +153,8 @@ INSERT INTO `equipamento_fornecedor` (`equipamento_id`, `fornecedor_id`) VALUES
 	(37, 7),
 	(38, 7),
 	(38, 12),
-	(39, 6);
+	(39, 6),
+	(40, 12);
 
 -- A despejar dados para tabela db1240811.estado: ~6 rows (aproximadamente)
 INSERT INTO `estado` (`id`, `estado`) VALUES
@@ -162,7 +165,7 @@ INSERT INTO `estado` (`id`, `estado`) VALUES
 	(5, 'Em Quarentena'),
 	(6, 'Abatido');
 
--- A despejar dados para tabela db1240811.fornecedores: ~13 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.fornecedores: ~14 rows (aproximadamente)
 INSERT INTO `fornecedores` (`id`, `nome_empresa`, `nif`, `morada`, `numero_telefonico`, `email`, `website`, `pessoa_contacto`, `tel_pessoa_contacto`, `observacoes`, `tipo_fornecedor_id`, `ativo`) VALUES
 	(1, 'Philips Healthcare Portugal', '507384921', 'Avenida da República 90, Lisboa', '213846275', 'geral@philipshealthcare.pt', 'https://www.philips.pt/healthcare', 'Ana Costa', '912458736', NULL, 3, 1),
 	(2, 'Dräger', '509671438', 'Rua José Ferreira Dias 728, Porto', '229783614', 'contacto@draeger.pt', 'https://www.draeger.com', 'João Martins', '934672542', 'Fornecedor principal de equipamentos de monitorização e imagiologia.', 1, 1),
@@ -190,14 +193,14 @@ INSERT INTO `funcionalidades` (`id`, `gestao_funcionalidades_id`, `icone`, `titu
 	(7, 1, 'fa-solid fa-chart-column', 'Dashboard', 'Indicadores em tempo real sobre equipamentos ativos, manutenção, garantias e estatísticas hospitalares.'),
 	(8, 1, 'fa-solid fa-shield-halved', 'Segurança', 'Sistema de autenticação e controlo de acesso para proteção dos dados hospitalares.');
 
--- A despejar dados para tabela db1240811.garantias_contratos: ~28 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.garantias_contratos: ~29 rows (aproximadamente)
 INSERT INTO `garantias_contratos` (`id`, `data_inicio`, `data_fim`, `contrato_manutencao`, `tipo_contrato_id`, `periodicidade_id`, `entidade_responsavel`, `observacoes_garant`) VALUES
 	(1, '2023-01-15', '2026-01-15', 1, 3, 4, 'Philips Healthcare Portugal', 'Contrato completo com manutenção anual.'),
 	(2, '2023-02-10', '2025-02-10', 1, 1, 3, 'Dräger', 'Manutenção preventiva semestral.'),
-	(3, '2023-03-12', '2026-03-12', 0, NULL, NULL, 'B. Braun', 'Garantia standard do fabricante.'),
+	(3, '2023-03-12', '2026-03-12', 0, 1, 1, 'B. Braun', 'Garantia standard do fabricante.'),
 	(4, '2023-04-05', '2029-06-22', 1, 3, 2, 'Siemens Healthineers', 'Cobertura integral do equipamento.'),
-	(5, '2023-05-20', '2025-05-20', 1, 1, 1, 'GE HealthCare', 'Inspeções mensais programadas.'),
-	(6, '2023-06-08', '2026-06-08', 0, NULL, NULL, 'Medtronic', 'Garantia de fábrica.'),
+	(5, '2023-05-20', '2025-05-20', 1, 1, 1, 'Ge Healthcare', 'Inspeções mensais programadas.'),
+	(6, '2023-06-08', '2026-06-08', 1, 1, 1, 'Medtronic', 'Garantia de fábrica.'),
 	(7, '2023-07-14', '2026-07-14', 1, 1, 3, 'Mindray', 'Plano preventivo semestral.'),
 	(8, '2023-08-01', '2025-08-01', 1, 2, 4, 'Fresenius Medical Care', 'Assistência corretiva quando necessário.'),
 	(9, '2023-09-18', '2026-09-18', 1, 3, 4, 'Olympus', 'Contrato de manutenção completo.'),
@@ -220,42 +223,54 @@ INSERT INTO `garantias_contratos` (`id`, `data_inicio`, `data_fim`, `contrato_ma
 	(37, '2026-06-10', '2029-06-14', 0, NULL, NULL, 'Philips', NULL),
 	(38, '2026-06-14', '2030-06-19', 0, NULL, NULL, 'Philips Healthcare Portugal', NULL),
 	(44, '2024-06-03', '2028-06-22', 1, NULL, NULL, 'Philips Healthcare Portugal', NULL),
-	(47, '2026-06-22', '2030-06-22', 1, 2, 4, 'B. Braun', NULL);
+	(47, '2026-06-22', '2030-06-22', 1, 2, 4, 'B. Braun', NULL),
+	(48, '2026-06-22', '2029-06-28', 0, NULL, NULL, 'Stryker', NULL);
 
--- A despejar dados para tabela db1240811.gestao_contacto: ~0 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.gestao_contacto: ~1 rows (aproximadamente)
 INSERT INTO `gestao_contacto` (`id`, `menu_contacto`, `titulo`, `texto_introdutorio`, `etiqueta1`, `etiqueta2`, `etiqueta3`, `texto_botao`, `data_criacao`, `data_ultima_alteracao`) VALUES
 	(1, 'Contacto', 'Contacto', 'Entre em contacto conosco para tirar todas as suas dúvidas ou obter mais informações sobre a nossa plataforma.', 'Nome', 'Email', 'Mensagem', 'Enviar Mensagem', '2026-06-21 16:02:06', '2026-06-21 16:02:06');
 
--- A despejar dados para tabela db1240811.gestao_funcionalidades: ~0 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.gestao_funcionalidades: ~1 rows (aproximadamente)
 INSERT INTO `gestao_funcionalidades` (`id`, `menu_funcionalidades`, `titulo`, `texto_introdutorio`, `data_criacao`, `data_ultima_alteracao`) VALUES
 	(1, 'Funcionalidades', 'Funcionalidades', 'Aqui encontram-se as funcionalidades da nossa página.', '2026-06-21 16:02:06', '2026-06-21 16:02:06');
 
--- A despejar dados para tabela db1240811.gestao_problema_solucao: ~0 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.gestao_problema_solucao: ~1 rows (aproximadamente)
 INSERT INTO `gestao_problema_solucao` (`id`, `menu_problema_solucao`, `titulo1`, `paragrafo1`, `paragrafo2`, `paragrafo3`, `titulo2`, `paragrafo1_vant`, `paragrafo2_vant`, `paragrafo3_vant`, `data_criacao`, `data_ultima_alteracao`) VALUES
 	(1, 'Problema e Solução', 'O Problema', 'Em muitas unidades hospitalares, a gestão do inventário de equipamentos médicos é realizada de forma fragmentada, recorrendo a folhas de Excel, documentos isolados, registos em papel e várias bases de dados sem integração.', 'Esta abordagem dificulta a organização da informação, a localização dos equipamentos e o rápido acesso à documentação técnica.', 'Como consequência, surgem problemas como a duplicação de dados, falta de controlo do estado dos equipamentos e dificuldades na gestão de garantias, contratos e fornecedores.', 'A Nossa Solução', 'A nossa empresa foi desenvolvida com o objetivo de centralizar e organizar toda a informação relativa aos equipamentos médicos, promovendo assim uma gestão mais eficiente e estruturada do inventário hospitalar.', 'Através de uma plataforma web intuitiva, é possível registar, consultar e atualizar dados em tempo real, garantindo um maior controlo sobre a localização, estado e documentação associada a cada equipamento.', 'O sistema permite ainda melhorar a rastreabilidade dos dispositivos médicos e apoiar a tomada de decisões técnicas e administrativas.', '2026-06-21 16:02:04', '2026-06-22 19:29:10');
 
--- A despejar dados para tabela db1240811.gestao_rodape: ~0 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.gestao_rodape: ~1 rows (aproximadamente)
 INSERT INTO `gestao_rodape` (`id`, `localizacao`, `morada`, `horario`, `horas`, `contactos`, `email`, `telefone`, `data_criacao`, `data_ultima_alteracao`) VALUES
 	(1, 'LOCALIZAÇÃO', 'Rua da Inovação, 42\n4690-945, Viseu\nPortugal', 'HORÁRIO', '2ª a 6ª Feira: 8h - 18h\nSábado e Feriados: 9h - 13h\nDomingo: Encerrado\nAtendimento online: 24/7', 'CONTACTOS', 'Email: suporte@MEDInvenTEC.pt', '+351 210 759 811', '2026-06-21 16:05:00', '2026-06-21 16:05:00');
 
--- A despejar dados para tabela db1240811.gestao_sobre_nos: ~0 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.gestao_sobre_nos: ~1 rows (aproximadamente)
 INSERT INTO `gestao_sobre_nos` (`id`, `menu_sobre_nos`, `titulo`, `conteudo`, `texto_botao`, `data_criacao`, `data_ultima_alteracao`) VALUES
 	(1, 'Sobre nós', 'Gestão Inteligente de Equipamentos Médicos', 'Organize, controle e otimize o seu inventário hospitalar.', 'Fale connosco!', '2026-06-21 16:02:04', '2026-06-21 16:35:30');
 
--- A despejar dados para tabela db1240811.gestao_vantagens: ~0 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.gestao_vantagens: ~1 rows (aproximadamente)
 INSERT INTO `gestao_vantagens` (`id`, `menu_vantagens`, `titulo`, `data_criacao`, `data_ultima_alteracao`) VALUES
 	(1, 'Vantagens', 'Vantagens', '2026-06-21 16:02:05', '2026-06-21 16:02:05');
 
--- A despejar dados para tabela db1240811.historico_movimentacoes: ~0 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.historico_movimentacoes: ~6 rows (aproximadamente)
 INSERT INTO `historico_movimentacoes` (`id`, `equipamento_id`, `utilizador_id`, `tipo_alteracao`, `valor_anterior`, `valor_novo`, `data_alteracao`) VALUES
 	(1, 17, 1, 'Estado', 'Ativo', 'Abatido', '2026-06-22 00:20:45'),
 	(2, 3, 1, 'Criticidade', 'Média', 'Suporte de Vida', '2026-06-22 00:49:17'),
 	(3, 4, 1, 'Designação', 'Ecógrafo portátil', 'Ecógrafo Portátil', '2026-06-22 02:28:37'),
 	(4, 4, 1, 'Ano de fabrico', '2022', '2021', '2026-06-22 02:28:37'),
 	(5, 4, 1, 'Fim de Garantia', '2027-04-05', '2029-06-22', '2026-06-22 02:28:37'),
-	(6, 4, 1, 'Ano de fabrico', '2021', '2022', '2026-06-22 19:20:10');
+	(6, 4, 1, 'Ano de fabrico', '2021', '2022', '2026-06-22 19:20:10'),
+	(7, 6, 1, 'Estado', 'Em Manutenção', 'Ativo', '2026-06-24 04:40:50'),
+	(8, 6, 1, 'Contrato Manutenção', 'Não', 'Sim', '2026-06-24 04:40:50'),
+	(9, 3, 1, 'Criticidade', 'Suporte de Vida', 'Média', '2026-06-24 04:41:41'),
+	(10, 2, 1, 'Designação', 'Ventilador pulmonar', 'Ventilador Pulmonar', '2026-06-24 04:48:17'),
+	(11, 2, 1, 'Nº de série', 'DR-EV500-002', 'DR-EV500-009', '2026-06-24 04:48:17'),
+	(12, 5, 1, 'Designação', 'Aparelho de raio-X digital', 'Aparelho De Raio-x Digital', '2026-06-24 04:53:05'),
+	(13, 5, 1, 'Marca', 'GE HealthCare', 'Ge Healthcare', '2026-06-24 04:53:05'),
+	(14, 5, 1, 'Fabricante', 'GE HealthCare', 'Ge Healthcare', '2026-06-24 04:53:05'),
+	(15, 5, 1, 'Tipo de entrada', 'Compra', 'Aluguer', '2026-06-24 04:53:05'),
+	(16, 5, 1, 'Entidade Responsável', 'GE HealthCare', 'Ge Healthcare', '2026-06-24 04:53:05'),
+	(17, 4, 1, 'Modelo', 'Acuson Freestyle', 'Acuson Freestyle 45x', '2026-06-24 04:59:14');
 
--- A despejar dados para tabela db1240811.localizacoes: ~13 rows (aproximadamente)
+-- A despejar dados para tabela db1240811.localizacoes: ~14 rows (aproximadamente)
 INSERT INTO `localizacoes` (`id`, `edificio`, `piso`, `servico_depart`, `sala_gabinete`, `ativo`) VALUES
 	(1, 'Edifício Central Hospitalar', '0', 'Urgência', 'URG02', 1),
 	(2, 'Edifício Central Hospitalar', '3', 'Bloco Operatório', 'OP05', 1),
@@ -275,7 +290,9 @@ INSERT INTO `localizacoes` (`id`, `edificio`, `piso`, `servico_depart`, `sala_ga
 -- A despejar dados para tabela db1240811.mensagens_contacto: ~2 rows (aproximadamente)
 INSERT INTO `mensagens_contacto` (`id`, `nome`, `email`, `mensagem`, `data_envio`, `lida`) VALUES
 	(1, 'Pedro Cardoso', 'pedro.car91763553@gmail.com', 'Como funcionaria a logística deste inventário?', '2026-06-21 20:58:35', 1),
-	(2, 'Catarina Pereira', 'cata_peres@gmail.com', 'Queria contratar a empresa para fazer o inventário', '2026-06-21 21:03:26', 0);
+	(2, 'Catarina Pereira', 'cata_peres@gmail.com', 'Queria contratar a empresa para fazer o inventário', '2026-06-21 21:03:26', 0),
+	(3, 'Paula Vastos', 'paula.gdhheh@gmail.com', 'Achei o conceito bastante interessante, como posso obter mais info|?', '2026-06-24 04:43:06', 0),
+	(4, 'Catarina Duarte', 'cat.du.123@gmail.com', 'Tenho uma questão de dúvidas.', '2026-06-24 04:52:02', 0);
 
 -- A despejar dados para tabela db1240811.perfil: ~3 rows (aproximadamente)
 INSERT INTO `perfil` (`id`, `perfil`) VALUES
@@ -322,9 +339,9 @@ INSERT INTO `tipo_fornecedor` (`id`, `tipo_fornecedor`) VALUES
 
 -- A despejar dados para tabela db1240811.utilizador: ~3 rows (aproximadamente)
 INSERT INTO `utilizador` (`id`, `nome`, `email`, `password`, `perfil_id`, `ativo`, `last_login`, `created_at`) VALUES
-	(1, 'Ana Vieira', 'admin@medinventec.pt', '$2y$10$wVf0HGRWiZkDqv69j4NvFOcV8Fzqd648CJhQlXVYpLw4D5E8B3HzC', 1, 1, '2026-06-22 20:54:02', '2026-06-20 23:07:33'),
-	(2, 'José Rocha', 'tecnico@medinventec.pt', '$2y$10$QlOhTk6G66aa0Wfu78yuiefMXKQlolUjv3ZNzMl4BJF49UW/NmB4O', 2, 1, '2026-06-22 20:45:34', '2026-06-20 23:07:33'),
-	(3, 'Jerusa Vinagre', 'saude@medinventec.pt', '$2y$10$OBB/DJvBU68ohfUzbCm6WOLu0J9HhRPph3L0NX97kWqPUdffWPMu2', 3, 1, '2026-06-22 20:45:51', '2026-06-20 23:07:33');
+	(1, 'Ana Vieira', 'admin@medinventec.pt', '$2y$10$wVf0HGRWiZkDqv69j4NvFOcV8Fzqd648CJhQlXVYpLw4D5E8B3HzC', 1, 1, '2026-06-24 04:52:26', '2026-06-20 23:07:33'),
+	(2, 'José Rocha', 'tecnico@medinventec.pt', '$2y$10$QlOhTk6G66aa0Wfu78yuiefMXKQlolUjv3ZNzMl4BJF49UW/NmB4O', 2, 1, '2026-06-24 05:02:47', '2026-06-20 23:07:33'),
+	(3, 'Jerusa Vinagre', 'saude@medinventec.pt', '$2y$10$OBB/DJvBU68ohfUzbCm6WOLu0J9HhRPph3L0NX97kWqPUdffWPMu2', 3, 1, '2026-06-24 04:50:34', '2026-06-20 23:07:33');
 
 -- A despejar dados para tabela db1240811.vantagens: ~7 rows (aproximadamente)
 INSERT INTO `vantagens` (`id`, `gestao_vantagens_id`, `vantagem`) VALUES
